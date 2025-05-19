@@ -186,7 +186,7 @@ public class FlightModel : MonoBehaviour
 
     void CheckForStalls()
     {
-        stalling = angleOfAttack >= maxAngleOfAttack || angleOfAttack <= (-maxAngleOfAttack / 2f) ||Mathf.Abs(angleOfAttackHorizontal) >= 5f;
+        stalling = angleOfAttack >= maxAngleOfAttack || angleOfAttack <= (-maxAngleOfAttack / 2f) || Mathf.Abs(angleOfAttackHorizontal) >= maxAngleOfAttack;
     }
 
     public void calculateControlForces(float pitch, float yaw, float roll)
@@ -237,12 +237,11 @@ public class FlightModel : MonoBehaviour
     {
         // *flip sign(s) if necessary*
         Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
-        // float _angleOfAttack = Mathf.Atan2(-localVelocity.x, localVelocity.z);
-        float angleOfAttackHorizontal = Mathf.Atan2(-localVelocity.x, localVelocity.z);
+        float _angleOfAttackHorizontal = Mathf.Atan2(-localVelocity.x, localVelocity.z);
 
 
         // α * 2 * PI * (AR / AR + 2)
-        float inducedLift = angleOfAttackHorizontal * ((wingArea / 2) / ((wingArea / 2) + 2f)) * 2f * Mathf.PI;
+        float inducedLift = _angleOfAttackHorizontal * ((wingArea / 2) / ((wingArea / 2) + 2f)) * 2f * Mathf.PI;
 
         // CL ^ 2 / (AR * PI)
         float inducedDrag = (inducedLift * inducedLift) / (aspectRatio * Mathf.PI);
@@ -279,6 +278,7 @@ public class FlightModel : MonoBehaviour
         machSpeed = currentSpeed / 1234f;
         CalculateGForce();
         angleOfAttack = Mathf.Atan2(-localVelocity.y, localVelocity.z) * Mathf.Rad2Deg;
+        angleOfAttackHorizontal = Mathf.Atan2(-localVelocity.x, localVelocity.z) * Mathf.Rad2Deg;
     }
 
     Vector3 lastVelocity;

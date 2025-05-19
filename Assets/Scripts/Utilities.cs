@@ -171,6 +171,9 @@ public static class Utilities {
     new Keyframe(-0f, 1f, -0.5f, -0.5f),
     new Keyframe(1.2f, 0.2f, -0.85f, -0.85f));
 
+
+    
+
     public static Quaternion SmoothDamp(Quaternion current, Quaternion target, ref Quaternion velocity, float smoothTime)
     {
         float dot = Quaternion.Dot(current, target);
@@ -225,5 +228,16 @@ public static class Utilities {
         // Limit angular velocity
         float maxDelta = maxTurnRate * Mathf.Rad2Deg * Time.fixedDeltaTime * rampProgress;
         return Quaternion.RotateTowards(currentRot, targetRot, maxDelta);
+    }
+
+    public static float GetPropEfficiencyNumber(float maxEfficiency, float maxEfficiencyMachSpeed, float currentMach)
+    {
+        AnimationCurve propEfficiencyCurve = new AnimationCurve(
+            new Keyframe(0f, 0f, 5.8f, 5.8f),
+            new Keyframe(maxEfficiencyMachSpeed, maxEfficiency, 0f, 0f),
+            new Keyframe(maxEfficiencyMachSpeed * 2, 0f, -5.8f, -5.8f));
+
+        return propEfficiencyCurve.Evaluate(currentMach);
+
     }
 }

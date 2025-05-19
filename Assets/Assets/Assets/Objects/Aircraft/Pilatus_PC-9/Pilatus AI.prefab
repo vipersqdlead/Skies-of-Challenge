@@ -3776,12 +3776,29 @@ MonoBehaviour:
   killcounter: {fileID: 5350997912003756959}
   planeCam: {fileID: 0}
   planeHUD: {fileID: 0}
+  weaponManager: {fileID: 0}
   irControl: {fileID: 0}
   sagControl: {fileID: 0}
   radarMissileControl: {fileID: 0}
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
+  flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 2924138118991605479}
+  aircraftName: 
+  speed_maxSpeed: 0
+  power_maxPower: 0
+  isJet: 0
+  engineNumber: 0
+  powerToWeight: 0
+  attack_totalBurstMass: 0
+  agility_maxTurnDegS: 0
+  agility_wingLoading: 0
+  agility_maxTurnSpeed: 0
+  agility_weight: 0
+  health_maxHP: 0
+  defense_def: 0
+  aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!114 &5961288077834183134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3799,20 +3816,32 @@ MonoBehaviour:
   currentSpeed: 0
   gForce: 0
   angleOfAttack: 0
+  criticalAoA: 0
+  angleOfAttackHorizontal: 0
+  maxAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
+  currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 120
   rb: {fileID: 707189148789588757}
   wingSpan: 10.125
   wingArea: 16.3
+  wingType: 0
+  sweepAngle: 0
   aspectRatio: 0
   drag: 0.01
+  waveDragMultiplier: 2
+  newWaveDragMultiplier: 2
+  waveDragPeakMach: 1.2
+  waveDragRange: 0.3
   currentDrag: 0
   flaps: 0
   airbrake: 0
+  stalling: 0
   stallSpeed: 65
   neverExceedSpeed: 800
   RollForce:
@@ -3933,15 +3962,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e096c513ce05b84e940f68a2d432d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aircraftHub: {fileID: 0}
   guns:
   - {fileID: 7191970950982547118}
   - {fileID: 4116678202783384248}
   isPlayer: 0
   trigger: 0
+  useConvergence: 0
+  hasDynamicConvergence: 0
+  gunConvergenceDistance: 500
+  convergencePoint: {x: 0, y: 0, z: 0}
   additionalGuns: []
   additionalGunsGO: []
   enableAG: 0
   AGTimer: 0
+  sightLockedTarget: {fileID: 0}
 --- !u!114 &8893305985367905589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3975,6 +4010,7 @@ MonoBehaviour:
   hitSound: {fileID: 1760746151735140103}
   fireSound: {fileID: 0}
   invulnerable: 0
+  invulnerableTimer: 0
 --- !u!114 &5350997912003756959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4066,6 +4102,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   isAfterburningEngine: 1
+  useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.88
+  propEfficiencyMach: 0.45
   afterBurner: 0
   afterburnerThrust: 1500
   engines:

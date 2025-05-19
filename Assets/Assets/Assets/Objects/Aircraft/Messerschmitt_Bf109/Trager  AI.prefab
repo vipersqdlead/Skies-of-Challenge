@@ -1573,10 +1573,13 @@ MonoBehaviour:
   gForce: 0
   angleOfAttack: 0
   criticalAoA: 0
+  angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
+  currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 170
@@ -1588,6 +1591,7 @@ MonoBehaviour:
   aspectRatio: 0
   drag: 0.0082
   waveDragMultiplier: 2
+  newWaveDragMultiplier: 2
   waveDragPeakMach: 0.67
   waveDragRange: 0.3
   currentDrag: 0
@@ -1957,6 +1961,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 1
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.45
   afterBurner: 0
   afterburnerThrust: 1625
   engines:
@@ -2014,6 +2020,7 @@ MonoBehaviour:
   health_maxHP: 0
   defense_def: 0
   aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!114 &3401298974850771870
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2092,8 +2099,9 @@ MonoBehaviour:
   - {fileID: 0}
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
-  missileFoV: 20
+  missileOuterFoV: 0
   missileLockRange: 2000
+  isCagedSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0

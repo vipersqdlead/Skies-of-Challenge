@@ -15,6 +15,8 @@ public class EngineControl : MonoBehaviour
     [SerializeField] AnimationCurve thrustBySpeedMultiplier;
     [SerializeField] bool isAfterburningEngine;
     [SerializeField] bool useAirDensityMultiplier;
+    public float maxPropEfficiency = 0.85f;
+    public float propEfficiencyMach = 0.42f;
     public bool afterBurner = false;
     [SerializeField] public float afterburnerThrust;
     [SerializeField] public Transform[] engines;
@@ -32,6 +34,11 @@ public class EngineControl : MonoBehaviour
         if (enginePropellers.Length != 0)
         {
             useAirDensityMultiplier = true;
+            engineStaticThrust /= 5f;
+            if(afterburnerThrust != 0)
+            {
+                afterburnerThrust /= 5f;
+            }
         }
     }
 
@@ -71,22 +78,23 @@ public class EngineControl : MonoBehaviour
     float currentThrust;
     private void CalculateEnginePower()
     {
+        if (afterBurner == true)
+        {
+            currentThrust = engineStaticThrust + afterburnerThrust;
+        }
+        else
+        {
+            currentThrust = engineStaticThrust;
+        }
 
-        currentEnginePower = (currentThrust * thrustBySpeedMultiplier.Evaluate(aircraft.IAS_Speed / 1234) * powerByAltitudeMultiplier.Evaluate(transform.position.y / 10000f)) * 60 * Time.fixedDeltaTime * ThrottleInput;
         if (useAirDensityMultiplier)
         {
-            currentEnginePower = currentEnginePower * aircraft.currentDrag;
+            currentEnginePower = ((currentThrust * powerByAltitudeMultiplier.Evaluate(transform.position.y / 10000f) * Utilities.GetPropEfficiencyNumber(maxPropEfficiency, propEfficiencyMach, aircraft.machSpeed) * 326f) / (aircraft.currentSpeed / 1.85200426f)) * 4.44822f * ThrottleInput;
         }
-        //engineSound.volume = ThrottleInput;
-
-            if (afterBurner == true)
-            {
-                currentThrust = engineStaticThrust + afterburnerThrust;
-            }
-            else
-            {
-                currentThrust = engineStaticThrust;
-            }
+        else
+        {
+            currentEnginePower = (currentThrust * thrustBySpeedMultiplier.Evaluate(aircraft.machSpeed) * powerByAltitudeMultiplier.Evaluate(transform.position.y / 10000f)) * (60 * Time.fixedDeltaTime) * ThrottleInput;
+        }
     }
 
     void ApplyThrust()
