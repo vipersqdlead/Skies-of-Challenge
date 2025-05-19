@@ -1,0 +1,107 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Android;
+using static UnityEngine.ParticleSystem;
+
+public class RocketEngine : MonoBehaviour
+{
+    [SerializeField] float rocketTimer, rocketThrust;
+    [SerializeField] Rigidbody rb;
+    [SerializeField] bool rocketDelay;
+    [SerializeField] ParticleSystem rocketTrailParticle, smoke;
+    [SerializeField] AudioSource launchSnd, rocketSound;
+
+    bool isAlreadyOutofFuel;
+
+    public float delayTimer = 0.4f;
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if(rocketDelay)
+        {
+            delayTimer -= Time.deltaTime;
+            if(delayTimer < 0f)
+            {
+                RocketBooster();
+            }
+        }
+
+        else
+        {
+            RocketBooster();
+        }
+    }
+
+    void RocketBooster()
+    {
+        if (rocketTimer >= 0)
+        {
+            launchSnd.enabled = true;
+            if(rocketSound != null)
+            {
+                rocketSound.enabled = true;
+            }
+            rb.AddForce(transform.forward * rocketThrust * Time.deltaTime * 60f, ForceMode.Impulse);
+            if(rocketTrailParticle != null)
+            {
+                rocketTrailParticle.enableEmission = true;
+            }
+            if(smoke != null)
+            {
+		var smokeEmission = smoke.emission;
+                smokeEmission.enabled = true;
+            }
+            rocketTimer -= Time.deltaTime;
+        }
+        else if (rocketTimer <= 0)
+        {
+            if (!isAlreadyOutofFuel)
+            {
+                if (rocketTrailParticle != null)
+                {
+                    rocketTrailParticle.enableEmission = false;
+                }
+                if (smoke != null)
+                {
+		    var smokeEmission = smoke.emission;
+                    smokeEmission.enabled = false;
+                }
+                if (rocketSound != null)
+                {
+                    rocketSound.enabled = false;
+                }
+                //KeepParticlesAlive();
+                isAlreadyOutofFuel = true;
+                this.enabled = false;
+            }
+            else
+            {
+                return;
+            }
+        }
+    }
+
+    public void KeepParticlesAlive()
+    {
+        if(smoke != null)
+        {
+            var smokeEmission = smoke.emission;
+            smokeEmission.enabled = false;
+            var mainS = smoke.main;
+            mainS.loop = false;
+            smoke.transform.parent = null;
+            //transform.localScale = new Vector3(1, 1, 1);  
+        }
+    }
+
+    private void OnDestroy()
+    {
+        KeepParticlesAlive();
+    }
+}

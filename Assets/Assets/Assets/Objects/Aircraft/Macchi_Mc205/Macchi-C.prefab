@@ -1,0 +1,311 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1089906461582122882
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7188233109956595322}
+  - component: {fileID: 4000648345294703684}
+  m_Layer: 0
+  m_Name: Motorkanone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7188233109956595322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089906461582122882}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.00043629983, y: 0.0019198153, z: -0.00000083761665, w: 0.99999815}
+  m_LocalPosition: {x: 0.004, y: -0.006, z: 4.246}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 168857589652127400}
+  m_LocalEulerAnglesHint: {x: 0.05, y: 0.22, z: 0}
+--- !u!114 &4000648345294703684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089906461582122882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shellTimer: 5
+  shells:
+  - {fileID: 7005174183826454184, guid: 1fc2538a01e900f4bab6cf67984c3bfc, type: 3}
+  - {fileID: 7005174183826454184, guid: a093639d6a9a001438aa4b010c491366, type: 3}
+  - {fileID: 7005174183826454184, guid: 1fc2538a01e900f4bab6cf67984c3bfc, type: 3}
+  - {fileID: 7005174183826454184, guid: 1fc2538a01e900f4bab6cf67984c3bfc, type: 3}
+  rateOfFireRPM: 750
+  muzzleVelocity: 720
+  accuracyError: 0.0001
+  shot: {fileID: 0}
+  rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  killCounter: {fileID: 6063059798093490029}
+--- !u!1001 &2190649938835612914
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4124388163639538946, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: shellTimer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4427857338791829161, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: shot
+      value: 
+      objectReference: {fileID: 6290892135640968476}
+    - target: {fileID: 4427857338791829161, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: shellTimer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4427857338791829161, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: shells.Array.data[0]
+      value: 
+      objectReference: {fileID: 7005174183826454184, guid: 1fc2538a01e900f4bab6cf67984c3bfc,
+        type: 3}
+    - target: {fileID: 4427857338791829161, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: shells.Array.data[2]
+      value: 
+      objectReference: {fileID: 7005174183826454184, guid: 1fc2538a01e900f4bab6cf67984c3bfc,
+        type: 3}
+    - target: {fileID: 4427857338791829161, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: shells.Array.data[3]
+      value: 
+      objectReference: {fileID: 7005174183826454184, guid: 1fc2538a01e900f4bab6cf67984c3bfc,
+        type: 3}
+    - target: {fileID: 5227133795111022212, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: shellTimer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272445856374229486, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272445856374229486, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272445856374229486, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: MinDistance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5272445856374229486, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961288077834183134, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: PitchForce.m_Curve.Array.data[1].time
+      value: 0.18222527
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961288077834183134, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: PitchForce.m_Curve.Array.data[2].time
+      value: 0.5315631
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961288077834183134, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: PitchForce.m_Curve.Array.data[3].time
+      value: 0.63892853
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961288077834183134, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: PitchForce.m_Curve.Array.data[1].value
+      value: 0.10990819
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961288077834183134, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: PitchForce.m_Curve.Array.data[2].value
+      value: 0.29820994
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961288077834183134, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: PitchForce.m_Curve.Array.data[3].value
+      value: 0.24764854
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961288077834183134, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: PitchForce.m_Curve.Array.data[1].inSlope
+      value: 1.0638252
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961288077834183134, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: PitchForce.m_Curve.Array.data[2].inSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961288077834183134, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: PitchForce.m_Curve.Array.data[1].outSlope
+      value: 1.0638252
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961288077834183134, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: PitchForce.m_Curve.Array.data[2].outSlope
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5961288077834183134, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: PitchForce.m_Curve.Array.data[1].outWeight
+      value: 0.16203782
+      objectReference: {fileID: 0}
+    - target: {fileID: 5965260452894347223, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: shellTimer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5965260452894347223, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: shells.Array.data[0]
+      value: 
+      objectReference: {fileID: 7005174183826454184, guid: 1fc2538a01e900f4bab6cf67984c3bfc,
+        type: 3}
+    - target: {fileID: 5965260452894347223, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: shells.Array.data[2]
+      value: 
+      objectReference: {fileID: 7005174183826454184, guid: 1fc2538a01e900f4bab6cf67984c3bfc,
+        type: 3}
+    - target: {fileID: 5965260452894347223, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: shells.Array.data[3]
+      value: 
+      objectReference: {fileID: 7005174183826454184, guid: 1fc2538a01e900f4bab6cf67984c3bfc,
+        type: 3}
+    - target: {fileID: 6185050561958779977, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: m_Name
+      value: Macchi-C
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680854307914149069, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: aircraftName
+      value: C.205N2 Orione
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680854307914149069, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: speed_maxSpeed
+      value: 660
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680854307914149069, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: aircraftDescription
+      value: The C.205 was also developed to be a high-altitude fighter with an engine
+        tuned with a bigger supercharger and longer wings.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639124801785713943, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639124801785713943, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639124801785713943, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639124801785713943, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639124801785713943, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639124801785713943, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639124801785713943, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639124801785713943, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639124801785713943, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7639124801785713943, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2031448432376339034, guid: cdf64bda3c002384c85877294dca9965,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7188233109956595322}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cdf64bda3c002384c85877294dca9965, type: 3}
+--- !u!4 &168857589652127400 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2031448432376339034, guid: cdf64bda3c002384c85877294dca9965,
+    type: 3}
+  m_PrefabInstance: {fileID: 2190649938835612914}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6063059798093490029 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5350997912003756959, guid: cdf64bda3c002384c85877294dca9965,
+    type: 3}
+  m_PrefabInstance: {fileID: 2190649938835612914}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b1f85fd94634d8459b3f61b18c3fb79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!82 &6290892135640968476 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5272445856374229486, guid: cdf64bda3c002384c85877294dca9965,
+    type: 3}
+  m_PrefabInstance: {fileID: 2190649938835612914}
+  m_PrefabAsset: {fileID: 0}
