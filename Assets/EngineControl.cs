@@ -87,7 +87,7 @@ public class EngineControl : MonoBehaviour
             currentThrust = engineStaticThrust;
         }
 
-        if (useAirDensityMultiplier)
+        if (useAirDensityMultiplier && aircraft.rb.velocity.magnitude > 0f)
         {
             currentEnginePower = ((currentThrust * powerByAltitudeMultiplier.Evaluate(transform.position.y / 10000f) * Utilities.GetPropEfficiencyNumber(maxPropEfficiency, propEfficiencyMach, aircraft.machSpeed) * 326f) / (aircraft.currentSpeed / 1.85200426f)) * 4.44822f * ThrottleInput;
         }
