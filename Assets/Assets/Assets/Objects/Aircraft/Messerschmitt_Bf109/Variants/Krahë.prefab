@@ -683,7 +683,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540922269036293049}
   serializedVersion: 4
-  m_Mass: 2100
+  m_Mass: 2270
   m_Drag: 0
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -781,6 +781,7 @@ MonoBehaviour:
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 1
   SpawnSpeed: 170
@@ -792,7 +793,7 @@ MonoBehaviour:
   aspectRatio: 0
   drag: 0.005
   waveDragMultiplier: 2
-  newWaveDragMultiplier: 2
+  newWaveDragMultiplier: 4
   waveDragPeakMach: 0.7
   waveDragRange: 0.3
   currentDrag: 0
@@ -1078,6 +1079,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 1
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 1625
   engines:
@@ -1089,8 +1092,8 @@ MonoBehaviour:
   - {fileID: 3832300005150206122}
   enginePropellers:
   - {fileID: 8081347477679242177}
-  minSpeed: 2
-  maxSpeed: 6
+  minSpeed: 0.6
+  maxSpeed: 2.7
 --- !u!114 &5393735990614257057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1217,12 +1220,12 @@ MonoBehaviour:
   power_maxPower: 1475
   isJet: 0
   engineNumber: 1
-  powerToWeight: 1.42
+  powerToWeight: 1.53
   attack_totalBurstMass: 6.89
   agility_maxTurnDegS: 36
-  agility_wingLoading: 143
+  agility_wingLoading: 155
   agility_maxTurnSpeed: 615
-  agility_weight: 2100
+  agility_weight: 2270
   health_maxHP: 115
   defense_def: 30
   aircraftDescription: A development of the He 100 fighter. Its innovative low-drag

@@ -1792,7 +1792,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1540922269036293049}
   serializedVersion: 4
-  m_Mass: 3100
+  m_Mass: 3470
   m_Drag: 0
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -1884,10 +1884,13 @@ MonoBehaviour:
   gForce: 0
   angleOfAttack: 0
   criticalAoA: 0
+  angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
+  currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 170
@@ -1898,6 +1901,10 @@ MonoBehaviour:
   sweepAngle: 0
   aspectRatio: 0
   drag: 0.0065
+  waveDragMultiplier: 2
+  newWaveDragMultiplier: 2.8
+  waveDragPeakMach: 1.2
+  waveDragRange: 0.3
   currentDrag: 0
   flaps: 0
   airbrake: 0
@@ -2201,6 +2208,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 1
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 1500
   engines:
@@ -2244,6 +2253,7 @@ MonoBehaviour:
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 5495686033073013095}
+  aircraftName: 
   speed_maxSpeed: 0
   power_maxPower: 0
   isJet: 0
@@ -2251,11 +2261,13 @@ MonoBehaviour:
   powerToWeight: 0
   attack_totalBurstMass: 0
   agility_maxTurnDegS: 0
+  agility_wingLoading: 0
   agility_maxTurnSpeed: 0
   agility_weight: 0
   health_maxHP: 0
   defense_def: 0
   aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!114 &7384599778373647072
 MonoBehaviour:
   m_ObjectHideFlags: 0
