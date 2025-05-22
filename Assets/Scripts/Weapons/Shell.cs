@@ -156,8 +156,6 @@ public class Shell : MonoBehaviour
                     }
                 }
             }
-        }
-        /*if (other.CompareTag("Bullet"))
         {
             InstantiateExplosions();
             RocketEngine[] engines = GetComponents<RocketEngine>();
@@ -166,7 +164,8 @@ public class Shell : MonoBehaviour
                 engine.KeepParticlesAlive();
             }
             Destroy(gameObject);
-        }*/
+        }
+        }
     }
 
     private void OnDestroy()
