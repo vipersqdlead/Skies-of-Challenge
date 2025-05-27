@@ -263,7 +263,12 @@ public class SurvivalMissionStatus : MonoBehaviour
                                 playerAcHub.irControl.MissileAmmo = playerAcHub.irControl.MaxMissileAmmo;
                                 newWaveBonusText.text = "Reward: IR Missiles enabled";
                             }
-                            else if(playerAcHub.radarMissileControl != null)
+                            else if(playerAcHub.sagControl != null)
+                            {
+                                playerAcHub.sagControl.MissileAmmo = playerAcHub.sagControl.MaxMissileAmmo;
+                                newWaveBonusText.text = "Reward: SAG Missiles enabled";
+                            }
+                            else if (playerAcHub.radarMissileControl != null)
                             {
                                 playerAcHub.radarMissileControl.MissileAmmo = playerAcHub.radarMissileControl.MaxMissileAmmo;
                                 newWaveBonusText.text = "Reward: Radar Missiles enabled";
@@ -291,6 +296,11 @@ public class SurvivalMissionStatus : MonoBehaviour
                             {
                                 playerAcHub.radarMissileControl.MissileAmmo = playerAcHub.radarMissileControl.MaxMissileAmmo;
                                 newWaveBonusText.text = "Reward: Radar Missiles enabled";
+                            }
+                            else if (playerAcHub.sagControl != null)
+                            {
+                                playerAcHub.sagControl.MissileAmmo = playerAcHub.sagControl.MaxMissileAmmo;
+                                newWaveBonusText.text = "Reward: SAG Missiles enabled";
                             }
                             else if (playerAcHub.irControl != null)
                             {

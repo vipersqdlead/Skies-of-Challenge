@@ -7,7 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 public class SAGMissileControl : BaseSpWeaponControl
 {
 
-    [SerializeField] int MaxMissileAmmo;
+    public int MaxMissileAmmo;
     public int MissileAmmo;
     float MissileReload = 20;
     public bool canReload;

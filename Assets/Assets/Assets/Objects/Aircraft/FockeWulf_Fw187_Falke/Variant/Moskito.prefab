@@ -12102,8 +12102,9 @@ GameObject:
   - component: {fileID: 5974869217195278853}
   - component: {fileID: 378903199239114602}
   - component: {fileID: 4060421403914432832}
-  - component: {fileID: 673906723629600453}
   - component: {fileID: 2244833770254590219}
+  - component: {fileID: 21143069217536459}
+  - component: {fileID: 3533254292200217525}
   m_Layer: 0
   m_Name: Moskito
   m_TagString: Fighter
@@ -12158,7 +12159,7 @@ MonoBehaviour:
   planeCam: {fileID: 873446309975120530}
   planeHUD: {fileID: 5974869217195278853}
   weaponManager: {fileID: 0}
-  irControl: {fileID: 673906723629600453}
+  irControl: {fileID: 0}
   sagControl: {fileID: 0}
   radarMissileControl: {fileID: 0}
   rocketLauncherControl: {fileID: 4060421403914432832}
@@ -12850,44 +12851,6 @@ MonoBehaviour:
   rateOfFireRPM: 750
   rofTimer: 0
   killCounter: {fileID: 4929685479358493003}
---- !u!114 &673906723629600453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7955617552474876909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b37ea0e9101ccd24eadf1164f886e8be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: 
-  isPlayer: 1
-  MaxMissileAmmo: 4
-  MissileAmmo: 0
-  canReload: 0
-  Missile: {fileID: 888724703871080596, guid: 3dc6d62e5cfe6ed4ea70f0858b355fbc, type: 3}
-  MissilePos:
-  - {fileID: 6431186179545841928}
-  - {fileID: 5629920493340168172}
-  - {fileID: 9167679087878322100}
-  - {fileID: 326680289308063999}
-  AcquisitionMaxTimer: 20
-  AcquisitionTimer: 20
-  missileOuterFoV: 0
-  missileLockRange: 10000
-  isCagedSeeker: 0
-  Target: {fileID: 0}
-  distanceToTarget: 0
-  _angleToTarget: 0
-  Acquiring: 0
-  Locked: 0
-  AcqGrowl: {fileID: 0}
-  LockGrowl: {fileID: 2071230819831282771}
-  killCounter: {fileID: 4929685479358493003}
-  aspect: 2
-  irccm: 0
 --- !u!114 &2244833770254590219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12954,6 +12917,58 @@ MonoBehaviour:
   rollInput: 0
   yawInput: 0
   controlType: 0
+--- !u!114 &21143069217536459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7955617552474876909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfd7b8248420da4aadcee591d9caec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specialWeapons:
+  - {fileID: 4060421403914432832}
+  - {fileID: 3533254292200217525}
+--- !u!114 &3533254292200217525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7955617552474876909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c299d3e747d81a24f99ac31b66a2ca39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: 
+  isPlayer: 0
+  MaxMissileAmmo: 4
+  MissileAmmo: 4
+  MissileReload: 20
+  canReload: 1
+  angleToPlayer: 0
+  MissilePrefab: {fileID: 888724703871080596, guid: 1d1de52f37c4fd6429daccd55279e5d7,
+    type: 3}
+  MissilePos:
+  - {fileID: 6431186179545841928}
+  - {fileID: 5629920493340168172}
+  - {fileID: 9167679087878322100}
+  - {fileID: 326680289308063999}
+  missile: {fileID: 0}
+  AcquisitionMaxTimer: 30
+  AcquisitionTimer: 30
+  possibleTarget: {fileID: 0}
+  Target: {fileID: 0}
+  Acquiring: 0
+  Locked: 0
+  Guiding: 0
+  AcqGrowl: {fileID: 0}
+  LockGrowl: {fileID: 2071230819831282771}
+  killCounter: {fileID: 4929685479358493003}
 --- !u!1 &8021098630795985434
 GameObject:
   m_ObjectHideFlags: 0

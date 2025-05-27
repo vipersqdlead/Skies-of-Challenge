@@ -3550,7 +3550,7 @@ Transform:
   m_GameObject: {fileID: 2350151253337619810}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.042, y: 0.033, z: 11.712}
+  m_LocalPosition: {x: 0.042, y: 0.033, z: 17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3696,7 +3696,7 @@ Transform:
   m_GameObject: {fileID: 2515796639273820532}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.04, y: 0.033, z: 10}
+  m_LocalPosition: {x: -0.04, y: 0.033, z: 15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5757,7 +5757,6 @@ GameObject:
   - component: {fileID: 6008138568628923761}
   - component: {fileID: 978643538639418854}
   - component: {fileID: 6502083555591075977}
-  - component: {fileID: 7247717140998464066}
   - component: {fileID: 3789231333902765384}
   - component: {fileID: 7436821796632801998}
   - component: {fileID: 2328185379595506059}
@@ -5819,7 +5818,7 @@ MonoBehaviour:
   irControl: {fileID: 2328185379595506059}
   sagControl: {fileID: 0}
   radarMissileControl: {fileID: 0}
-  rocketLauncherControl: {fileID: 7247717140998464066}
+  rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 6517130212115597091}
@@ -5887,7 +5886,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 14, y: 1.25, z: 10.44212}
+  m_Size: {x: 12, y: 1.25, z: 10.44212}
   m_Center: {x: 0, y: -0.029178888, z: -3.0823307}
 --- !u!114 &6132751562054808651
 MonoBehaviour:
@@ -6426,61 +6425,6 @@ MonoBehaviour:
   - {fileID: 5401131115897170400}
   minSpeed: 0.6
   maxSpeed: 2.7
---- !u!114 &7247717140998464066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3537050823985110030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 262b14506348fdb4bbf021b93671b7c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: 
-  isPlayer: 0
-  rocketsEnabled: 0
-  semiAuto: 1
-  canReload: 0
-  maxRockets: 26
-  rocketAmmo: 0
-  rocket: {fileID: 888724703871080596, guid: 4b5ca78dfbf37d549b9acdc296fd546a, type: 3}
-  missilePos:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  rocketLaunchersGO:
-  - {fileID: 0}
-  - {fileID: 0}
-  rktIndex: 0
-  rateOfFire: 0
-  rateOfFireRPM: 750
-  rofTimer: 0
-  killCounter: {fileID: 1952286437106927272}
 --- !u!114 &3789231333902765384
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6567,7 +6511,7 @@ MonoBehaviour:
   canReload: 0
   maxRockets: 26
   rocketAmmo: 0
-  rocket: {fileID: 888724703871080596, guid: e62000b1cda80684eaf009b34a09e680, type: 3}
+  rocket: {fileID: 888724703871080596, guid: 4b5ca78dfbf37d549b9acdc296fd546a, type: 3}
   missilePos:
   - {fileID: 4866128010694893591}
   - {fileID: 397737557643105522}
@@ -6618,8 +6562,8 @@ MonoBehaviour:
   weaponName: 
   isPlayer: 1
   MaxMissileAmmo: 6
-  MissileAmmo: 0
-  canReload: 0
+  MissileAmmo: 6
+  canReload: 1
   Missile: {fileID: 9145924101538048397, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
   MissilePos:
   - {fileID: 1241556574002493252}
@@ -6631,7 +6575,7 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
   missileOuterFoV: 0
-  missileLockRange: 20
+  missileLockRange: 2000
   isCagedSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0

@@ -221,7 +221,7 @@ public class FlightModel : MonoBehaviour
         //Vector3 torque = rb.rotation * new Vector3(pitchOutput * Time.deltaTime, yawOutput * Time.deltaTime, -rollOutput * Time.deltaTime);
         //rb.AddTorque(torque, ForceMode.Force);
 
-        if (angleOfAttack >= 5f)
+        if (angleOfAttack >= 10f)
         {
             wing1.emitting = true;
             wing2.emitting = true;

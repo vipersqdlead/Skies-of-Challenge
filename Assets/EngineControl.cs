@@ -99,30 +99,6 @@ public class EngineControl : MonoBehaviour
 
     void ApplyThrust()
     {
-        if(transform.position.y > serviceCeiling)
-        {
-            foreach (var engine in engineSound)
-            {
-                engine.volume = Mathf.Lerp(ThrottleInput, 0f, Time.deltaTime * 1f);
-            }
-
-            if (isAfterburningEngine)
-            {
-                foreach (var engine in engineAfterburners)
-                {
-                    engine.gameObject.SetActive(false);
-                }
-            }
-
-            foreach (var prop in enginePropellers)
-            {
-                prop.transform.Rotate(0, 0, minSpeed * Time.fixedDeltaTime * 60f);
-            }
-            return;
-        }
-
-        else if(transform.position.y < serviceCeiling)
-        {
             foreach (var engine in engines)
             {
                 aircraft.rb.AddForce(transform.forward * currentEnginePower, ForceMode.Force);
@@ -158,17 +134,18 @@ public class EngineControl : MonoBehaviour
             }
             foreach (var prop in enginePropellers)
             {
-                float speed = minSpeed + (maxSpeed * ThrottleInput);
+                //float speed = minSpeed + (maxSpeed * ThrottleInput);
+                float speed = Mathf.Lerp(minSpeed, maxSpeed, ThrottleInput);
                 if (!afterBurner)
                 {
                     prop.transform.Rotate(0, 0, speed * Time.fixedDeltaTime * 60f);
                 }
                 if (afterBurner)
                 {
-                    prop.transform.Rotate(0, 0, (speed * 1.5f) * Time.fixedDeltaTime * 60f);
+                    prop.transform.Rotate(0, 0, (speed * 1.2f) * Time.fixedDeltaTime * 60f);
                 }
             }
-        }
+        
     }
 
     public void SetThrottleInput(float input)
