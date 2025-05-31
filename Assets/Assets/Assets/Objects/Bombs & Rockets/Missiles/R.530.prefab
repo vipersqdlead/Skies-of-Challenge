@@ -385,7 +385,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2244568564740985332}
   serializedVersion: 4
-  m_Mass: 230
+  m_Mass: 193
   m_Drag: 0.022
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -636,8 +636,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rocketTimer: 2.7
   rocketThrust: 800
+  initialMass: 193
+  finalMass: 160
   rb: {fileID: 6942089147527653431}
-  rocketDelay: 1
+  rocketDelay: 0
   rocketTrailParticle: {fileID: 1869778482100521050}
   smoke: {fileID: 7032926577999782248}
   launchSnd: {fileID: -4027492773483778785}
@@ -657,6 +659,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rocketTimer: 6.3
   rocketThrust: 75
+  initialMass: 160
+  finalMass: 148
   rb: {fileID: 6942089147527653431}
   rocketDelay: 1
   rocketTrailParticle: {fileID: 354841966628193202}
@@ -776,6 +780,7 @@ MonoBehaviour:
   possibleTarget: {fileID: 0}
   target: {fileID: 0}
   timerToFuze: 2
+  lifeTime: 60
   ProxyFuse: 0
   proxyFuseCollider: {fileID: 2908728161635261571}
   maxGLoad: 20

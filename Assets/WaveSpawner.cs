@@ -147,7 +147,7 @@ public class WaveSpawner : MonoBehaviour
         wave.AddAllyRenderersToMarker(markers, status);
         foreach(AircraftHub hub in wave.aircraft)
         {
-            hub.hp.extraLives = 2;
+            hub.hp.extraLives = 1;
             if(hub.transform.position.y < 0f)
             {
                 hub.transform.position = new Vector3(hub.transform.position.x, Mathf.Abs(hub.transform.position.y), hub.transform.position.z);
@@ -163,7 +163,11 @@ public class WaveSpawner : MonoBehaviour
         wave.AddAllyRenderersToMarker(markers, status);
         foreach (AircraftHub hub in wave.aircraft)
         {
-            hub.hp.extraLives = 2;
+            hub.hp.extraLives = 1;
+			if(hub.irControl != null)
+			{
+				hub.irControl.canReload = true;
+			}
             if (hub.transform.position.y < 0f)
             {
                 hub.transform.position = new Vector3(hub.transform.position.x, Mathf.Abs(hub.transform.position.y), hub.transform.position.z);
@@ -178,7 +182,11 @@ public class WaveSpawner : MonoBehaviour
         wave.AddAllyRenderersToMarker(markers, status);
         foreach (AircraftHub hub in wave.aircraft)
         {
-            hub.hp.extraLives = 2;
+            hub.hp.extraLives = 1;
+			if(hub.irControl != null)
+			{
+				hub.irControl.canReload = true;
+			}
             if (hub.transform.position.y < 0f)
             {
                 hub.transform.position = new Vector3(hub.transform.position.x, Mathf.Abs(hub.transform.position.y), hub.transform.position.z);
@@ -189,7 +197,7 @@ public class WaveSpawner : MonoBehaviour
     Vector3 GetSafeSpawnAltitude(Vector3 spawnPoint, float playerAltitude)
     {
         Vector3 rayStart = new Vector3(spawnPoint.x, 10000f, spawnPoint.z);
-        Ray ray = new Ray(rayStart, Vector3.up);
+        Ray ray = new Ray(rayStart, Vector3.down);
         RaycastHit hit;
 
         float terrainY = 0f;
@@ -203,7 +211,7 @@ public class WaveSpawner : MonoBehaviour
             terrainY = 50f;
         }
 
-        float safeAltitude = terrainY + 250f;
+        float safeAltitude = terrainY + 500f;
 
         float finalAltitude = Mathf.Max(safeAltitude, playerAltitude);
 

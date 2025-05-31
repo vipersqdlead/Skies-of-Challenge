@@ -10,25 +10,93 @@ public class DogfightingState : StateBase
 {
     public AIController controller;
     public float targetLookRange = 50000f;
+	public Rigidbody incomingMissile;
+	public PilotLevel pilotLevel;
     [SerializeField]IRMissileControl irController;
+	[SerializeField]FlareDispenser flares;
     bool missileCooldown;
     public float missileCooldownTime;
     public float missileCooldownTimer;
+	public float lookAroundCooldownTime;
+    public float lookAroundCooldownTimer;
+	public float lookAroundRange;
+	
+	public enum PilotLevel
+	{
+		Novice,
+		Average,
+		Experienced,
+		Ace
+	}
 
-    public void OnStateStart(AIController userController)
+    public override void OnStateStart(StateUser user)
     {
-        controller = userController;
+        controller = user as AIController;
         if (controller.plane.target == null)
         {
             controller.plane.target = Utilities.GetNearestTarget(gameObject, controller.plane.side, targetLookRange);
-            print(controller.plane.target.ToString());
         }
         if (controller.canUseMissiles)
         {
             irController = GetComponent<IRMissileControl>();
         }
+		
+		switch (pilotLevel)
+		{
+			case PilotLevel.Novice:
+			{
+				controller.steeringSpeed = 1f;
+				controller.reactionDelayMin = 0.5f;
+				controller.reactionDelayMax = 2.5f;
+				controller.reactionDelayDistance = 200f;
+				controller.minMissileDodgeDistance = 100f;
+				lookAroundCooldownTime = UnityEngine.Random.Range(7f, 10f);
+				lookAroundRange = UnityEngine.Random.Range(1500f, 2200f);
+				break;
+			}
+			
+			case PilotLevel.Average:
+			{
+				controller.steeringSpeed = 2f;
+				controller.reactionDelayMin = 0.4f;
+				controller.reactionDelayMax = 1.5f;
+				controller.reactionDelayDistance = 350f;
+				controller.minMissileDodgeDistance = 250f;
+				lookAroundCooldownTime = UnityEngine.Random.Range(3f, 7f);
+				lookAroundRange = UnityEngine.Random.Range(1800f, 2500f);
+				flares = controller.hub.flareDispenser;
+				break;
+			}
+			
+			case PilotLevel.Experienced:
+			{
+				controller.steeringSpeed = 3f;
+				controller.reactionDelayMin = 0.25f;
+				controller.reactionDelayMax = 0.8f;
+				controller.reactionDelayDistance = 450f;
+				controller.minMissileDodgeDistance = 350f;
+				lookAroundCooldownTime = UnityEngine.Random.Range(1f, 3f);
+				lookAroundRange = UnityEngine.Random.Range(2300f, 3200f);
+				flares = controller.hub.flareDispenser;
+				break;
+			}
+			
+			case PilotLevel.Ace:
+			{
+				controller.steeringSpeed = 5f;
+				controller.reactionDelayMin = 0.1f;
+				controller.reactionDelayMax = 0.5f;
+				controller.reactionDelayDistance = 650f;
+				controller.minMissileDodgeDistance = 500f;
+				lookAroundCooldownTime = UnityEngine.Random.Range(0.15f, 0.8f);
+				lookAroundRange = UnityEngine.Random.Range(4500f, 7000f);
+				flares = controller.hub.flareDispenser;
+				break;
+			}
+		}
 
         missileCooldownTimer = missileCooldownTime;
+
     }
 
     public override void OnStateStay()
@@ -45,28 +113,33 @@ public class DogfightingState : StateBase
             return;
         }
 
-        //var incomingMissile = selfTarget.GetIncomingMissile();
-        //if (incomingMissile != null)
-        //{
-        //    if (dodging == false)
-        //    {
-        //        //start dodging
-        //        dodging = true;
-        //        lastDodgePoint = plane.rb.position;
-        //        dodgeTimer = 0;
-        //    }
+        if (incomingMissile != null)
+        {
+            if (controller.dodging == false)
+            {
+                //start dodging
+                controller.dodging = true;
+                controller.lastDodgePoint = controller.plane.rb.position;
+                controller.dodgeTimer = 0;
+				controller.plane.target = Utilities.GetNearestTarget(gameObject, controller.plane.side, targetLookRange); 
+            }
 
-        //    var dodgePosition = GetMissileDodgePosition(dt, incomingMissile);
-        //    steering = CalculateSteering(dodgePosition);
-        //    emergency = true;
-        //}
-        //else
-        //{
-        controller.dodging = false;
-        controller.targetPosition = controller.GetTargetPosition();
-        //}
+            var dodgePosition = controller.GetMissileDodgePosition(Time.deltaTime, incomingMissile);
+            controller.steering = controller.CalculateSteering(dodgePosition);
+            controller.emergency = true;
+        }
+        else
+        {
+			controller.dodging = false;
+			controller.targetPosition = controller.GetTargetPosition();
+        }
+		
+		if(flares != null)
+		{
+			flares.trigger = controller.dodging;
+		}
 
-        if ((controller.plane.currentSpeed < controller.recoverSpeedMin || controller.isRecoveringSpeed))
+        if (incomingMissile == null && (controller.plane.currentSpeed < controller.recoverSpeedMin || controller.isRecoveringSpeed))
         {
             controller.isRecoveringSpeed = controller.plane.currentSpeed < controller.recoverSpeedMax;
 
@@ -106,6 +179,16 @@ public class DogfightingState : StateBase
                 }
             }
         }
+		    if (lookAroundCooldownTimer <= 0f)
+            {
+                CheckForMissiles();
+				lookAroundCooldownTimer = lookAroundCooldownTime;
+            }
+            else if (lookAroundCooldownTimer > 0f)
+            {
+                lookAroundCooldownTimer -= Time.deltaTime;
+            }
+		
     }
 
     public override void OnStateEnd()
@@ -162,5 +245,10 @@ public class DogfightingState : StateBase
                 irController.Acquiring = false;
             }
         }
+    }
+	
+	void CheckForMissiles()
+    {
+		incomingMissile = Utilities.GetNearestMissile(gameObject, lookAroundRange);
     }
 }

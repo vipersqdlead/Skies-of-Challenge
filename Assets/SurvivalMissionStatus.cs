@@ -596,7 +596,7 @@ public class SurvivalMissionStatus : MonoBehaviour
             }
         }
 
-        if (startWithAllies)
+        if (startWithAllies && currentWave == 1)
         {
             switch (aircraftType)
             {

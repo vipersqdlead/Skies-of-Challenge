@@ -4249,12 +4249,29 @@ MonoBehaviour:
   killcounter: {fileID: 0}
   planeCam: {fileID: 0}
   planeHUD: {fileID: 0}
+  weaponManager: {fileID: 0}
   irControl: {fileID: 5224512070307470254}
   sagControl: {fileID: 0}
   radarMissileControl: {fileID: 0}
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
+  flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 7105474077257720994}
+  aircraftName: 
+  speed_maxSpeed: 0
+  power_maxPower: 0
+  isJet: 0
+  engineNumber: 0
+  powerToWeight: 0
+  attack_totalBurstMass: 0
+  agility_maxTurnDegS: 0
+  agility_wingLoading: 0
+  agility_maxTurnSpeed: 0
+  agility_weight: 0
+  health_maxHP: 0
+  defense_def: 0
+  aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!114 &602845952886048050
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4271,16 +4288,33 @@ MonoBehaviour:
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
   gForce: 0
+  angleOfAttack: 0
+  criticalAoA: 0
+  angleOfAttackHorizontal: 0
+  maxAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
+  IAS_Speed: 0
+  currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 300
   rb: {fileID: 2959798183306711499}
   wingSpan: 13.7
   wingArea: 38.5
+  wingType: 0
+  sweepAngle: 0
   aspectRatio: 0
   drag: 0.03
+  waveDragMultiplier: 2
+  newWaveDragMultiplier: 2
+  waveDragPeakMach: 1.2
+  waveDragRange: 0.3
+  currentDrag: 0
+  flaps: 0
+  airbrake: 0
+  stalling: 0
   stallSpeed: 200
   neverExceedSpeed: 3000
   RollForce:
@@ -4377,7 +4411,9 @@ MonoBehaviour:
   wing2: {fileID: 8360536993579438340}
   centerOfLift: {fileID: 4768934802081334869}
   health: {fileID: 6747458687842777627}
+  anims: {fileID: 0}
   controlInput: {x: 0, y: 0, z: 0}
+  brakeInput: 0
 --- !u!114 &5410915704757073567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4394,6 +4430,8 @@ MonoBehaviour:
   rightWing: {fileID: 3699282819266505459}
   minWingAngle: 28
   maxWingAngle: 0
+  minWingPosition: 0
+  maxWingPosition: 0
   minSpeed: 400
   maxSpeed: 800
   minSweepDrag: 0.03
@@ -4403,6 +4441,7 @@ MonoBehaviour:
   finalWingspan: 10
   wingArea: 38.5
   currentWingspan: 0
+  currentPosition: 0
 --- !u!114 &7696272227702872507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4416,6 +4455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 602845952886048050}
+  hub: {fileID: 0}
   engineControl: {fileID: 0}
   steeringSpeed: 50
   minSpeed: 500
@@ -4474,9 +4514,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 7696272227702872507}
   targetLookRange: 15000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 3
   irController: {fileID: 5224512070307470254}
+  flares: {fileID: 0}
   missileCooldownTime: 15
   missileCooldownTimer: 15
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!114 &542333027415765532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4489,15 +4535,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e096c513ce05b84e940f68a2d432d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aircraftHub: {fileID: 0}
   guns:
   - {fileID: 5202124732301607839}
   - {fileID: 4600658203920846884}
   isPlayer: 0
   trigger: 0
+  useConvergence: 0
+  hasDynamicConvergence: 0
+  gunConvergenceDistance: 500
+  convergencePoint: {x: 0, y: 0, z: 0}
   additionalGuns: []
   additionalGunsGO: []
   enableAG: 0
   AGTimer: 0
+  sightLockedTarget: {fileID: 0}
 --- !u!114 &6747458687842777627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4531,6 +4583,7 @@ MonoBehaviour:
   hitSound: {fileID: 380509898968165802}
   fireSound: {fileID: 0}
   invulnerable: 0
+  invulnerableTimer: 0
 --- !u!65 &481244601869412783
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4627,6 +4680,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   isAfterburningEngine: 1
+  useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 25000
   engines:
@@ -4652,6 +4708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37ea0e9101ccd24eadf1164f886e8be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponName: 
   isPlayer: 0
   MaxMissileAmmo: 6
   MissileAmmo: 6
@@ -4666,8 +4723,9 @@ MonoBehaviour:
   - {fileID: 8758526261832322211}
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
-  missileFoV: 40
+  missileOuterFoV: 0
   missileLockRange: 8500
+  isCagedSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
@@ -4676,7 +4734,8 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 0}
   killCounter: {fileID: 0}
-  allAspect: 1
+  aspect: 0
+  irccm: 0
 --- !u!114 &8196732323232946169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4691,7 +4750,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
-  comboBonusTimer: 5
   comboCounting: 0
   currentCombo: 0
 --- !u!1001 &3295101983927709802

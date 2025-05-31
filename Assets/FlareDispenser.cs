@@ -6,7 +6,8 @@ using UnityEngine;
 public class FlareDispenser : MonoBehaviour
 {
     public bool isPlayer;
-    bool trigger;
+    public bool trigger;
+	Rigidbody rb;
     [SerializeField] private GameObject flarePrefab;
     [SerializeField] private Transform[] flareSpawnPoint; // Position where flares are deployed
     [SerializeField] float flareReload = 20;
@@ -15,6 +16,11 @@ public class FlareDispenser : MonoBehaviour
     public float rateOfFireRPM = 0; // This is the reference RPM (rounds per minute) for continuous flare dispensing.
     public float rateOfFire; // Time in seconds between shots
     [SerializeField] float rofTimer; // Timer to be used when firing
+	
+	void Awake()
+	{
+		rb = GetComponent<Rigidbody>();
+	}
 
     private void Start()
     {
@@ -77,10 +83,10 @@ public class FlareDispenser : MonoBehaviour
 
     public void Fire(int i)
     {
-
         {
+			Vector3 error = new Vector3(UnityEngine.Random.Range(-0.1f, 0.1f), UnityEngine.Random.Range(-0.1f, 0.1f), 0f);
             GameObject flare = Instantiate(flarePrefab, flareSpawnPoint[i].position, transform.rotation);
-            flare.GetComponent<Rigidbody>().AddForce(flareSpawnPoint[i].forward * 25f, ForceMode.VelocityChange);
+            flare.GetComponent<Rigidbody>().AddForce(rb.velocity + ((flareSpawnPoint[i].forward + error) * 115f), ForceMode.VelocityChange);
             flareCount--;
             Destroy(flare, 10f);
         }

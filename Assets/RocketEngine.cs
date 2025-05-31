@@ -6,7 +6,9 @@ using static UnityEngine.ParticleSystem;
 
 public class RocketEngine : MonoBehaviour
 {
-    [SerializeField] float rocketTimer, rocketThrust;
+    public float rocketTimer, rocketThrust;
+	float totalRocketTimer;
+	[SerializeField] float initialMass, finalMass;
     [SerializeField] Rigidbody rb;
     [SerializeField] bool rocketDelay;
     [SerializeField] ParticleSystem rocketTrailParticle, smoke;
@@ -18,6 +20,11 @@ public class RocketEngine : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+		if(initialMass == 0){
+		initialMass = rb.mass;}
+		if(finalMass == 0){
+		finalMass = initialMass;}
+		totalRocketTimer = rocketTimer;
     }
 
     // Update is called once per frame
@@ -54,10 +61,11 @@ public class RocketEngine : MonoBehaviour
             }
             if(smoke != null)
             {
-		var smokeEmission = smoke.emission;
+			var smokeEmission = smoke.emission;
                 smokeEmission.enabled = true;
             }
             rocketTimer -= Time.deltaTime;
+			rb.mass = Mathf.Lerp(initialMass, finalMass, ((totalRocketTimer - rocketTimer) * 100f / totalRocketTimer) / 100f);
         }
         else if (rocketTimer <= 0)
         {

@@ -9,8 +9,9 @@ public class AIController : MonoBehaviour , StateUser
 {
     [Header("Flight-related")]
     public FlightModel plane;
+	public AircraftHub hub;
     public EngineControl engineControl;
-    [SerializeField] float steeringSpeed;
+    public float steeringSpeed;
     public float minSpeed;
     public float maxSpeed;
     public float recoverSpeedMin;
@@ -42,10 +43,10 @@ public class AIController : MonoBehaviour , StateUser
     [SerializeField] float cannonMaxFireAngle;
     [SerializeField] float cannonBurstLength;
     [SerializeField] float cannonBurstCooldown;
-    [SerializeField] float minMissileDodgeDistance;
-    [SerializeField] float reactionDelayMin;
-    [SerializeField] float reactionDelayMax;
-    [SerializeField] float reactionDelayDistance;
+    public float minMissileDodgeDistance;
+    public float reactionDelayMin;
+    public float reactionDelayMax;
+    public float reactionDelayDistance;
 
     Target selfTarget;
     FlightModel targetPlane;
@@ -76,6 +77,10 @@ public class AIController : MonoBehaviour , StateUser
 
     void Start()
     {
+		    try
+    {
+		hub = plane.GetComponent<AircraftHub>();
+		
         engineControl = GetComponent<EngineControl>();
 
         selfTarget = plane.GetComponent<Target>();
@@ -87,10 +92,23 @@ public class AIController : MonoBehaviour , StateUser
 
         dodgeOffsets = new List<Vector3>();
         inputQueue = new Queue<ControlInput>();
-        currentState.OnStateStart(this);
 
         recoverSpeedMin = recoverSpeedMin * 3.6f;
         recoverSpeedMax = recoverSpeedMax * 3.6f;
+		
+		if (currentState == null)
+{
+    Debug.LogError("currentState is NULL at ExecuteStateOnStart()");
+}
+		
+		Debug.Log("About to call OnStateStart()");
+		ExecuteStateOnStart();
+	}
+	
+	    catch (System.Exception e)
+    {
+        Debug.LogError("Error in Start(): " + e);
+    }
     }
 
     Vector3 AvoidGround()
@@ -132,7 +150,7 @@ public class AIController : MonoBehaviour , StateUser
         return targetPosition;
     }
 
-    Vector3 CalculateSteering(Vector3 targetPosition)
+    public Vector3 CalculateSteering(Vector3 targetPosition)
     {
         if (plane.target == null)
         {
@@ -177,48 +195,48 @@ public class AIController : MonoBehaviour , StateUser
         return input;
     }
 
-    //Vector3 GetMissileDodgePosition(float dt, Missile missile)
-    //{
-    //    dodgeTimer = Mathf.Max(0, dodgeTimer - dt);
-    //    var missilePos = missile.Rigidbody.position;
+    public Vector3 GetMissileDodgePosition(float dt, Rigidbody missile)
+    {
+        dodgeTimer = Mathf.Max(0, dodgeTimer - dt);
+        var missilePos = missile.position;
 
-    //    var dist = Mathf.Max(minMissileDodgeDistance, Vector3.Distance(missilePos, plane.rb.position));
+        var dist = Mathf.Max(minMissileDodgeDistance, Vector3.Distance(missilePos, plane.rb.position));
 
-    //    //calculate dodge points
-    //    if (dodgeTimer == 0)
-    //    {
-    //        var missileForward = missile.Rigidbody.rotation * Vector3.forward;
-    //        dodgeOffsets.Clear();
+        //calculate dodge points
+        if (dodgeTimer == 0)
+        {
+            var missileForward = missile.rotation * Vector3.forward;
+            dodgeOffsets.Clear();
 
-    //        //4 dodge points: up, down, left, right
+            //4 dodge points: up, down, left, right
 
-    //        dodgeOffsets.Add(new Vector3(0, dist, 0));
-    //        dodgeOffsets.Add(new Vector3(0, -dist, 0));
-    //        dodgeOffsets.Add(Vector3.Cross(missileForward, Vector3.up) * dist);
-    //        dodgeOffsets.Add(Vector3.Cross(missileForward, Vector3.up) * -dist);
+            dodgeOffsets.Add(new Vector3(0, dist, 0));
+            dodgeOffsets.Add(new Vector3(0, -dist, 0));
+            dodgeOffsets.Add(Vector3.Cross(missileForward, Vector3.up) * dist);
+            dodgeOffsets.Add(Vector3.Cross(missileForward, Vector3.up) * -dist);
 
-    //        dodgeTimer = dodgeUpdateInterval;
-    //    }
+            dodgeTimer = dodgeUpdateInterval;
+        }
 
-    //    //select nearest dodge point
-    //    float min = float.PositiveInfinity;
-    //    Vector3 minDodge = missilePos + dodgeOffsets[0];
+        //select nearest dodge point
+        float min = float.PositiveInfinity;
+        Vector3 minDodge = missilePos + dodgeOffsets[0];
 
-    //    foreach (var offset in dodgeOffsets)
-    //    {
-    //        var dodgePosition = missilePos + offset;
-    //        var offsetDist = Vector3.Distance(dodgePosition, lastDodgePoint);
+        foreach (var offset in dodgeOffsets)
+        {
+            var dodgePosition = missilePos + offset;
+            var offsetDist = Vector3.Distance(dodgePosition, lastDodgePoint);
 
-    //        if (offsetDist < min)
-    //        {
-    //            minDodge = dodgePosition;
-    //            min = offsetDist;
-    //        }
-    //    }
+            if (offsetDist < min)
+            {
+                minDodge = dodgePosition;
+                min = offsetDist;
+            }
+        }
 
-    //    lastDodgePoint = minDodge;
-    //    return minDodge;
-    //}
+        lastDodgePoint = minDodge;
+        return minDodge;
+    }
 
     public float CalculateThrottle(float minSpeed, float maxSpeed)
     {
@@ -312,7 +330,7 @@ public class AIController : MonoBehaviour , StateUser
             var targetDir = error.normalized;
             var targetAngle = Vector3.Angle(targetDir, plane.rb.rotation * Vector3.forward);
 
-            if (range < cannonRange && targetAngle < cannonMaxFireAngle && cannonCooldownTimer == 0)
+            if (range < cannonRange && targetAngle < plane.criticalAoA && cannonCooldownTimer == 0)
             {
                 cannonFiring = true;
                 cannonBurstTimer = cannonBurstLength;
@@ -381,7 +399,7 @@ public class AIController : MonoBehaviour , StateUser
 	Vector3 rayDir = plane.rb.velocity.normalized;
 
         //if (Physics.Raycast(ray, groundCollisionDistance + plane.localVelocity.z, groundCollisionMask.value) || plane.IAS_Speed >= plane.neverExceedSpeed)
-	if (Physics.Raycast(transform.position, rayDir, out RaycastHit hit, groundCollisionDistance))
+		if (Physics.Raycast(transform.position, rayDir, out RaycastHit hit, groundCollisionDistance))
         {
             steering = AvoidGround();
             plane.SetControlInput(steering);

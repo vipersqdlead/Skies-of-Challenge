@@ -240,4 +240,81 @@ public static class Utilities {
         return propEfficiencyCurve.Evaluate(currentMach);
 
     }
+	
+	public static Rigidbody GetNearestMissile(GameObject user, float dist)
+    {
+		Collider[] colliders = Physics.OverlapSphere(user.transform.position, dist);
+        Rigidbody missile = null;
+        float closestDistanceSqr = Mathf.Infinity;
+
+        foreach (Collider collider in colliders)
+        {
+            // Skip self-collisions (if needed)
+            if (!collider.CompareTag("Missile"))
+            {
+                continue;
+            }
+
+            if(collider.CompareTag("Missile"))
+            {
+                Rigidbody hitMssl = collider.GetComponent<Rigidbody>();
+                if(hitMssl != null)
+                {
+					{
+						Radar_Missile msslRdr = hitMssl.GetComponent<Radar_Missile>();
+						IR_Missile msslIR = hitMssl.GetComponent<IR_Missile>();
+					
+						if(msslRdr != null)
+						{
+							if(msslRdr.target != user)
+							{
+								continue;
+							}
+						}
+						if(msslIR != null)
+						{
+							if(msslIR.target != user)
+							{
+								continue;
+							}
+						}
+					}
+					RocketEngine[] rocketEngines = collider.GetComponents<RocketEngine>();
+					bool isEngineBurning = false;
+					foreach(RocketEngine engine in rocketEngines)
+					{
+						if(engine.rocketTimer > 0f)
+						{
+							isEngineBurning = true;
+						}
+					}
+					
+					if (isEngineBurning == false)
+					{
+						continue;
+					}
+					
+                    float dSqrToTarget = Vector3.Distance(user.transform.position, collider.transform.position);
+                    if (dSqrToTarget < closestDistanceSqr)
+                    {
+                        closestDistanceSqr = dSqrToTarget;
+                        missile = hitMssl;
+                    }
+                }
+            }
+            else
+            {
+                continue;
+            }
+
+        }
+        if(missile == null)
+        {
+            return null;
+        }
+        else
+        {
+            return missile;
+        }
+    }
 }

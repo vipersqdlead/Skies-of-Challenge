@@ -17,8 +17,9 @@ GameObject:
   - component: {fileID: 2425077229713114793}
   - component: {fileID: 595472319981253915}
   - component: {fileID: -9182242353373441545}
+  - component: {fileID: 4554860387396284344}
   m_Layer: 0
-  m_Name: AIM-54 Phoenix
+  m_Name: Fakour 90
   m_TagString: Missile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,10 +59,10 @@ MonoBehaviour:
   possibleTarget: {fileID: 0}
   target: {fileID: 0}
   timerToFuze: 1
-  lifeTime: 160
+  lifeTime: 150
   ProxyFuse: 0
   proxyFuseCollider: {fileID: 2425077229713114793}
-  maxGLoad: 17
+  maxGLoad: 20
   energyBleedMultiplier: 0.1
   rampUpTime: 5
   launchTime: 0
@@ -107,7 +108,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5186579997882432130}
   serializedVersion: 4
-  m_Mass: 443
+  m_Mass: 637
   m_Drag: 0.018
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -377,10 +378,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa22c512a0d78e1498c7a755eeba4d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocketTimer: 30
-  rocketThrust: 360
-  initialMass: 443
-  finalMass: 273
+  rocketTimer: 5
+  rocketThrust: 1398.333
+  initialMass: 637
+  finalMass: 455
   rb: {fileID: 2806993683341460876}
   rocketDelay: 1
   rocketTrailParticle: {fileID: 3034043757769928337}
@@ -484,6 +485,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4554860387396284344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5186579997882432130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa22c512a0d78e1498c7a755eeba4d87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rocketTimer: 21
+  rocketThrust: 206.6667
+  initialMass: 455
+  finalMass: 342
+  rb: {fileID: 2806993683341460876}
+  rocketDelay: 1
+  rocketTrailParticle: {fileID: 3034043757769928337}
+  smoke: {fileID: 4269494909908804134}
+  launchSnd: {fileID: -9182242353373441545}
+  rocketSound: {fileID: 5789698023987373327}
+  delayTimer: 5.5
 --- !u!1001 &4692227153365280279
 PrefabInstance:
   m_ObjectHideFlags: 0

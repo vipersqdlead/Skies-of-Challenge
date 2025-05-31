@@ -40,7 +40,6 @@ public class RadarMissileControl : BaseSpWeaponControl
         {
             if (Input.GetKeyDown(KeyCode.JoystickButton1) || Input.GetKeyDown(KeyCode.LeftShift))
             {
-                print("Papu is trying to fire a radar mssl");
                 if (Target == null)
                 {
                     Acquiring = true;
@@ -56,6 +55,12 @@ public class RadarMissileControl : BaseSpWeaponControl
                 }
             }
         }
+		
+		if(missile == null)
+        {
+            Guiding = false;
+        }
+		
         if (isPlayer && LockGrowl != null)
         {
             LockGrowl.enabled = Locked;
@@ -73,9 +78,9 @@ public class RadarMissileControl : BaseSpWeaponControl
                 GuidingMissile();
             }
         }
-        if(missile == null)
+		if(Target == null)
         {
-            Guiding = false;
+            Locked = false;
         }
 
         MissilePositions();
@@ -116,7 +121,7 @@ public class RadarMissileControl : BaseSpWeaponControl
                     angleToPlayer = Vector3.Angle(transform.forward, possibleTarget.transform.position - transform.position);
                     if (angleToPlayer < 25f)
                     {
-                        Target = possibleTarget; Locked = true; print("Target Locked!");
+                        Target = possibleTarget; Locked = true;
                     }
                     else if (angleToPlayer >= 60f)
                     {
@@ -142,12 +147,7 @@ public class RadarMissileControl : BaseSpWeaponControl
         {
             missile.target = Target;
         }
-        else
-        {
-            TurnSeekerOff();
-            missile.target = null;
-            missile = null;
-        }
+
     }
 
     void TurnSeekerOff()
