@@ -10,7 +10,6 @@ public class SurvivalMissionSetup : MonoBehaviour
     // Set in the same order as those in the Survival Menu settings!
     [SerializeField] GameObject[] mapPrefabs;
     [SerializeField] GameObject[] playerAircraftPrefabs;
-    public bool missilesAllowed;
     [SerializeField] GameObject player;
     AircraftHub hub;
 
@@ -37,10 +36,6 @@ public class SurvivalMissionSetup : MonoBehaviour
         {
             status.aircraftType = SurvivalMissionStatus.AircraftType.JetTier2;
         }
-        if(player.GetComponent<IRMissileControl>() != null)
-        {
-            missilesAllowed = true;
-        }
         Instantiate(mapPrefabs[PlayerPrefs.GetInt("Survival Map")]);
         status.Player = player;
         hub = player.GetComponent<AircraftHub>();
@@ -50,6 +45,28 @@ public class SurvivalMissionSetup : MonoBehaviour
         status.camListener = hub.planeCam.cameraTransform.GetComponent<AudioListener>();
         waveSpawner.player = hub.fm;
         UISetup();
+
+        {
+            if(PlayerPrefs.GetInt("Survival Enable Wave Bonus") == 1)
+            {
+                status.enableWaveBonus = true;
+            }
+
+            if (PlayerPrefs.GetInt("Survival Start With Allies") == 1)
+            {
+                status.startWithBonus = true;
+            }
+
+            if (PlayerPrefs.GetInt("Survival Start With Bonus") == 1)
+            {
+                status.startWithAllies = true;
+            }
+
+            if (PlayerPrefs.GetInt("Survival Always Reload Missiles") == 1)
+            {
+                status.missilesAllowed = true;
+            }
+        }
     }
 
     void Start()
@@ -57,7 +74,6 @@ public class SurvivalMissionSetup : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         

@@ -15,7 +15,6 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] List<Transform> SpawnPositions;
     public EnemyMarkers markers;
     public SurvivalMissionStatus status;
-    public LayerMask terrainLayer;
 
     public void JetTier1SpawnWave(int numberOfEnemies)
     {
@@ -190,12 +189,12 @@ public class WaveSpawner : MonoBehaviour
     Vector3 GetSafeSpawnAltitude(Vector3 spawnPoint, float playerAltitude)
     {
         Vector3 rayStart = new Vector3(spawnPoint.x, 10000f, spawnPoint.z);
-        Ray ray = new Ray(rayStart, Vector3.down);
+        Ray ray = new Ray(rayStart, Vector3.up);
         RaycastHit hit;
 
         float terrainY = 0f;
 
-        if(Physics.Raycast(ray, out hit, Mathf.Infinity, terrainLayer))
+        if(Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
             terrainY = hit.point.y;
         }

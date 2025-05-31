@@ -32,6 +32,10 @@ public class SurvivalMissionStatus : MonoBehaviour
     public EnemyMarkers markers;
     public AudioListener camListener;
 
+
+    public bool enableWaveBonus, startWithBonus, startWithAllies, missilesAllowed;
+
+
     [SerializeField] GameObject currentLockedTarget;
     public TMP_Text KillCountUI, PointCount, TimeLeft, currentWaveUI, newWaveText, newWaveBonusText, bonusWaveObjectiveText, enemiesLeftText, currentTarget, mapBoundaryWarning, mEnd_TimeBonus, mEnd_PointScore, mEnd_FinalScore;
     public AudioSource mapBoundaryWarningAS;
@@ -50,8 +54,31 @@ public class SurvivalMissionStatus : MonoBehaviour
     {
         Fade(true);
         playerAcHub = Player.GetComponent<AircraftHub>();
-        MissionStart.GetComponent<AudioSource>().Play(); 
+        MissionStart.GetComponent<AudioSource>().Play();
+
+        bgm.volume = PlayerPrefs.GetFloat("BGM Volume", 0.7f);
         bgmVolume.value = bgm.volume;
+
+        if (missilesAllowed)
+        {
+            if(playerAcHub.irControl != null)
+            {
+                playerAcHub.irControl.MissileAmmo = playerAcHub.irControl.MaxMissileAmmo;
+                playerAcHub.irControl.canReload = true;
+            }
+
+            if (playerAcHub.radarMissileControl != null)
+            {
+                playerAcHub.radarMissileControl.MissileAmmo = playerAcHub.radarMissileControl.MaxMissileAmmo;
+                playerAcHub.radarMissileControl.canReload = true;
+            }
+
+            if (playerAcHub.sagControl != null)
+            {
+                playerAcHub.sagControl.MissileAmmo = playerAcHub.sagControl.MaxMissileAmmo;
+                playerAcHub.sagControl.canReload = true;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -162,397 +189,433 @@ public class SurvivalMissionStatus : MonoBehaviour
         newWaveText.text = "Wave " + currentWave + " Inbound!";
         newWaveText.gameObject.GetComponent<AudioSource>().PlayOneShot(newWaveText.gameObject.GetComponent<AudioSource>().clip);
 
-        switch (aircraftType)
         {
-            case AircraftType.Trainer:
-                if (currentWave != 1)
-                {
-                    newWaveBonusText.enabled = true;
-                    int randomReward = UnityEngine.Random.Range(1, 7);
-                    switch (randomReward)
+            switch (aircraftType)
+            {
+                case AircraftType.Trainer:
+                    if (currentWave != 1)
                     {
-                        case 1:
-                            playerAcHub.hp.HealMaxHP();
-                            newWaveBonusText.text = "Reward: Full Health Restored!";
-                            break;
-                        case 2:
-                            playerAcHub.hp.HealHPAmmount(UnityEngine.Random.Range(50, 100));
-                            newWaveBonusText.text = "Reward: Health Restored!";
-                            break;
-                        case 3:
-                            playerAcHub.hp.EnableInvulerability();
-                            newWaveBonusText.text = "Reward: Invulnerable for 3 minutes!";
-                            break;
-                        case 4:
-                            playerAcHub.irControl.MissileAmmo = playerAcHub.irControl.MaxMissileAmmo;
-                            newWaveBonusText.text = "Reward: IR Missiles enabled";
-                            break;
-                        case 5:
-                            playerAcHub.gunsControl.EnableAG();
-                            newWaveBonusText.text = "Reward: Gunpods enabled for 4 minutes!";
-                            break;
-                        case 6:
-                            playerAcHub.rocketLauncherControl.EnableRockets();
-                            newWaveBonusText.text = "Reward: Rocketpods enabled!";
-                            break;
+                        if (enableWaveBonus)
+                        {
+                            newWaveBonusText.enabled = true;
+                            int randomReward = UnityEngine.Random.Range(1, 7);
+                            switch (randomReward)
+                            {
+                                case 1:
+                                    playerAcHub.hp.HealMaxHP();
+                                    newWaveBonusText.text = "Reward: Full Health Restored!";
+                                    break;
+                                case 2:
+                                    playerAcHub.hp.HealHPAmmount(UnityEngine.Random.Range(50, 100));
+                                    newWaveBonusText.text = "Reward: Health Restored!";
+                                    break;
+                                case 3:
+                                    playerAcHub.hp.EnableInvulerability();
+                                    newWaveBonusText.text = "Reward: Invulnerable for 3 minutes!";
+                                    break;
+                                case 4:
+                                    playerAcHub.irControl.MissileAmmo = playerAcHub.irControl.MaxMissileAmmo;
+                                    newWaveBonusText.text = "Reward: IR Missiles enabled";
+                                    break;
+                                case 5:
+                                    playerAcHub.gunsControl.EnableAG();
+                                    newWaveBonusText.text = "Reward: Gunpods enabled for 4 minutes!";
+                                    break;
+                                case 6:
+                                    playerAcHub.rocketLauncherControl.EnableRockets();
+                                    newWaveBonusText.text = "Reward: Rocketpods enabled!";
+                                    break;
+                            }
+                        }
                     }
-                }
 
-                if (currentWave % 5 == 0)
-                {
-                    waveSpawner.PropBonusSpawnWave();
-                    bonusWaveObjectiveText.text = "Bonus Wave: Intercept the Enemy!";
-                    bonusWaveObjectiveText.enabled = true;
-                }
-
-                else
-                {
-                    if (currentWave % 5 == 1 && currentWave != 1)
+                    if (currentWave % 5 == 0)
                     {
-                        playerAcHub.hp.GrantExtraLife();
-
-                        bonusWaveObjectiveText.text = "Continue granted!";
+                        waveSpawner.PropBonusSpawnWave();
+                        bonusWaveObjectiveText.text = "Bonus Wave: Intercept the Enemy!";
                         bonusWaveObjectiveText.enabled = true;
                     }
-                    if (currentWave <= 3)
-                    {
-                        waveSpawner.TrainerSpawnWave(1);
-                    }
-                    else if (currentWave > 3 && currentWave <= 6)
-                    {
-                        waveSpawner.TrainerSpawnWave(2);
-                    }
-                    else if (currentWave > 6 && currentWave <= 9)
-                    {
-                        waveSpawner.TrainerSpawnWave(3);
-                    }
-                    else if (currentWave > 9 && currentWave <= 12)
-                    {
-                        waveSpawner.TrainerSpawnWave(4);
-                    }
+
                     else
                     {
-                        waveSpawner.TrainerSpawnWave(6);
+                        if (currentWave % 5 == 1 && currentWave != 1)
+                        {
+                            playerAcHub.hp.GrantExtraLife();
+
+                            bonusWaveObjectiveText.text = "Continue granted!";
+                            bonusWaveObjectiveText.enabled = true;
+                        }
+                        if (currentWave <= 3)
+                        {
+                            waveSpawner.TrainerSpawnWave(1);
+                        }
+                        else if (currentWave > 3 && currentWave <= 6)
+                        {
+                            waveSpawner.TrainerSpawnWave(2);
+                        }
+                        else if (currentWave > 6 && currentWave <= 9)
+                        {
+                            waveSpawner.TrainerSpawnWave(3);
+                        }
+                        else if (currentWave > 9 && currentWave <= 12)
+                        {
+                            waveSpawner.TrainerSpawnWave(4);
+                        }
+                        else
+                        {
+                            waveSpawner.TrainerSpawnWave(6);
+                        }
                     }
-                }
 
-                break;
+                    break;
 
-            case AircraftType.Prop:
-                if(currentWave != 1)
-                {
-                    newWaveBonusText.enabled = true;
-                    int randomReward = UnityEngine.Random.Range(1, 9);
-                    switch (randomReward)
+                case AircraftType.Prop:
+                    if (currentWave != 1)
                     {
-                        case 1:
-                            playerAcHub.hp.HealMaxHP();
-                            newWaveBonusText.text = "Reward: Full Health Restored!";
-                            break;
-                        case 2:
-                            playerAcHub.hp.HealHPAmmount(UnityEngine.Random.Range(70, 150));
-                            newWaveBonusText.text = "Reward: Health Restored!";
-                            break;
-                        case 3:
-                            playerAcHub.hp.EnableInvulerability();
-                            newWaveBonusText.text = "Reward: Invulnerable for 3 minutes!";
-                            break;
-                        case 4:
-                            if(playerAcHub.irControl != null)
+                        if (enableWaveBonus)
+                        {
+                            newWaveBonusText.enabled = true;
+                            int randomReward = UnityEngine.Random.Range(1, 9);
+                            switch (randomReward)
                             {
-                                playerAcHub.irControl.MissileAmmo = playerAcHub.irControl.MaxMissileAmmo;
-                                newWaveBonusText.text = "Reward: IR Missiles enabled";
+                                case 1:
+                                    playerAcHub.hp.HealMaxHP();
+                                    newWaveBonusText.text = "Reward: Full Health Restored!";
+                                    break;
+                                case 2:
+                                    playerAcHub.hp.HealHPAmmount(UnityEngine.Random.Range(70, 150));
+                                    newWaveBonusText.text = "Reward: Health Restored!";
+                                    break;
+                                case 3:
+                                    playerAcHub.hp.EnableInvulerability();
+                                    newWaveBonusText.text = "Reward: Invulnerable for 3 minutes!";
+                                    break;
+                                case 4:
+                                    if (playerAcHub.irControl != null)
+                                    {
+                                        playerAcHub.irControl.MissileAmmo = playerAcHub.irControl.MaxMissileAmmo;
+                                        newWaveBonusText.text = "Reward: IR Missiles enabled";
+                                    }
+                                    else if (playerAcHub.sagControl != null)
+                                    {
+                                        playerAcHub.sagControl.MissileAmmo = playerAcHub.sagControl.MaxMissileAmmo;
+                                        newWaveBonusText.text = "Reward: SAG Missiles enabled";
+                                    }
+                                    else if (playerAcHub.radarMissileControl != null)
+                                    {
+                                        playerAcHub.radarMissileControl.MissileAmmo = playerAcHub.radarMissileControl.MaxMissileAmmo;
+                                        newWaveBonusText.text = "Reward: Radar Missiles enabled";
+                                    }
+                                    else
+                                    {
+                                        playerAcHub.hp.HealMaxHP();
+                                        newWaveBonusText.text = "Reward: Full Health Restored!";
+                                    }
+                                    break;
+                                case 5:
+                                    playerAcHub.gunsControl.EnableAG();
+                                    newWaveBonusText.text = "Reward: Gunpods enabled for 4 minutes!";
+                                    break;
+                                case 6:
+                                    playerAcHub.rocketLauncherControl.EnableRockets();
+                                    newWaveBonusText.text = "Reward: Rocketpods enabled!";
+                                    break;
+                                case 7:
+                                    waveSpawner.PropAlliedSpawnWave();
+                                    newWaveBonusText.text = "Reward: Allied Reinforcements!";
+                                    break;
+                                case 8:
+                                    if (playerAcHub.radarMissileControl != null)
+                                    {
+                                        playerAcHub.radarMissileControl.MissileAmmo = playerAcHub.radarMissileControl.MaxMissileAmmo;
+                                        newWaveBonusText.text = "Reward: Radar Missiles enabled";
+                                    }
+                                    else if (playerAcHub.sagControl != null)
+                                    {
+                                        playerAcHub.sagControl.MissileAmmo = playerAcHub.sagControl.MaxMissileAmmo;
+                                        newWaveBonusText.text = "Reward: SAG Missiles enabled";
+                                    }
+                                    else if (playerAcHub.irControl != null)
+                                    {
+                                        playerAcHub.irControl.MissileAmmo = playerAcHub.irControl.MaxMissileAmmo;
+                                        newWaveBonusText.text = "Reward: IR Missiles enabled";
+                                    }
+                                    else
+                                    {
+                                        playerAcHub.hp.HealMaxHP();
+                                        newWaveBonusText.text = "Reward: Full Health Restored!";
+                                    }
+                                    break;
                             }
-                            else if(playerAcHub.sagControl != null)
-                            {
-                                playerAcHub.sagControl.MissileAmmo = playerAcHub.sagControl.MaxMissileAmmo;
-                                newWaveBonusText.text = "Reward: SAG Missiles enabled";
-                            }
-                            else if (playerAcHub.radarMissileControl != null)
-                            {
-                                playerAcHub.radarMissileControl.MissileAmmo = playerAcHub.radarMissileControl.MaxMissileAmmo;
-                                newWaveBonusText.text = "Reward: Radar Missiles enabled";
-                            }
-                            else
-                            {
-                                playerAcHub.hp.HealMaxHP();
-                                newWaveBonusText.text = "Reward: Full Health Restored!";
-                            }
-                            break;
-                        case 5:
-                            playerAcHub.gunsControl.EnableAG();
-                            newWaveBonusText.text = "Reward: Gunpods enabled for 4 minutes!";
-                            break;
-                        case 6:
-                            playerAcHub.rocketLauncherControl.EnableRockets();
-                            newWaveBonusText.text = "Reward: Rocketpods enabled!";
-                            break;
-                        case 7:
-                            waveSpawner.PropAlliedSpawnWave();
-                            newWaveBonusText.text = "Reward: Allied Reinforcements!";
-                            break;
-                        case 8:
-                            if (playerAcHub.radarMissileControl != null)
-                            {
-                                playerAcHub.radarMissileControl.MissileAmmo = playerAcHub.radarMissileControl.MaxMissileAmmo;
-                                newWaveBonusText.text = "Reward: Radar Missiles enabled";
-                            }
-                            else if (playerAcHub.sagControl != null)
-                            {
-                                playerAcHub.sagControl.MissileAmmo = playerAcHub.sagControl.MaxMissileAmmo;
-                                newWaveBonusText.text = "Reward: SAG Missiles enabled";
-                            }
-                            else if (playerAcHub.irControl != null)
-                            {
-                                playerAcHub.irControl.MissileAmmo = playerAcHub.irControl.MaxMissileAmmo;
-                                newWaveBonusText.text = "Reward: IR Missiles enabled";
-                            }
-                            else
-                            {
-                                playerAcHub.hp.HealMaxHP();
-                                newWaveBonusText.text = "Reward: Full Health Restored!";
-                            }
-                            break;
+                        }
                     }
-                }
 
-                if (currentWave % 5 == 0)
-                {
-                    waveSpawner.PropBonusSpawnWave();
-                    bonusWaveObjectiveText.text = "Bonus Wave: Intercept the Enemy!";
-                    bonusWaveObjectiveText.enabled = true;
-                }
-
-                else
-                {
-                    if (currentWave % 5 == 1 && currentWave != 1)
+                    if (currentWave % 5 == 0)
                     {
-                        playerAcHub.hp.GrantExtraLife();
-
-                        bonusWaveObjectiveText.text = "Continue granted!";
+                        waveSpawner.PropBonusSpawnWave();
+                        bonusWaveObjectiveText.text = "Bonus Wave: Intercept the Enemy!";
                         bonusWaveObjectiveText.enabled = true;
                     }
-                    if (currentWave <= 2)
-                    {
-                        waveSpawner.PropSpawnWave(1);
-                    }
-                    else if (currentWave > 2 && currentWave < 5)
-                    {
-                        waveSpawner.PropSpawnWave(2);
-                    }
-                    else if (currentWave > 5 && currentWave <= 8)
-                    {
-                        waveSpawner.PropSpawnWave(3);
-                    }
-                    else if (currentWave > 8 && currentWave < 10)
-                    {
-                        waveSpawner.PropSpawnWave(4);
-                    }
+
                     else
                     {
-                        waveSpawner.PropSpawnWave(6);
+                        if (currentWave % 5 == 1 && currentWave != 1)
+                        {
+                            playerAcHub.hp.GrantExtraLife();
+
+                            bonusWaveObjectiveText.text = "Continue granted!";
+                            bonusWaveObjectiveText.enabled = true;
+                        }
+                        if (currentWave <= 2)
+                        {
+                            waveSpawner.PropSpawnWave(1);
+                        }
+                        else if (currentWave > 2 && currentWave < 5)
+                        {
+                            waveSpawner.PropSpawnWave(2);
+                        }
+                        else if (currentWave > 5 && currentWave <= 8)
+                        {
+                            waveSpawner.PropSpawnWave(3);
+                        }
+                        else if (currentWave > 8 && currentWave < 10)
+                        {
+                            waveSpawner.PropSpawnWave(4);
+                        }
+                        else
+                        {
+                            waveSpawner.PropSpawnWave(6);
+                        }
                     }
-                }
-                break;
+                    break;
 
-            case AircraftType.JetTier1:
-                if (currentWave != 1)
-                {
-                    newWaveBonusText.enabled = true;
-                    int randomReward = UnityEngine.Random.Range(1, 9);
-                    switch (randomReward)
+                case AircraftType.JetTier1:
+                    if (currentWave != 1)
                     {
-                        case 1:
-                            playerAcHub.hp.HealMaxHP();
-                            newWaveBonusText.text = "Reward: Full Health Restored!";
-                            break;
-                        case 2:
-                            playerAcHub.hp.HealHPAmmount(UnityEngine.Random.Range(50, 100));
-                            newWaveBonusText.text = "Reward: Health Restored!";
-                            break;
-                        case 3:
-                            playerAcHub.hp.EnableInvulerability();
-                            newWaveBonusText.text = "Reward: Invulnerable for 3 minutes!";
-                            break;
-                        case 4:
-                            if (playerAcHub.irControl != null)
+                        if (enableWaveBonus)
+                        {
+                            newWaveBonusText.enabled = true;
+                            int randomReward = UnityEngine.Random.Range(1, 9);
+                            switch (randomReward)
                             {
-                                playerAcHub.irControl.MissileAmmo = playerAcHub.irControl.MaxMissileAmmo;
-                                newWaveBonusText.text = "Reward: IR Missiles enabled";
+                                case 1:
+                                    playerAcHub.hp.HealMaxHP();
+                                    newWaveBonusText.text = "Reward: Full Health Restored!";
+                                    break;
+                                case 2:
+                                    playerAcHub.hp.HealHPAmmount(UnityEngine.Random.Range(50, 100));
+                                    newWaveBonusText.text = "Reward: Health Restored!";
+                                    break;
+                                case 3:
+                                    playerAcHub.hp.EnableInvulerability();
+                                    newWaveBonusText.text = "Reward: Invulnerable for 3 minutes!";
+                                    break;
+                                case 4:
+                                    if (playerAcHub.irControl != null)
+                                    {
+                                        playerAcHub.irControl.MissileAmmo = playerAcHub.irControl.MaxMissileAmmo;
+                                        newWaveBonusText.text = "Reward: IR Missiles enabled";
+                                    }
+                                    else if (playerAcHub.radarMissileControl != null)
+                                    {
+                                        playerAcHub.radarMissileControl.MissileAmmo = playerAcHub.radarMissileControl.MaxMissileAmmo;
+                                        newWaveBonusText.text = "Reward: Radar Missiles enabled";
+                                    }
+                                    else
+                                    {
+                                        playerAcHub.hp.HealMaxHP();
+                                        newWaveBonusText.text = "Reward: Full Health Restored!";
+                                    }
+                                    break;
+                                case 5:
+                                    playerAcHub.gunsControl.EnableAG();
+                                    newWaveBonusText.text = "Reward: Gunpods enabled for 4 minutes!";
+                                    break;
+                                case 6:
+                                    playerAcHub.rocketLauncherControl.EnableRockets();
+                                    newWaveBonusText.text = "Reward: Rocketpods enabled!";
+                                    break;
+                                case 7:
+                                    waveSpawner.Jet1AlliedSpawnWave();
+                                    newWaveBonusText.text = "Reward: Allied Reinforcements!";
+                                    break;
+                                case 8:
+                                    if (playerAcHub.radarMissileControl != null)
+                                    {
+                                        playerAcHub.radarMissileControl.MissileAmmo = playerAcHub.radarMissileControl.MaxMissileAmmo;
+                                        newWaveBonusText.text = "Reward: Radar Missiles enabled";
+                                    }
+                                    else if (playerAcHub.irControl != null)
+                                    {
+                                        playerAcHub.irControl.MissileAmmo = playerAcHub.irControl.MaxMissileAmmo;
+                                        newWaveBonusText.text = "Reward: IR Missiles enabled";
+                                    }
+                                    else
+                                    {
+                                        playerAcHub.hp.HealMaxHP();
+                                        newWaveBonusText.text = "Reward: Full Health Restored!";
+                                    }
+                                    break;
                             }
-                            else if (playerAcHub.radarMissileControl != null)
-                            {
-                                playerAcHub.radarMissileControl.MissileAmmo = playerAcHub.radarMissileControl.MaxMissileAmmo;
-                                newWaveBonusText.text = "Reward: Radar Missiles enabled";
-                            }
-                            else
-                            {
-                                playerAcHub.hp.HealMaxHP();
-                                newWaveBonusText.text = "Reward: Full Health Restored!";
-                            }
-                            break;
-                        case 5:
-                            playerAcHub.gunsControl.EnableAG();
-                            newWaveBonusText.text = "Reward: Gunpods enabled for 4 minutes!";
-                            break;
-                        case 6:
-                            playerAcHub.rocketLauncherControl.EnableRockets();
-                            newWaveBonusText.text = "Reward: Rocketpods enabled!";
-                            break;
-                        case 7:
-                            waveSpawner.Jet1AlliedSpawnWave();
-                            newWaveBonusText.text = "Reward: Allied Reinforcements!";
-                            break;
-                        case 8:
-                            if (playerAcHub.radarMissileControl != null)
-                            {
-                                playerAcHub.radarMissileControl.MissileAmmo = playerAcHub.radarMissileControl.MaxMissileAmmo;
-                                newWaveBonusText.text = "Reward: Radar Missiles enabled";
-                            }
-                            else if (playerAcHub.irControl != null)
-                            {
-                                playerAcHub.irControl.MissileAmmo = playerAcHub.irControl.MaxMissileAmmo;
-                                newWaveBonusText.text = "Reward: IR Missiles enabled";
-                            }
-                            else
-                            {
-                                playerAcHub.hp.HealMaxHP();
-                                newWaveBonusText.text = "Reward: Full Health Restored!";
-                            }
-                            break;
+                        }
                     }
-                }
 
-                if (currentWave % 5 == 0)
-                {
-                    waveSpawner.JetTier1BonusSpawnWave();
-                    bonusWaveObjectiveText.text = "Bonus Wave: Intercept the Enemy!";
-                    bonusWaveObjectiveText.enabled = true;
-                }
-
-                else
-                {
-                    if (currentWave % 5 == 1 && currentWave != 1)
+                    if (currentWave % 5 == 0)
                     {
-                        playerAcHub.hp.GrantExtraLife();
-
-                        bonusWaveObjectiveText.text = "Continue granted!";
+                        waveSpawner.JetTier1BonusSpawnWave();
+                        bonusWaveObjectiveText.text = "Bonus Wave: Intercept the Enemy!";
                         bonusWaveObjectiveText.enabled = true;
                     }
-                    if (currentWave <= 3)
-                    {
-                        waveSpawner.JetTier1SpawnWave(1);
-                    }
-                    else if (currentWave > 3 && currentWave <= 6)
-                    {
-                        waveSpawner.JetTier1SpawnWave(2);
-                    }
-                    else if (currentWave > 6 && currentWave <= 9)
-                    {
-                        waveSpawner.JetTier1SpawnWave(3);
-                    }
-                    else if (currentWave > 9 && currentWave <= 12)
-                    {
-                        waveSpawner.JetTier1SpawnWave(4);
-                    }
+
                     else
                     {
-                        waveSpawner.JetTier1SpawnWave(6);
+                        if (currentWave % 5 == 1 && currentWave != 1)
+                        {
+                            playerAcHub.hp.GrantExtraLife();
+
+                            bonusWaveObjectiveText.text = "Continue granted!";
+                            bonusWaveObjectiveText.enabled = true;
+                        }
+                        if (currentWave <= 3)
+                        {
+                            waveSpawner.JetTier1SpawnWave(1);
+                        }
+                        else if (currentWave > 3 && currentWave <= 6)
+                        {
+                            waveSpawner.JetTier1SpawnWave(2);
+                        }
+                        else if (currentWave > 6 && currentWave <= 9)
+                        {
+                            waveSpawner.JetTier1SpawnWave(3);
+                        }
+                        else if (currentWave > 9 && currentWave <= 12)
+                        {
+                            waveSpawner.JetTier1SpawnWave(4);
+                        }
+                        else
+                        {
+                            waveSpawner.JetTier1SpawnWave(6);
+                        }
                     }
-                }
 
-                break;
+                    break;
 
-            case AircraftType.JetTier2:
+                case AircraftType.JetTier2:
 
-                if (currentWave != 1)
-                {
-                    newWaveBonusText.enabled = true;
-                    int randomReward = UnityEngine.Random.Range(1, 8);
-                    switch (randomReward)
+                    if (currentWave != 1)
                     {
-                        case 1:
-                            playerAcHub.hp.HealMaxHP();
-                            newWaveBonusText.text = "Reward: Full Health Restored!";
-                            break;
-                        case 2:
-                            playerAcHub.hp.HealHPAmmount(UnityEngine.Random.Range(50, 100));
-                            newWaveBonusText.text = "Reward: Health Restored!";
-                            break;
-                        case 3:
-                            playerAcHub.hp.EnableInvulerability();
-                            newWaveBonusText.text = "Reward: Invulnerable for 3 minutes!";
-                            break;
-                        case 4:
-                            playerAcHub.gunsControl.EnableAG();
-                            newWaveBonusText.text = "Reward: Gunpods enabled for 4 minutes!";
-                            break;
-                        case 5:
-                            playerAcHub.rocketLauncherControl.EnableRockets();
-                            newWaveBonusText.text = "Reward: Rocketpods enabled!";
-                            break;
-                        case 6:
-                            waveSpawner.Jet2AlliedSpawnWave();
-                            newWaveBonusText.text = "Reward: Allied Reinforcements!";
-                            break;
-                        case 7:
-                            if (playerAcHub.radarMissileControl != null)
+                        if (enableWaveBonus)
+                        {
+                            newWaveBonusText.enabled = true;
+                            int randomReward = UnityEngine.Random.Range(1, 8);
+                            switch (randomReward)
                             {
-                                playerAcHub.radarMissileControl.MissileAmmo = playerAcHub.radarMissileControl.MaxMissileAmmo;
-                                newWaveBonusText.text = "Reward: Radar Missiles reloaded";
+                                case 1:
+                                    playerAcHub.hp.HealMaxHP();
+                                    newWaveBonusText.text = "Reward: Full Health Restored!";
+                                    break;
+                                case 2:
+                                    playerAcHub.hp.HealHPAmmount(UnityEngine.Random.Range(50, 100));
+                                    newWaveBonusText.text = "Reward: Health Restored!";
+                                    break;
+                                case 3:
+                                    playerAcHub.hp.EnableInvulerability();
+                                    newWaveBonusText.text = "Reward: Invulnerable for 3 minutes!";
+                                    break;
+                                case 4:
+                                    playerAcHub.gunsControl.EnableAG();
+                                    newWaveBonusText.text = "Reward: Gunpods enabled for 4 minutes!";
+                                    break;
+                                case 5:
+                                    playerAcHub.rocketLauncherControl.EnableRockets();
+                                    newWaveBonusText.text = "Reward: Rocketpods enabled!";
+                                    break;
+                                case 6:
+                                    waveSpawner.Jet2AlliedSpawnWave();
+                                    newWaveBonusText.text = "Reward: Allied Reinforcements!";
+                                    break;
+                                case 7:
+                                    if (playerAcHub.radarMissileControl != null)
+                                    {
+                                        playerAcHub.radarMissileControl.MissileAmmo = playerAcHub.radarMissileControl.MaxMissileAmmo;
+                                        newWaveBonusText.text = "Reward: Radar Missiles reloaded";
+                                    }
+                                    else if (playerAcHub.irControl != null)
+                                    {
+                                        playerAcHub.irControl.MissileAmmo = playerAcHub.irControl.MaxMissileAmmo;
+                                        newWaveBonusText.text = "Reward: IR Missiles reloaded";
+                                    }
+                                    else
+                                    {
+                                        playerAcHub.hp.HealMaxHP();
+                                        newWaveBonusText.text = "Reward: Full Health Restored!";
+                                    }
+                                    break;
                             }
-                            else if (playerAcHub.irControl != null)
-                            {
-                                playerAcHub.irControl.MissileAmmo = playerAcHub.irControl.MaxMissileAmmo;
-                                newWaveBonusText.text = "Reward: IR Missiles reloaded";
-                            }
-                            else
-                            {
-                                playerAcHub.hp.HealMaxHP();
-                                newWaveBonusText.text = "Reward: Full Health Restored!";
-                            }
-                            break;
+                        }
                     }
-                }
 
-                if (currentWave % 5 == 0)
-                {
-                    waveSpawner.JetTier2BonusSpawnWave();
-                    bonusWaveObjectiveText.text = "Bonus Wave: Intercept the Enemy!";
-                    bonusWaveObjectiveText.enabled = true;
-                }
-
-                else
-                {
-                    if (currentWave % 5 == 1 && currentWave != 1)
+                    if (currentWave % 5 == 0)
                     {
-                        playerAcHub.hp.GrantExtraLife();
-
-                        bonusWaveObjectiveText.text = "Continue granted!";
+                        waveSpawner.JetTier2BonusSpawnWave();
+                        bonusWaveObjectiveText.text = "Bonus Wave: Intercept the Enemy!";
                         bonusWaveObjectiveText.enabled = true;
                     }
-                    if (currentWave <= 3)
-                    {
-                        waveSpawner.JetTier2SpawnWave(1);
-                    }
-                    else if (currentWave > 3 && currentWave <= 6)
-                    {
-                        waveSpawner.JetTier2SpawnWave(2);
-                    }
-                    else if (currentWave > 6 && currentWave <= 9)
-                    {
-                        waveSpawner.JetTier2SpawnWave(3);
-                    }
-                    else if (currentWave > 9 && currentWave <= 12)
-                    {
-                        waveSpawner.JetTier2SpawnWave(4);
-                    }
+
                     else
                     {
-                        waveSpawner.JetTier2SpawnWave(6);
+                        if (currentWave % 5 == 1 && currentWave != 1)
+                        {
+                            playerAcHub.hp.GrantExtraLife();
+
+                            bonusWaveObjectiveText.text = "Continue granted!";
+                            bonusWaveObjectiveText.enabled = true;
+                        }
+                        if (currentWave <= 3)
+                        {
+                            waveSpawner.JetTier2SpawnWave(1);
+                        }
+                        else if (currentWave > 3 && currentWave <= 6)
+                        {
+                            waveSpawner.JetTier2SpawnWave(2);
+                        }
+                        else if (currentWave > 6 && currentWave <= 9)
+                        {
+                            waveSpawner.JetTier2SpawnWave(3);
+                        }
+                        else if (currentWave > 9 && currentWave <= 12)
+                        {
+                            waveSpawner.JetTier2SpawnWave(4);
+                        }
+                        else
+                        {
+                            waveSpawner.JetTier2SpawnWave(6);
+                        }
                     }
-                }
-                break;
+                    break;
+            }
+        }
+
+        if (startWithAllies)
+        {
+            switch (aircraftType)
+            {
+                case AircraftType.Trainer:
+                    waveSpawner.PropAlliedSpawnWave();
+                    break;
+
+                case AircraftType.Prop:
+                    waveSpawner.PropAlliedSpawnWave();
+                    break;
+
+                case AircraftType.JetTier1:
+                    waveSpawner.Jet1AlliedSpawnWave();
+                    break;
+
+                case AircraftType.JetTier2:
+                    waveSpawner.Jet2AlliedSpawnWave();
+                    break;
+            }
         }
 
         yield return new WaitForSeconds(5f);
@@ -746,10 +809,8 @@ public class SurvivalMissionStatus : MonoBehaviour
     {
         PauseUI.SetActive(isPaused);
         bgm.gameObject.SetActive(!isPaused);
-        if (camListener != null)
-        {
-            camListener.enabled = !isPaused;
-        }
+        AudioListener.pause = isPaused;
+        
         if (Input.GetKeyDown(KeyCode.JoystickButton7) || Input.GetKeyDown(KeyCode.Escape))
         {
             if (!isPaused)
@@ -763,6 +824,7 @@ public class SurvivalMissionStatus : MonoBehaviour
                 Time.timeScale = 1f;
                 BattleUI.SetActive(true);
                 bgm.UnPause();
+                PlayerPrefs.SetFloat("BGM Volume", bgmVolume.value);
                 isPaused = false;
             }
         }
@@ -785,6 +847,7 @@ public class SurvivalMissionStatus : MonoBehaviour
     {
         isPaused = false;
         Time.timeScale = 1f;
+        PlayerPrefs.SetFloat("BGM Volume", bgmVolume.value);
         bgm.UnPause();
     }
 

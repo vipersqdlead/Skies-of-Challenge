@@ -24,6 +24,11 @@ public class SurvivalSettings : MonoBehaviour
     public Transform modelDisplayPoint; // assign in Inspector
     private GameObject currentModel; // to keep track of the displayed model
     public float modelRotationSpeed = 20f;
+
+    // Battle options
+    public Toggle enableWaveBonusT, startWithBonusT, startWithAlliesT, alwaysReloadMissilesT;
+    public bool enableWaveBonus, startWithBonus, startWithAllies, alwaysReloadMissiles;
+
     [SerializeField] TMP_Text bestScore, bestRound, bestTime, lastScore;
     [SerializeField] FadeInOut fadeEffect;
     [SerializeField] GameObject activeCanvas;
@@ -38,6 +43,30 @@ public class SurvivalSettings : MonoBehaviour
     private void Start()
     {
         fadeEffect.ActivateFadeIn = true;
+
+        if (PlayerPrefs.GetInt("Survival Enable Wave Bonus") == 1)
+        {
+            enableWaveBonus = true;
+            enableWaveBonusT.isOn = true;
+        }
+
+        if (PlayerPrefs.GetInt("Survival Start With Allies") == 1)
+        {
+            startWithBonus = true;
+            startWithBonusT.isOn = true;
+        }
+
+        if (PlayerPrefs.GetInt("Survival Start With Bonus") == 1)
+        {
+            startWithAllies = true;
+            startWithAlliesT.isOn = true;
+        }
+
+        if (PlayerPrefs.GetInt("Survival Always Reload Missiles") == 1)
+        {
+            alwaysReloadMissiles = true;
+            alwaysReloadMissilesT.isOn = true;
+        }
 
         bestScore.text = "Highest Score: " + PlayerPrefs.GetInt("Survival High Score") + " pts.";
         bestRound.text = "Highest Round: Wave " + PlayerPrefs.GetInt("Survival Highest Round");
@@ -69,6 +98,11 @@ public class SurvivalSettings : MonoBehaviour
         {
             currentModel.transform.Rotate(Vector3.up * modelRotationSpeed * Time.deltaTime);
         }
+
+        enableWaveBonus = enableWaveBonusT.isOn;
+        startWithBonus = startWithBonusT.isOn;
+        startWithAllies = startWithAlliesT.isOn;
+        alwaysReloadMissiles = alwaysReloadMissilesT.isOn;
     }
 
     public void StartCoroutineChangeMenu(GameObject newMenu)
@@ -95,7 +129,6 @@ public class SurvivalSettings : MonoBehaviour
         yield return null;
     }
 
-
     public IEnumerator ToMainMenu()
     {
         fadeEffect.ActivateFadeOut = true;
@@ -109,16 +142,16 @@ public class SurvivalSettings : MonoBehaviour
     {
         if(aircraftHub.aircraftModel != null)
         {
-	    if(currentModel == null) { currentModel = Instantiate(aircraftHub.aircraftModel, modelDisplayPoint.position, Quaternion.Euler(-30f, 0f, 0f), modelDisplayPoint); } 
+	        if(currentModel == null) { currentModel = Instantiate(aircraftHub.aircraftModel, modelDisplayPoint.position, Quaternion.Euler(-30f, 0f, 0f), modelDisplayPoint); } 
 		
-	    else
-	    {
-	    	Quaternion currentRotation = currentModel.transform.rotation;
-		Destroy(currentModel); // remove the old model
-            	// Instantiate the aircraft's model at the display point
-            	currentModel = Instantiate(aircraftHub.aircraftModel, modelDisplayPoint.position, currentRotation, modelDisplayPoint);
-            	// Optional: disable any flight scripts or extra colliders on this model
-	    }
+	        else
+	        {
+                Quaternion currentRotation = currentModel.transform.rotation;
+                Destroy(currentModel); // remove the old model
+                                       // Instantiate the aircraft's model at the display point
+                currentModel = Instantiate(aircraftHub.aircraftModel, modelDisplayPoint.position, currentRotation, modelDisplayPoint);
+                // Optional: disable any flight scripts or extra colliders on this model
+            }
         }
     }
 
@@ -1132,6 +1165,10 @@ public class SurvivalSettings : MonoBehaviour
     {
         PlayerPrefs.SetInt("Survival Aircraft", (int)playerPlane);
         PlayerPrefs.SetInt("Survival Map", (int)mapTypes);
+        PlayerPrefs.SetInt("Survival Enable Wave Bonus", enableWaveBonus ? 1 : 0);
+        PlayerPrefs.SetInt("Survival Start With Allies", startWithAllies ? 1  :0);
+        PlayerPrefs.SetInt("Survival Start With Bonus", startWithBonus ? 1 : 0);
+        PlayerPrefs.SetInt("Survival Always Reload Missiles", alwaysReloadMissiles ? 1 : 0);
     }
 
     public void SaveChanges(int manualPlaneType)

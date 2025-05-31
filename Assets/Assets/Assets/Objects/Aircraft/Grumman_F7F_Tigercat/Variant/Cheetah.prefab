@@ -4841,6 +4841,7 @@ GameObject:
   - component: {fileID: 7981137225842437951}
   - component: {fileID: 3072047364211725394}
   - component: {fileID: 2053801674923033790}
+  - component: {fileID: 662184227065498051}
   m_Layer: 0
   m_Name: Cheetah
   m_TagString: Fighter
@@ -5004,8 +5005,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.16466907
-      value: 0.09669063
+      time: 0
+      value: -0.0028274776
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.17837146
+      value: 0.08536861
       inSlope: 1.3551041
       outSlope: 1.3551041
       tangentMode: 0
@@ -5013,8 +5023,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.120865904
     - serializedVersion: 3
-      time: 0.59101593
-      value: 0.34907967
+      time: 0.58875763
+      value: 0.3335493
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -5023,16 +5033,16 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 0.6955843
-      value: 0.2311384
-      inSlope: -3.9018295
-      outSlope: -3.9018295
+      value: 0.18966807
+      inSlope: -4.8893094
+      outSlope: -4.8893094
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.2459811
-      outWeight: 0.71185976
+      outWeight: 1
     - serializedVersion: 3
       time: 0.7169682
-      value: 0.13445412
+      value: 0.0929838
       inSlope: -2.0078278
       outSlope: -2.0078278
       tangentMode: 0
@@ -5046,8 +5056,17 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0.1014151
+      time: -0.0017167382
+      value: -0
+      inSlope: 0.11236495
+      outSlope: 0.11236495
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.3862644
+    - serializedVersion: 3
+      time: 0.19828415
+      value: 0.045873106
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -5055,8 +5074,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.9955414
-      value: 0.05423837
+      time: 0.826474
+      value: 0.0021753833
       inSlope: -0.28917155
       outSlope: -0.28917155
       tangentMode: 0
@@ -5452,7 +5471,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2651573024464254577}
   serializedVersion: 4
-  m_Mass: 8100
+  m_Mass: 7830
   m_Drag: 0
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -5507,8 +5526,8 @@ MonoBehaviour:
   weaponName: 
   isPlayer: 1
   MaxMissileAmmo: 2
-  MissileAmmo: 0
-  canReload: 0
+  MissileAmmo: 2
+  canReload: 1
   Missile: {fileID: 2244568564740985332, guid: 86e47f0f2e83a804e8980d5314a31270, type: 3}
   MissilePos:
   - {fileID: 7946953118705351912}
@@ -5547,7 +5566,7 @@ MonoBehaviour:
   canReload: 0
   maxRockets: 26
   rocketAmmo: 0
-  rocket: {fileID: 888724703871080596, guid: e62000b1cda80684eaf009b34a09e680, type: 3}
+  rocket: {fileID: 888724703871080596, guid: fbfaf4d178fa9804191b30562db3a122, type: 3}
   missilePos:
   - {fileID: 4408222624588515668}
   - {fileID: 9069788442005487724}
@@ -5686,6 +5705,22 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 0}
   killCounter: {fileID: 4277119381940890023}
+--- !u!114 &662184227065498051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2651573024464254577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfd7b8248420da4aadcee591d9caec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specialWeapons:
+  - {fileID: 7981137225842437951}
+  - {fileID: 6657392839032964174}
+  - {fileID: 2053801674923033790}
 --- !u!1 &2657064890560570457
 GameObject:
   m_ObjectHideFlags: 0
