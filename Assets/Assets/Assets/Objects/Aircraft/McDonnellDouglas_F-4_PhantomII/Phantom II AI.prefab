@@ -113,6 +113,16 @@ PrefabInstance:
       propertyPath: isPlayer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7269806837363031025, guid: a4f032e7b2a831d4782eebe4df455fac,
+        type: 3}
+      propertyPath: flareReload
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269806837363031025, guid: a4f032e7b2a831d4782eebe4df455fac,
+        type: 3}
+      propertyPath: rateOfFireRPM
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 8043938010775167576, guid: a4f032e7b2a831d4782eebe4df455fac,
         type: 3}
       propertyPath: isPlayer
@@ -205,9 +215,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 3320409674301915633}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 466071038906043711}
+  flares: {fileID: 0}
   missileCooldownTime: 20
   missileCooldownTimer: 20
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!114 &3320409674301915633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 5092267281739895715}
+  hub: {fileID: 0}
   engineControl: {fileID: 8166342672405924112}
   steeringSpeed: 50
   minSpeed: 144

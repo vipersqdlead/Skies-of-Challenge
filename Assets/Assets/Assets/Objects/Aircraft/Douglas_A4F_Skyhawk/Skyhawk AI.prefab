@@ -604,6 +604,39 @@ MonoBehaviour:
   rateOfFireRPM: 650
   rofTimer: 0
   killCounter: {fileID: 0}
+--- !u!1 &2598641897113332942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3521073793020112139}
+  m_Layer: 0
+  m_Name: Flares
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3521073793020112139
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2598641897113332942}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.1087297, y: 1.93, z: 3.9146943}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8500555001143717117}
+  - {fileID: 2409741269450239677}
+  m_Father: {fileID: 3679483640184359903}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2732642888784337186
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,6 +859,7 @@ GameObject:
   - component: {fileID: 4174714995952344821}
   - component: {fileID: 1936249785512775161}
   - component: {fileID: 1748033475896474436}
+  - component: {fileID: 5885719150683666551}
   m_Layer: 0
   m_Name: Skyhawk AI
   m_TagString: Fighter
@@ -901,6 +935,7 @@ MonoBehaviour:
   health_maxHP: 0
   defense_def: 0
   aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!54 &6079865287207750442
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1007,6 +1042,7 @@ MonoBehaviour:
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 170
@@ -1273,6 +1309,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 0
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 0
   engines:
@@ -1350,6 +1388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 8679186710179448142}
+  hub: {fileID: 0}
   engineControl: {fileID: 6775140481111859132}
   steeringSpeed: 50
   minSpeed: 120
@@ -1408,9 +1447,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1936249785512775161}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 4174714995952344821}
+  flares: {fileID: 0}
   missileCooldownTime: 20
   missileCooldownTimer: 20
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
+--- !u!114 &5885719150683666551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3057848942870415129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b819a906094784d9aea3bf9ea0627c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayer: 1
+  trigger: 0
+  flarePrefab: {fileID: 5231318020974602043, guid: a644b4741f60d71478e4e8a7c48499cc,
+    type: 3}
+  flareSpawnPoint:
+  - {fileID: 8500555001143717117}
+  - {fileID: 2409741269450239677}
+  flareReload: 0
+  flareCount: 60
+  maxFlareCount: 60
+  rateOfFireRPM: 60
+  rateOfFire: 0
+  rofTimer: 0
 --- !u!1 &3312025921134221885
 GameObject:
   m_ObjectHideFlags: 0
@@ -1670,6 +1740,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &3533923749345676126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8500555001143717117}
+  m_Layer: 0
+  m_Name: Fl1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8500555001143717117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3533923749345676126}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.9326452, y: -0.048329122, z: -0.33051306, w: -0.13637565}
+  m_LocalPosition: {x: -0.606, y: -0.827, z: -3.157}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3521073793020112139}
+  m_LocalEulerAnglesHint: {x: 196.638, y: 39.026993, z: 0}
 --- !u!1 &3662876537510837053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1784,6 +1885,7 @@ Transform:
   m_Children:
   - {fileID: 1212592385177352527}
   - {fileID: 1670425075487460268}
+  - {fileID: 3521073793020112139}
   m_Father: {fileID: 4734283303039233240}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3976256131706553836
@@ -1905,6 +2007,37 @@ Transform:
   - {fileID: 3282678473097618095}
   m_Father: {fileID: 4734283303039233240}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4400622555530084385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2409741269450239677}
+  m_Layer: 0
+  m_Name: Fl2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2409741269450239677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4400622555530084385}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.93264514, y: 0.048328735, z: 0.33051407, w: -0.13637409}
+  m_LocalPosition: {x: 0.606, y: -0.827, z: -3.157}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3521073793020112139}
+  m_LocalEulerAnglesHint: {x: 196.638, y: -39.02699, z: 0}
 --- !u!1 &4434130152681080138
 GameObject:
   m_ObjectHideFlags: 0

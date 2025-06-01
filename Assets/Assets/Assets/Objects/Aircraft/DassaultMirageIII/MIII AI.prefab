@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 6982110809263645009}
   - component: {fileID: 2309544383534133888}
   - component: {fileID: 3651618698870004517}
+  - component: {fileID: 3758600686252380049}
   m_Layer: 0
   m_Name: MIII AI
   m_TagString: Fighter
@@ -127,6 +128,7 @@ MonoBehaviour:
   health_maxHP: 0
   defense_def: 0
   aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!54 &7932003786084330843
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -172,11 +174,13 @@ MonoBehaviour:
   gForce: 0
   angleOfAttack: 0
   criticalAoA: 25
+  angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 200
@@ -406,8 +410,9 @@ MonoBehaviour:
   - {fileID: 2112057255296744889}
   AcquisitionMaxTimer: 25
   AcquisitionTimer: 25
-  missileFoV: 35
+  missileOuterFoV: 0
   missileLockRange: 5500
+  isCagedSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
@@ -485,6 +490,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 1
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 17900
   engines:
@@ -510,6 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 8221686311685507775}
+  hub: {fileID: 0}
   engineControl: {fileID: 6982110809263645009}
   steeringSpeed: 50
   minSpeed: 500
@@ -568,9 +576,70 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 2309544383534133888}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 4781588429107943575}
+  flares: {fileID: 0}
   missileCooldownTime: 20
   missileCooldownTimer: 20
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
+--- !u!114 &3758600686252380049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119144134666846188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b819a906094784d9aea3bf9ea0627c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayer: 1
+  trigger: 0
+  flarePrefab: {fileID: 5231318020974602043, guid: a644b4741f60d71478e4e8a7c48499cc,
+    type: 3}
+  flareSpawnPoint:
+  - {fileID: 4272059789079997759}
+  flareReload: 20
+  flareCount: 30
+  maxFlareCount: 0
+  rateOfFireRPM: 60
+  rateOfFire: 0
+  rofTimer: 0
+--- !u!1 &886228760512931295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4272059789079997759}
+  m_Layer: 0
+  m_Name: Flare
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4272059789079997759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886228760512931295}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.8373159, y: -0.13207108, z: -0.52685356, w: -0.062327314}
+  m_LocalPosition: {x: 0.5595703, y: 0.3701172, z: -1.171875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4776582309031936098}
+  m_LocalEulerAnglesHint: {x: -178.006, y: -64.065, z: -16.679993}
 --- !u!1 &1625477039055865817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,6 +1137,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2378266044613790820}
+  - {fileID: 4272059789079997759}
   m_Father: {fileID: 1230384127447869894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6105231148650006493

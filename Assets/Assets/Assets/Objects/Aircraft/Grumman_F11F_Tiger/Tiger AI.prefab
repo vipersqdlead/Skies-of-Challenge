@@ -315,6 +315,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1539798028072858895
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 822964347885219172}
+  m_Layer: 0
+  m_Name: Fl2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &822964347885219172
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539798028072858895}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.93264514, y: 0.048328735, z: 0.33051407, w: -0.13637409}
+  m_LocalPosition: {x: 0.606, y: -0.827, z: -3.157}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7528232361722488583}
+  m_LocalEulerAnglesHint: {x: 196.638, y: -39.02699, z: 0}
 --- !u!1 &1799331580515171907
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,6 +440,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 762756714535422969}
+  - {fileID: 7528232361722488583}
   m_Father: {fileID: 4888792426059889481}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2297987837692719150
@@ -608,6 +640,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &3131530418243848787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4874623014703566114}
+  m_Layer: 0
+  m_Name: Fl1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4874623014703566114
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3131530418243848787}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.9326452, y: -0.048329122, z: -0.33051306, w: -0.13637565}
+  m_LocalPosition: {x: -0.606, y: -0.827, z: -3.157}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7528232361722488583}
+  m_LocalEulerAnglesHint: {x: 196.638, y: 39.026993, z: 0}
 --- !u!1 &3153571175365495769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,6 +1104,7 @@ GameObject:
   - component: {fileID: 8043938010775167576}
   - component: {fileID: 6133947137227583989}
   - component: {fileID: 6871905230154700985}
+  - component: {fileID: 2650386268565159940}
   m_Layer: 0
   m_Name: Tiger AI
   m_TagString: Fighter
@@ -1486,6 +1550,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 1
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 16660
   engines:
@@ -1567,9 +1633,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 6871905230154700985}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 8043938010775167576}
+  flares: {fileID: 0}
   missileCooldownTime: 20
   missileCooldownTimer: 20
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!114 &6871905230154700985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1583,6 +1655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 3421961934031879364}
+  hub: {fileID: 0}
   engineControl: {fileID: 1766171124683318903}
   steeringSpeed: 50
   minSpeed: 500
@@ -1627,6 +1700,64 @@ MonoBehaviour:
   throttle: 0
   emergency: 0
   targetPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &2650386268565159940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5229710937259975155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14b819a906094784d9aea3bf9ea0627c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayer: 1
+  trigger: 0
+  flarePrefab: {fileID: 5231318020974602043, guid: a644b4741f60d71478e4e8a7c48499cc,
+    type: 3}
+  flareSpawnPoint:
+  - {fileID: 4874623014703566114}
+  - {fileID: 822964347885219172}
+  flareReload: 0
+  flareCount: 32
+  maxFlareCount: 0
+  rateOfFireRPM: 60
+  rateOfFire: 0
+  rofTimer: 0
+--- !u!1 &5361357654973018279
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7528232361722488583}
+  m_Layer: 0
+  m_Name: Flares
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7528232361722488583
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5361357654973018279}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4874623014703566114}
+  - {fileID: 822964347885219172}
+  m_Father: {fileID: 7345703564542810833}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6230401586307889171
 GameObject:
   m_ObjectHideFlags: 0

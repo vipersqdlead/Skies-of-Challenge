@@ -68,6 +68,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1372948868202894757, guid: 640ccb8771399ef408df67c3629a7d07,
+        type: 3}
+      propertyPath: flareReload
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1372948868202894757, guid: 640ccb8771399ef408df67c3629a7d07,
+        type: 3}
+      propertyPath: rateOfFireRPM
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 2038094239862580057, guid: 640ccb8771399ef408df67c3629a7d07,
         type: 3}
       propertyPath: m_IsActive
@@ -366,11 +376,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8320289180716399917, guid: 640ccb8771399ef408df67c3629a7d07,
         type: 3}
-      propertyPath: flareDispenser
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8320289180716399917, guid: 640ccb8771399ef408df67c3629a7d07,
-        type: 3}
       propertyPath: power_maxPower
       value: 0
       objectReference: {fileID: 0}
@@ -409,14 +414,13 @@ PrefabInstance:
     - {fileID: 4458270206114227055, guid: 640ccb8771399ef408df67c3629a7d07, type: 3}
     - {fileID: 9145525613850960406, guid: 640ccb8771399ef408df67c3629a7d07, type: 3}
     - {fileID: 1257820892668996848, guid: 640ccb8771399ef408df67c3629a7d07, type: 3}
-    - {fileID: 3642742496484483773, guid: 640ccb8771399ef408df67c3629a7d07, type: 3}
-    - {fileID: 9184215881287864580, guid: 640ccb8771399ef408df67c3629a7d07, type: 3}
-    - {fileID: 5681915724501492983, guid: 640ccb8771399ef408df67c3629a7d07, type: 3}
-    - {fileID: 2143909340782452476, guid: 640ccb8771399ef408df67c3629a7d07, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 5134692137552665971, guid: 640ccb8771399ef408df67c3629a7d07, type: 3}
     - {fileID: 7107123546004588074, guid: 640ccb8771399ef408df67c3629a7d07, type: 3}
-    - {fileID: 1372948868202894757, guid: 640ccb8771399ef408df67c3629a7d07, type: 3}
-    - {fileID: 5844223311150292072, guid: 640ccb8771399ef408df67c3629a7d07, type: 3}
+    - {fileID: 0}
     - {fileID: 7231966843281029618, guid: 640ccb8771399ef408df67c3629a7d07, type: 3}
     m_RemovedGameObjects:
     - {fileID: 3362471661331637960, guid: 640ccb8771399ef408df67c3629a7d07, type: 3}
@@ -469,9 +473,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 7831219305828837630}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 8194213364776354921}
+  flares: {fileID: 0}
   missileCooldownTime: 20
   missileCooldownTimer: 20
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!114 &7831219305828837630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,6 +495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 4752811460590884417}
+  hub: {fileID: 0}
   engineControl: {fileID: 5983414999665294767}
   steeringSpeed: 50
   minSpeed: 220

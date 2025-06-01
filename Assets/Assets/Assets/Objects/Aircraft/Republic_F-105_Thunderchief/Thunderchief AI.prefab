@@ -1926,6 +1926,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 1
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 50000
   engines:
@@ -2006,15 +2008,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
+  trigger: 0
   flarePrefab: {fileID: 5231318020974602043, guid: a644b4741f60d71478e4e8a7c48499cc,
     type: 3}
   flareSpawnPoint:
   - {fileID: 6037289560127279864}
   - {fileID: 1965451409828083302}
-  flareReload: 20
+  flareReload: 0
   flareCount: 60
   maxFlareCount: 0
-  rateOfFireRPM: 250
+  rateOfFireRPM: 60
   rateOfFire: 0
   rofTimer: 0
 --- !u!114 &6006456173245475903
@@ -2030,6 +2033,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 3421961934031879364}
+  hub: {fileID: 0}
   engineControl: {fileID: 1766171124683318903}
   steeringSpeed: 50
   minSpeed: 150
@@ -2088,9 +2092,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 6006456173245475903}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 8043938010775167576}
+  flares: {fileID: 0}
   missileCooldownTime: 20
   missileCooldownTimer: 20
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!1 &5945519339403519978
 GameObject:
   m_ObjectHideFlags: 0
