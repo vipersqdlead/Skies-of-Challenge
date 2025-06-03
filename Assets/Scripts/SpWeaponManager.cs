@@ -43,7 +43,6 @@ public class SpWeaponManager : MonoBehaviour
                 specialWeapons[i].DisableWeapon();
             }
         }
-        Debug.Log("Switched to: " + specialWeapons[currentWeaponIndex].weaponName);
     }
 
 }

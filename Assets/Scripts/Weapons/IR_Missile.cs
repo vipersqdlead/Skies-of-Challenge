@@ -51,8 +51,8 @@ public class IR_Missile : MonoBehaviour
     }
     void Start()
     {
-	if(target != null) {        directionToTarget = (target.transform.position - transform.position).normalized; print("Target is found");}
-	else { print("target not assigned!"); }
+		if(target != null) {        directionToTarget = (target.transform.position - transform.position).normalized; print("Target is found");}
+		else { print("target not assigned!"); }
     }
 
     // Update is called once per frame
@@ -73,7 +73,6 @@ public class IR_Missile : MonoBehaviour
         if (missileTimer <= fuzeTimer)
         {
             ProxyFuse = true;
-            proxyFuseCollider.enabled = true;
             Guidance();
         }
 
@@ -447,7 +446,6 @@ public class IR_Missile : MonoBehaviour
 
     void OnDestroy()
     {
-        print("Missile " + gameObject.name + " max G achieved was: " + maxGAchieved);
-        print("Missile " + gameObject.name + " max speed achieved was: M " + maxSpeedAchievedMach);
+        print("Missile " + gameObject.name + " max G achieved was: " + maxGAchieved + " G; max speed achieved was: M " + maxSpeedAchievedMach);
     }
 }

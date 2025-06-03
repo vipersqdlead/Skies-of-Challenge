@@ -993,6 +993,7 @@ MonoBehaviour:
   health_maxHP: 0
   defense_def: 0
   aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!54 &6079865287207750442
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1099,6 +1100,7 @@ MonoBehaviour:
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 170
@@ -1384,6 +1386,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 1
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 29620
   engines:
@@ -1464,6 +1468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 8679186710179448142}
+  hub: {fileID: 0}
   engineControl: {fileID: 6775140481111859132}
   steeringSpeed: 50
   minSpeed: 500
@@ -1522,9 +1527,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 7603809660999043496}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 4174714995952344821}
+  flares: {fileID: 0}
   missileCooldownTime: 20
   missileCooldownTimer: 20
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!1 &3142971498976550356
 GameObject:
   m_ObjectHideFlags: 0
@@ -3577,6 +3588,8 @@ PrefabInstance:
     - {fileID: 1670640804323270339, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
     - {fileID: 2849805696076507682, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
     - {fileID: 2336263370449300910, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
+    - {fileID: -3976028368082848619, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
+    - {fileID: 8329066232262381356, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
     m_RemovedGameObjects:
     - {fileID: 3452627851514076143, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
     m_AddedGameObjects: []
@@ -3819,6 +3832,8 @@ PrefabInstance:
     - {fileID: 1670640804323270339, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
     - {fileID: 2849805696076507682, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
     - {fileID: 2336263370449300910, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
+    - {fileID: -3976028368082848619, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
+    - {fileID: 8329066232262381356, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
     m_RemovedGameObjects:
     - {fileID: 3452627851514076143, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
     m_AddedGameObjects: []
@@ -3907,6 +3922,8 @@ PrefabInstance:
     - {fileID: 1670640804323270339, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
     - {fileID: 2849805696076507682, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
     - {fileID: 2336263370449300910, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
+    - {fileID: -3976028368082848619, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
+    - {fileID: 8329066232262381356, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
     m_RemovedGameObjects:
     - {fileID: 3452627851514076143, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
     m_AddedGameObjects: []
@@ -4350,6 +4367,8 @@ PrefabInstance:
     - {fileID: 1670640804323270339, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
     - {fileID: 2849805696076507682, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
     - {fileID: 2336263370449300910, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
+    - {fileID: -3976028368082848619, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
+    - {fileID: 8329066232262381356, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
     m_RemovedGameObjects:
     - {fileID: 3452627851514076143, guid: 731a61eff3673aa4d952864a6177e80f, type: 3}
     m_AddedGameObjects: []

@@ -989,7 +989,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4059854080399886714}
-  - component: {fileID: 6748792759247818787}
   - component: {fileID: 7094081631568012495}
   - component: {fileID: 6670943407909229558}
   - component: {fileID: 3885259179208702769}
@@ -998,6 +997,7 @@ GameObject:
   - component: {fileID: 8219502203030299332}
   - component: {fileID: 2892485487076387862}
   - component: {fileID: 1327524090301452856}
+  - component: {fileID: -1347079776649390333}
   m_Layer: 0
   m_Name: AA-20 Nord
   m_TagString: Missile
@@ -1023,30 +1023,6 @@ Transform:
   - {fileID: 6100237527751061965}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6748792759247818787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9145924101538048397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a01d6b66e3ee0354184120a4623124b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShellVelocity: 0
-  DmgToAir: 10000
-  DmgToGrnd: 5
-  isTracer: 0
-  isIncendiary: 0
-  selfDestruct: 0
-  shellType: 0
-  reloadTimer: 0
-  ExplosionSmaller: {fileID: 1099838043991838807, guid: 0e6b37ee9ce548f469e5c719ee44f294,
-    type: 3}
-  hitSound: {fileID: 0}
-  trail: {fileID: 0}
 --- !u!82 &7094081631568012495
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1476,10 +1452,29 @@ MonoBehaviour:
   RocketThrust: 80
   MaxTurn: 20
   ProxyFuse: 0
-  proxyFuseCollider: {fileID: 2871271111155695146}
   missileAlert: {fileID: 0}
   Guide: {fileID: 0}
   gForce: 0
+--- !u!114 &-1347079776649390333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9145924101538048397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f390c48ce2cbe0249a71f601b89768bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerToFuze: 0.7
+  explosionRadius: 0
+  explosionPower: 25000
+  proxyFuse: {fileID: 0}
+  explosion: {fileID: 1099838043991838807, guid: 778deeeddaf1b7e4996f34382bbb99e9,
+    type: 3}
+  waterSplash: {fileID: 5509927898478369345, guid: cf8b55990d3457944886a599ba485712,
+    type: 3}
 --- !u!1 &9216898366690984858
 GameObject:
   m_ObjectHideFlags: 0

@@ -50,7 +50,7 @@ public class DogfightingState : StateBase
 				controller.reactionDelayMax = 2.5f;
 				controller.reactionDelayDistance = 200f;
 				controller.minMissileDodgeDistance = 100f;
-				lookAroundCooldownTime = UnityEngine.Random.Range(7f, 10f);
+				lookAroundCooldownTime = UnityEngine.Random.Range(3f, 6f);
 				lookAroundRange = UnityEngine.Random.Range(1500f, 2200f);
 				break;
 			}
@@ -61,8 +61,8 @@ public class DogfightingState : StateBase
 				controller.reactionDelayMin = 0.4f;
 				controller.reactionDelayMax = 1.5f;
 				controller.reactionDelayDistance = 350f;
-				controller.minMissileDodgeDistance = 250f;
-				lookAroundCooldownTime = UnityEngine.Random.Range(3f, 7f);
+				controller.minMissileDodgeDistance = UnityEngine.Random.Range(800f, 1500f);
+				lookAroundCooldownTime = UnityEngine.Random.Range(1.5f, 3f);
 				lookAroundRange = UnityEngine.Random.Range(1800f, 2500f);
 				flares = controller.hub.flareDispenser;
 				break;
@@ -74,8 +74,8 @@ public class DogfightingState : StateBase
 				controller.reactionDelayMin = 0.25f;
 				controller.reactionDelayMax = 0.8f;
 				controller.reactionDelayDistance = 450f;
-				controller.minMissileDodgeDistance = 350f;
-				lookAroundCooldownTime = UnityEngine.Random.Range(1f, 3f);
+				controller.minMissileDodgeDistance = UnityEngine.Random.Range(1200f, 1800f);
+				lookAroundCooldownTime = UnityEngine.Random.Range(0.8f, 2f);
 				lookAroundRange = UnityEngine.Random.Range(2300f, 3200f);
 				flares = controller.hub.flareDispenser;
 				break;
@@ -87,8 +87,8 @@ public class DogfightingState : StateBase
 				controller.reactionDelayMin = 0.1f;
 				controller.reactionDelayMax = 0.5f;
 				controller.reactionDelayDistance = 650f;
-				controller.minMissileDodgeDistance = 500f;
-				lookAroundCooldownTime = UnityEngine.Random.Range(0.15f, 0.8f);
+				controller.minMissileDodgeDistance = UnityEngine.Random.Range(1500f, 2000f);
+				lookAroundCooldownTime = UnityEngine.Random.Range(0.15f, 0.6f);
 				lookAroundRange = UnityEngine.Random.Range(4500f, 7000f);
 				flares = controller.hub.flareDispenser;
 				break;

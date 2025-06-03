@@ -172,7 +172,7 @@ public class RadarMissileControl : BaseSpWeaponControl
                 Rigidbody missilerb = missile.GetComponent<Rigidbody>();
                 missilerb.AddForce(gameObject.GetComponent<Rigidbody>().velocity, ForceMode.VelocityChange);
                 missilerb.rotation = Quaternion.LookRotation(gameObject.GetComponent<Rigidbody>().velocity);
-                missile.GetComponent<Shell>().SetKillEnemyDelegate(EnemyKilled);
+                missile.GetComponent<RocketScript>().SetKillEnemyDelegate(EnemyKilled);
                 missile.GetComponent<Radar_Missile>().shooter = gameObject;
                 MissileAmmo--;
                 AcquisitionTimer = AcquisitionMaxTimer;

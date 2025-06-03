@@ -55,14 +55,18 @@ public class FlareDispenser : MonoBehaviour
 
         if (flareCount == 0)
         {
-            flareReload -= Time.deltaTime;
-            {
-                if (flareReload <= 0)
-                {
-                    flareCount = maxFlareCount;
-                    flareReload = 20f;
-                }
-            }
+			if(flareReload != 0)
+			{
+				flareReload -= Time.deltaTime;
+				{
+					if (flareReload <= 0)
+					{
+						flareCount = maxFlareCount;
+						flareReload = 20f;
+					}
+				}
+
+			}
         }
     }
 

@@ -8,7 +8,7 @@ public class RocketScript : MonoBehaviour
     public float timerToFuze;
     public float explosionRadius; public float explosionPower;
     Rigidbody rocketRb;
-    public Collider proxyFuse;
+    public SphereCollider proxyFuse;
     public GameObject explosion, waterSplash;
 
     public delegate void KillEnemy(bool countsAsKill, int points);
@@ -18,6 +18,23 @@ public class RocketScript : MonoBehaviour
     void Start()
     {
         rocketRb = GetComponent<Rigidbody>();
+		if(proxyFuse == null)
+		{
+			proxyFuse = GetComponent<SphereCollider>();
+		}
+		
+		if(proxyFuse == null)
+		{
+			this.enabled = false;
+			return;
+		}
+		
+		if(explosionRadius == 0f)
+		{
+			explosionRadius = proxyFuse.radius * 3f;
+		}
+		
+
     }
 
     // Update is called once per frame
@@ -65,14 +82,27 @@ public class RocketScript : MonoBehaviour
     void Explosion()
     {
         Instantiate(explosion, transform.position, transform.rotation);
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius + proxyFuse.radius);
 
         foreach (Collider nearbyObj in colliders)
         {
+			
+			float distanceToObj = Vector3.Distance(transform.position, nearbyObj.transform.position);
+			
+			float damageToTarget = explosionPower;
+			if (distanceToObj > proxyFuse.radius)
+			{			
+				float inverseDistance = Mathf.Abs((distanceToObj - explosionRadius));
+				float damagePercent = (inverseDistance * 100f / explosionRadius) / 100;
+				damageToTarget *= damagePercent;
+			}
+			
+			print("Damage to Target = " + damageToTarget);
+			
             HealthPoints objHp = nearbyObj.GetComponent<HealthPoints>();
             if (objHp != null)
             {
-                float damageDealt = explosionPower / (objHp.Defense + (Random.Range(-5f, 5f)));
+                float damageDealt = damageToTarget / (objHp.Defense * (Random.Range(0.8f, 1f)));
                 float critDefRandom = Random.Range(0, 100);
                 if (critDefRandom < objHp.CritRate)
                 {
@@ -92,11 +122,10 @@ public class RocketScript : MonoBehaviour
                 }
             }
         }
-        print("Explosion");
     }
 
     public void SetKillEnemyDelegate(KillEnemy killEnemyDel)
     {
-        delKillEnemy = killEnemyDel;
+        delKillEnemy = killEnemyDel; 
     }
 }

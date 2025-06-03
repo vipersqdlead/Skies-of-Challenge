@@ -14,7 +14,6 @@ public class Radar_Missile : MonoBehaviour
     [SerializeField] float lifeTime = 60f;
     Rigidbody rb;
     public bool ProxyFuse;
-    public Collider proxyFuseCollider;
 
     public float maxGLoad = 20f;
     public float energyBleedMultiplier;
@@ -56,7 +55,6 @@ public class Radar_Missile : MonoBehaviour
         if (timerToFuze <= 0)
         {
             ProxyFuse = true;
-            proxyFuseCollider.enabled = true;
             Guidance();
         }
 

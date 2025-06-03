@@ -442,6 +442,7 @@ MonoBehaviour:
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 1
   SpawnSpeed: 300
@@ -1007,6 +1008,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 1
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 43780
   engines:
@@ -1103,6 +1106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 1
+  trigger: 0
   flarePrefab: {fileID: 5231318020974602043, guid: a644b4741f60d71478e4e8a7c48499cc,
     type: 3}
   flareSpawnPoint:
@@ -9185,6 +9189,7 @@ PrefabInstance:
     - {fileID: 2425077229713114793, guid: 17e179aeeac8c144e84c7ac4cdb7ebb2, type: 3}
     - {fileID: 595472319981253915, guid: 17e179aeeac8c144e84c7ac4cdb7ebb2, type: 3}
     - {fileID: -9182242353373441545, guid: 17e179aeeac8c144e84c7ac4cdb7ebb2, type: 3}
+    - {fileID: -5412704744468258515, guid: 17e179aeeac8c144e84c7ac4cdb7ebb2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -9801,6 +9806,7 @@ PrefabInstance:
     - {fileID: 2425077229713114793, guid: 17e179aeeac8c144e84c7ac4cdb7ebb2, type: 3}
     - {fileID: 595472319981253915, guid: 17e179aeeac8c144e84c7ac4cdb7ebb2, type: 3}
     - {fileID: -9182242353373441545, guid: 17e179aeeac8c144e84c7ac4cdb7ebb2, type: 3}
+    - {fileID: -5412704744468258515, guid: 17e179aeeac8c144e84c7ac4cdb7ebb2, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6101604475247981430, guid: 17e179aeeac8c144e84c7ac4cdb7ebb2, type: 3}
     m_AddedGameObjects:
@@ -10359,6 +10365,7 @@ PrefabInstance:
     - {fileID: 2849805696076507682, guid: 037e84772a7da4044a7f70f42d6906f7, type: 3}
     - {fileID: 2336263370449300910, guid: 037e84772a7da4044a7f70f42d6906f7, type: 3}
     - {fileID: 6978170807528824036, guid: 037e84772a7da4044a7f70f42d6906f7, type: 3}
+    - {fileID: 7988602517562127240, guid: 037e84772a7da4044a7f70f42d6906f7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -10840,6 +10847,7 @@ PrefabInstance:
     - {fileID: 2849805696076507682, guid: 037e84772a7da4044a7f70f42d6906f7, type: 3}
     - {fileID: 2336263370449300910, guid: 037e84772a7da4044a7f70f42d6906f7, type: 3}
     - {fileID: 6978170807528824036, guid: 037e84772a7da4044a7f70f42d6906f7, type: 3}
+    - {fileID: 7988602517562127240, guid: 037e84772a7da4044a7f70f42d6906f7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

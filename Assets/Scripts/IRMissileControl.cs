@@ -278,8 +278,8 @@ public class IRMissileControl : BaseSpWeaponControl
                 missilerb.AddForce(gameObject.GetComponent<Rigidbody>().velocity, ForceMode.VelocityChange);
                 missilerb.rotation = Quaternion.LookRotation(gameObject.GetComponent<Rigidbody>().velocity);
                 missileScript.target = Target;
-		missileScript.launcherPlane = gameObject;
-                missilego.GetComponent<Shell>().SetKillEnemyDelegate(EnemyKilled);
+				missileScript.launcherPlane = gameObject;
+                missilego.GetComponent<RocketScript>().SetKillEnemyDelegate(EnemyKilled);
                 MissileAmmo--;
                 return;
             }

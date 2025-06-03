@@ -19,7 +19,6 @@ public class SAG_Missile : MonoBehaviour
     Rigidbody rb;
     public float MaxTurn = 40f;
     public bool ProxyFuse;
-    public Collider proxyFuseCollider;
 
     [SerializeField] GameObject missileAlert;
 
@@ -51,7 +50,6 @@ public class SAG_Missile : MonoBehaviour
 
         if (timerToFuze <= 0f)
         {
-            proxyFuseCollider.enabled = true;
             ProxyFuse = true;
             if (Guide != null)
             {

@@ -72,7 +72,7 @@ public class SAGMissileControl : BaseSpWeaponControl
                 Rigidbody missilerb = missile.GetComponent<Rigidbody>();
                 missilerb.AddForce(gameObject.GetComponent<Rigidbody>().velocity, ForceMode.VelocityChange);
                 missile.GetComponent<SAG_Missile>().LaunchingPlane = gameObject;
-                missile.GetComponent<Shell>().SetKillEnemyDelegate(EnemyKilled);
+                missile.GetComponent<RocketScript>().SetKillEnemyDelegate(EnemyKilled);
                 MissileAmmo--;
                 return;
             }

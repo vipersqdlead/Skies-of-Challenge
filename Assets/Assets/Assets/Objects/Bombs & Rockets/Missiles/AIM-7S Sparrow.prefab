@@ -1768,7 +1768,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5301864672722419179}
   - component: {fileID: 4925005748519942401}
-  - component: {fileID: 304714107023858196}
   - component: {fileID: 2806993683341460876}
   - component: {fileID: 6215362194702807962}
   - component: {fileID: 5789698023987373327}
@@ -1776,6 +1775,7 @@ GameObject:
   - component: {fileID: 595472319981253915}
   - component: {fileID: -9182242353373441545}
   - component: {fileID: 6954367020670890899}
+  - component: {fileID: 3143091206549032046}
   m_Layer: 0
   m_Name: AIM-7S Sparrow
   m_TagString: Missile
@@ -1819,7 +1819,6 @@ MonoBehaviour:
   timerToFuze: 0.5
   lifeTime: 90
   ProxyFuse: 0
-  proxyFuseCollider: {fileID: 2425077229713114793}
   maxGLoad: 25
   energyBleedMultiplier: 0.3
   rampUpTime: 1.5
@@ -1834,30 +1833,6 @@ MonoBehaviour:
   speedMach: 0
   gForce: 0
   navigationConstant: 2
---- !u!114 &304714107023858196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5186579997882432130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a01d6b66e3ee0354184120a4623124b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShellVelocity: 0
-  DmgToAir: 25000
-  DmgToGrnd: 200
-  isTracer: 0
-  isIncendiary: 0
-  selfDestruct: 0
-  shellType: 0
-  reloadTimer: 0
-  ExplosionSmaller: {fileID: 1099838043991838807, guid: 0e6b37ee9ce548f469e5c719ee44f294,
-    type: 3}
-  hitSound: {fileID: 5789698023987373327}
-  trail: {fileID: 0}
 --- !u!54 &2806993683341460876
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2266,6 +2241,26 @@ MonoBehaviour:
   launchSnd: {fileID: -9182242353373441545}
   rocketSound: {fileID: 5789698023987373327}
   delayTimer: 3.25
+--- !u!114 &3143091206549032046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5186579997882432130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f390c48ce2cbe0249a71f601b89768bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerToFuze: 0.7
+  explosionRadius: 0
+  explosionPower: 25000
+  proxyFuse: {fileID: 0}
+  explosion: {fileID: 1099838043991838807, guid: 778deeeddaf1b7e4996f34382bbb99e9,
+    type: 3}
+  waterSplash: {fileID: 5509927898478369345, guid: cf8b55990d3457944886a599ba485712,
+    type: 3}
 --- !u!1 &5280914916269250523
 GameObject:
   m_ObjectHideFlags: 0

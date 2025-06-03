@@ -100,8 +100,6 @@ public class AIController : MonoBehaviour , StateUser
 {
     Debug.LogError("currentState is NULL at ExecuteStateOnStart()");
 }
-		
-		Debug.Log("About to call OnStateStart()");
 		ExecuteStateOnStart();
 	}
 	
