@@ -49,6 +49,7 @@ public class IRMissileControl : BaseSpWeaponControl
     {
         weaponName = Missile.name;
         missileOuterFoV = Missile.GetComponent<IR_Missile>().missileOuterFoV;
+		missileLockRange = Missile.GetComponent<IR_Missile>().searchRange;
         isCagedSeeker = Missile.GetComponent<IR_Missile>().isCagedSeeker;
     }
 

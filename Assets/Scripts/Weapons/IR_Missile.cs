@@ -51,8 +51,7 @@ public class IR_Missile : MonoBehaviour
     }
     void Start()
     {
-		if(target != null) {        directionToTarget = (target.transform.position - transform.position).normalized; print("Target is found");}
-		else { print("target not assigned!"); }
+		if(target != null) {        directionToTarget = (target.transform.position - transform.position).normalized;}
     }
 
     // Update is called once per frame
@@ -211,12 +210,14 @@ public class IR_Missile : MonoBehaviour
 
     GameObject SeekerNoIRCCM()
     {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, 300f, directionToTarget, searchRange);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, SearchRadius((target.transform.position - transform.position).magnitude), directionToTarget, searchRange);
 
         List<(int, float, RaycastHit)> sortedHits = new List<(int, float, RaycastHit)>();
 
         foreach (var hit in hits)
         {
+			float angle = Vector3.Angle(directionToTarget, transform.forward);
+			
             int typePriority = 1;
 
             if (hit.collider.CompareTag("Flare"))
@@ -431,6 +432,13 @@ public class IR_Missile : MonoBehaviour
             }
         }
     }
+	
+	float SearchRadius(float distanceToTarget)
+	{
+		float halfAngleRad = Mathf.Deg2Rad * (missileInnerFoV / 2f);
+		float spherecastRadius = Mathf.Tan(halfAngleRad) * distanceToTarget;
+		return spherecastRadius;
+	}
 
     Vector3 lastVelocity;
     Vector3 LocalGForce;

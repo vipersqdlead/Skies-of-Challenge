@@ -128,7 +128,8 @@ public class FlightModel : MonoBehaviour
 
     void CalculateDrag()
     {
-        float waveDragEffect = Mathf.Exp(-Mathf.Pow((machSpeed - waveDragPeakMach) / waveDragRange, 2));
+		float clampedMach = Mathf.Min(machSpeed, waveDragPeakMach);
+        float waveDragEffect = Mathf.Exp(-Mathf.Pow((clampedMach - waveDragPeakMach) / waveDragRange, 2));
         drag = waveDragEffect * newWaveDragMultiplier * originalDragValue;
     }
     private void calculateForces()

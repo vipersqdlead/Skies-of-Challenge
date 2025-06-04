@@ -15,16 +15,12 @@ public class SAGMissileControl : BaseSpWeaponControl
     public GameObject missilePrefab;
     public GameObject[] MissilePos;
     public GameObject GuidePoint;
-    [SerializeField] GameObject missile;
     [SerializeField] KillCounter killCounter;
 
 
     void Start()
     {
-        if (weaponName == null)
-        {
-            weaponName = missilePrefab.name;
-        }
+        weaponName = missilePrefab.name;
     }
 
     void Update()
@@ -33,10 +29,7 @@ public class SAGMissileControl : BaseSpWeaponControl
         {
             if (Input.GetKeyDown(KeyCode.JoystickButton1) || Input.GetKeyDown(KeyCode.LeftShift))
             {
-                if (missile == null)
-                {
-                    FireMissile();
-                }
+                FireMissile();
             }
         }
 
@@ -68,7 +61,7 @@ public class SAGMissileControl : BaseSpWeaponControl
                 Quaternion launchRotation = MissilePos[currentIndex].transform.rotation;
                 Vector3 eulerRotation = launchRotation.eulerAngles;
                 eulerRotation.z = 0; // Reset roll axis
-                missile = Instantiate(missilePrefab, MissilePos[currentIndex].transform.position, Quaternion.Euler(eulerRotation));
+                GameObject missile = Instantiate(missilePrefab, MissilePos[currentIndex].transform.position, Quaternion.Euler(eulerRotation));
                 Rigidbody missilerb = missile.GetComponent<Rigidbody>();
                 missilerb.AddForce(gameObject.GetComponent<Rigidbody>().velocity, ForceMode.VelocityChange);
                 missile.GetComponent<SAG_Missile>().LaunchingPlane = gameObject;
@@ -107,6 +100,7 @@ public class SAGMissileControl : BaseSpWeaponControl
 
     public override void DisableWeapon()
     {
+		return;
         throw new System.NotImplementedException();
     }
 }

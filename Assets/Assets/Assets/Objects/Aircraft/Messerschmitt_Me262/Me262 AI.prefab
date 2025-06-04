@@ -931,6 +931,7 @@ MonoBehaviour:
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 280
@@ -1007,7 +1008,7 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 0.20038323
-      value: 0.10276708
+      value: 0.09580907
       inSlope: 0.7458766
       outSlope: 0.7458766
       tangentMode: 0
@@ -1015,8 +1016,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.13507438
     - serializedVersion: 3
-      time: 0.60815316
-      value: 0.3614132
+      time: 0.60986215
+      value: 0.30413172
       inSlope: -0.051065374
       outSlope: -0.051065374
       tangentMode: 0
@@ -1024,22 +1025,22 @@ MonoBehaviour:
       inWeight: 0.09726201
       outWeight: 0.24173309
     - serializedVersion: 3
-      time: 0.7732754
-      value: 0.21795441
-      inSlope: -0.68121046
-      outSlope: -0.68121046
+      time: 0.61721784
+      value: 0.29967707
+      inSlope: -1.1957831
+      outSlope: -1.1957831
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.2540235
-      outWeight: 0.7302744
+      inWeight: 0.33333334
+      outWeight: 0.12905386
     - serializedVersion: 3
       time: 0.88287663
       value: 0.14381436
-      inSlope: -0.63846946
-      outSlope: -0.63846946
+      inSlope: -0.2682324
+      outSlope: -0.2682324
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.74833316
+      inWeight: 0.19887817
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1097,6 +1098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 7834724363537997970}
+  hub: {fileID: 0}
   engineControl: {fileID: 0}
   steeringSpeed: 50
   minSpeed: 200
@@ -1184,9 +1186,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 5766884630178293159}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 0}
+  flares: {fileID: 0}
   missileCooldownTime: 0
   missileCooldownTimer: 0
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!114 &1142532762888801300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1290,6 +1298,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 0
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 0
   engines:
