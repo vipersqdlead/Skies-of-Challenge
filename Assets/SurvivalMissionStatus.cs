@@ -771,14 +771,14 @@ public class SurvivalMissionStatus : MonoBehaviour
         if (fadeInOrOut)
         {
             BlackBG.fillOrigin = 1;
-            BlackBG.fillAmount -= Time.deltaTime * 2f;
+            BlackBG.fillAmount -= Time.unscaledDeltaTime * 2f;
 
         }
 
         if (!fadeInOrOut)
         {
             BlackBG.fillOrigin = 2;
-            BlackBG.fillAmount += Time.deltaTime * 2f;
+            BlackBG.fillAmount += Time.unscaledDeltaTime * 2f;
         }
     }
 

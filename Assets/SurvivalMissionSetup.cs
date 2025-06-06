@@ -19,7 +19,9 @@ public class SurvivalMissionSetup : MonoBehaviour
     private void Awake()
     {
         player = Instantiate(playerAircraftPrefabs[PlayerPrefs.GetInt("Survival Aircraft")], new Vector3(transform.position.x, 4500f, transform.position.z), transform.rotation);
-        status.aircraftName = playerAircraftPrefabs[PlayerPrefs.GetInt("Survival Aircraft")].name;
+        //status.aircraftName = playerAircraftPrefabs[PlayerPrefs.GetInt("Survival Aircraft")].name;
+		status.aircraftName = playerAircraftPrefabs[PlayerPrefs.GetInt("Survival Aircraft")].GetComponent<AircraftHub>().aircraftName;
+		
         if (PlayerPrefs.GetInt("Survival Aircraft") < 1)
         {
             status.aircraftType = SurvivalMissionStatus.AircraftType.Trainer;

@@ -20,6 +20,7 @@ public class SurvivalSettings : MonoBehaviour
     public Image mapImg;
     public TMP_Text mapText;
     public TMP_Text weaponText;
+	public float totalAvailable;
     [SerializeField] TMP_Text speedText, powerText, climbText, weightText, agilityText, wingLoadingText, firePowerText, healthText, descriptionText;
     public Transform modelDisplayPoint; // assign in Inspector
     private GameObject currentModel; // to keep track of the displayed model
@@ -29,7 +30,7 @@ public class SurvivalSettings : MonoBehaviour
     public Toggle enableWaveBonusT, startWithBonusT, startWithAlliesT, alwaysReloadMissilesT;
     public bool enableWaveBonus, startWithBonus, startWithAllies, alwaysReloadMissiles;
 
-    [SerializeField] TMP_Text bestScore, bestRound, bestTime, lastScore;
+    [SerializeField] TMP_Text bestScore, bestRound, bestTime, lastScore, totalCompletion;
     [SerializeField] FadeInOut fadeEffect;
     [SerializeField] GameObject activeCanvas;
     [SerializeField] AudioSource bgm;
@@ -77,6 +78,8 @@ public class SurvivalSettings : MonoBehaviour
         playerPlane = (PlaneTypes)PlayerPrefs.GetInt("Survival Aircraft", 5);
         selectedHub = aircraftPrefabs[(int)playerPlane].GetComponent<AircraftHub>();
         UpdateAircraftInfo();
+		totalAvailable = CheckTotalAvailability();
+		totalCompletion.text = "Completion: " + totalAvailable + "/" + aircraftPrefabs.Length;
     }
 
     private void Update()
@@ -235,6 +238,19 @@ public class SurvivalSettings : MonoBehaviour
         // planeText.text = playerPlane.ToString();
         UpdateAircraftInfo();
     }
+	
+	float CheckTotalAvailability()
+	{	
+		for(int i = 0; i < aircraftPrefabs.Length; i++)
+		{
+			if(CheckPlaneAvailability((PlaneTypes)i))
+			{
+				totalAvailable++;
+			}
+		}
+		
+		return totalAvailable;
+	}
 
     bool CheckPlaneAvailability(PlaneTypes type)
     {
@@ -247,64 +263,73 @@ public class SurvivalSettings : MonoBehaviour
         switch (type)
         {
             case PlaneTypes.Emil:
+			    if (PlayerPrefs.GetInt("Bf 109T Trager Total Kill Count") >= 3)
+                { return true; }
+                else
+                { return false; }
                 return true;
             case PlaneTypes.Fried:
-                if (PlayerPrefs.GetInt("Trager Total Kill Count") >= 10)
+                if (PlayerPrefs.GetInt("Bf 109E Emil Total Kill Count") >= 10)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.TragerLate:
-                if (PlayerPrefs.GetInt("Trager Total Kill Count") >= 50 && PlayerPrefs.GetInt("Trager Highest Kill Count") >= 20)
+                if (PlayerPrefs.GetInt("Bf 109T Trager Total Kill Count") >= 50 && PlayerPrefs.GetInt("Bf 109T Trager Highest Kill Count") >= 20)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.Krahe:
-                if (PlayerPrefs.GetInt("Trager (Late) Highest Kill Count") >= 25 && PlayerPrefs.GetInt("General Total Score") > 90000)
+                if (PlayerPrefs.GetInt("Bf 109T Trager (Late) Highest Kill Count") >= 25 && PlayerPrefs.GetInt("General Total Score") > 90000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.HispanoCobra:
-                if (PlayerPrefs.GetInt("Airacobra Total Kill Count") >= 30)
+                if (PlayerPrefs.GetInt("P-39N Airacobra Total Kill Count") >= 30)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.AiracobraL:
-                if (PlayerPrefs.GetInt("Airacobra Highest Score") >= 30000 || PlayerPrefs.GetInt("Hispanocobra Highest Score") >= 30000)
+                if (PlayerPrefs.GetInt("P-39N Airacobra Highest Score") >= 30000 || PlayerPrefs.GetInt("P-400 Hispanocobra Highest Score") >= 30000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.VargA:
-                if (PlayerPrefs.GetInt("Varg Highest Time Alive") >= 300)
+                if (PlayerPrefs.GetInt("J22B Varg Highest Time Alive") >= 300)
                 { return true; }
                 else
                 { return false; }
+            /*case PlaneTypes.ReisenIII:
+                if (PlayerPrefs.GetInt("A6M5 Reisen Total Time Alive") >= 300)
+                { return true; }
+                else
+                { return false; } */
             case PlaneTypes.ReisenKai:
-                if (PlayerPrefs.GetInt("Reisen Total Time Alive") >= 600)
+                if (PlayerPrefs.GetInt("A6M5 Reisen Total Time Alive") >= 600)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.HayabusaIII:
-                if (PlayerPrefs.GetInt("Reisen-Kai Total Time Alive") + PlayerPrefs.GetInt("Reisen Total Time Alive") >= 1200 && (PlayerPrefs.GetInt("Hien Total Score") + PlayerPrefs.GetInt("Hien-I Total Score") + PlayerPrefs.GetInt("Hien-III-Otsu Total Score") >= 50000))
+                if (PlayerPrefs.GetInt("A6M8 Reisen-Kai Total Time Alive") + PlayerPrefs.GetInt("A6M5 Reisen Total Time Alive") >= 1200 && (PlayerPrefs.GetInt("Ki-61-II Hien Total Score") + PlayerPrefs.GetInt("Ki-61-I Hien Total Score") + PlayerPrefs.GetInt("Ki-61-III Hien Total Score") >= 50000))
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.NightHellcat:
-                if (PlayerPrefs.GetInt("Hellcat Total Time Alive") >= 450 && PlayerPrefs.GetInt("Hellcat Total Kill Count") >= 30)
+                if (PlayerPrefs.GetInt("F6F-5 Hellcat Total Time Alive") >= 450 && PlayerPrefs.GetInt("Hellcat Total Kill Count") >= 30)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.SuperHellcat:
-                if (PlayerPrefs.GetInt("Hellcat Total Kill Count") + PlayerPrefs.GetInt("Night Hellcat Total Kill Count") >= 80)
+                if (PlayerPrefs.GetInt("F6F-5 Hellcat Total Kill Count") + PlayerPrefs.GetInt("F6F-5N Night Hellcat Total Kill Count") >= 80)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.CorsairB:
-                if (PlayerPrefs.GetInt("Corsair Total Score") > 100000)
+                if (PlayerPrefs.GetInt("F4U-4 Corsair Total Score") > 100000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.SuperCorsair:
-                if (PlayerPrefs.GetInt("Corsair Total Kill Count") + PlayerPrefs.GetInt("Corsair-B Total Kill Count") >= 100)
+                if (PlayerPrefs.GetInt("F4U-4 Corsair Total Kill Count") + PlayerPrefs.GetInt("F4U-4B Corsair Total Kill Count") >= 100)
                 { return true; }
                 else
                 { return false; }
@@ -314,42 +339,42 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
             case PlaneTypes.SuperWarhawk:
-                if (PlayerPrefs.GetInt("Warhawk Total Score") + PlayerPrefs.GetInt("Truehawk Total Score") > 100000 && PlayerPrefs.GetInt("General Total Fly Time") > 10000)
+                if (PlayerPrefs.GetInt("P-40M Warhawk Total Score") + PlayerPrefs.GetInt("P-40M Warhawk (Mod) Total Score") > 100000 && PlayerPrefs.GetInt("General Total Fly Time") > 10000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.Apache:
-                if (PlayerPrefs.GetInt("Mustang-C Total Kill Count") >= 25)
+                if (PlayerPrefs.GetInt("P-51C Mustang Total Kill Count") >= 25)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.MustangA:
-                if (PlayerPrefs.GetInt("Mustang-C Highest Score") >= 30000 || PlayerPrefs.GetInt("Apache Highest Score") >= 30000)
+                if (PlayerPrefs.GetInt("P-51C Mustang Highest Score") >= 30000 || PlayerPrefs.GetInt("A-36A Apache Highest Score") >= 30000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.MustangD:
-                if (PlayerPrefs.GetInt("Mustang-C Total Time Alive") + PlayerPrefs.GetInt("Mustang-A Total Time Alive") + PlayerPrefs.GetInt("Apache Total Time Alive") >= 1200)
+                if (PlayerPrefs.GetInt("P-51C Mustang Total Time Alive") + PlayerPrefs.GetInt("P-51A Mustang Total Time Alive") + PlayerPrefs.GetInt("A-36A Apache Total Time Alive") >= 1200)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.SkayatekaMustang:
-                if (PlayerPrefs.GetInt("Mustang-A Highest Time Alive") >= 900 || PlayerPrefs.GetInt("Mustang-D Highest Time Alive") >= 900)
+                if (PlayerPrefs.GetInt("P-51A Mustang Highest Time Alive") >= 900 || PlayerPrefs.GetInt("P-51D Mustang Highest Time Alive") >= 900)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.MustangH:
-                if (PlayerPrefs.GetInt("Mustang-D Total Score") + PlayerPrefs.GetInt("Mustang-A Total Score") + PlayerPrefs.GetInt("Mustang-C Total Score") + PlayerPrefs.GetInt("Apache Total Score") + PlayerPrefs.GetInt("Skayateka Mustang Total Score") > 500000)
+                if (PlayerPrefs.GetInt("P-51D Mustang Total Score") + PlayerPrefs.GetInt("P-51A Mustang Total Score") + PlayerPrefs.GetInt("P-51C Mustang Total Score") + PlayerPrefs.GetInt("A-36A Apache Total Score") + PlayerPrefs.GetInt("P-51D Skayateka Mustang Total Score") > 500000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.YakovlevT:
-                if (PlayerPrefs.GetInt("Yakovlev Total Time Alive") >= 300)
+                if (PlayerPrefs.GetInt("Yak-9U Total Time Alive") >= 300)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.YakovlevK:
-                if (PlayerPrefs.GetInt("Yakovlev-T Highest Score") >= 30000)
+                if (PlayerPrefs.GetInt("Yak-9T Highest Score") >= 30000)
                 { return true; }
                 else
                 { return false; }
@@ -364,7 +389,7 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
             case PlaneTypes.AntonA:
-                if (PlayerPrefs.GetInt("Anton Total Kill Count") >= 30)
+                if (PlayerPrefs.GetInt("Fw 190A Anton (Late) Total Kill Count") >= 30)
                 { return true; }
                 else
                 { return false; }
@@ -374,27 +399,27 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
             case PlaneTypes.HellWhisper:
-                if (PlayerPrefs.GetInt("Anton Total Kill Count") + PlayerPrefs.GetInt("Anton-A Total Kill Count") >= 200 && PlayerPrefs.GetInt("Hell's Whisper Times Killed") >= 5)
+                if (PlayerPrefs.GetInt("Fw 190A Anton (Late) Total Kill Count") + PlayerPrefs.GetInt("Fw 190A Anton (Early) Total Kill Count") >= 200 && PlayerPrefs.GetInt("Hell's Whisper Times Killed") >= 5)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.ZerstorerH:
-                if (PlayerPrefs.GetInt("Zerstorer Highest Time Alive") >= 600)
+                if (PlayerPrefs.GetInt("Bf 110G Zerstorer Highest Time Alive") >= 600)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.DinahKai:
-                if (PlayerPrefs.GetInt("Dinah Highest Score") >= 40000)
+                if (PlayerPrefs.GetInt("Ki-46-III Dinah Highest Score") >= 40000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.Raiko:
-                if (PlayerPrefs.GetInt("Dinah Total Kill Count") + PlayerPrefs.GetInt("Dinah-Kai Total Kill Count") >= 100)
+                if (PlayerPrefs.GetInt("Ki-46-III Dinah Total Kill Count") + PlayerPrefs.GetInt("Ki-46-III Dinah-Kai Total Kill Count") >= 100)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.LightningK:
-                if (PlayerPrefs.GetInt("Lightning Total Time Alive") >= 1000 && PlayerPrefs.GetInt("Lightning Highest Kill Count") >= 38)
+                if (PlayerPrefs.GetInt("P-38L Lightning Total Time Alive") >= 1000 && PlayerPrefs.GetInt("P-38L Lightning Highest Kill Count") >= 38)
                 { return true; }
                 else
                 { return false; }
@@ -409,22 +434,22 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
             case PlaneTypes.BearcatB:
-                if (PlayerPrefs.GetInt("Bearcat Total Kill Count") >= 80)
+                if (PlayerPrefs.GetInt("F8F-1 Bearcat Total Kill Count") >= 80)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.FalkeB:
-                if (PlayerPrefs.GetInt("Falke Total Time Alive") >= 1500)
+                if (PlayerPrefs.GetInt("Fw 187D Falke Total Time Alive") >= 1500)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.FalkeG:
-                if (PlayerPrefs.GetInt("Falke-B Highest Kill Count") >= 70 || PlayerPrefs.GetInt("Falke Highest Kill Count") >= 70)
+                if (PlayerPrefs.GetInt("Fw 187B Falke Highest Kill Count") >= 70 || PlayerPrefs.GetInt("Fw 187D Falke Highest Kill Count") >= 70)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.Moskito:
-                if (PlayerPrefs.GetInt("Falke-B Highest Time Alive") >= 1500 || PlayerPrefs.GetInt("Falke-G Highest Time Alive") >= 1500 || PlayerPrefs.GetInt("Falke Highest Time Alive") >= 1500)
+                if (PlayerPrefs.GetInt("Fw 187B Falke Highest Time Alive") >= 1500 || PlayerPrefs.GetInt("Fw 187G Falke Highest Time Alive") >= 1500 || PlayerPrefs.GetInt("Fw 187D Falke Highest Time Alive") >= 1500)
                 { return true; }
                 else
                 { return false; }
@@ -444,22 +469,22 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
             case PlaneTypes.HienI:
-                if (PlayerPrefs.GetInt("Hien Highest Time Alive") >= 900)
+                if (PlayerPrefs.GetInt("Ki-61-II Hien Highest Time Alive") >= 900)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.HienIIIOtsu:
-                if ((PlayerPrefs.GetInt("Hien Total Time Alive") + (PlayerPrefs.GetInt("Hien-I Total Time Alive")) >= 1500) && PlayerPrefs.GetInt("Hayate Total Time Alive") + PlayerPrefs.GetInt("Hayate Otsu Total Time Alive") + PlayerPrefs.GetInt("Hayate Hei Total Time Alive") + PlayerPrefs.GetInt("Hayate-II Total Time Alive") > 1500)
+                if ((PlayerPrefs.GetInt("Ki-61-II Hien Total Time Alive") + (PlayerPrefs.GetInt("Ki-61-I Hien Total Time Alive")) >= 1500) && PlayerPrefs.GetInt("Ki-84-Ia Hayate Total Time Alive") + PlayerPrefs.GetInt("Ki-84b Hayate Total Time Alive") + PlayerPrefs.GetInt("Ki-84c Hayate Total Time Alive") + PlayerPrefs.GetInt("Ki-84-II Hayate Total Time Alive") > 1500)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.TenraiKai:
-                if (PlayerPrefs.GetInt("Tenrai Highest Time Alive") >= 1000)
+                if (PlayerPrefs.GetInt("J5N1 Tenrai Highest Time Alive") >= 1000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.TenraiSuperKai:
-                if (PlayerPrefs.GetInt("Tenrai Highest Score") >= 55000 || PlayerPrefs.GetInt("Tenrai-Kai Highest Kill Count") >= 80)
+                if (PlayerPrefs.GetInt("J5N1 Tenrai Highest Score") >= 55000 || PlayerPrefs.GetInt("J5N2 Tenrai-Kai Highest Kill Count") >= 80)
                 { return true; }
                 else
                 { return false; }
@@ -474,17 +499,22 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
             case PlaneTypes.Shoki:
-                if (PlayerPrefs.GetInt("Raiden Highest Time Alive") >= 600)
+                if (PlayerPrefs.GetInt("J2M5 Raiden Highest Time Alive") >= 600)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.CentauroA:
-                if (PlayerPrefs.GetInt("Centauro Highest Kill Count") >= 50)
+                if (PlayerPrefs.GetInt("G.55 Serie 1 Highest Kill Count") >= 50)
+                { return true; }
+                else
+                { return false; }
+            case PlaneTypes.Airacomet:
+                if ((PlayerPrefs.GetInt("P-63A Kingcobra Total Kill Count") + PlayerPrefs.GetInt("P-39N Airacobra Total Kill Count")) >= 100)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.DolchA:
-                if (PlayerPrefs.GetInt("Dolch Total Score") + PlayerPrefs.GetInt("Kurfurst Total Score") >= 120000)
+                if (PlayerPrefs.GetInt("Me 309C Dolch Total Score") + PlayerPrefs.GetInt("Bf 109K Kurfurst Total Score") >= 120000)
                 { return true; }
                 else
                 { return false; }
@@ -504,27 +534,27 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
             case PlaneTypes.MacchiC:
-                if (PlayerPrefs.GetInt("Macchi Highest Score") >= 50000)
+                if (PlayerPrefs.GetInt("C.205 S3 Veltro Highest Score") >= 50000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.MoonbatB:
-                if (PlayerPrefs.GetInt("Survival Highest Score") >= 70000)
+                if (PlayerPrefs.GetInt("P-67A Moonbat Total Score") >= 70000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.MansyuuKai:
-                if (PlayerPrefs.GetInt("Mansyuu Total Time Alive") >= 1000)
+                if (PlayerPrefs.GetInt("Ki-98-I Mansyuu Total Time Alive") >= 1000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.Senden:
-                if (PlayerPrefs.GetInt("Mansyuu Total Score") + PlayerPrefs.GetInt("Mansyuu-Kai Total Score") >= 150000 && (PlayerPrefs.GetInt("Reppu Total Kill Count") + PlayerPrefs.GetInt("Reppu-C Total Kill Count") + PlayerPrefs.GetInt("Reppu-Kai Total Kill Count") >= 100))
+                if (PlayerPrefs.GetInt("Ki-98-I Mansyuu Total Score") + PlayerPrefs.GetInt("Ki-98-I Mansyuu-Kai Total Score") >= 150000 && (PlayerPrefs.GetInt("A7M2 Reppu Total Kill Count") + PlayerPrefs.GetInt("A7M3 Reppu Total Kill Count") + PlayerPrefs.GetInt("A7M3-J Reppu-Kai Total Kill Count") >= 100))
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.WhiteFootFox:
-                if (PlayerPrefs.GetInt("Kurfurst Total Kill Count") >= 158 && PlayerPrefs.GetInt("White-Foot Fox Times Killed") >= 3)
+                if (PlayerPrefs.GetInt("Bf 109K Kurfurst Total Kill Count") >= 158 && PlayerPrefs.GetInt("White-Foot Fox Times Killed") >= 3)
                 { return true; }
                 else
                 { return false; }
@@ -534,17 +564,17 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
             case PlaneTypes.KogarashiI:
-                if (PlayerPrefs.GetInt("Kogarashi Highest Score") >= 30000)
+                if (PlayerPrefs.GetInt("Ki-100-II Kogarashi Highest Score") >= 30000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.KogarashiOtsu:
-                if (PlayerPrefs.GetInt("Kogarashi Highest Kill Count") >= 60 || PlayerPrefs.GetInt("Kogarashi-I Highest Kill Count") >= 60 && PlayerPrefs.GetInt("Hayate Total Time Alive") + PlayerPrefs.GetInt("Hayate Otsu Total Time Alive") + PlayerPrefs.GetInt("Hayate Hei Total Time Alive") + PlayerPrefs.GetInt("Hayate-II Total Time Alive") >= 1800)
+                if (PlayerPrefs.GetInt("Ki-100-II Kogarashi Highest Kill Count") >= 60 || PlayerPrefs.GetInt("Ki-100-I Kogarashi Highest Kill Count") >= 60 && PlayerPrefs.GetInt("Ki-84-Ic Hayate Total Time Alive") + PlayerPrefs.GetInt("Ki-84-Ib Hayate Total Time Alive") + PlayerPrefs.GetInt("Ki-84-Ic Hayate Total Time Alive") + PlayerPrefs.GetInt("Ki-84-II Hayate Total Time Alive") >= 1800)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.TankC:
-                if (PlayerPrefs.GetInt("Tank Total Score") >= 120000)
+                if (PlayerPrefs.GetInt("Ta 152H Tank Total Score") >= 120000)
                 { return true; }
                 else
                 { return false; }
@@ -554,17 +584,17 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
             case PlaneTypes.ShidenKaiIV:
-                if (PlayerPrefs.GetInt("Shiden-Kai Highest Score") >= 50000)
+                if (PlayerPrefs.GetInt("N1K2-J Shiden-Kai Highest Score") >= 50000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.PyorremyrskyLate:
-                if (PlayerPrefs.GetInt("Pyorremyrsky Total Kill Count") >= 80)
+                if (PlayerPrefs.GetInt("VL Pyorremyrsky Total Kill Count") >= 80)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.MathiasFleisher:
-                if (PlayerPrefs.GetInt("Mathias Fleisher Times Killed") >= 3 && (PlayerPrefs.GetInt("Pyorremyrsky Highest Kill Count") >= 50 || PlayerPrefs.GetInt("Pyorremyrsky (Late) Highest Kill Count") >= 50))
+                if (PlayerPrefs.GetInt("Mathias Fleisher Times Killed") >= 3 && (PlayerPrefs.GetInt("VL Pyorremyrsky Highest Kill Count") >= 50 || PlayerPrefs.GetInt("VL Pyorremyrsky (Late) Highest Kill Count") >= 50))
                 { return true; }
                 else
                 { return false; }
@@ -579,32 +609,32 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
             case PlaneTypes.ReppuC:
-                if (PlayerPrefs.GetInt("Reppu Highest Kill Count") >= 75)
+                if (PlayerPrefs.GetInt("A7M2 Reppu Highest Kill Count") >= 75)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.ReppuKai:
-                if (PlayerPrefs.GetInt("Reppu Total Score") + PlayerPrefs.GetInt("Reppu-C Total Score") >= 200000)
+                if (PlayerPrefs.GetInt("A7M2 Reppu Total Score") + PlayerPrefs.GetInt("A7M3 Reppu Total Score") >= 200000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.Crusader:
-                if (PlayerPrefs.GetInt("Crusader Nagao Times Killed") >= 5 && PlayerPrefs.GetInt("Blue Angel Times Killed") >= 5)
+                if (PlayerPrefs.GetInt("Crusader Nagao Times Killed") >= 3 && PlayerPrefs.GetInt("Blue Angel Times Killed") >= 3)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.HayateOtsu:
-                if (PlayerPrefs.GetInt("Hayate Total Time Alive") >= 1000)
+                if (PlayerPrefs.GetInt("Ki-84-Ia Hayate Total Time Alive") >= 1000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.HayateHei:
-                if (PlayerPrefs.GetInt("Hayate Highest Score") >= 50000 || PlayerPrefs.GetInt("Hayate Highest Score") >= 50000)
+                if (PlayerPrefs.GetInt("Ki-84-Ia Hayate Highest Score") >= 50000 || PlayerPrefs.GetInt("Ki-84-Ia Hayate Highest Score") >= 50000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.HayateII:
-                if (PlayerPrefs.GetInt("Hayate Total Time Alive") + PlayerPrefs.GetInt("Hayate Otsu Total Time Alive") + PlayerPrefs.GetInt("Hayate Hei Total Time Alive") >= 3000 && PlayerPrefs.GetInt("Blue Angel Times Killed") >= 2 && PlayerPrefs.GetInt("Survival Highest Round") >= 15)
+                if (PlayerPrefs.GetInt("Ki-84-Ia Hayate Total Time Alive") + PlayerPrefs.GetInt("Ki-84-Ib Hayate Total Time Alive") + PlayerPrefs.GetInt("Ki-84-Ic Hayate Total Time Alive") >= 3000 && PlayerPrefs.GetInt("Blue Angel Times Killed") >= 3 && PlayerPrefs.GetInt("Survival Highest Round") >= 15)
                 { return true; }
                 else
                 { return false; }
@@ -624,22 +654,22 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
             case PlaneTypes.SeiranEarly:
-                if (PlayerPrefs.GetInt("Seiran Total Score") >= 70000)
+                if (PlayerPrefs.GetInt("D5A2 Seiran Total Score") >= 70000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.SeiranKai:
-                if (PlayerPrefs.GetInt("Seiran Total Score") + PlayerPrefs.GetInt("Seiran (Early) Total Score") >= 200000)
+                if (PlayerPrefs.GetInt("D5A2 Seiran Total Score") + PlayerPrefs.GetInt("D5A1 Seiran Total Score") >= 200000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.Cheetah:
-                if (PlayerPrefs.GetInt("Tigercat Total Time Alive") >= 1200)
+                if (PlayerPrefs.GetInt("F7F-1 Tigercat Total Time Alive") >= 1200)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.TigercatC:
-                if (PlayerPrefs.GetInt("Tigercat Total Kill Count") + PlayerPrefs.GetInt("Cheetah Total Kill Count") >= 120)
+                if (PlayerPrefs.GetInt("F7F-1 Tigercat Total Kill Count") + PlayerPrefs.GetInt("P-65A Cheetah Total Kill Count") >= 120)
                 { return true; }
                 else
                 { return false; }
@@ -649,17 +679,17 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
             case PlaneTypes.TakaKai:
-                if (PlayerPrefs.GetInt("Survival Highest Kills") >= 120)
+                if (PlayerPrefs.GetInt("Survival Highest Kills") >= 150)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.SchwalbeIb:
-                if (PlayerPrefs.GetInt("Schwalbe Total Kill Count") >= 50)
+                if (PlayerPrefs.GetInt("Me 262A Schwalbe Total Kill Count") >= 50)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.SchwalbeIc:
-                if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
+                if (PlayerPrefs.GetInt("Me 262A Schwalbe Highest Kill Count") >= 75)
                 { return true; }
                 else
                 { return false; }
@@ -669,12 +699,12 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
             case PlaneTypes.KikkaOtsu:
-                if (PlayerPrefs.GetInt("Reisen Total Score") + PlayerPrefs.GetInt("Reisen-Kai Total Score") + PlayerPrefs.GetInt("Raiden Total Score") + PlayerPrefs.GetInt("Tenrai Total Score") + PlayerPrefs.GetInt("Tenrai-Kai Total Score") + PlayerPrefs.GetInt("Seiran (Early) Total Score") + PlayerPrefs.GetInt("Tenrai-SuperKai Total Score") + PlayerPrefs.GetInt("Shiden-Kai-IV Total Score") + PlayerPrefs.GetInt("Reppu Total Score") + PlayerPrefs.GetInt("Reppu-C Total Score") + PlayerPrefs.GetInt("Reppu-Kai Total Score") + PlayerPrefs.GetInt("Seiran Total Score") + PlayerPrefs.GetInt("Seiran (Early) Total Score") + PlayerPrefs.GetInt("Seiran-Kai Total Score") + PlayerPrefs.GetInt("Kikka Total Score") >= 1500000)
+                if (PlayerPrefs.GetInt("A6M5 Reisen Total Score") + PlayerPrefs.GetInt("A6M8 Reisen-Kai Total Score") + PlayerPrefs.GetInt("J2M5 Raiden Total Score") + PlayerPrefs.GetInt("J5N1 Tenrai Total Score") + PlayerPrefs.GetInt("J5N2 Tenrai-Kai Total Score") + PlayerPrefs.GetInt("D5A1 Seiran Total Score") + PlayerPrefs.GetInt("J5N3 Tenrai-Super Kai Total Score") + PlayerPrefs.GetInt("N1K4-J Shiden-Kai Total Score") + PlayerPrefs.GetInt("A7M2 Reppu Total Score") + PlayerPrefs.GetInt("A7M3 Reppu Total Score") + PlayerPrefs.GetInt("A7M3-J Reppu-Kai Total Score") + PlayerPrefs.GetInt("D5A2 Seiran Total Score") + PlayerPrefs.GetInt("D5A1 Seiran Total Score") + PlayerPrefs.GetInt("D5A3 Seiran-Kai Total Score") + PlayerPrefs.GetInt("J9N1 Kikka Total Score") >= 1500000)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.ShootingStarC:
-                if (PlayerPrefs.GetInt("Shooting Star Total Kill Count") >= 70)
+                if (PlayerPrefs.GetInt("F-80A Shooting Star Total Kill Count") >= 70)
                 { return true; }
                 else
                 { return false; }
@@ -689,22 +719,32 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
             case PlaneTypes.FargoLate:
-                if (PlayerPrefs.GetInt("Fargo Highest Time Alive") >= 900f)
+                if (PlayerPrefs.GetInt("MiG-9FS Fargo Highest Time Alive") >= 900f)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.SeaVenom:
-                if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
+                if (PlayerPrefs.GetInt("Vampire FB 52 Fargo Total Time Alive") >= 1500f)
                 { return true; }
                 else
                 { return false; }
             //case PlaneTypes.SeaVixen:
-            //    if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
+            //    if (PlayerPrefs.GetInt("Sea Venom FAW 20 Fargo Total Time Alive") >= 1500f)
             //    { return true; }
             //    else
             //    { return false; }
+		    case PlaneTypes.HatsutakaII:
+                if (PlayerPrefs.GetInt("Ki-215-I Hatsutaka Highest Score") >= 60000)
+                { return true; }
+                else
+                { return false; }
+		    case PlaneTypes.HatsutakaT:
+                if ((PlayerPrefs.GetInt("Ki-215-I Hatsutaka Total Score") + PlayerPrefs.GetInt("Ki-215-II Hatsutaka Total Score")) >= 25000)
+                { return true; }
+                else
+                { return false; }
             case PlaneTypes.GinaPreserie:
-                if (PlayerPrefs.GetInt("Gina Highest Kills") >= 30)
+                if (PlayerPrefs.GetInt("G.91 R/4 Gina Highest Kills") >= 30)
                 { return true; }
                 else
                 { return false; }
@@ -719,17 +759,17 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
             case PlaneTypes.Gunval:
-                if (PlayerPrefs.GetInt("Sabre Total Time Alive") >= 1500)
+                if (PlayerPrefs.GetInt("F-86F Sabre Total Time Alive") >= 1500)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.FJ2Fury:
-                if (PlayerPrefs.GetInt("Gunval Highest Kill Count") >= 35)
+                if (PlayerPrefs.GetInt("F-86F-2 Gunval Sabre Highest Kill Count") >= 35)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.CACSabre:
-                if (PlayerPrefs.GetInt("Sabre Total Score") + PlayerPrefs.GetInt("Gunval Total Score") + PlayerPrefs.GetInt("FJ2 Fury Total Score") >= 650000)
+                if (PlayerPrefs.GetInt("F-86F Sabre Total Score") + PlayerPrefs.GetInt("F-86F-2 Gunval Sabre Total Score") + PlayerPrefs.GetInt("FJ-3 Fury Total Score") >= 650000)
                 { return true; }
                 else
                 { return false; }
@@ -754,32 +794,27 @@ public class SurvivalSettings : MonoBehaviour
             //    else
             //    { return false; }
             case PlaneTypes.Cougar:
-                if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
+                if (PlayerPrefs.GetInt("Survival Highest Round") >= 15)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.Jaguar:
-                if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
+                if (PlayerPrefs.GetInt("Survival Highest Round") >= 20)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.SkyhawkM:
-                if (PlayerPrefs.GetInt("Skyhawk Highest Kill Count") >= 25)
+                if (PlayerPrefs.GetInt("A-4E Skyhawk Highest Kill Count") >= 25)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.Ayit:
-                if (PlayerPrefs.GetInt("Skyhawk-M Highest Time Alive") >= 900)
+                if (PlayerPrefs.GetInt("A-4M Skyhawk Highest Time Alive") >= 900)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.FightingHawk:
-                if (PlayerPrefs.GetInt("Skyhawk-M Highest Kill Count") >= 35)
-                { return true; }
-                else
-                { return false; }
-            case PlaneTypes.HatsutakaT:
-                if (PlayerPrefs.GetInt("Hatsutaka Highest Score") >= 50000)
+                if (PlayerPrefs.GetInt("A-4M Skyhawk Highest Kill Count") >= 35)
                 { return true; }
                 else
                 { return false; }
@@ -803,18 +838,18 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
-            //case PlaneTypes.DrakenJ:
-            //    if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
-            //    { return true; }
-            //    else
-            //    { return false; }
+            case PlaneTypes.DrakenJ:
+                if (PlayerPrefs.GetInt("J35D Draken Highest Kill Count") >= 25)
+                { return true; }
+                else
+                { return false; }
             //case PlaneTypes.Cipher:
             //    if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
             //    { return true; }
             //    else
             //    { return false; }
             case PlaneTypes.Kfir:
-                if (PlayerPrefs.GetInt("Mirage III Total Time Alive") >= 1000)
+                if (PlayerPrefs.GetInt("Mirage IIIC Total Time Alive") >= 1000)
                 { return true; }
                 else
                 { return false; }
@@ -833,13 +868,23 @@ public class SurvivalSettings : MonoBehaviour
             //    { return true; }
             //    else
             //    { return false; }
+            case PlaneTypes.PhantomS:
+                if (PlayerPrefs.GetInt("F-4E Phantom II Highest Score") >= 30000)
+                { return true; }
+                else
+                { return false; }
+            case PlaneTypes.YuureiEarly:
+                if (PlayerPrefs.GetInt("F-4E Phantom II Highest Score") >= 30000 && (PlayerPrefs.GetInt("T-2A Kaze Total Kill Count") + PlayerPrefs.GetInt("T-2A Kaze (Late) Total Kill Count") >= 30))
+                { return true; }
+                else
+                { return false; }
             case PlaneTypes.Yuurei:
-                if (PlayerPrefs.GetInt("Phantom II Highest Score") >= 30000 && (PlayerPrefs.GetInt("Kaze Total Kill Count") + PlayerPrefs.GetInt("Kaze (Late) Total Kill Count") >= 30))
+                if (PlayerPrefs.GetInt("F-4E Phantom II Total Kill Count") >= 100 && PlayerPrefs.GetInt("A9M5 Yuurei (Early) Total Kill Count") >= 100)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.Fengren:
-                if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
+                if (PlayerPrefs.GetInt("MiG-23MLD Flogger Highest Round") >= 25)
                 { return true; }
                 else
                 { return false; }
@@ -849,7 +894,7 @@ public class SurvivalSettings : MonoBehaviour
             //    else
             //    { return false; }
             case PlaneTypes.SuperDeltaDart:
-                if (PlayerPrefs.GetInt("Delta Dart Highest Score") >= 30000)
+                if (PlayerPrefs.GetInt("F-106A Delta Dart Highest Score") >= 30000)
                 { return true; }
                 else
                 { return false; }
@@ -897,6 +942,7 @@ public class SurvivalSettings : MonoBehaviour
         AiracobraL,
         VargB,
         VargA,
+        //ReisenIII,
         ReisenV,
         ReisenKai,
         HayabusaIII,
@@ -972,7 +1018,7 @@ public class SurvivalSettings : MonoBehaviour
         MoonbatB,
 		Chimere,
         Tvestjarten,
-	// TvestjartenRB,
+		// TvestjartenRB,
         Mansyuu,
         MansyuuKai,
         Senden,
@@ -985,8 +1031,8 @@ public class SurvivalSettings : MonoBehaviour
         KogarashiOtsu,
         Lavochkin,
         Tempest,
-	// Skyraider,
-	// Skyshark,
+		// Skyraider,
+		// Skyshark,
         Tank,
         TankC,
         ShidenKai,
@@ -1008,7 +1054,7 @@ public class SurvivalSettings : MonoBehaviour
         HayateII,
         BlueAngel,
         SeaFury,
-	// Wyvern
+		// Wyvern
         Shinden,
         ShindenLate,
         Reaper,
@@ -1019,7 +1065,7 @@ public class SurvivalSettings : MonoBehaviour
         Cheetah,
         TigercatC,
         Pfeil,
-	Narval,
+		Narval,
         TwinMustang,
         Zwilling,
         ZwillingK,
@@ -1041,14 +1087,15 @@ public class SurvivalSettings : MonoBehaviour
         Starfire,
         Thunderjet, 
         Meteor,
-	KeiunKai_V1,
-	// KeiunKai_V2
-	// KeiunKai_Prod
+		KeiunKai_V1,
+		// KeiunKai_V2
+		// KeiunKai_Prod
         Vampire,
         SeaVenom,
         //SeaVixen,
         Shinden_Kai,
         Hatsutaka,
+		HatsutakaII,
         HatsutakaT,
         Ente,
         //EnteB,
@@ -1058,7 +1105,7 @@ public class SurvivalSettings : MonoBehaviour
         Huckebein,
         Thunderstrike,
         Gina,
-	// GinaY,
+		// GinaY,
         GinaPreserie,
         Mystere,
         Drachentoter,
@@ -1084,7 +1131,7 @@ public class SurvivalSettings : MonoBehaviour
         Lansen,
         Hunter,
         SuperEtendard,
-	//SuperEtendardModernise
+		//SuperEtendardModernise
         Vautour,
         Kyokkou,
         Harrier,
@@ -1094,12 +1141,12 @@ public class SurvivalSettings : MonoBehaviour
         Skyray,
         DeltaDagger,
         Tiger,
-	// Lightning F6
+		// Lightning F6
         Thunderchief,
         Fantan,
         Crusader,
         CrusaderE,
-	// Jaguar,
+		// Jaguar,
         Kaze,
         KazeLate,
         Draken,
@@ -1119,7 +1166,7 @@ public class SurvivalSettings : MonoBehaviour
         Yuurei,
         Flogger,
         Fengren,
-	// FloggerM,
+		// FloggerM,
         DeltaDart,
         SuperDeltaDart,
         Viggen,
@@ -1185,6 +1232,7 @@ public class SurvivalSettings : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        SaveChanges();
         StartCoroutine("ToMainMenu");
     }
 

@@ -3707,6 +3707,7 @@ MonoBehaviour:
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 1
   SpawnSpeed: 300
@@ -4065,6 +4066,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 1
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 31400
   engines:
@@ -4337,6 +4340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 1
+  trigger: 0
   flarePrefab: {fileID: 5231318020974602043, guid: a644b4741f60d71478e4e8a7c48499cc,
     type: 3}
   flareSpawnPoint:
@@ -6670,6 +6674,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1536330764635792412, guid: bb89375873b4b964fa1e15273760b9e2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1912383049356378529, guid: bb89375873b4b964fa1e15273760b9e2,
         type: 3}

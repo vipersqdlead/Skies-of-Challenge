@@ -104,6 +104,7 @@ public class IR_Missile : MonoBehaviour
 		if(SeekerNoIRCCM().CompareTag("Flare"))
 		{
 			target = SeekerNoIRCCM(); 
+			print("Saw a flare");
 		}
 	    }
         }
@@ -210,7 +211,7 @@ public class IR_Missile : MonoBehaviour
 
     GameObject SeekerNoIRCCM()
     {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, SearchRadius((target.transform.position - transform.position).magnitude), directionToTarget, searchRange);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, SearchRadius(searchRange), directionToTarget, searchRange);
 
         List<(int, float, RaycastHit)> sortedHits = new List<(int, float, RaycastHit)>();
 
@@ -273,7 +274,7 @@ public class IR_Missile : MonoBehaviour
     }
     GameObject SeekerIRCCM()
     {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, 2.5f, directionToTarget, searchRange);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, 1f, directionToTarget, searchRange);
 
         List<(int, float, RaycastHit)> sortedHits = new List<(int, float, RaycastHit)>();
 
@@ -443,14 +444,21 @@ public class IR_Missile : MonoBehaviour
     Vector3 lastVelocity;
     Vector3 LocalGForce;
     [SerializeField] public float gForce;
-    void CalculateGForce()
-    {
-        var invRotation = Quaternion.Inverse(rb.rotation);
-        var acceleration = (rb.velocity - lastVelocity) / Time.fixedDeltaTime;
-        LocalGForce = invRotation * acceleration;
-        lastVelocity = rb.velocity;
-        gForce = LocalGForce.y / 9.81f;
-    }
+	void CalculateGForce()
+{
+		// Get the change in velocity over time (acceleration)
+		Vector3 acceleration = (rb.velocity - lastVelocity) / Time.fixedDeltaTime;
+		lastVelocity = rb.velocity;
+
+		// Remove the component of acceleration in the direction of velocity (i.e., forward acceleration)
+		Vector3 velocityDir = rb.velocity.normalized;
+		Vector3 lateralAcceleration = Vector3.ProjectOnPlane(acceleration, velocityDir);
+
+		// Compute G-force based only on lateral acceleration
+		float lateralG = lateralAcceleration.magnitude / 9.81f;
+
+		gForce = lateralG;
+	}
 
     void OnDestroy()
     {
