@@ -372,8 +372,8 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
   - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
   - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
-  rateOfFireRPM: 550
-  muzzleVelocity: 800
+  rateOfFireRPM: 480
+  muzzleVelocity: 780
   accuracyError: 0.0001
   shot: {fileID: 7533204519348891505}
   rateOfFire: 0
@@ -4933,8 +4933,8 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
   - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
   - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
-  rateOfFireRPM: 550
-  muzzleVelocity: 800
+  rateOfFireRPM: 480
+  muzzleVelocity: 780
   accuracyError: 0.0001
   shot: {fileID: 6201998616931188264}
   rateOfFire: 0
@@ -7151,9 +7151,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 3354541244886268521}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 0}
+  flares: {fileID: 0}
   missileCooldownTime: 0
   missileCooldownTimer: 0
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!114 &3354541244886268521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7167,6 +7173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 5961288077834183134}
+  hub: {fileID: 0}
   engineControl: {fileID: 8921916259647643811}
   steeringSpeed: 50
   minSpeed: 100
@@ -10321,10 +10328,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shellTimer: 3
   shells:
-  - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
-  - {fileID: 7005174183826454184, guid: 0a66811b75a303444b896d25c247326a, type: 3}
-  - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
-  - {fileID: 7005174183826454184, guid: cb49a454856bca449bd12970ccfdd0ca, type: 3}
+  - {fileID: 7005174183826454184, guid: 3f88c09db90d7f441bac241c4b38d9aa, type: 3}
+  - {fileID: 7005174183826454184, guid: 3f88c09db90d7f441bac241c4b38d9aa, type: 3}
+  - {fileID: 7005174183826454184, guid: 3f88c09db90d7f441bac241c4b38d9aa, type: 3}
+  - {fileID: 7005174183826454184, guid: 3f88c09db90d7f441bac241c4b38d9aa, type: 3}
   rateOfFireRPM: 800
   muzzleVelocity: 950
   accuracyError: 0.0001
@@ -10479,10 +10486,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shellTimer: 3
   shells:
-  - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
-  - {fileID: 7005174183826454184, guid: 0a66811b75a303444b896d25c247326a, type: 3}
-  - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
-  - {fileID: 7005174183826454184, guid: cb49a454856bca449bd12970ccfdd0ca, type: 3}
+  - {fileID: 7005174183826454184, guid: 3f88c09db90d7f441bac241c4b38d9aa, type: 3}
+  - {fileID: 7005174183826454184, guid: 3f88c09db90d7f441bac241c4b38d9aa, type: 3}
+  - {fileID: 7005174183826454184, guid: 3f88c09db90d7f441bac241c4b38d9aa, type: 3}
+  - {fileID: 7005174183826454184, guid: 3f88c09db90d7f441bac241c4b38d9aa, type: 3}
   rateOfFireRPM: 800
   muzzleVelocity: 950
   accuracyError: 0.0001

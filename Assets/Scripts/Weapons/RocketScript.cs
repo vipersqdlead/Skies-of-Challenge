@@ -82,11 +82,17 @@ public class RocketScript : MonoBehaviour
     void Explosion()
     {
         Instantiate(explosion, transform.position, transform.rotation);
+		
+		    RocketEngine[] engines = GetComponents<RocketEngine>();
+            foreach (RocketEngine engine in engines)
+            {
+                engine.KeepParticlesAlive();
+            }
+		
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius + proxyFuse.radius);
 
         foreach (Collider nearbyObj in colliders)
         {
-			
 			float distanceToObj = Vector3.Distance(transform.position, nearbyObj.transform.position);
 			
 			float damageToTarget = explosionPower;

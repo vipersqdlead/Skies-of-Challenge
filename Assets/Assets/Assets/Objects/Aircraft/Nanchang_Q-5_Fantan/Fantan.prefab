@@ -190,6 +190,7 @@ MonoBehaviour:
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 1
   SpawnSpeed: 150
@@ -472,6 +473,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 1
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 10300
   engines:
@@ -598,7 +601,7 @@ MonoBehaviour:
   pointsWorth: 970
   HP: 210
   hpPercent: 0
-  Defense: 65
+  Defense: 45
   CritRate: 15
   extraLives: 0
   Explosion: {fileID: 1099838043991838807, guid: 0e6b37ee9ce548f469e5c719ee44f294,
@@ -901,12 +904,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 1
+  trigger: 0
   flarePrefab: {fileID: 5231318020974602043, guid: a644b4741f60d71478e4e8a7c48499cc,
     type: 3}
   flareSpawnPoint:
   - {fileID: 4391363198477374520}
   flareReload: 20
-  flareCount: 20
+  flareCount: 10
   maxFlareCount: 0
   rateOfFireRPM: 400
   rateOfFire: 0

@@ -128,6 +128,7 @@ MonoBehaviour:
   health_maxHP: 0
   defense_def: 0
   aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!54 &7932003786084330843
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -179,6 +180,7 @@ MonoBehaviour:
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 150
@@ -444,6 +446,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 1
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 8600
   engines:
@@ -504,7 +508,7 @@ MonoBehaviour:
   pointsWorth: 930
   HP: 210
   hpPercent: 0
-  Defense: 65
+  Defense: 45
   CritRate: 15
   extraLives: 0
   Explosion: {fileID: 1099838043991838807, guid: 0e6b37ee9ce548f469e5c719ee44f294,
@@ -606,6 +610,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 8221686311685507775}
+  hub: {fileID: 0}
   engineControl: {fileID: 6982110809263645009}
   steeringSpeed: 50
   minSpeed: 150
@@ -664,9 +669,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 7768286900642332757}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 4781588429107943575}
+  flares: {fileID: 0}
   missileCooldownTime: 20
   missileCooldownTimer: 20
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!1 &125505901369531410
 GameObject:
   m_ObjectHideFlags: 0
