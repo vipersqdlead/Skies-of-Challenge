@@ -66,35 +66,6 @@ public class CruiseMissileState : StateBase
         float donePercentage = Mathf.Min(1f, Time.deltaTime / timetocomplete);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, donePercentage);
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (!collision.collider.CompareTag("Bullet"))
-        {
-            Instantiate(explosion, transform.position, transform.rotation);
-            Destroy(gameObject);
-        }
-    }
-
-    private void OnDestroy()
-    {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
-
-        foreach (Collider nearbyObj in colliders)
-        {
-            if(!nearbyObj.CompareTag("Bomber"))
-            {
-                HealthPoints objHp = nearbyObj.GetComponent<HealthPoints>();
-                if (objHp != null)
-                {
-                    if (objHp.TryKill(explosionPower))
-                    {
-                        delKillEnemy.Invoke(objHp.countsAsKill, objHp.pointsWorth);
-                    }
-                }
-            }
-        }
-        print("Explosion");
-    }
 
     public delegate void KillEnemy(bool countsAsKill, int points);
     KillEnemy delKillEnemy;

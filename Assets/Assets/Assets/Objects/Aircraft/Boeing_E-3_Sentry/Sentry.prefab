@@ -582,7 +582,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2978082466726773752}
+  - {fileID: 8468675026525715843}
   - {fileID: 7341429076008863666}
   - {fileID: 3633970487192244200}
   - {fileID: 8260106328622609126}
@@ -663,7 +663,7 @@ MonoBehaviour:
     type: 3}
   destroyedObject: {fileID: 5507326161961310014, guid: 4b5eafa7fc803424083a59ab6cb39cd3,
     type: 3}
-  smoke: {fileID: 2249482162893508604}
+  smoke: {fileID: 4892392655964647815}
   onFire: 0
   fireTimer: 25
   fireDamageTimer: 0
@@ -671,6 +671,7 @@ MonoBehaviour:
   hitSound: {fileID: 4077273143872184161}
   fireSound: {fileID: 0}
   invulnerable: 0
+  invulnerableTimer: 0
 --- !u!114 &2711113863893963076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -687,18 +688,35 @@ MonoBehaviour:
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
   gForce: 0
+  angleOfAttack: 0
+  criticalAoA: 0
+  angleOfAttackHorizontal: 0
+  maxAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
+  IAS_Speed: 0
+  currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 260
   rb: {fileID: 1251166548568895210}
   wingSpan: 44.2
   wingArea: 283
+  wingType: 0
+  sweepAngle: 0
   aspectRatio: 0
-  drag: 0.015
+  drag: 0.03
+  waveDragMultiplier: 2
+  newWaveDragMultiplier: 5
+  waveDragPeakMach: 1.2
+  waveDragRange: 0.3
+  currentDrag: 0
+  flaps: 0
+  airbrake: 0
+  stalling: 0
   stallSpeed: 200
-  neverExceedSpeed: 1230
+  neverExceedSpeed: 1020
   RollForce:
     serializedVersion: 2
     m_Curve: []
@@ -721,7 +739,9 @@ MonoBehaviour:
   wing2: {fileID: 0}
   centerOfLift: {fileID: 8260106328622609126}
   health: {fileID: 3173646873260957634}
+  anims: {fileID: 0}
   controlInput: {x: 0, y: 0, z: 0}
+  brakeInput: 0
 --- !u!114 &6321247789069591798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,6 +835,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   isAfterburningEngine: 0
+  useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 0
   engines:
@@ -858,12 +881,29 @@ MonoBehaviour:
   killcounter: {fileID: 0}
   planeCam: {fileID: 0}
   planeHUD: {fileID: 0}
+  weaponManager: {fileID: 0}
   irControl: {fileID: 0}
   sagControl: {fileID: 0}
   radarMissileControl: {fileID: 0}
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
+  flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 7438057076742578692}
+  aircraftName: 
+  speed_maxSpeed: 0
+  power_maxPower: 0
+  isJet: 0
+  engineNumber: 0
+  powerToWeight: 0
+  attack_totalBurstMass: 0
+  agility_maxTurnDegS: 0
+  agility_wingLoading: 0
+  agility_maxTurnSpeed: 0
+  agility_weight: 0
+  health_maxHP: 0
+  defense_def: 0
+  aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!1 &9202859089844967666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1232,75 +1272,75 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7045615810924820133}
     m_Modifications:
-    - target: {fileID: 1461615399276377154, guid: df227e00939421540aefe076e2cc7896,
+    - target: {fileID: 2666061558443838080, guid: 608d6d5d4cd86cd4daf838ae60098b12,
+        type: 3}
+      propertyPath: m_Name
+      value: SmokeLight
+      objectReference: {fileID: 0}
+    - target: {fileID: 5231549300600932921, guid: 608d6d5d4cd86cd4daf838ae60098b12,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1461615399276377154, guid: df227e00939421540aefe076e2cc7896,
+    - target: {fileID: 5231549300600932921, guid: 608d6d5d4cd86cd4daf838ae60098b12,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1461615399276377154, guid: df227e00939421540aefe076e2cc7896,
+    - target: {fileID: 5231549300600932921, guid: 608d6d5d4cd86cd4daf838ae60098b12,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1461615399276377154, guid: df227e00939421540aefe076e2cc7896,
+    - target: {fileID: 5231549300600932921, guid: 608d6d5d4cd86cd4daf838ae60098b12,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1461615399276377154, guid: df227e00939421540aefe076e2cc7896,
+    - target: {fileID: 5231549300600932921, guid: 608d6d5d4cd86cd4daf838ae60098b12,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1461615399276377154, guid: df227e00939421540aefe076e2cc7896,
+    - target: {fileID: 5231549300600932921, guid: 608d6d5d4cd86cd4daf838ae60098b12,
         type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1461615399276377154, guid: df227e00939421540aefe076e2cc7896,
+    - target: {fileID: 5231549300600932921, guid: 608d6d5d4cd86cd4daf838ae60098b12,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1461615399276377154, guid: df227e00939421540aefe076e2cc7896,
+    - target: {fileID: 5231549300600932921, guid: 608d6d5d4cd86cd4daf838ae60098b12,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1461615399276377154, guid: df227e00939421540aefe076e2cc7896,
+    - target: {fileID: 5231549300600932921, guid: 608d6d5d4cd86cd4daf838ae60098b12,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1461615399276377154, guid: df227e00939421540aefe076e2cc7896,
+    - target: {fileID: 5231549300600932921, guid: 608d6d5d4cd86cd4daf838ae60098b12,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8659650176526742779, guid: df227e00939421540aefe076e2cc7896,
-        type: 3}
-      propertyPath: m_Name
-      value: Smoke
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: df227e00939421540aefe076e2cc7896, type: 3}
---- !u!198 &2249482162893508604 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 608d6d5d4cd86cd4daf838ae60098b12, type: 3}
+--- !u!198 &4892392655964647815 stripped
 ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2462115860195719238, guid: df227e00939421540aefe076e2cc7896,
+  m_CorrespondingSourceObject: {fileID: 9149538167782295101, guid: 608d6d5d4cd86cd4daf838ae60098b12,
     type: 3}
   m_PrefabInstance: {fileID: 4403664258081650618}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2978082466726773752 stripped
+--- !u!4 &8468675026525715843 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 1461615399276377154, guid: df227e00939421540aefe076e2cc7896,
+  m_CorrespondingSourceObject: {fileID: 5231549300600932921, guid: 608d6d5d4cd86cd4daf838ae60098b12,
     type: 3}
   m_PrefabInstance: {fileID: 4403664258081650618}
   m_PrefabAsset: {fileID: 0}

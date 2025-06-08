@@ -200,7 +200,7 @@ public class DogfightingState : StateBase
     void LookingForTargets()
     {
         lookTimer += Time.deltaTime;
-        if(lookTimer > 5f)
+        if(lookTimer > lookAroundCooldownTime)
         {
             controller.plane.target = Utilities.GetNearestTarget(gameObject, controller.plane.side, targetLookRange);
             lookTimer = 0f;

@@ -5909,7 +5909,7 @@ Transform:
   m_GameObject: {fileID: 2989719021814271234}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -0, z: 8}
+  m_LocalPosition: {x: -0.5, y: -0, z: 14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5927,15 +5927,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shellTimer: 3
+  shellTimer: 5
   shells:
   - {fileID: 7005174183826454184, guid: 36bb9385ed8bf2e46b9863f8c945c1b3, type: 3}
   - {fileID: 7005174183826454184, guid: 36bb9385ed8bf2e46b9863f8c945c1b3, type: 3}
   - {fileID: 7005174183826454184, guid: 36bb9385ed8bf2e46b9863f8c945c1b3, type: 3}
   - {fileID: 7005174183826454184, guid: 36bb9385ed8bf2e46b9863f8c945c1b3, type: 3}
-  rateOfFireRPM: 900
-  muzzleVelocity: 800
-  accuracyError: 0.0001
+  rateOfFireRPM: 1000
+  muzzleVelocity: 900
+  accuracyError: 0.001
   shot: {fileID: 0}
   rateOfFire: 0
   rofTimer: 0
@@ -7276,8 +7276,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 12, y: 1, z: 10.2701235}
-  m_Center: {x: 0, y: 0, z: -3.5823264}
+  m_Size: {x: 10, y: 1.5405148, z: 11.52682}
+  m_Center: {x: 0, y: 0.27025753, z: -2.953978}
 --- !u!114 &6132751562054808651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9638,7 +9638,7 @@ Transform:
   m_GameObject: {fileID: 4758469798507116726}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.5, y: -0, z: 8}
+  m_LocalPosition: {x: 0.5, y: -0, z: 12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9656,15 +9656,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shellTimer: 3
+  shellTimer: 5
   shells:
   - {fileID: 7005174183826454184, guid: 36bb9385ed8bf2e46b9863f8c945c1b3, type: 3}
   - {fileID: 7005174183826454184, guid: 36bb9385ed8bf2e46b9863f8c945c1b3, type: 3}
   - {fileID: 7005174183826454184, guid: 36bb9385ed8bf2e46b9863f8c945c1b3, type: 3}
   - {fileID: 7005174183826454184, guid: 36bb9385ed8bf2e46b9863f8c945c1b3, type: 3}
-  rateOfFireRPM: 900
-  muzzleVelocity: 800
-  accuracyError: 0.0001
+  rateOfFireRPM: 1000
+  muzzleVelocity: 900
+  accuracyError: 0.001
   shot: {fileID: 3405246056797866413}
   rateOfFire: 0
   rofTimer: 0
@@ -9683,7 +9683,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7a7267d53db4c5848972918c1a5a2144, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8d1935e23c8c0d14fbffaeeff7a1f715, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -16137,6 +16137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hub: {fileID: 6645141352060931459}
+  ownTarget: {fileID: 0}
   side: 1
   guns:
   - {fileID: 1651477349590523375}
@@ -16144,10 +16145,10 @@ MonoBehaviour:
   trigger: 0
   pathOfFireObstructed: 0
   firingRange: 500
-  cannonBurstLength: 2.5
-  cannonBurstCooldown: 1.5
-  maxHorizontalAngle: 40
-  maxVerticalAngle: 20
+  cannonBurstLength: 1
+  cannonBurstCooldown: 2
+  maxHorizontalAngle: 60
+  maxVerticalAngle: 45
   rotationSpeed: 50
   targetDir: {x: 0, y: 0, z: 0}
 --- !u!1 &7375463221442873049

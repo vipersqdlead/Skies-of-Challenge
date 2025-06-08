@@ -18,6 +18,8 @@ GameObject:
   - component: {fileID: 493777090100812737}
   - component: {fileID: 4228956280363128760}
   - component: {fileID: 5580962857419492404}
+  - component: {fileID: 3751894647957802255}
+  - component: {fileID: 6929589364630636253}
   m_Layer: 0
   m_Name: V-1
   m_TagString: Bomber
@@ -78,17 +80,34 @@ MonoBehaviour:
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
   gForce: 0
+  angleOfAttack: 0
+  criticalAoA: 0
+  angleOfAttackHorizontal: 0
+  maxAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
+  IAS_Speed: 0
+  currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 150
   rb: {fileID: 0}
   wingSpan: 6
   wingArea: 15
+  wingType: 0
+  sweepAngle: 0
   aspectRatio: 0
   drag: 0.01
-  stallSpeed: 0
+  waveDragMultiplier: 2
+  newWaveDragMultiplier: 2
+  waveDragPeakMach: 1.2
+  waveDragRange: 0.3
+  currentDrag: 0
+  flaps: 0
+  airbrake: 0
+  stalling: 0
+  stallSpeed: 120
   neverExceedSpeed: 900
   RollForce:
     serializedVersion: 2
@@ -112,7 +131,9 @@ MonoBehaviour:
   wing2: {fileID: 0}
   centerOfLift: {fileID: 6605206811687875144}
   health: {fileID: 8037989494457564538}
+  anims: {fileID: 0}
   controlInput: {x: 0, y: 0, z: 0}
+  brakeInput: 0
 --- !u!114 &3345790340657941157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +147,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 7587789366007615351}
+  hub: {fileID: 0}
   engineControl: {fileID: 4228956280363128760}
   steeringSpeed: 0
   minSpeed: 0
@@ -205,13 +227,13 @@ MonoBehaviour:
   isPlayer: 0
   isGroundTgt: 1
   countsAsKill: 1
-  pointsWorth: 300
+  pointsWorth: 700
   HP: 5
   hpPercent: 0
   Defense: 1
   CritRate: 50
   extraLives: 0
-  Explosion: {fileID: 1099838043991838807, guid: 0e6b37ee9ce548f469e5c719ee44f294,
+  Explosion: {fileID: 1099838043991838807, guid: d008f59f95b1a154cba68e783d7c40bd,
     type: 3}
   destroyedObject: {fileID: 0}
   smoke: {fileID: 0}
@@ -222,6 +244,7 @@ MonoBehaviour:
   hitSound: {fileID: 0}
   fireSound: {fileID: 0}
   invulnerable: 0
+  invulnerableTimer: 0
 --- !u!82 &1158724069493821712
 AudioSource:
   m_ObjectHideFlags: 0
@@ -340,12 +363,29 @@ MonoBehaviour:
   killcounter: {fileID: 0}
   planeCam: {fileID: 0}
   planeHUD: {fileID: 0}
+  weaponManager: {fileID: 0}
   irControl: {fileID: 0}
   sagControl: {fileID: 0}
   radarMissileControl: {fileID: 0}
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
+  flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 5514414566422084658}
+  aircraftName: 
+  speed_maxSpeed: 0
+  power_maxPower: 0
+  isJet: 0
+  engineNumber: 0
+  powerToWeight: 0
+  attack_totalBurstMass: 0
+  agility_maxTurnDegS: 0
+  agility_wingLoading: 0
+  agility_maxTurnSpeed: 0
+  agility_weight: 0
+  health_maxHP: 0
+  defense_def: 0
+  aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!114 &4228956280363128760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,7 +401,7 @@ MonoBehaviour:
   aircraft: {fileID: 7587789366007615351}
   ThrottleInput: 1
   currentEnginePower: 0
-  engineStaticThrust: 6000
+  engineStaticThrust: 2700
   serviceCeiling: 12000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -391,10 +431,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1.6625456
-      outSlope: 1.6625456
+      time: -0.0017166138
+      value: 0.06945801
+      inSlope: 1.5429469
+      outSlope: 1.5429469
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
@@ -402,8 +442,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.6029053
       value: 1.0023575
-      inSlope: 0.19452667
-      outSlope: 0.19452667
+      inSlope: 0.13472736
+      outSlope: 0.13472736
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -421,6 +461,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   isAfterburningEngine: 0
+  useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 0
   engines:
@@ -458,6 +501,47 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3751894647957802255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261751200548911367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f390c48ce2cbe0249a71f601b89768bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerToFuze: 0
+  explosionRadius: 100
+  explosionPower: 30000
+  proxyFuse: {fileID: 6929589364630636253}
+  explosion: {fileID: 1099838043991838807, guid: d008f59f95b1a154cba68e783d7c40bd,
+    type: 3}
+  waterSplash: {fileID: 5509927898478369345, guid: cf8b55990d3457944886a599ba485712,
+    type: 3}
+--- !u!135 &6929589364630636253
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261751200548911367}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 7
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &6959313842292083913
 PrefabInstance:
   m_ObjectHideFlags: 0

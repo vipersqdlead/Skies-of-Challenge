@@ -89,7 +89,7 @@ public class EngineControl : MonoBehaviour
 
         if (useAirDensityMultiplier && aircraft.rb.velocity.magnitude > 0f)
         {
-            currentEnginePower = ((currentThrust * powerByAltitudeMultiplier.Evaluate(transform.position.y / 10000f) * Utilities.GetPropEfficiencyNumber(maxPropEfficiency, propEfficiencyMach, aircraft.machSpeed) * 326f) / (aircraft.currentSpeed / 1.85200426f)) * 4.44822f * ThrottleInput;
+            currentEnginePower = ((currentThrust * powerByAltitudeMultiplier.Evaluate(transform.position.y / 10000f) * Utilities.GetPropEfficiencyNumber(maxPropEfficiency, propEfficiencyMach, aircraft.machSpeed) * 326f) / (aircraft.currentSpeed / 1.85200426f)) * 4.44822f * ThrottleInput * Utilities.airDensityAnimCurve.Evaluate(transform.position.y / 10000f);
         }
         else
         {
@@ -101,6 +101,11 @@ public class EngineControl : MonoBehaviour
     {
             foreach (var engine in engines)
             {
+				if(float.IsNaN(currentEnginePower) == true)
+				{
+					print("Current Engine Power returns NaN - Check variables for vehicle " + gameObject.name);
+					return;
+				}
                 aircraft.rb.AddForce(transform.forward * currentEnginePower, ForceMode.Force);
             }
             foreach (var engine in engineSound)

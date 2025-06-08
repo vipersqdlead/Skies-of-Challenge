@@ -49,10 +49,6 @@ public class RocketScript : MonoBehaviour
                 proxyFuse.enabled = true;
             }
         }
-        if (timerToFuze <= -15f)
-        {
-            Destroy(gameObject);
-        }
     }
 
     private void OnCollisionEnter(Collision collision)

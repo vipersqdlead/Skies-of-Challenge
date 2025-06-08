@@ -63,6 +63,8 @@ public int engineNumber;
         rocketLauncherControl = GetComponent<RocketLauncherControl>();
         bombControl = GetComponent<BombControl>();
         flareDispenser = GetComponent<FlareDispenser>();
+		
+		CalculateSomeStats();
 
         if(meshRenderer == false)
         {

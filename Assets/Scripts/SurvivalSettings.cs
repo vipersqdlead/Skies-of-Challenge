@@ -267,7 +267,6 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
-                return true;
             case PlaneTypes.Fried:
                 if (PlayerPrefs.GetInt("Bf 109E Emil Total Kill Count") >= 10)
                 { return true; }
@@ -960,6 +959,7 @@ public class SurvivalSettings : MonoBehaviour
         MustangA,
         MustangD,
         SkayatekaMustang,
+		//Mustang_II
         MustangH,
         Yakovkev,
         YakovlevT,

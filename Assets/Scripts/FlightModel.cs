@@ -19,6 +19,7 @@ public class FlightModel : MonoBehaviour
     public float IAS_Speed;
     public float currentTurnRadius;
     public float currentTurnRate;
+	public float noseAuthority;
 
 
     [Header("Battle related")]
@@ -67,8 +68,13 @@ public class FlightModel : MonoBehaviour
             criticalAoA = maxAngleOfAttack * 0.9f;
         }
         waveDragPeakMach = (neverExceedSpeed / 1234f) + 0.03f;
-        rb.AddForce(transform.forward * SpawnSpeed, ForceMode.VelocityChange);
     }
+	
+	void Start()
+	{
+		rb.AddForce(transform.forward * SpawnSpeed, ForceMode.VelocityChange);
+		noseAuthority = GetComponent<AircraftHub>().agility_maxTurnDegS;
+	}
 
     void CalculateMaxAoA()
     {
@@ -179,7 +185,7 @@ public class FlightModel : MonoBehaviour
             Vector3 torqueDirection = Vector3.Cross(Vector3.up, velocityDirection);
 
             // Apply torque to align nose with velocity (nose-down effect)
-            float torqueMultiplier = Mathf.Abs(angleOfAttack) * 1000f;
+            float torqueMultiplier = Mathf.Max(Mathf.Abs(angleOfAttack), Mathf.Abs(angleOfAttackHorizontal)) * 1000f;
             rb.AddTorque(torqueDirection * torqueMultiplier * (Time.deltaTime * 60f), ForceMode.Force);
         }
         rb.AddForce(liftDirection * lift - dragDirection * _drag);
@@ -190,18 +196,19 @@ public class FlightModel : MonoBehaviour
         stalling = angleOfAttack >= maxAngleOfAttack || angleOfAttack <= (-maxAngleOfAttack / 2f) || Mathf.Abs(angleOfAttackHorizontal) >= maxAngleOfAttack;
     }
 
+	public float authorityPercent;
     public void calculateControlForces(float pitch, float yaw, float roll)
     {
         float normalizedSpeed = IAS_Speed / 1234f;
-	currentTurnRate = PitchForce.Evaluate(normalizedSpeed) * 100f;
+		currentTurnRate = PitchForce.Evaluate(normalizedSpeed) * 100f;
 
         float turnRateRad = currentTurnRate * Mathf.Deg2Rad;
         currentTurnRadius = currentSpeed / turnRateRad; // Result is in meters
 
-
+		authorityPercent = Mathf.Clamp01((IAS_Speed * 100 / (stallSpeed * 2f)) / 100f);
         // Pitch force
         float pitchOutput = Mathf.Clamp(pitch, -1.0f, 0.5f);
-        pitchOutput = pitchOutput * (PitchForce.Evaluate(normalizedSpeed) * 100f);
+        pitchOutput = pitchOutput * ((Mathf.Max(noseAuthority,(PitchForce.Evaluate(normalizedSpeed) * 100f))) * authorityPercent);
         if(anims != null)
         {
                 pitchOutput -= anims.flapExtensionValue * (anims.flapExtensionAngle / 10f);

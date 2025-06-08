@@ -127,6 +127,7 @@ MonoBehaviour:
   health_maxHP: 0
   defense_def: 0
   aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!54 &7932003786084330843
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -178,6 +179,7 @@ MonoBehaviour:
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 150
@@ -554,6 +556,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 0
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 0
   engines:
@@ -579,6 +583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 8221686311685507775}
+  hub: {fileID: 0}
   engineControl: {fileID: 6982110809263645009}
   steeringSpeed: 50
   minSpeed: 120
@@ -637,9 +642,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 7464360527585488996}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 4781588429107943575}
+  flares: {fileID: 0}
   missileCooldownTime: 20
   missileCooldownTimer: 20
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!1 &1625477039055865817
 GameObject:
   m_ObjectHideFlags: 0
@@ -2623,7 +2634,7 @@ PrefabInstance:
         type: 3}
       propertyPath: shot
       value: 
-      objectReference: {fileID: 6275071057558565492}
+      objectReference: {fileID: 0}
     - target: {fileID: 514237850303463731, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: shellTimer
@@ -2748,7 +2759,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: GunPrefab
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2756,12 +2768,6 @@ PrefabInstance:
 --- !u!4 &700782452756328074 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
-    type: 3}
-  m_PrefabInstance: {fileID: 7360940469009331690}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &6275071057558565492 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
     type: 3}
   m_PrefabInstance: {fileID: 7360940469009331690}
   m_PrefabAsset: {fileID: 0}

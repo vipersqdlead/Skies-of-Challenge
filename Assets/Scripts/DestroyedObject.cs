@@ -5,11 +5,16 @@ using UnityEngine;
 public class DestroyedObject : MonoBehaviour
 {
     [SerializeField] float timerTillDestroyed;
-    [SerializeField] GameObject Explosion, waterSplash, wreckage;
+	[SerializeField] float chanceToParachute = 50f;
+	[SerializeField] int chutesToSpawn = 1;
+    [SerializeField] GameObject Explosion, waterSplash, wreckage, parachute;
     [SerializeField] ParticleSystem[] particles;
+	
+	
     void Start()
     {
         timerTillDestroyed = timerTillDestroyed + (Random.Range(0, timerTillDestroyed / 2));
+		StartCoroutine("SpawnParachute");
     }
 
     // Update is called once per frame
@@ -67,5 +72,24 @@ public class DestroyedObject : MonoBehaviour
             FullyDestroy();
         }
     }
+	
+	IEnumerator SpawnParachute()
+    {
+		yield return new WaitForSeconds(2f);
+		
+		for(int i = 0; i < chutesToSpawn; i++)
+		{
+			int randomChance = Random.Range(0, 100);
+			if(randomChance <= chanceToParachute)
+			{
+				GameObject chute = Instantiate(parachute, transform.position, parachute.transform.rotation);
+				Rigidbody chuteRb = chute.GetComponent<Rigidbody>();
+				chuteRb.AddForce(gameObject.GetComponent<Collider>().attachedRigidbody.velocity + (transform.up * 10f), ForceMode.VelocityChange);
+			}
+			yield return new WaitForSeconds(3f);
+		}
+		
+		yield return null;
+	}
 
 }

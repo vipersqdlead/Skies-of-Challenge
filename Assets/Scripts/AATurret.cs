@@ -7,6 +7,7 @@ using UnityEngine;
 public class AATurret : MonoBehaviour
 {
     public AircraftHub hub;
+	public FlightModel ownTarget;
     public int side;
     public Gun[] guns;
     public bool trigger;
@@ -34,7 +35,7 @@ public class AATurret : MonoBehaviour
             gun.SetKillCounter(kc);
         }
 
-
+		side = hub.fm.side;
         initialRotation = transform.localRotation; // Store the initial rotation of the turret
     }
 
@@ -43,19 +44,23 @@ public class AATurret : MonoBehaviour
     public Vector3 targetDir;
     void Update()
     {
-        if (hub.fm.target == null) return;
- 
-        else
+		LookingForTargets();
+		
+		if (ownTarget == null)
+		{
+			return;
+		}
+			
         {
-            dist = Vector3.Distance(transform.position, hub.fm.target.transform.position);
+            dist = Vector3.Distance(transform.position, ownTarget.transform.position);
 
             RotateTurret();
             Ray ray = new Ray(transform.position, transform.forward);
             RaycastHit hitInfo;
 
-            if (Physics.Raycast(ray, out hitInfo, dist - 15f))
+            if (Physics.Raycast(ray, out hitInfo, dist))
             {
-                if(hitInfo.collider.gameObject == gameObject || hitInfo.collider.gameObject == hub.fm.target.gameObject)
+                if(hitInfo.collider.gameObject == gameObject || hitInfo.collider.gameObject == ownTarget.gameObject)
                 {
                     pathOfFireObstructed = false;
                 }
@@ -115,9 +120,9 @@ public class AATurret : MonoBehaviour
         Vector3 targetDirection = Utilities.FirstOrderIntercept(
             transform.position,
             hub.rb.velocity,
-            800f,
-            hub.fm.target.transform.position,
-            hub.fm.target.rb.velocity * Random.Range(0.9f, 1.1f)
+            guns[0].muzzleVelocity,
+            ownTarget.transform.position,
+            ownTarget.rb.velocity * Random.Range(0.9f, 1.1f)
         );
 
         // Calculate the angle between the turret's forward direction and the target
@@ -137,6 +142,17 @@ public class AATurret : MonoBehaviour
         else
         {
             trigger = false;
+        }
+    }
+	
+	float lookTimer;
+    void LookingForTargets()
+    {
+        lookTimer += Time.deltaTime;
+        if(lookTimer > 10f)
+        {
+            ownTarget = Utilities.GetNearestTarget(gameObject, side, firingRange * 4f);
+            lookTimer = 0f;
         }
     }
 }

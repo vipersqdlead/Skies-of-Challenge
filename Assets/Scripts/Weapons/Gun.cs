@@ -75,8 +75,12 @@ public class Gun : MonoBehaviour
                 Shell sh = shell.GetComponent<Shell>();
                 sh.SetKillEnemyDelegate(EnemyKilled); // Sets the delegate
                 sh.SetHitBonusDelegate(HitBonus);
-                if(shot != null){
-                    shot.PlayOneShot(shot.clip); // Just a small audio
+                if(shot != null)
+				{
+					if(shot.enabled == true)
+					{
+						shot.PlayOneShot(shot.clip); // Just a small audio
+					}
                 }
                 Destroy(shell, shellTimer); // And destroy it after a pair of seconds if it didn't hit anything
 

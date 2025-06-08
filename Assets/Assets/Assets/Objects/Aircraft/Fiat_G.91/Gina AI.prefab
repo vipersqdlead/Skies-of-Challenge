@@ -935,6 +935,7 @@ MonoBehaviour:
   health_maxHP: 0
   defense_def: 0
   aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!54 &6079865287207750442
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1035,11 +1036,13 @@ MonoBehaviour:
   gForce: 0
   angleOfAttack: 0
   criticalAoA: 0
+  angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 170
@@ -1284,6 +1287,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 1
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 300
   engines:
@@ -1337,8 +1342,9 @@ MonoBehaviour:
   - {fileID: 768334106447004149}
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
-  missileFoV: 5
+  missileOuterFoV: 0
   missileLockRange: 2000
+  isCagedSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
@@ -1362,6 +1368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 8679186710179448142}
+  hub: {fileID: 0}
   engineControl: {fileID: 6775140481111859132}
   steeringSpeed: 50
   minSpeed: 200
@@ -1420,9 +1427,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 2359129762305438449}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 5785821754581664084}
+  flares: {fileID: 0}
   missileCooldownTime: 20
   missileCooldownTimer: 20
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!1 &3334909821476722172
 GameObject:
   m_ObjectHideFlags: 0
@@ -2245,7 +2258,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7a7267d53db4c5848972918c1a5a2144, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b7e1c44171a86354f82a1920d3b7269f, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
