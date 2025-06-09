@@ -17,7 +17,7 @@ public class PlaneToUI : MonoBehaviour
     [SerializeField] LaserGuidedBombController lgbController;
 
     public GameObject UI;
-    public TMP_Text Health, MissilesIR, MissilesSAG, MissilesRadar, Rockets1, Bombs, flaresTxt, guidedBombs, killsCombo;
+    public TMP_Text Health, MissilesIR, MissilesSAG, MissilesRadar, Rockets1, Bombs, flaresTxt, guidedBombs, killsCombo, currentTarget;
     public RawImage healthIcon;
     public GameObject AcquireCircle, LockCircle, SARHPovCircle, SARHLockCircle;
 
@@ -85,6 +85,7 @@ public class PlaneToUI : MonoBehaviour
         Rocket();
         //Bomb();
         //GuidedBomb();
+		ShowTarget();
         CountKillsCombo();
     }
 
@@ -464,6 +465,41 @@ public class PlaneToUI : MonoBehaviour
             guidedBombs.enabled= false;
         }
     }
+	
+	void ShowTarget()
+	{
+		if(hub.fm.target != null)
+        {
+			if(currentTarget.enabled == false)
+			{
+				currentTarget.enabled = true;
+			}
+            currentTarget.text = "Target: " + hub.fm.target.gameObject.name + " (" + hub.fm.target.health.pointsWorth + ")";
+			
+			if (hub.planeCam.camShaking == true)
+			{
+				currentTarget.color = Color.red;
+			}
+			else if(hub.fm.target.side == 1)
+			{
+				currentTarget.color = Color.blue;
+			}
+			else
+			{
+				currentTarget.color = Color.white;
+			}
+		
+        }
+        else
+        {			
+			if(currentTarget.enabled == true)
+			{
+				currentTarget.enabled = false;
+			}
+        }
+		
+
+	}
 
     void CountKillsCombo()
     {

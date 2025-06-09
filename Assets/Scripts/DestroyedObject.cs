@@ -84,7 +84,7 @@ public class DestroyedObject : MonoBehaviour
 			{
 				GameObject chute = Instantiate(parachute, transform.position, parachute.transform.rotation);
 				Rigidbody chuteRb = chute.GetComponent<Rigidbody>();
-				chuteRb.AddForce(gameObject.GetComponent<Collider>().attachedRigidbody.velocity + (transform.up * 10f), ForceMode.VelocityChange);
+				chuteRb.AddForce(gameObject.GetComponent<Collider>().attachedRigidbody.velocity + (transform.up * 100f), ForceMode.VelocityChange);
 			}
 			yield return new WaitForSeconds(3f);
 		}

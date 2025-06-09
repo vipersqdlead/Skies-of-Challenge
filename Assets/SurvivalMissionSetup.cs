@@ -93,7 +93,7 @@ public class SurvivalMissionSetup : MonoBehaviour
     public RectTransform UI_climbArrow;
 
 
-    [SerializeField] TMP_Text UI_HP, UI_Missiles, UI_MissilesSAG, UI_MissilesRadar, UI_Rockets, UI_Combo, UI_Flares;
+    [SerializeField] TMP_Text UI_HP, UI_Missiles, UI_MissilesSAG, UI_MissilesRadar, UI_Rockets, UI_Combo, UI_Flares, UI_Target;
     [SerializeField] GameObject UI_Crosshair, UI_LeadMarker, UI_FPM, UI_MsslAcq, UI_MsslLock, UI_SARHAcq, UI_SARHLock, UI_Center;
     [SerializeField] AudioSource UI_stallWarning_SFX;
     [SerializeField] RawImage UI_healthIcon;
@@ -123,6 +123,7 @@ public class SurvivalMissionSetup : MonoBehaviour
         hub.planeToUI.LockCircle = UI_MsslLock;
         hub.planeToUI.SARHPovCircle = UI_SARHAcq;
         hub.planeToUI.SARHLockCircle = UI_SARHLock;
+		hub.planeToUI.currentTarget = UI_Target;
 
 
         hub.planeToUI.IRControl = hub.irControl;

@@ -11,7 +11,7 @@ public class EnemyMarkers : MonoBehaviour
     [SerializeField] List<GameObject> enemyMarkers, alliedMarkers;
     [SerializeField] GameObject markerPrefab, alliedMarkerPrefab, selectedTargetPrefab;
     [SerializeField] GameObject targetLockedMarker;
-    public Renderer targetLocked;
+	public AircraftHub targetLockedHub;
     Vector3 screenPos;
 
     public RadarMinimap minimap;
@@ -90,17 +90,22 @@ public class EnemyMarkers : MonoBehaviour
             }
         }
 
-        if (Camera.main == null || targetLocked == null)
+        if (Camera.main == null || targetLockedHub == null)
         {
             targetLockedMarker.SetActive(false);
         }
-        else if (Camera.main != null && targetLocked != null)
+        else if (Camera.main != null && targetLockedHub != null)
         {
+			if(targetLockedHub.fm.side == 1)
+			{
+				targetLockedMarker.SetActive(false);
+				return;
+			}
             screenPos = Camera.main.WorldToScreenPoint(transform.position);
-            if (targetLocked.isVisible)
+            if (targetLockedHub.meshRenderer.isVisible)
             {
                 targetLockedMarker.SetActive(true);
-                targetLockedMarker.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, targetLocked.transform.TransformPoint(Vector3.zero));
+                targetLockedMarker.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, targetLockedHub.transform.TransformPoint(Vector3.zero));
             }
 
             else

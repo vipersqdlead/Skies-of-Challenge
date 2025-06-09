@@ -37,7 +37,7 @@ public class SurvivalMissionStatus : MonoBehaviour
 
 
     [SerializeField] GameObject currentLockedTarget;
-    public TMP_Text KillCountUI, PointCount, TimeLeft, currentWaveUI, newWaveText, newWaveBonusText, bonusWaveObjectiveText, enemiesLeftText, currentTarget, mapBoundaryWarning, mEnd_TimeBonus, mEnd_PointScore, mEnd_FinalScore;
+    public TMP_Text KillCountUI, PointCount, TimeLeft, currentWaveUI, newWaveText, newWaveBonusText, bonusWaveObjectiveText, enemiesLeftText, mapBoundaryWarning, mEnd_TimeBonus, mEnd_PointScore, mEnd_FinalScore;
     public AudioSource mapBoundaryWarningAS;
     public AudioClip mapBoundaryWarningLight, mapBoundaryWarningStrong;
 
@@ -134,7 +134,6 @@ public class SurvivalMissionStatus : MonoBehaviour
             PointCount.color = Color.red;
             currentWaveUI.color = Color.red;
             enemiesLeftText.color = Color.red;
-            currentTarget.color = Color.red;
         }
         else
         {
@@ -143,7 +142,6 @@ public class SurvivalMissionStatus : MonoBehaviour
             PointCount.color = Color.white;
             currentWaveUI.color = Color.white;
             enemiesLeftText.color = Color.white;
-            currentTarget.color = Color.white;
         }
         TimeLeft.text = "Time: " + (int)MissionTimer;
         KillCountUI.text = "Destroyed: " + KillCounter.Kills;
@@ -151,32 +149,15 @@ public class SurvivalMissionStatus : MonoBehaviour
         currentWaveUI.text = "Wave " + currentWave;
         enemiesLeftText.text = enemyFighters.Count + " Enemies Left";
         BlackBG.fillClockwise = true;
-
-        if(playerAcHub.planeCam.camLockedTarget != null)
-        {
-            currentTarget.text = "Target: " + playerAcHub.planeCam.camLockedTarget.gameObject.name + " (" + playerAcHub.fm.target.health.pointsWorth + ")";
-        }
-        else
-        {
-            currentTarget.text = "Target: None";
-        }
-
-        if (currentLockedTarget != playerAcHub.planeCam.camLockedTarget)
-        {
-            if(playerAcHub.planeCam.camLockedTarget.GetComponent<AircraftHub>().meshRenderer != null)
-            {
-                markers.targetLocked = playerAcHub.planeCam.camLockedTarget.GetComponent<AircraftHub>().meshRenderer;
-            }
-            else
-            {
-                markers.targetLocked = playerAcHub.planeCam.camLockedTarget.GetComponentInChildren<MeshRenderer>();
-            }
-            currentLockedTarget = playerAcHub.planeCam.camLockedTarget;
-        }
-        //if(playerAcHub.planeCam.camLockedTarget == null && enemyFighters[0] != null)
-        //{
-        //    playerAcHub.planeCam.camLockedTarget = enemyFighters[0].gameObject;
-        //}
+		if(playerAcHub.fm.target != null)
+		{
+			markers.targetLockedHub = playerAcHub.fm.target.hub;
+		}
+		else
+		{
+			markers.targetLockedHub = null;
+		}
+		
         MapBoundaries();
 
     }
@@ -212,48 +193,6 @@ public class SurvivalMissionStatus : MonoBehaviour
         bonusWaveObjectiveText.enabled = false;
         startingwave = false;
         yield return null;
-    }
-
-    void MapBoundaries()
-    {
-        float giveWarningDistance = 12000f;
-        float destroyDistance = 13500f;
-
-        if(playerAcHub == null)
-        {
-            mapBoundaryWarning.enabled = false;
-            mapBoundaryWarningAS.enabled = false;
-            return;
-        }
-
-        if (playerAcHub.transform.position.x < -destroyDistance || playerAcHub.transform.position.x > destroyDistance || playerAcHub.transform.position.z < -destroyDistance || playerAcHub.transform.position.z > destroyDistance)
-        {
-            mapBoundaryWarningAS.enabled = true;
-            mapBoundaryWarning.color = Color.red;
-            playerAcHub.hp.DealExternalDamagePerSecond();
-            mapBoundaryWarningAS.clip = mapBoundaryWarningStrong;
-            if (mapBoundaryWarningAS.isPlaying == false)
-            {
-                mapBoundaryWarningAS.Play();
-            }
-        }
-        else if (playerAcHub.transform.position.x < -giveWarningDistance || playerAcHub.transform.position.x > giveWarningDistance || playerAcHub.transform.position.z < -giveWarningDistance || playerAcHub.transform.position.z > giveWarningDistance)
-        {
-            mapBoundaryWarning.enabled = true;
-            mapBoundaryWarning.color = Color.white;
-            mapBoundaryWarningAS.enabled = true;
-            mapBoundaryWarningAS.clip = mapBoundaryWarningLight;
-            if(mapBoundaryWarningAS.isPlaying == false)
-            {
-                mapBoundaryWarningAS.Play();
-            }
-        }
-        else
-        {
-            mapBoundaryWarning.enabled = false;
-            mapBoundaryWarningAS.enabled = false;
-        }
-
     }
 
     bool SetRetry = false;
@@ -360,7 +299,6 @@ public class SurvivalMissionStatus : MonoBehaviour
         {
             BlackBG.fillOrigin = 1;
             BlackBG.fillAmount -= Time.unscaledDeltaTime * 2f;
-
         }
 
         if (!fadeInOrOut)
@@ -370,8 +308,35 @@ public class SurvivalMissionStatus : MonoBehaviour
         }
     }
 
+	private IEnumerator FadeOut()
+	{
+		float t = 0f;
+		while (t < 1f)
+		{
+			t += Time.unscaledDeltaTime * 2f;
+            BlackBG.fillOrigin = 2;
+            BlackBG.fillAmount = Mathf.Lerp(0f, 1f, t);
+			yield return null;
+		}
+		BlackBG.fillAmount = 1f;
+	}
+
+	private IEnumerator FadeIn()
+	{
+		float t = 0f;
+		while (t < 1f)
+		{
+			t += Time.unscaledDeltaTime * 2f;
+			BlackBG.fillOrigin = 1;
+            BlackBG.fillAmount = Mathf.Lerp(1f, 0f, t);
+			yield return null;
+		}
+        BlackBG.fillAmount = 0f;
+		//fadeCanvasGroup.alpha = 0f;
+	}
+
     bool startingwave = false;
-    public List<FlightModel> enemyFighters;
+    public List<AircraftHub> enemyFighters;
     void CheckForRemainingFighters()
     {
         for (int i = 0; i < enemyFighters.Count; i++)
@@ -392,6 +357,93 @@ public class SurvivalMissionStatus : MonoBehaviour
             }
         }
     }
+
+	public bool isPlayerOutOfBounds;
+    void MapBoundaries()
+    {
+        float giveWarningDistance = 12500f;
+        float destroyDistance = 16000f;
+
+        if(playerAcHub == null)
+        {
+            mapBoundaryWarning.enabled = false;
+            mapBoundaryWarningAS.enabled = false;
+            return;
+        }
+
+			float distance = Vector3.Distance(playerAcHub.transform.position, new Vector3(0f, playerAcHub.transform.position.y, 0f));
+			if(distance > giveWarningDistance)
+			{
+				mapBoundaryWarning.enabled = true;
+				mapBoundaryWarning.color = Color.white;
+				mapBoundaryWarningAS.enabled = true;
+				mapBoundaryWarningAS.clip = mapBoundaryWarningLight;
+				if(mapBoundaryWarningAS.isPlaying == false && isPaused == false)
+				{
+					mapBoundaryWarningAS.Play();
+				}
+			}
+	        else
+			{
+				mapBoundaryWarning.enabled = false;
+				mapBoundaryWarningAS.enabled = false;
+			}
+			
+			if (distance > destroyDistance)
+			{
+				if(!isPlayerOutOfBounds)
+				{
+					StartCoroutine(ResetPlayerOutOfBounds(playerAcHub, giveWarningDistance));
+					isPlayerOutOfBounds = true;
+					print("Reposition Algorythm called");
+				}
+			}
+		
+		foreach (AircraftHub aircraft in enemyFighters)
+		{
+			if (aircraft == null) continue;
+	
+			float distanceAI = Vector3.Distance(aircraft.transform.position, new Vector3(0f, aircraft.transform.position.y, 0f));
+			if (distanceAI > destroyDistance)
+			{
+				TurnAircraftToCenter(aircraft, giveWarningDistance);
+			}
+		}
+    }
+
+	public void TurnAircraftToCenter(AircraftHub aircraft, float distanceToReposition)
+	{
+		Rigidbody rb = aircraft.rb;
+		if (rb == null) return;
+
+		// Reset physics
+		rb.velocity = Vector3.zero;
+		rb.angularVelocity = Vector3.zero;
+
+		// Point toward world center
+		Vector3 directionToCenter = (new Vector3(0f, aircraft.transform.position.y, 0f) - aircraft.transform.position).normalized;
+		aircraft.transform.rotation = Quaternion.LookRotation(directionToCenter, Vector3.up);
+		
+		Vector3 directionFromCenter = (aircraft.transform.position - Vector3.zero).normalized;
+		aircraft.transform.position = directionFromCenter * distanceToReposition;
+
+		// Apply forward "spawn" speed
+		float spawnSpeed = aircraft.fm.SpawnSpeed; // You can make this configurable per aircraft
+		rb.velocity = aircraft.transform.forward * spawnSpeed;
+		print("Aircraft Repositioned");
+	}
+
+	public IEnumerator ResetPlayerOutOfBounds(AircraftHub player, float distanceToReposition)
+	{
+		print("Starting reposition Algorythm");
+        StartCoroutine(FadeOut());
+		yield return new WaitForSeconds(0.5f);
+		TurnAircraftToCenter(player, distanceToReposition);
+		isPlayerOutOfBounds = false;
+	    StartCoroutine(FadeIn());
+		print("Finishing reposition Algorythm");
+		yield return null;
+	}
 
     void Pause()
     {

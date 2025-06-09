@@ -5,6 +5,7 @@ using UnityEngine;
 public class FlightModel : MonoBehaviour
 {
     [Header("Status")]
+	public AircraftHub hub;
     public Vector3 localVelocity;
     public Vector3 localAngularVelocity;
     public float currentSpeed;
@@ -54,6 +55,7 @@ public class FlightModel : MonoBehaviour
     public ControlSurfaceAnimation anims;
     private void Awake()
     {
+		hub = GetComponent<AircraftHub>();
         rb = GetComponent<Rigidbody>();
         anims = GetComponent<ControlSurfaceAnimation>();
         originalDragValue = drag;

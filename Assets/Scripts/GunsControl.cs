@@ -82,7 +82,10 @@ public class GunsControl : MonoBehaviour
                 {
                     //Quaternion lookRot = Quaternion.LookRotation(gun.transform.forward, convergencePoint);
                     //gun.transform.rotation = Quaternion.Euler()
-                    gun.transform.LookAt(convergencePoint);
+                    if(gun != null)
+					{
+						gun.transform.LookAt(convergencePoint);
+					}
                 }
             }
 
@@ -110,7 +113,10 @@ public class GunsControl : MonoBehaviour
 					{
 						//Quaternion lookRot = Quaternion.LookRotation(gun.transform.forward, convergencePoint);
 						//gun.transform.rotation = Quaternion.Euler()
-						gun.transform.LookAt(convergencePoint);
+						if(gun != null)
+						{
+							gun.transform.LookAt(convergencePoint);
+						}
 					}
                 }
                 else
@@ -121,7 +127,16 @@ public class GunsControl : MonoBehaviour
                         //Quaternion lookRot = Quaternion.LookRotation(gun.transform.forward, convergencePoint);
                         //gun.transform.rotation = Quaternion.Euler()
                         gun.transform.LookAt(convergencePoint);
-                    }
+                    }					
+					foreach(Gun gun in additionalGuns)
+					{
+						//Quaternion lookRot = Quaternion.LookRotation(gun.transform.forward, convergencePoint);
+						//gun.transform.rotation = Quaternion.Euler()
+						if(gun != null)
+						{
+							gun.transform.LookAt(convergencePoint);
+						}
+					}
                 }
                 // algo
             }

@@ -18,7 +18,7 @@ public class Wave : MonoBehaviour
             {
                 aircraft[i].fm.target = player;
             }
-            status.enemyFighters.Add(aircraft[i].fm);
+            status.enemyFighters.Add(aircraft[i]);
         }
     }
 

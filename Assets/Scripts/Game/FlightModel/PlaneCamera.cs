@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Sockets;
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Linq;
 
 public class PlaneCamera : MonoBehaviour
 {
@@ -63,9 +64,11 @@ public class PlaneCamera : MonoBehaviour
             camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, CalculateFoV(), Time.deltaTime * 10f);
         }
 
-        if (Input.GetAxis("SelectTarget") != 0)
+        //if (Input.GetAxis("SelectTarget") != 0)
+		if (Input.GetKeyDown(KeyCode.Tab))
         {
-            SearchForTargetCameraLock();
+			hub.fm.target = AcquireTarget(transform);
+            //SearchForTargetCameraLock();
         }
 
         HandleCameraMode();
@@ -130,17 +133,157 @@ public class PlaneCamera : MonoBehaviour
             float x = Random.Range(-1f, 1f) * magnitude;
             float y = Random.Range(-1f, 1f) * magnitude;
             cameraParent.transform.localPosition = originalPosition + new Vector3(x, y, 0);
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             yield return null;
         }
         cameraParent.transform.localPosition = originalPosition;
         camShaking = false;
         yield return null;
     }
+	
+	FlightModel AcquireTarget(Transform self)
+	{
+		List<Transform> possibleTargets = GetNearbyEnemyTargets(transform, 32000f);
+		
+		Transform target = GetTargetClosestToCenter(SortTargetsByScreenCenter(possibleTargets));
 
-    void SearchForTargetCameraLock()
+		if (target == null)
+		{
+			target = GetClosestTargetByDistance(self, possibleTargets);
+		}
+		
+		FlightModel fm = target.GetComponent<FlightModel>();
+		
+		if(fm != null)
+		{
+			return fm;
+		}
+		else
+		{
+			return null;
+		}
+	}
+	
+	List<Transform> GetNearbyEnemyTargets(Transform playerTransform, float searchRadius)
+	{
+		List<Transform> nearbyTargets = new List<Transform>();
+
+		// Get all colliders in the area
+		Collider[] hits = Physics.OverlapSphere(playerTransform.position, searchRadius);
+
+		foreach (Collider hit in hits)
+		{
+			if (hit.CompareTag("Fighter") || hit.CompareTag("Bomber"))
+			{
+				if(hit.gameObject == gameObject)
+				{
+					continue;
+				}
+            // Optional: Make sure it's an aircraft with needed components
+				if (hit.transform.TryGetComponent<AircraftHub>(out var hub))
+				{
+					nearbyTargets.Add(hit.transform);
+				}
+				else
+				{
+					// Fallback: Add anyway if no check needed
+					nearbyTargets.Add(hit.transform);
+				}
+			}
+		}
+		return nearbyTargets;
+	}
+	
+	List<Transform> SortTargetsByScreenCenter(List<Transform> possibleTargets)
+	{
+		Vector2 screenCenter = new Vector2(0.5f, 0.5f); // Viewport center
+		List<(Transform target, float distance)> scoredTargets = new();
+
+		foreach (var target in possibleTargets)
+		{
+			Vector3 viewportPos = camera.WorldToViewportPoint(target.position);
+
+			// Skip targets behind the camera
+			if (viewportPos.z < 0) continue;
+
+			Vector2 viewport2D = new Vector2(viewportPos.x, viewportPos.y);
+			float screenDistance = Vector2.Distance(viewport2D, screenCenter);
+
+			scoredTargets.Add((target, screenDistance));
+		}
+
+		// Sort by screen center distance (ascending)
+		scoredTargets.Sort((a, b) => a.distance.CompareTo(b.distance));
+
+		// Return just the sorted transforms
+		return scoredTargets.Select(t => t.target).ToList();
+	}
+	
+	Transform GetTargetClosestToCenter(List<Transform> possibleTargets, float maxScreenDistance = 0.2f)
+	{
+        Transform bestTarget = null;
+		float closestDistance = Mathf.Infinity;
+
+		foreach (Transform _target in possibleTargets)
+		{
+			
+			if(hub.fm.target != null)
+			{
+				if(hub.fm.target.transform == _target)
+				{
+					continue;
+				}	
+			}
+			
+			Vector3 viewportPos = camera.WorldToViewportPoint(_target.position);
+
+			// Check if target is in front of the camera
+			if (viewportPos.z < 0)
+				continue;
+
+			// Compute distance from screen center (0.5, 0.5 in viewport)
+			float dx = viewportPos.x - 0.5f;
+			float dy = viewportPos.y - 0.5f;
+			float screenDistance = Mathf.Sqrt(dx * dx + dy * dy);
+
+			if (screenDistance < closestDistance && screenDistance <= maxScreenDistance)
+			{				
+				closestDistance = screenDistance;
+				bestTarget = _target;
+			}
+		}
+		return bestTarget;
+    }
+	
+	Transform GetClosestTargetByDistance(Transform self, List<Transform> possibleTargets)
+	{
+		Transform closestTarget = null;
+		float closestSqrDist = Mathf.Infinity;
+
+		foreach (Transform target in possibleTargets)
+		{
+			AircraftHub hub;
+			if (target.TryGetComponent<AircraftHub>(out hub))
+			{
+				if(hub.fm.side == 2)
+				{
+					continue;
+				}
+			}
+			
+			float sqrDist = (target.position - self.position).sqrMagnitude;
+
+			if (sqrDist < closestSqrDist)
+			{
+				closestSqrDist = sqrDist;
+				closestTarget = target;
+			}
+		}
+		return closestTarget;
+	}
+
+    void SearchForTargetCameraLockOld()
     {
-
         float closestDistance = Mathf.Infinity;
         GameObject closestTarget = null;
         RaycastHit[] hits = Physics.SphereCastAll(cameraParent.transform.position, 5000f, cameraParent.transform.forward);
@@ -202,13 +345,14 @@ public class PlaneCamera : MonoBehaviour
 
         if (trackingInput != 0)
         {
-            if (camLockedTarget != null)
+            if (hub.fm.target != null)
             {
                 currentMode = CameraMode.Tracking;
             }
             else
             {
-                SearchForTargetCameraLock();
+                hub.fm.target = AcquireTarget(transform);
+				currentMode = CameraMode.Forward;
             }
         }
         else if (Input.GetAxis("HorizontalCameraRotation") != 0 || Input.GetAxis("VerticalCameraRotation") != 0) // Replace with your actual input check
@@ -233,14 +377,11 @@ public class PlaneCamera : MonoBehaviour
                 break;
 
             case CameraMode.Tracking:
-                if (camLockedTarget != null)
-                {
                     // Get world-space LookAt rotation
-                    Quaternion worldLookRotation = Quaternion.LookRotation(camLockedTarget.transform.position - cameraParent.transform.position);
+                    Quaternion worldLookRotation = Quaternion.LookRotation(hub.fm.target.transform.position - cameraParent.transform.position);
 
                     // Convert to local space relative to the player's aircraft
                     targetRotation = Quaternion.Inverse(hub.transform.rotation) * worldLookRotation;
-                }
                 break;
 
             case CameraMode.Forward:

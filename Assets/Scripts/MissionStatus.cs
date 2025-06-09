@@ -104,31 +104,22 @@ public class MissionStatus : MonoBehaviour
 
     void TargetTracking()
     {
-        if (playerAcHub.planeCam.camLockedTarget != null)
+        if (playerAcHub.fm.target != null)
         {
-            currentTarget.text = "Target: " + playerAcHub.planeCam.camLockedTarget.gameObject.name + " (" + playerAcHub.fm.target.health.pointsWorth + ")";
+            currentTarget.text = "Target: " + playerAcHub.fm.target.gameObject.name + " (" + playerAcHub.fm.target.health.pointsWorth + ")";
         }
         else
         {
             currentTarget.text = "Target: None";
         }
-
-        if (currentLockedTarget != playerAcHub.planeCam.camLockedTarget)
-        {
-            if(playerAcHub.planeCam.camLockedTarget == null)
-            {
-                markers.targetLocked = null;
-            }
-            else if (playerAcHub.planeCam.camLockedTarget.GetComponent<AircraftHub>().meshRenderer != null)
-            {
-                markers.targetLocked = playerAcHub.planeCam.camLockedTarget.GetComponent<AircraftHub>().meshRenderer;
-            }
-            else
-            {
-                markers.targetLocked = playerAcHub.planeCam.camLockedTarget.GetComponentInChildren<MeshRenderer>();
-            }
-            currentLockedTarget = playerAcHub.planeCam.camLockedTarget;
-        }
+		if(playerAcHub.fm.target != null)
+		{
+			markers.targetLockedHub = playerAcHub.fm.target.hub;
+		}
+		else
+		{
+			markers.targetLockedHub = null;
+		}
     }
     void MissionAccomplished()
     {
