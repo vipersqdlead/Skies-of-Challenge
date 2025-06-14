@@ -28,6 +28,7 @@ public class AircraftHub : MonoBehaviour
 
     [Header("Aircraft Stats")]
     public string aircraftName;
+	public string nameShort, nameLong;
     public int speed_maxSpeed;
     public float power_maxPower;
     public bool isJet;

@@ -7,6 +7,7 @@ public class SAM_Launcher : MonoBehaviour
 {
     public GameObject target;
     [SerializeField] int SAM_Launches = 4;
+	[SerializeField] int chanceOfLaunchPerSecond = 10;
     [SerializeField] int side = 0;
     [SerializeField] protected GameObject missilePref;
     [SerializeField] protected GameObject missile;
@@ -61,9 +62,9 @@ public class SAM_Launcher : MonoBehaviour
                 timer += Time.deltaTime;
                 if (timer >= 1)
                 {
-                    random = Random.Range(0, 15);
+                    random = Random.Range(0, 100);
                     timer = 0f;
-                    if (random <= 3 && missile == null && SAM_Launches > 0)
+                    if (random <= chanceOfLaunchPerSecond && missile == null && SAM_Launches > 0)
                     {
                         print("SAM, Open fire!");
                         OpenFire();
@@ -81,7 +82,10 @@ public class SAM_Launcher : MonoBehaviour
 
                 if (Vector3.Distance(transform.position, target.transform.position) < Vector3.Distance(transform.position, missile.transform.position))
                 {
-                    missile.GetComponent<SAG_Missile>().Guide = null;
+					if(missile.GetComponent<SAG_Missile>() != null)
+					{
+						missile.GetComponent<SAG_Missile>().Guide = null;
+					}
                     missile = null;
                 }
             }

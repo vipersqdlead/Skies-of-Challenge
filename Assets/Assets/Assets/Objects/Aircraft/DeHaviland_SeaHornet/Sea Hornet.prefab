@@ -9232,6 +9232,8 @@ MonoBehaviour:
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 499363666608135754}
   aircraftName: Sea Hornet F.20
+  nameShort: Sea Hornet
+  nameLong: Sea Hornet F.20
   speed_maxSpeed: 760
   power_maxPower: 2200
   isJet: 0
@@ -9261,6 +9263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -9274,6 +9277,7 @@ MonoBehaviour:
   IAS_Speed: 0
   currentTurnRadius: 0
   currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 1
   SpawnSpeed: 170
@@ -9283,7 +9287,7 @@ MonoBehaviour:
   wingType: 0
   sweepAngle: 0
   aspectRatio: 0
-  drag: 0.008
+  drag: 0.0085
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2
   waveDragPeakMach: 1.2
@@ -9416,6 +9420,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 1032576776052007754}
   health: {fileID: 8893305985367905589}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &840625624679607077
@@ -9499,6 +9504,7 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
+  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
@@ -9669,20 +9675,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.4499848
       value: 0.9587685
-      inSlope: -0.63619965
-      outSlope: -0.63619965
+      inSlope: -1.3232175
+      outSlope: -1.3232175
       tangentMode: 0
       weightedMode: 0
       inWeight: 1
-      outWeight: 0.039712675
+      outWeight: 0.053035915
     - serializedVersion: 3
       time: 1.2230865
       value: 0.3078223
-      inSlope: -0.7266564
-      outSlope: -0.7266564
+      inSlope: 0.009105906
+      outSlope: 0.009105906
       tangentMode: 0
       weightedMode: 0
-      inWeight: 1
+      inWeight: 0.07538433
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -9761,7 +9767,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.475
   afterBurner: 0
-  afterburnerThrust: 3000
+  afterburnerThrust: 2150
   engines:
   - {fileID: 4410946736168538361}
   - {fileID: 2983082356208668534}
@@ -9785,7 +9791,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6185050561958779977}
   serializedVersion: 4
-  m_Mass: 5350
+  m_Mass: 6220
   m_Drag: 0
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}

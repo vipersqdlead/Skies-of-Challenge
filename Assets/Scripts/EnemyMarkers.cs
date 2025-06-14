@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class EnemyMarkers : MonoBehaviour
 {
+	public AircraftHub player;
     public List<GameObject> enemiesToBeMarked = new List<GameObject>();
     [SerializeField]List<Renderer> enemyRenderer;
     public List<GameObject> alliesToBeMarked;
@@ -12,6 +14,11 @@ public class EnemyMarkers : MonoBehaviour
     [SerializeField] GameObject markerPrefab, alliedMarkerPrefab, selectedTargetPrefab;
     [SerializeField] GameObject targetLockedMarker;
 	public AircraftHub targetLockedHub;
+    public GameObject leadMarkerGO;
+	Transform leadMarker;
+	public TMP_Text distanceMarker;
+	public TMP_Text targetName;
+	public float distanceToLeadMarker = 800f;
     Vector3 screenPos;
 
     public RadarMinimap minimap;
@@ -23,6 +30,8 @@ public class EnemyMarkers : MonoBehaviour
         enemyMarkers = new List<GameObject>(enemiesToBeMarked.Count);
         alliedMarkers = new List<GameObject>(alliesToBeMarked.Count);
         targetLockedMarker = new GameObject();
+		leadMarkerGO.SetActive(false);
+		distanceMarker.gameObject.SetActive(false);
 
         for (int i = 0; i < enemiesToBeMarked.Count; i++)
         {
@@ -41,6 +50,8 @@ public class EnemyMarkers : MonoBehaviour
             alliedMarkers.Add(Instantiate(alliedMarkerPrefab, alliesToBeMarked[i].transform.position, transform.rotation, this.transform));
         }
         targetLockedMarker = Instantiate(selectedTargetPrefab, transform.position, transform.rotation, this.transform);
+		
+		leadMarker = leadMarkerGO.transform;
     }
 
 
@@ -93,12 +104,18 @@ public class EnemyMarkers : MonoBehaviour
         if (Camera.main == null || targetLockedHub == null)
         {
             targetLockedMarker.SetActive(false);
+			leadMarkerGO.SetActive(false);
+			distanceMarker.gameObject.SetActive(false);
+			targetName.gameObject.SetActive(false);
         }
         else if (Camera.main != null && targetLockedHub != null)
         {
 			if(targetLockedHub.fm.side == 1)
 			{
 				targetLockedMarker.SetActive(false);
+				leadMarkerGO.SetActive(false);
+				distanceMarker.gameObject.SetActive(false);
+				targetName.gameObject.SetActive(false);
 				return;
 			}
             screenPos = Camera.main.WorldToScreenPoint(transform.position);
@@ -106,12 +123,18 @@ public class EnemyMarkers : MonoBehaviour
             {
                 targetLockedMarker.SetActive(true);
                 targetLockedMarker.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, targetLockedHub.transform.TransformPoint(Vector3.zero));
+				ShowLeadMarker();
+				ShowTargetInfo();
             }
 
             else
             {
                 targetLockedMarker.SetActive(false);
+				leadMarkerGO.SetActive(false);
+				distanceMarker.gameObject.SetActive(false);
+				targetName.gameObject.SetActive(false);
             }
+			
         }
 
     }
@@ -151,4 +174,77 @@ public class EnemyMarkers : MonoBehaviour
             minimap.AddAllyBlip(aircraftToAdd.transform, 1);
         }
     }
+	
+    void ShowLeadMarker()
+    {    
+		if(targetLockedHub == null)
+        {
+            leadMarkerGO.SetActive(false);
+			return;
+        }
+        else if(targetLockedHub != null)
+        {
+            float distToTarget = Vector3.Distance(player.transform.position, targetLockedHub.transform.position);
+            if(distToTarget < distanceToLeadMarker)
+            {
+                Vector3 leadPos = Utilities.FirstOrderIntercept(player.transform.position, player.rb.velocity, player.gunsControl.guns[0].muzzleVelocity, targetLockedHub.transform.position, targetLockedHub.rb.velocity);
+
+                var hudPos = Utilities.TransformToHUDSpace(leadPos);
+
+                if (hudPos.z > 0)
+                {
+                    leadMarkerGO.SetActive(true);
+                    leadMarker.localPosition = new Vector3(hudPos.x, hudPos.y, 0);
+                }
+                else
+                {
+                    leadMarkerGO.SetActive(false);
+                }
+            }
+            else
+            {
+                leadMarkerGO.SetActive(false);
+            }
+        }
+    }
+	
+	void ShowTargetInfo()
+	{
+		if(targetLockedHub == null)
+        {
+            distanceMarker.gameObject.SetActive(false);
+			targetName.gameObject.SetActive(false);
+			return;
+        }
+        else if(targetLockedHub != null)
+        {
+            float distToTarget = Vector3.Distance(player.transform.position, targetLockedHub.transform.position);
+			screenPos = Camera.main.WorldToScreenPoint(transform.position);
+			distanceMarker.gameObject.SetActive(true);
+			targetName.gameObject.SetActive(true);
+            distanceMarker.gameObject.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, targetLockedHub.transform.TransformPoint(Vector3.zero));
+			targetName.gameObject.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, targetLockedHub.transform.TransformPoint(Vector3.zero));
+			{
+				float x = distToTarget / 1000f;
+				x *= 100;
+				x = Mathf.Floor(x);
+				x /= 100;
+				distToTarget = x;
+			}
+			distanceMarker.text = distToTarget + " km";
+			
+			if(distToTarget > 1.5f)
+			{
+				targetName.text = targetLockedHub.nameShort;
+			}
+			else if(distToTarget < 1.5f && distToTarget > 0.4f)
+			{
+				targetName.text = targetLockedHub.nameLong;
+			}
+			else
+			{
+				targetName.text = targetLockedHub.aircraftName;
+			}
+        }
+	}
 }

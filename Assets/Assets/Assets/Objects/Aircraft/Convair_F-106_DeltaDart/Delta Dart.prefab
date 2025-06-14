@@ -1405,6 +1405,8 @@ MonoBehaviour:
   flareDispenser: {fileID: 5506585253482084134}
   meshRenderer: {fileID: 0}
   aircraftName: F-106A Delta Dart (Late)
+  nameShort: F-106
+  nameLong: F-106A
   speed_maxSpeed: 1420
   power_maxPower: 9866
   isJet: 1
@@ -1515,6 +1517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -1528,6 +1531,7 @@ MonoBehaviour:
   IAS_Speed: 0
   currentTurnRadius: 0
   currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 1
   SpawnSpeed: 300
@@ -1652,6 +1656,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 7475012727370642860}
   health: {fileID: 3091880813656110447}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &5826004335633451601
@@ -2593,10 +2598,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 11abeea83087f7b47a43ab7d4dd81669, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 0.7
+  m_PlayOnAwake: 1
+  m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3532,10 +3537,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 17c0e307854d0a64d9e48e2163e8a177, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 0.7
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

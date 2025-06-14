@@ -2130,6 +2130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hub: {fileID: 6645141352060931459}
+  ownTarget: {fileID: 0}
   side: 1
   guns:
   - {fileID: 6154903753034881755}
@@ -5818,11 +5819,13 @@ MonoBehaviour:
   irControl: {fileID: 2328185379595506059}
   sagControl: {fileID: 0}
   radarMissileControl: {fileID: 0}
-  rocketLauncherControl: {fileID: 0}
+  rocketLauncherControl: {fileID: 7436821796632801998}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 6517130212115597091}
   aircraftName: Bf 110G Zerstorer
+  nameShort: Bf 110
+  nameLong: Bf 110G
   speed_maxSpeed: 560
   power_maxPower: 1475
   isJet: 0
@@ -5848,7 +5851,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537050823985110030}
   serializedVersion: 4
-  m_Mass: 4500
+  m_Mass: 6466
   m_Drag: 0
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -5900,6 +5903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -5913,6 +5917,7 @@ MonoBehaviour:
   IAS_Speed: 0
   currentTurnRadius: 0
   currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 1
   SpawnSpeed: 170
@@ -6073,6 +6078,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 9097531827791674253}
   health: {fileID: 8194085726454922345}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &5414683243659837352
@@ -6156,6 +6162,7 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
+  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}

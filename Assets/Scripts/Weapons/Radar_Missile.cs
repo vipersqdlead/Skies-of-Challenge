@@ -65,7 +65,8 @@ public class Radar_Missile : MonoBehaviour
         speedMach = speed / 1234f;
         CalculateGForce();
         float newDrag = drag * Utilities.airDensityAnimCurve.Evaluate(transform.position.y / 10000f);
-        rb.drag = Mathf.Clamp(newDrag * (Mathf.Abs(gForce) * energyBleedMultiplier), newDrag, 1);
+		float turnDrag = newDrag * (Mathf.Abs(gForce) * energyBleedMultiplier * Utilities.airDensityAnimCurve.Evaluate(transform.position.y / 10000f));
+        rb.drag = Mathf.Clamp(turnDrag, newDrag, 1);
 
         if (gForce > maxGAchieved)
         {

@@ -1956,6 +1956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hub: {fileID: 6645141352060931459}
+  ownTarget: {fileID: 0}
   side: 0
   guns:
   - {fileID: 8212826459668536714}
@@ -5235,6 +5236,8 @@ MonoBehaviour:
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 6517130212115597091}
   aircraftName: 
+  nameShort: Bf 110
+  nameLong: Bf 110G
   speed_maxSpeed: 0
   power_maxPower: 0
   isJet: 0
@@ -5257,7 +5260,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537050823985110030}
   serializedVersion: 4
-  m_Mass: 4500
+  m_Mass: 6466
   m_Drag: 0
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -5309,6 +5312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -5322,6 +5326,7 @@ MonoBehaviour:
   IAS_Speed: 0
   currentTurnRadius: 0
   currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 170
@@ -5482,6 +5487,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 9097531827791674253}
   health: {fileID: 8194085726454922345}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &3512189422470826710
@@ -5731,6 +5737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 6132751562054808651}
+  hub: {fileID: 0}
   engineControl: {fileID: 6502083555591075977}
   steeringSpeed: 50
   minSpeed: 250
@@ -5789,9 +5796,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 7591892730321834432}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 0}
+  flares: {fileID: 0}
   missileCooldownTime: 0
   missileCooldownTimer: 0
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!1 &3630961032415885270
 GameObject:
   m_ObjectHideFlags: 0

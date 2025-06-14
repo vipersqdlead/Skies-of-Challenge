@@ -196,7 +196,9 @@ MonoBehaviour:
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 4936467670240447055}
-  aircraftName: 
+  aircraftName: MiG-9FS Fargo
+  nameShort: MiG-9
+  nameLong: MiG-9FS
   speed_maxSpeed: 0
   power_maxPower: 0
   isJet: 0
@@ -210,6 +212,7 @@ MonoBehaviour:
   health_maxHP: 0
   defense_def: 0
   aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!54 &844937897969581014
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -218,7 +221,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 844937897969581019}
   serializedVersion: 4
-  m_Mass: 3300
+  m_Mass: 3655
   m_Drag: 0
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -304,17 +307,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
   gForce: 0
   angleOfAttack: 0
   criticalAoA: 0
+  angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 170
@@ -439,6 +446,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 3309850688539755545}
   health: {fileID: 844937897969581012}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &8676490642689346423
@@ -576,6 +584,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 0
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 0
   engines:
@@ -620,6 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 3553180581882249819}
+  hub: {fileID: 0}
   engineControl: {fileID: 5921936483342888669}
   steeringSpeed: 50
   minSpeed: 200
@@ -678,9 +689,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 8453690376752552691}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 0}
+  flares: {fileID: 0}
   missileCooldownTime: 0
   missileCooldownTimer: 0
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!1 &1297929146784181038
 GameObject:
   m_ObjectHideFlags: 0

@@ -37,7 +37,7 @@ public class SurvivalMissionStatus : MonoBehaviour
 
 
     [SerializeField] GameObject currentLockedTarget;
-    public TMP_Text KillCountUI, PointCount, TimeLeft, currentWaveUI, newWaveText, newWaveBonusText, bonusWaveObjectiveText, enemiesLeftText, mapBoundaryWarning, mEnd_TimeBonus, mEnd_PointScore, mEnd_FinalScore;
+    public TMP_Text KillCountUI, PointCount, TimeLeft, currentWaveUI, newWaveText, newWaveBonusText, bonusWaveObjectiveText, enemiesLeftText, mapBoundaryWarning, mEnd_TimeBonus, mEnd_PointScore, mEnd_FinalScore, fpsCounterTxt;
     public AudioSource mapBoundaryWarningAS;
     public AudioClip mapBoundaryWarningLight, mapBoundaryWarningStrong;
 
@@ -159,8 +159,23 @@ public class SurvivalMissionStatus : MonoBehaviour
 		}
 		
         MapBoundaries();
-
+		CountFPS();
+		fpsCounterTxt.text = "FPS: " + currentFPS;
     }
+	
+	
+	int totalFrames;
+	int currentFPS;
+	void CountFPS()
+	{
+		totalFrames++;
+		if(totalFrames % 10 == 0)
+		{
+			currentFPS = (int)(1f / Time.unscaledDeltaTime);
+			totalFrames = 0;
+		}
+	}
+	
 
     IEnumerator StartNewWave()
     {

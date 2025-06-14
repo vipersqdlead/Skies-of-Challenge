@@ -27,7 +27,7 @@ public class PlaneHUD : MonoBehaviour
         cameraTransform = camera.transform;
         hudCenterGO = hudCenter.gameObject;
         velocityMarkerGO = velocityMarker.gameObject;
-        leadMarkerGO = leadMarker.gameObject;
+        // leadMarkerGO = leadMarker.gameObject;
     }
 
     void UpdateVelocityMarker() 
@@ -111,7 +111,7 @@ public class PlaneHUD : MonoBehaviour
     {
         UpdateVelocityMarker();
         UpdateHUDCenter();
-        ShowLeadMarker();
+        //ShowLeadMarker();
     }
 
     private void OnDisable()

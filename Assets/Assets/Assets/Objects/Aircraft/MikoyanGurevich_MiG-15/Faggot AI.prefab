@@ -549,7 +549,9 @@ MonoBehaviour:
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 2540619674447792711}
-  aircraftName: 
+  aircraftName: MiG-15bis Faggot
+  nameShort: MiG-15
+  nameLong: MiG-15bis
   speed_maxSpeed: 0
   power_maxPower: 0
   isJet: 0
@@ -563,6 +565,7 @@ MonoBehaviour:
   health_maxHP: 0
   defense_def: 0
   aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!54 &2279510858203801326
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -657,6 +660,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -669,6 +673,8 @@ MonoBehaviour:
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 170
@@ -820,6 +826,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 3206248684021766248}
   health: {fileID: 7001663105546344619}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &1225637261739395065
@@ -835,6 +842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 3724718906486859914}
+  hub: {fileID: 0}
   engineControl: {fileID: 0}
   steeringSpeed: 50
   minSpeed: 700
@@ -893,9 +901,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 1225637261739395065}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 0}
+  flares: {fileID: 0}
   missileCooldownTime: 0
   missileCooldownTimer: 0
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!114 &1952405387702200213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1018,6 +1032,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 0
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 0
   engines:

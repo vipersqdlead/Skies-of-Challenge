@@ -8446,11 +8446,13 @@ MonoBehaviour:
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 2829346634196850408}
   aircraftName: Ta 152H Tank
+  nameShort: Ta 152
+  nameLong: Ta 152H
   speed_maxSpeed: 760
-  power_maxPower: 2050
+  power_maxPower: 2020
   isJet: 0
   engineNumber: 1
-  powerToWeight: 1.7
+  powerToWeight: 1.73
   attack_totalBurstMass: 5.04
   agility_maxTurnDegS: 33
   agility_wingLoading: 148
@@ -8475,6 +8477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -8488,6 +8491,7 @@ MonoBehaviour:
   IAS_Speed: 0
   currentTurnRadius: 0
   currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 170
@@ -8630,6 +8634,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 1032576776052007754}
   health: {fileID: 8893305985367905589}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &840625624679607077
@@ -8710,6 +8715,7 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
+  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
@@ -8845,37 +8851,73 @@ MonoBehaviour:
   aircraft: {fileID: 5961288077834183134}
   ThrottleInput: 1
   currentEnginePower: 0
-  engineStaticThrust: 8750
+  engineStaticThrust: 8600
   serviceCeiling: 14500
   powerByAltitudeMultiplier:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.004432624
-      value: 1.0023584
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
+      time: 0.0015759589
+      value: 1.0006224
+      inSlope: -0.29350272
+      outSlope: -0.29350272
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.27379286
+    - serializedVersion: 3
+      time: 0.26256496
+      value: 0.9210517
+      inSlope: -0.15416013
+      outSlope: -0.15416013
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.9473692
-      value: 0.98821414
-      inSlope: -0.0397102
-      outSlope: -0.0397102
+      time: 0.3511388
+      value: 0.9901844
+      inSlope: -0.44892442
+      outSlope: -0.44892442
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.67645174
+      value: 0.79698217
+      inSlope: -0.653134
+      outSlope: -0.653134
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10571901
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.74223006
+      value: 0.89272463
+      inSlope: -0.52925116
+      outSlope: -0.52925116
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.062225237
-      outWeight: 0.33333334
+      outWeight: 0.17922539
     - serializedVersion: 3
-      time: 0.9988814
-      value: 0.8113207
-      inSlope: -3.7952788
-      outSlope: -3.7952788
+      time: 1.0022993
+      value: 0.7019457
+      inSlope: -0.8093671
+      outSlope: -0.8093671
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.23780198
+      inWeight: 0.1540654
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.408606
+      value: 0.36109778
+      inSlope: -0.8732256
+      outSlope: -0.8732256
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.09300987
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -8964,8 +9006,8 @@ MonoBehaviour:
   - {fileID: 8316942606464493367}
   enginePropellers:
   - {fileID: 7664407602786681049}
-  minSpeed: 1
-  maxSpeed: 6
+  minSpeed: 0.6
+  maxSpeed: 2.8
 --- !u!54 &707189148789588757
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8974,7 +9016,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6185050561958779977}
   serializedVersion: 4
-  m_Mass: 3500
+  m_Mass: 4095
   m_Drag: 0
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}

@@ -17,7 +17,7 @@ public class PlaneToUI : MonoBehaviour
     [SerializeField] LaserGuidedBombController lgbController;
 
     public GameObject UI;
-    public TMP_Text Health, MissilesIR, MissilesSAG, MissilesRadar, Rockets1, Bombs, flaresTxt, guidedBombs, killsCombo, currentTarget;
+    public TMP_Text Health, MissilesIR, MissilesSAG, MissilesRadar, Rockets1, Bombs, flaresTxt, guidedBombs, killsCombo; /*	currentTarget; */
     public RawImage healthIcon;
     public GameObject AcquireCircle, LockCircle, SARHPovCircle, SARHLockCircle;
 
@@ -59,11 +59,6 @@ public class PlaneToUI : MonoBehaviour
     private const float maxClimbRate = 30f;
     private const float minClimbRate = -30f;
 
-
-
-
-
-
     // Start is called before the first frame update
     void Awake()
     {
@@ -85,7 +80,7 @@ public class PlaneToUI : MonoBehaviour
         Rocket();
         //Bomb();
         //GuidedBomb();
-		ShowTarget();
+		//ShowTarget();
         CountKillsCombo();
     }
 
@@ -466,6 +461,7 @@ public class PlaneToUI : MonoBehaviour
         }
     }
 	
+	/*
 	void ShowTarget()
 	{
 		if(hub.fm.target != null)
@@ -497,9 +493,8 @@ public class PlaneToUI : MonoBehaviour
 				currentTarget.enabled = false;
 			}
         }
-		
-
 	}
+	*/
 
     void CountKillsCombo()
     {

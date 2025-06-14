@@ -8852,6 +8852,8 @@ MonoBehaviour:
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 422496025106708206}
   aircraftName: F6F-5 Hellcat
+  nameShort: F6F
+  nameLong: F6F-5
   speed_maxSpeed: 650
   power_maxPower: 2160
   isJet: 0
@@ -8881,6 +8883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -8894,6 +8897,7 @@ MonoBehaviour:
   IAS_Speed: 0
   currentTurnRadius: 0
   currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 1
   SpawnSpeed: 170
@@ -9036,6 +9040,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 1032576776052007754}
   health: {fileID: 8893305985367905589}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &840625624679607077
@@ -9260,49 +9265,58 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.029903466
-      value: 1.0023584
-      inSlope: -0.41653052
-      outSlope: -0.41653052
+      time: 0.0020180289
+      value: 0.98365116
+      inSlope: 0.40665266
+      outSlope: 0.40665266
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 1
+      outWeight: 0.18644145
     - serializedVersion: 3
-      time: 0.47421253
-      value: 0.81848156
-      inSlope: -0.27355298
-      outSlope: -0.27355298
+      time: 0.059571233
+      value: 0.99908847
+      inSlope: 0.34905854
+      outSlope: 0.34905854
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.09380528
-      outWeight: 0.39708787
-    - serializedVersion: 3
-      time: 0.6388069
-      value: 0.749539
-      inSlope: -0.41593668
-      outSlope: -0.41593668
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.94014007
-      outWeight: 0.22269212
-    - serializedVersion: 3
-      time: 0.87312245
-      value: 0.4769194
-      inSlope: -1.1316674
-      outSlope: -1.1316674
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.99710596
+      inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.2823516
-      value: 0.22111511
-      inSlope: -0.6319226
-      outSlope: -0.6319226
+      time: 0.2137026
+      value: 0.8958276
+      inSlope: -0.1050018
+      outSlope: -0.1050018
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.31723413
+      outWeight: 0.5476322
+    - serializedVersion: 3
+      time: 0.5083649
+      value: 0.93446124
+      inSlope: 0.094938904
+      outSlope: 0.094938904
       tangentMode: 0
       weightedMode: 0
       inWeight: 1
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5193309
+      value: 0.93516153
+      inSlope: -0.7414351
+      outSlope: -0.7414351
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.08535385
+    - serializedVersion: 3
+      time: 1.2230865
+      value: 0.31996828
+      inSlope: -0.97591555
+      outSlope: -0.97591555
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07328921
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2

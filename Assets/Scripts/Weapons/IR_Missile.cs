@@ -78,9 +78,10 @@ public class IR_Missile : MonoBehaviour
         TargetReflection();
         rb.velocity = transform.forward * rb.velocity.magnitude;
 
-        float newDrag = drag * Utilities.airDensityAnimCurve.Evaluate(transform.position.y / 10000f);
         CalculateGForce();
-        rb.drag = Mathf.Clamp(newDrag * (Mathf.Abs(gForce) * energyBleedMultiplier), newDrag, 1);
+        float newDrag = drag * Utilities.airDensityAnimCurve.Evaluate(transform.position.y / 10000f);
+		float turnDrag = newDrag * (Mathf.Abs(gForce) * energyBleedMultiplier * Utilities.airDensityAnimCurve.Evaluate(transform.position.y / 10000f));
+        rb.drag = Mathf.Clamp(turnDrag, newDrag, 1);
 
         if(gForce > maxGAchieved)
         {

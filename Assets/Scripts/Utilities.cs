@@ -317,4 +317,11 @@ public static class Utilities {
             return missile;
         }
     }
+
+	public static Vector3 TransformToHUDSpace(Vector3 worldSpace) 
+    {
+		Camera camera = Camera.main;
+        var screenSpace = camera.WorldToScreenPoint(worldSpace);
+        return screenSpace - new Vector3(camera.pixelWidth / 2, camera.pixelHeight / 2);
+    }
 }

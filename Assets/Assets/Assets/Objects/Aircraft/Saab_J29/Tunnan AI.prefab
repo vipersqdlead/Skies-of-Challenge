@@ -469,7 +469,9 @@ MonoBehaviour:
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 8953946847923195391}
-  aircraftName: 
+  aircraftName: J29F Tunnan
+  nameShort: J29
+  nameLong: J29F
   speed_maxSpeed: 0
   power_maxPower: 0
   isJet: 0
@@ -483,6 +485,7 @@ MonoBehaviour:
   health_maxHP: 0
   defense_def: 0
   aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!54 &6079865287207750442
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -577,6 +580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -589,6 +593,8 @@ MonoBehaviour:
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 170
@@ -722,6 +728,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 7475012727370642860}
   health: {fileID: 3091880813656110447}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &5826004335633451601
@@ -842,6 +849,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 1
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 8000
   engines:
@@ -884,6 +893,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 8679186710179448142}
+  hub: {fileID: 0}
   engineControl: {fileID: 6775140481111859132}
   steeringSpeed: 50
   minSpeed: 700
@@ -942,9 +952,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 7276794957579705408}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 0}
+  flares: {fileID: 0}
   missileCooldownTime: 20
   missileCooldownTimer: 20
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!1 &3512080983259827518
 GameObject:
   m_ObjectHideFlags: 0

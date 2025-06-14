@@ -7284,7 +7284,9 @@ MonoBehaviour:
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 6617567975512925014}
-  aircraftName: 
+  aircraftName: N1K2-J Shiden-Kai
+  nameShort: N1K
+  nameLong: N1K2-J
   speed_maxSpeed: 0
   power_maxPower: 0
   isJet: 0
@@ -7311,6 +7313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -7324,6 +7327,7 @@ MonoBehaviour:
   IAS_Speed: 0
   currentTurnRadius: 0
   currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 170
@@ -7466,6 +7470,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 1032576776052007754}
   health: {fileID: 8893305985367905589}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &1994996906693939299
@@ -7705,7 +7710,7 @@ MonoBehaviour:
   enginePropellers:
   - {fileID: 3916436086770518546}
   minSpeed: 1
-  maxSpeed: 3.5
+  maxSpeed: 3
 --- !u!54 &707189148789588757
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7768,9 +7773,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 405538605183239122}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 0}
+  flares: {fileID: 0}
   missileCooldownTime: 0
   missileCooldownTimer: 0
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!114 &405538605183239122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7784,6 +7795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 5961288077834183134}
+  hub: {fileID: 0}
   engineControl: {fileID: 8921916259647643811}
   steeringSpeed: 50
   minSpeed: 200

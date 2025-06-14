@@ -8199,7 +8199,9 @@ MonoBehaviour:
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 2251842882682437363}
-  aircraftName: Polikarpov I-185
+  aircraftName: Polikarpov I-185 (M82)
+  nameShort: I-185
+  nameLong: I-185 (M82)
   speed_maxSpeed: 660
   power_maxPower: 2200
   isJet: 0
@@ -8229,6 +8231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -8242,6 +8245,7 @@ MonoBehaviour:
   IAS_Speed: 0
   currentTurnRadius: 0
   currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 1
   SpawnSpeed: 170
@@ -8393,6 +8397,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 1032576776052007754}
   health: {fileID: 8893305985367905589}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &840625624679607077
@@ -8473,6 +8478,7 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
+  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
@@ -8728,7 +8734,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6185050561958779977}
   serializedVersion: 4
-  m_Mass: 2600
+  m_Mass: 2780
   m_Drag: 0
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}

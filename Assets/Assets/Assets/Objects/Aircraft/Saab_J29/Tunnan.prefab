@@ -1493,6 +1493,8 @@ MonoBehaviour:
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 0}
   aircraftName: J29F Tunnan
+  nameShort: J29
+  nameLong: J29F
   speed_maxSpeed: 1050
   power_maxPower: 2875
   isJet: 1
@@ -1604,6 +1606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -1616,6 +1619,8 @@ MonoBehaviour:
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 1
   SpawnSpeed: 280
@@ -1749,6 +1754,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 7475012727370642860}
   health: {fileID: 3091880813656110447}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &5826004335633451601
@@ -1869,6 +1875,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 1
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 8000
   engines:
@@ -1928,6 +1936,7 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
+  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}

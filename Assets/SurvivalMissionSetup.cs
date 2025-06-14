@@ -123,7 +123,7 @@ public class SurvivalMissionSetup : MonoBehaviour
         hub.planeToUI.LockCircle = UI_MsslLock;
         hub.planeToUI.SARHPovCircle = UI_SARHAcq;
         hub.planeToUI.SARHLockCircle = UI_SARHLock;
-		hub.planeToUI.currentTarget = UI_Target;
+		//hub.planeToUI.currentTarget = UI_Target;
 
 
         hub.planeToUI.IRControl = hub.irControl;
@@ -147,7 +147,8 @@ public class SurvivalMissionSetup : MonoBehaviour
 
         hub.planeHUD.hudCenter = UI_Center.transform;
         hub.planeHUD.velocityMarker = UI_FPM.transform;
-        hub.planeHUD.leadMarker = UI_LeadMarker.transform;
+		markers.player = hub;
+        markers.leadMarkerGO = UI_LeadMarker;
 
         waveSpawner.markers = markers;
         minimap.player = player.transform;

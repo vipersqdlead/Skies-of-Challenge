@@ -126,6 +126,11 @@ PrefabInstance:
     - target: {fileID: 3553180581882249819, guid: 0799efc963352f84892675e5a9f094fc,
         type: 3}
       propertyPath: RollForce.m_Curve.Array.data[2].time
+      value: 0.9963806
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553180581882249819, guid: 0799efc963352f84892675e5a9f094fc,
+        type: 3}
+      propertyPath: RollForce.m_Curve.Array.data[3].time
       value: 1.0001838
       objectReference: {fileID: 0}
     - target: {fileID: 3553180581882249819, guid: 0799efc963352f84892675e5a9f094fc,
@@ -146,6 +151,11 @@ PrefabInstance:
     - target: {fileID: 3553180581882249819, guid: 0799efc963352f84892675e5a9f094fc,
         type: 3}
       propertyPath: RollForce.m_Curve.Array.data[2].value
+      value: 0.520534
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553180581882249819, guid: 0799efc963352f84892675e5a9f094fc,
+        type: 3}
+      propertyPath: RollForce.m_Curve.Array.data[3].value
       value: 1.008281
       objectReference: {fileID: 0}
     - target: {fileID: 3553180581882249819, guid: 0799efc963352f84892675e5a9f094fc,
@@ -161,17 +171,42 @@ PrefabInstance:
     - target: {fileID: 3553180581882249819, guid: 0799efc963352f84892675e5a9f094fc,
         type: 3}
       propertyPath: RollForce.m_Curve.Array.data[2].inSlope
+      value: -8.679673
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553180581882249819, guid: 0799efc963352f84892675e5a9f094fc,
+        type: 3}
+      propertyPath: RollForce.m_Curve.Array.data[3].inSlope
       value: -2.007933
       objectReference: {fileID: 0}
     - target: {fileID: 3553180581882249819, guid: 0799efc963352f84892675e5a9f094fc,
         type: 3}
       propertyPath: RollForce.m_Curve.Array.data[2].inWeight
-      value: 0.14327914
+      value: 0.06199119
       objectReference: {fileID: 0}
     - target: {fileID: 3553180581882249819, guid: 0799efc963352f84892675e5a9f094fc,
         type: 3}
       propertyPath: RollForce.m_Curve.Array.data[2].outSlope
+      value: -8.679673
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553180581882249819, guid: 0799efc963352f84892675e5a9f094fc,
+        type: 3}
+      propertyPath: RollForce.m_Curve.Array.data[3].inWeight
+      value: 0.14327914
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553180581882249819, guid: 0799efc963352f84892675e5a9f094fc,
+        type: 3}
+      propertyPath: RollForce.m_Curve.Array.data[3].outSlope
       value: -2.007933
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553180581882249819, guid: 0799efc963352f84892675e5a9f094fc,
+        type: 3}
+      propertyPath: RollForce.m_Curve.Array.data[2].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3553180581882249819, guid: 0799efc963352f84892675e5a9f094fc,
+        type: 3}
+      propertyPath: RollForce.m_Curve.Array.data[3].outWeight
+      value: 0.2813103
       objectReference: {fileID: 0}
     - target: {fileID: 5921936483342888669, guid: 0799efc963352f84892675e5a9f094fc,
         type: 3}
@@ -367,6 +402,11 @@ PrefabInstance:
         type: 3}
       propertyPath: powerByAltitudeMultiplier.m_Curve.Array.data[1].tangentMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030754280285388959, guid: 0799efc963352f84892675e5a9f094fc,
+        type: 3}
+      propertyPath: nameLong
+      value: Me 262G
       objectReference: {fileID: 0}
     - target: {fileID: 7030754280285388959, guid: 0799efc963352f84892675e5a9f094fc,
         type: 3}
@@ -713,9 +753,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 8583097889426151732}
   targetLookRange: 10000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 0}
+  flares: {fileID: 0}
   missileCooldownTime: 20
   missileCooldownTimer: 20
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!114 &8583097889426151732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -729,6 +775,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 3439340360967003173}
+  hub: {fileID: 0}
   engineControl: {fileID: 5538128911074226339}
   steeringSpeed: 50
   minSpeed: 120

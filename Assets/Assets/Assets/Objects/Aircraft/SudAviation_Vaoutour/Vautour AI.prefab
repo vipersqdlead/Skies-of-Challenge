@@ -1204,6 +1204,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 0
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 0
   engines:
@@ -1233,6 +1235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -1245,6 +1248,8 @@ MonoBehaviour:
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 1
   SpawnSpeed: 250
@@ -1378,6 +1383,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 1203138783792892821}
   health: {fileID: 4589046941072282347}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &3966597516042868046
@@ -1527,7 +1533,9 @@ MonoBehaviour:
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 1001067094333237125}
-  aircraftName: 
+  aircraftName: Vautour IIN
+  nameShort: Vautour II
+  nameLong: Vautour IIN
   speed_maxSpeed: 0
   power_maxPower: 0
   isJet: 0
@@ -1541,6 +1549,7 @@ MonoBehaviour:
   health_maxHP: 0
   defense_def: 0
   aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!114 &4147959951855141421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1555,9 +1564,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 4209470441967831547}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 445089596365846479}
+  flares: {fileID: 0}
   missileCooldownTime: 30
   missileCooldownTimer: 30
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!114 &4209470441967831547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1571,6 +1586,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 5943632087803924268}
+  hub: {fileID: 0}
   engineControl: {fileID: 3534083020964063264}
   steeringSpeed: 50
   minSpeed: 200

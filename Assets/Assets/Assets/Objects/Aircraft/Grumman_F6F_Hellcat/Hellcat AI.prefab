@@ -8064,7 +8064,9 @@ MonoBehaviour:
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 422496025106708206}
-  aircraftName: 
+  aircraftName: F6F-5 Hellcat
+  nameShort: F6F
+  nameLong: F6F-5
   speed_maxSpeed: 0
   power_maxPower: 0
   isJet: 0
@@ -8091,6 +8093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -8104,6 +8107,7 @@ MonoBehaviour:
   IAS_Speed: 0
   currentTurnRadius: 0
   currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 170
@@ -8246,6 +8250,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 1032576776052007754}
   health: {fileID: 8893305985367905589}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &1994996906693939299
@@ -8356,31 +8361,49 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.004432624
-      value: 1.0023584
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
+      time: 0.0020180289
+      value: 0.98365116
+      inSlope: 0.40665266
+      outSlope: 0.40665266
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.18644145
+    - serializedVersion: 3
+      time: 0.059571233
+      value: 0.99908847
+      inSlope: 0.34905854
+      outSlope: 0.34905854
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.6533778
-      value: 1.0030103
-      inSlope: -0.011232435
-      outSlope: -0.011232435
+      time: 0.2137026
+      value: 0.8958276
+      inSlope: -0.1050018
+      outSlope: -0.1050018
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.16426727
+      inWeight: 0.31723413
+      outWeight: 0.5476322
     - serializedVersion: 3
-      time: 0.99994195
-      value: 0.5023651
-      inSlope: -3.2500846
-      outSlope: -3.2500846
+      time: 0.45514226
+      value: 0.91362536
+      inSlope: 0.094938904
+      outSlope: 0.094938904
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.083750084
+      inWeight: 1
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.2230865
+      value: 0.31996828
+      inSlope: -0.7266564
+      outSlope: -0.7266564
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -8532,6 +8555,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 5961288077834183134}
+  hub: {fileID: 0}
   engineControl: {fileID: 0}
   steeringSpeed: 50
   minSpeed: 200
@@ -8590,9 +8614,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 5190689711016241250}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 0}
+  flares: {fileID: 0}
   missileCooldownTime: 0
   missileCooldownTimer: 0
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!1 &6243681264700096391
 GameObject:
   m_ObjectHideFlags: 0

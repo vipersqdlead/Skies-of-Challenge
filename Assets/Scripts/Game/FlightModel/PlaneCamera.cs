@@ -219,7 +219,7 @@ public class PlaneCamera : MonoBehaviour
 		return scoredTargets.Select(t => t.target).ToList();
 	}
 	
-	Transform GetTargetClosestToCenter(List<Transform> possibleTargets, float maxScreenDistance = 0.2f)
+	Transform GetTargetClosestToCenter(List<Transform> possibleTargets, float maxScreenDistance = 1f)
 	{
         Transform bestTarget = null;
 		float closestDistance = Mathf.Infinity;
@@ -265,7 +265,7 @@ public class PlaneCamera : MonoBehaviour
 			AircraftHub hub;
 			if (target.TryGetComponent<AircraftHub>(out hub))
 			{
-				if(hub.fm.side == 2)
+				if(hub.fm.side != 0)
 				{
 					continue;
 				}

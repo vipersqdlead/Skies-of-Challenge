@@ -719,7 +719,9 @@ MonoBehaviour:
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 3740890787525094020}
-  aircraftName: 
+  aircraftName: P-47D Thunderbolt
+  nameShort: P-47
+  nameLong: P-47D
   speed_maxSpeed: 0
   power_maxPower: 0
   isJet: 0
@@ -746,6 +748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -759,6 +762,7 @@ MonoBehaviour:
   IAS_Speed: 0
   currentTurnRadius: 0
   currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 170
@@ -901,6 +905,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 1032576776052007754}
   health: {fileID: 8893305985367905589}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &1994996906693939299
@@ -1016,40 +1021,31 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.7493316
-      value: 0.99413973
-      inSlope: -0.008346036
-      outSlope: -0.008346036
+      time: 0.59757155
+      value: 0.91220933
+      inSlope: -0.31695944
+      outSlope: -0.31695944
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.1035961
+      outWeight: 0.23026313
+    - serializedVersion: 3
+      time: 0.8017028
+      value: 0.7758828
+      inSlope: -0.88000864
+      outSlope: -0.88000864
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15472978
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.9273559
-      value: 0.8844045
-      inSlope: -0.98254746
-      outSlope: -0.98254746
+      time: 1.398302
+      value: 0.2916134
+      inSlope: -0.4731227
+      outSlope: -0.4731227
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.20429215
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.2463517
-      value: 0.31076384
-      inSlope: -2.0696082
-      outSlope: -2.0696082
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.11570627
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1.3965664
-      value: 0.114583306
-      inSlope: -0.80384123
-      outSlope: -0.80384123
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.4457143
+      inWeight: 0.10989789
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1138,8 +1134,8 @@ MonoBehaviour:
   - {fileID: 3531493133052407305}
   enginePropellers:
   - {fileID: 7924934684157635081}
-  minSpeed: 1.5
-  maxSpeed: 5.5
+  minSpeed: 0.6
+  maxSpeed: 2.8
 --- !u!54 &707189148789588757
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1202,9 +1198,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 7966912197931219304}
   targetLookRange: 15000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 0}
+  flares: {fileID: 0}
   missileCooldownTime: 0
   missileCooldownTimer: 0
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!114 &7966912197931219304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1218,6 +1220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 5961288077834183134}
+  hub: {fileID: 0}
   engineControl: {fileID: 8921916259647643811}
   steeringSpeed: 50
   minSpeed: 300

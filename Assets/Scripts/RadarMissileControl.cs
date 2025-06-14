@@ -147,6 +147,10 @@ public class RadarMissileControl : BaseSpWeaponControl
         {
             missile.target = Target;
         }
+		else
+		{
+			TurnSeekerOff();
+		}
 
     }
 

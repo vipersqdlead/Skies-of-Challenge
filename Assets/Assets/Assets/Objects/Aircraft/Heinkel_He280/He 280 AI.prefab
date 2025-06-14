@@ -1756,7 +1756,9 @@ MonoBehaviour:
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 5624601314095263459}
-  aircraftName: 
+  aircraftName: He 280A Blitz
+  nameShort: He 280
+  nameLong: He 280A
   speed_maxSpeed: 0
   power_maxPower: 0
   isJet: 0
@@ -1764,11 +1766,13 @@ MonoBehaviour:
   powerToWeight: 0
   attack_totalBurstMass: 0
   agility_maxTurnDegS: 0
+  agility_wingLoading: 0
   agility_maxTurnSpeed: 0
   agility_weight: 0
   health_maxHP: 0
   defense_def: 0
   aircraftDescription: 
+  aircraftModel: {fileID: 0}
 --- !u!114 &8221208957401345608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1781,16 +1785,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
   gForce: 0
   angleOfAttack: 0
   criticalAoA: 0
+  angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
+  currentTurnRadius: 0
+  currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 170
@@ -1801,6 +1810,10 @@ MonoBehaviour:
   sweepAngle: 0
   aspectRatio: 0
   drag: 0.0185
+  waveDragMultiplier: 2
+  newWaveDragMultiplier: 2
+  waveDragPeakMach: 1.2
+  waveDragRange: 0.3
   currentDrag: 0
   flaps: 0
   airbrake: 0
@@ -1902,6 +1915,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 414064352352809231}
   health: {fileID: 3669777336593032806}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &5018022827151572806
@@ -1917,6 +1931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 8221208957401345608}
+  hub: {fileID: 0}
   engineControl: {fileID: 0}
   steeringSpeed: 50
   minSpeed: 200
@@ -2085,9 +2100,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 5018022827151572806}
   targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 0}
+  flares: {fileID: 0}
   missileCooldownTime: 0
   missileCooldownTimer: 0
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!114 &4510716955201874514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2191,6 +2212,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 0
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
   afterburnerThrust: 0
   engines:

@@ -99,8 +99,6 @@ public class RocketScript : MonoBehaviour
 				damageToTarget *= damagePercent;
 			}
 			
-			print("Damage to Target = " + damageToTarget);
-			
             HealthPoints objHp = nearbyObj.GetComponent<HealthPoints>();
             if (objHp != null)
             {
@@ -110,7 +108,10 @@ public class RocketScript : MonoBehaviour
                 {
                     if (objHp.TryKill(damageDealt * 2))
                     {
-                        delKillEnemy.Invoke(objHp.countsAsKill, objHp.pointsWorth);
+						if(delKillEnemy != null)
+						{
+							delKillEnemy.Invoke(objHp.countsAsKill, objHp.pointsWorth);
+						}
                         Destroy(gameObject);
                     }
                 }
@@ -118,7 +119,10 @@ public class RocketScript : MonoBehaviour
                 {
                     if (objHp.TryKill(damageDealt))
                     {
-                        delKillEnemy.Invoke(objHp.countsAsKill, objHp.pointsWorth);
+						if(delKillEnemy != null)
+						{
+							delKillEnemy.Invoke(objHp.countsAsKill, objHp.pointsWorth);
+						}
                         Destroy(gameObject);
                     }
                 }

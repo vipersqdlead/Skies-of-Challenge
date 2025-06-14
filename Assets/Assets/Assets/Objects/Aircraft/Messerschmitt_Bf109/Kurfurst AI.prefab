@@ -980,6 +980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -993,6 +994,7 @@ MonoBehaviour:
   IAS_Speed: 0
   currentTurnRadius: 0
   currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 170
@@ -1135,6 +1137,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 5427502661894645417}
   health: {fileID: 4974088820625432985}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &8138680464670988325
@@ -1150,6 +1153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 121843090630770814}
+  hub: {fileID: 0}
   engineControl: {fileID: 0}
   steeringSpeed: 50
   minSpeed: 200
@@ -1208,9 +1212,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 8138680464670988325}
   targetLookRange: 15000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 0}
+  flares: {fileID: 0}
   missileCooldownTime: 0
   missileCooldownTimer: 0
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!114 &6567825561575381797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1414,7 +1424,9 @@ MonoBehaviour:
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 5342306022517091872}
-  aircraftName: 
+  aircraftName: Bf 109K Kurfurst
+  nameShort: Bf 109
+  nameLong: Bf 109K
   speed_maxSpeed: 0
   power_maxPower: 0
   isJet: 0

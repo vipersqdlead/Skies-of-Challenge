@@ -8012,6 +8012,8 @@ MonoBehaviour:
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 287053638690696815}
   aircraftName: Ki-100-II Kogarashi
+  nameShort: Ki-100
+  nameLong: Ki-100-II
   speed_maxSpeed: 580
   power_maxPower: 1590
   isJet: 0
@@ -8042,6 +8044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -8055,6 +8058,7 @@ MonoBehaviour:
   IAS_Speed: 0
   currentTurnRadius: 0
   currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 1
   SpawnSpeed: 170
@@ -8206,6 +8210,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 1032576776052007754}
   health: {fileID: 8893305985367905589}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &840625624679607077
@@ -8289,6 +8294,7 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
+  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
@@ -8430,31 +8436,76 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.004432624
-      value: 1.0023584
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 136
+      time: 0.0013231976
+      value: 0.9289832
+      inSlope: 0.39814514
+      outSlope: 0.39814514
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.96869147
+    - serializedVersion: 3
+      time: 0.19887666
+      value: 0.99820864
+      inSlope: 0.36379397
+      outSlope: 0.36379397
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.23139577
+      outWeight: 0.47862327
+    - serializedVersion: 3
+      time: 0.39802873
+      value: 0.92538196
+      inSlope: -0.039452974
+      outSlope: -0.039452974
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.42221084
+    - serializedVersion: 3
+      time: 0.50434935
+      value: 0.9554991
+      inSlope: 0.13817975
+      outSlope: 0.13817975
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.67231953
+      outWeight: 0.07862762
+    - serializedVersion: 3
+      time: 0.6060261
+      value: 0.90284115
+      inSlope: -0.027700607
+      outSlope: -0.027700607
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.28910974
+    - serializedVersion: 3
+      time: 0.8998321
+      value: 0.8636716
+      inSlope: -0.023189126
+      outSlope: -0.023189126
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.25782973
+      outWeight: 0.49427414
+    - serializedVersion: 3
+      time: 1.0023329
+      value: 0.8239128
+      inSlope: -0.6602911
+      outSlope: -0.6602911
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.7962883
-      value: 0.9962048
-      inSlope: -0.10698655
-      outSlope: -0.10698655
+      time: 1.7077501
+      value: 0.0009910464
+      inSlope: -1.2401459
+      outSlope: -1.2401459
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.2525755
-    - serializedVersion: 3
-      time: 0.99600977
-      value: 0.8089634
-      inSlope: -2.6751833
-      outSlope: -2.6751833
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.12120985
+      inWeight: 0.058113538
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
