@@ -233,18 +233,26 @@ public class EnemyMarkers : MonoBehaviour
 			}
 			distanceMarker.text = distToTarget + " km";
 			
-			if(distToTarget > 1.5f)
+			if(distToTarget >= 1.5f)
 			{
 				targetName.text = targetLockedHub.nameShort;
 			}
-			else if(distToTarget < 1.5f && distToTarget > 0.4f)
+			else if(distToTarget < 1.5f && distToTarget >= 0.4f)
 			{
 				targetName.text = targetLockedHub.nameLong;
 			}
-			else
+			else if(distToTarget < 0.4f)
 			{
 				targetName.text = targetLockedHub.aircraftName;
 			}
         }
+	}
+	
+	void OnDisable()
+	{
+	    targetLockedMarker.SetActive(false);
+		leadMarkerGO.SetActive(false);
+		distanceMarker.gameObject.SetActive(false);
+		targetName.gameObject.SetActive(false);
 	}
 }

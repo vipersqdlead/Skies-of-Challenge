@@ -262,6 +262,11 @@ public class SurvivalSettings : MonoBehaviour
 
         switch (type)
         {
+			case PlaneTypes.Pucara66:
+			    if (PlayerPrefs.GetInt("IA 58D Pucará Total Kill Count") >= 5)
+                { return true; }
+                else
+                { return false; }
             case PlaneTypes.Emil:
 			    if (PlayerPrefs.GetInt("Bf 109T Trager Total Kill Count") >= 3)
                 { return true; }
@@ -297,11 +302,11 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
-            /*case PlaneTypes.ReisenIII:
+            case PlaneTypes.ReisenIII:
                 if (PlayerPrefs.GetInt("A6M5 Reisen Total Time Alive") >= 300)
                 { return true; }
                 else
-                { return false; } */
+                { return false; }
             case PlaneTypes.ReisenKai:
                 if (PlayerPrefs.GetInt("A6M5 Reisen Total Time Alive") >= 600)
                 { return true; }
@@ -359,6 +364,11 @@ public class SurvivalSettings : MonoBehaviour
                 { return false; }
             case PlaneTypes.SkayatekaMustang:
                 if (PlayerPrefs.GetInt("P-51A Mustang Highest Time Alive") >= 900 || PlayerPrefs.GetInt("P-51D Mustang Highest Time Alive") >= 900)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.Mustang_II:
+                if (PlayerPrefs.GetInt("A-36A Apache Total Kill Count") >= 80)
                 { return true; }
                 else
                 { return false; }
@@ -569,6 +579,11 @@ public class SurvivalSettings : MonoBehaviour
                 { return false; }
             case PlaneTypes.KogarashiOtsu:
                 if (PlayerPrefs.GetInt("Ki-100-II Kogarashi Highest Kill Count") >= 60 || PlayerPrefs.GetInt("Ki-100-I Kogarashi Highest Kill Count") >= 60 && PlayerPrefs.GetInt("Ki-84-Ic Hayate Total Time Alive") + PlayerPrefs.GetInt("Ki-84-Ib Hayate Total Time Alive") + PlayerPrefs.GetInt("Ki-84-Ic Hayate Total Time Alive") + PlayerPrefs.GetInt("Ki-84-II Hayate Total Time Alive") >= 1800)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.Skyraider:
+                if (PlayerPrefs.GetInt("Skyraider Times Killed") >= 30)
                 { return true; }
                 else
                 { return false; }
@@ -928,6 +943,8 @@ public class SurvivalSettings : MonoBehaviour
     {
         Fuji,
         Pucara,
+		Pucara66,
+		// PucaraC,
         Trojan,
         Pilatus,
         Tucano,
@@ -941,8 +958,8 @@ public class SurvivalSettings : MonoBehaviour
         AiracobraL,
         VargB,
         VargA,
-        //ReisenIII,
         ReisenV,
+		ReisenIII,
         ReisenKai,
         HayabusaIII,
         Hellcat,
@@ -959,7 +976,7 @@ public class SurvivalSettings : MonoBehaviour
         MustangA,
         MustangD,
         SkayatekaMustang,
-		//Mustang_II
+		Mustang_II,
         MustangH,
         Yakovkev,
         YakovlevT,
@@ -1031,8 +1048,8 @@ public class SurvivalSettings : MonoBehaviour
         KogarashiOtsu,
         Lavochkin,
         Tempest,
-		// Skyraider,
-		// Skyshark,
+		Skyraider,
+		// Skyshark
         Tank,
         TankC,
         ShidenKai,

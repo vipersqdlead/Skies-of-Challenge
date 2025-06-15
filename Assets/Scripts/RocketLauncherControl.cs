@@ -24,6 +24,7 @@ public class RocketLauncherControl : BaseSpWeaponControl
 
     private void Start()
     {
+		maxRockets = missilePos.Length;
         weaponName = rocket.name;
         reloadTime = rocketReload;
         rateOfFire = 1 / (rateOfFireRPM / 60); // This turns the reference RPM into a small float (how much time happens between bullets being fired)
@@ -76,20 +77,12 @@ public class RocketLauncherControl : BaseSpWeaponControl
 
     void FireRocket()
     {
+		int rktIndex = rocketAmmo - 1;
         GameObject rktGo = Instantiate(rocket, missilePos[rktIndex].transform.position, missilePos[rktIndex].transform.rotation);
         Rigidbody RktRb = rktGo.GetComponent<Rigidbody>();
         RktRb.AddForce(gameObject.GetComponent<Rigidbody>().velocity, ForceMode.VelocityChange);
         rktGo.GetComponent<RocketScript>().SetKillEnemyDelegate(EnemyKilled);
         rocketAmmo--;
-
-        if(rktIndex < missilePos.Length - 1)
-        {
-            rktIndex++;
-        }
-        else
-        {
-            rktIndex = 0;
-        }
 		
 		MissilePositions();
     }
@@ -99,9 +92,8 @@ public class RocketLauncherControl : BaseSpWeaponControl
         reloadTime -= Time.deltaTime;
         if(reloadTime < 0)
         {
-            rocketAmmo = maxRockets;
+			EnableRockets();
             reloadTime = rocketReload;
-			MissilePositions();
         }
     }
 
@@ -112,8 +104,8 @@ public class RocketLauncherControl : BaseSpWeaponControl
         foreach (GameObject rocketLauncher in rocketLaunchersGO)
         {
             rocketLauncher.SetActive(true);
-			MissilePositions();
         }
+		MissilePositions();
     }
 	
 	void MissilePositions()

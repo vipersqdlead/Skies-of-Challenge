@@ -75,7 +75,7 @@ public class RocketScript : MonoBehaviour
         }
     }
 
-    void Explosion()
+    public void Explosion()
     {
         Instantiate(explosion, transform.position, transform.rotation);
 		

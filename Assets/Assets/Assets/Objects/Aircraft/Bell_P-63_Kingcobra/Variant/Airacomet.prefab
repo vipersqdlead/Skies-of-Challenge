@@ -475,7 +475,6 @@ GameObject:
   - component: {fileID: 7160021290123139819}
   - component: {fileID: 5160225766580429515}
   - component: {fileID: 5393735990614257057}
-  - component: {fileID: 2762982554527229539}
   - component: {fileID: -7352541962628100837}
   - component: {fileID: 2726497995332553526}
   - component: {fileID: 8745190652845005266}
@@ -484,6 +483,7 @@ GameObject:
   - component: {fileID: 2884729399333096637}
   - component: {fileID: 5038970896733329131}
   - component: {fileID: -273580980637048551}
+  - component: {fileID: 6852469549102605693}
   m_Layer: 0
   m_Name: Airacomet
   m_TagString: Fighter
@@ -612,6 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -625,6 +626,7 @@ MonoBehaviour:
   IAS_Speed: 0
   currentTurnRadius: 0
   currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 1
   SpawnSpeed: 170
@@ -767,6 +769,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 1961224334811655317}
   health: {fileID: 1540922269036293029}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &810768066963378457
@@ -944,6 +947,8 @@ MonoBehaviour:
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 0}
   aircraftName: P-59A Airacomet
+  nameShort: 
+  nameLong: 
   speed_maxSpeed: 660
   power_maxPower: 0
   isJet: 0
@@ -1016,44 +1021,6 @@ MonoBehaviour:
   rateOfFireRPM: 750
   rofTimer: 0
   killCounter: {fileID: 7384599778373647072}
---- !u!114 &2762982554527229539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540922269036293049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b37ea0e9101ccd24eadf1164f886e8be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: 
-  isPlayer: 1
-  MaxMissileAmmo: 4
-  MissileAmmo: 0
-  canReload: 0
-  Missile: {fileID: 2244568564740985332, guid: 86e47f0f2e83a804e8980d5314a31270, type: 3}
-  MissilePos:
-  - {fileID: 4852973067464998610}
-  - {fileID: 1187613827102706732}
-  - {fileID: 1124885880360521597}
-  - {fileID: 4931392064429599672}
-  AcquisitionMaxTimer: 20
-  AcquisitionTimer: 20
-  missileOuterFoV: 0
-  missileLockRange: 2000
-  isCagedSeeker: 0
-  Target: {fileID: 0}
-  distanceToTarget: 0
-  _angleToTarget: 0
-  Acquiring: 0
-  Locked: 0
-  AcqGrowl: {fileID: 0}
-  LockGrowl: {fileID: 7546863466201536546}
-  killCounter: {fileID: 7384599778373647072}
-  aspect: 1
-  irccm: 0
 --- !u!114 &-7352541962628100837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1077,7 +1044,7 @@ MonoBehaviour:
   planeCam: {fileID: 0}
   planeHUD: {fileID: 0}
   weaponManager: {fileID: 0}
-  irControl: {fileID: 2762982554527229539}
+  irControl: {fileID: 0}
   sagControl: {fileID: 0}
   radarMissileControl: {fileID: 0}
   rocketLauncherControl: {fileID: 5393735990614257057}
@@ -1085,6 +1052,8 @@ MonoBehaviour:
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 0}
   aircraftName: 
+  nameShort: 
+  nameLong: 
   speed_maxSpeed: 0
   power_maxPower: 0
   isJet: 0
@@ -1112,8 +1081,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHp: {fileID: 1540922269036293029}
-  IRControl: {fileID: 2762982554527229539}
-  SAGControl: {fileID: 0}
+  IRControl: {fileID: 0}
+  SAGControl: {fileID: 6852469549102605693}
   SARHControl: {fileID: 0}
   RktControl: {fileID: 5393735990614257057}
   bmbControl: {fileID: 0}
@@ -1134,7 +1103,7 @@ MonoBehaviour:
   SARHPovCircle: {fileID: 0}
   SARHLockCircle: {fileID: 0}
   IRMissiles: 0
-  SAGMissiles: 0
+  SAGMissiles: 1
   SARHMissiles: 0
   Rockets: 0
   bomb: 0
@@ -1311,7 +1280,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specialWeapons:
   - {fileID: 5393735990614257057}
-  - {fileID: 2762982554527229539}
+  - {fileID: 6852469549102605693}
+--- !u!114 &6852469549102605693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540922269036293049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5fb1eaee68e3c146b599721f41ae919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: 
+  isPlayer: 0
+  MaxMissileAmmo: 4
+  MissileAmmo: 0
+  canReload: 0
+  missilePrefab: {fileID: 2244568564740985332, guid: 14957afb2a2f892459cd2cece39b1285,
+    type: 3}
+  MissilePos:
+  - {fileID: 4852973067464998610}
+  - {fileID: 1187613827102706732}
+  - {fileID: 1124885880360521597}
+  - {fileID: 4931392064429599672}
+  GuidePoint: {fileID: 6526778870233953980}
+  killCounter: {fileID: 7384599778373647072}
 --- !u!1 &1540922269994766545
 GameObject:
   m_ObjectHideFlags: 0
@@ -4203,6 +4198,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6526778870233953980
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5635452141911587755}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5635452141911587755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6526778870233953980}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 8000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6830268714335930088}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6720942877538477772
 GameObject:
   m_ObjectHideFlags: 0
@@ -4514,6 +4540,7 @@ Transform:
   - {fileID: 348946589706720711}
   - {fileID: 1959225092550219414}
   - {fileID: 5702685608933191938}
+  - {fileID: 5635452141911587755}
   m_Father: {fileID: 2763883787741988183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &7546863466201536546
@@ -5913,7 +5940,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Firebird (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2908728161635261571, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 6467208130037599213, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 6942089147527653431, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 1670640804323270339, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 2849805696076507682, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 2270717683242551778, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 818174437072133996, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 7690822250606184788, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 8438440680273048849, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 2728102995083394986, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -5993,7 +6030,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Firebird (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2908728161635261571, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 6467208130037599213, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 6942089147527653431, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 1670640804323270339, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 2849805696076507682, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 2270717683242551778, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 818174437072133996, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 7690822250606184788, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 8438440680273048849, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 2728102995083394986, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -6864,7 +6911,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Firebird (3)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2908728161635261571, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 6467208130037599213, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 6942089147527653431, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 1670640804323270339, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 2849805696076507682, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 2270717683242551778, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 818174437072133996, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 7690822250606184788, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 8438440680273048849, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 2728102995083394986, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -6944,7 +7001,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Firebird
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2908728161635261571, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 6467208130037599213, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 6942089147527653431, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 1670640804323270339, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 2849805696076507682, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 2270717683242551778, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 818174437072133996, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 7690822250606184788, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 8438440680273048849, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
+    - {fileID: 2728102995083394986, guid: 14957afb2a2f892459cd2cece39b1285, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

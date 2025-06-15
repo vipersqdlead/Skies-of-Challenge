@@ -12,10 +12,8 @@ public class SAG_Missile : MonoBehaviour
     GameObject Missile;
     public GameObject LaunchingPlane;
     public float Distance;
-    public GameObject explosionSmall;
 
     public float timerToFuze = 3.5f;
-    public float RocketThrust = 80f;
     Rigidbody rb;
     public float MaxTurn = 40f;
     public bool ProxyFuse;
@@ -42,10 +40,9 @@ public class SAG_Missile : MonoBehaviour
     {
         timerToFuze -= Time.deltaTime;
 
-        if (timerToFuze <= -15f)
+        if (timerToFuze <= -30f)
         {
-            Instantiate(explosionSmall, transform.position, Quaternion.identity);
-            Destroy(Missile);
+			GetComponent<RocketScript>().Explosion();
         }
 
         if (timerToFuze <= 0f)
@@ -58,12 +55,6 @@ public class SAG_Missile : MonoBehaviour
                 RWRreturn();
             }
         }
-
-        //if (Distance <= 5f || Guide == null)
-        //{
-        //    Instantiate(explosionSmall, transform.position, Quaternion.identity);
-        //    Destroy(Missile);
-        //}
 
         rb.velocity = transform.forward * rb.velocity.magnitude;
 

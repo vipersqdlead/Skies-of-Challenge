@@ -123,7 +123,7 @@ public class RadarMissileControl : BaseSpWeaponControl
                     {
                         Target = possibleTarget; Locked = true;
                     }
-                    else if (angleToPlayer >= 60f)
+                    else if (angleToPlayer > 60f)
                     {
                         Target = null; Locked = false;
                     }
@@ -149,6 +149,10 @@ public class RadarMissileControl : BaseSpWeaponControl
         }
 		else
 		{
+			if(missile != null)
+			{
+				missile.target = null;
+			}
 			TurnSeekerOff();
 		}
 

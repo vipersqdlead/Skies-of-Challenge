@@ -265,9 +265,9 @@ GameObject:
   - component: {fileID: 1670640804323270339}
   - component: {fileID: 2849805696076507682}
   - component: {fileID: 2270717683242551778}
-  - component: {fileID: 818174437072133996}
   - component: {fileID: 7690822250606184788}
   - component: {fileID: 8438440680273048849}
+  - component: {fileID: 2728102995083394986}
   m_Layer: 0
   m_Name: AAM-A-1 Firebird
   m_TagString: Missile
@@ -678,38 +678,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &818174437072133996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2244568564740985332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b89ae5113df399447a6491597a43bf51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shooter: {fileID: 0}
-  possibleTarget: {fileID: 0}
-  target: {fileID: 0}
-  timerToFuze: 0.8
-  lifeTime: 60
-  ProxyFuse: 0
-  maxGLoad: 10
-  energyBleedMultiplier: 0.6
-  rampUpTime: 2
-  launchTime: 0
-  drag: 0
-  angleToMissile: 0
-  hasTerminalGuidance: 0
-  IR_Guidance: {fileID: 0}
-  Acquiring: 0
-  Locked: 0
-  speed: 0
-  speedMach: 0
-  gForce: 0
-  navigationConstant: 2
 --- !u!114 &7690822250606184788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,6 +721,27 @@ MonoBehaviour:
     type: 3}
   waterSplash: {fileID: 5509927898478369345, guid: cf8b55990d3457944886a599ba485712,
     type: 3}
+--- !u!114 &2728102995083394986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2244568564740985332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ea45d4a1ccf6049a649b0da78fa0ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayerTheLauncher: 1
+  LaunchingPlane: {fileID: 0}
+  Distance: 0
+  timerToFuze: 0.5
+  MaxTurn: 20
+  ProxyFuse: 0
+  missileAlert: {fileID: 0}
+  Guide: {fileID: 0}
+  gForce: 0
 --- !u!1 &2695597366621323087
 GameObject:
   m_ObjectHideFlags: 0
