@@ -6,11 +6,11 @@ using UnityEngine;
 public class GunsControl : MonoBehaviour
 {
     [SerializeField] AircraftHub aircraftHub;
-
     public Gun[] guns;
     public bool isPlayer;
     public bool trigger;
-
+	
+	[SerializeField] float baseVelocity;
     public bool useConvergence;
     public bool hasDynamicConvergence;
     public float gunConvergenceDistance = 500f;
@@ -23,7 +23,7 @@ public class GunsControl : MonoBehaviour
 
     private void Awake()
     {
-        if (aircraftHub != null)
+        if (aircraftHub == null)
         {
             aircraftHub = GetComponent<AircraftHub>();
         }
@@ -44,7 +44,7 @@ public class GunsControl : MonoBehaviour
         }
 
         ApplyConvergence();
-
+		baseVelocity = aircraftHub.rb.velocity.magnitude;
         if(trigger)
         {
             FireGuns();
@@ -145,17 +145,24 @@ public class GunsControl : MonoBehaviour
 
     void FireGuns()
     {
-        for (int i = 0; i < guns.Length; i++)
-        {
-            guns[i].Fire();
-        }
+		
+		foreach(Gun gun in guns)
+		{
+			if(gun == null)
+					continue;
+			gun.baseVelocity = baseVelocity;
+            gun.Fire();
+		}
 
         if(enableAG)
         {
-            for (int i = 0; i < additionalGuns.Length; i++)
-            {
-                additionalGuns[i].Fire();
-            }
+			foreach(Gun gun in additionalGuns)
+			{
+				if(gun == null)
+					continue;
+				gun.baseVelocity = baseVelocity;
+				gun.Fire();
+			}
         }
     }
 

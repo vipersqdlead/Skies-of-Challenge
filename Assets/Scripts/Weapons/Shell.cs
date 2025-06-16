@@ -6,6 +6,7 @@ public class Shell : MonoBehaviour
 {
 
     public int ShellVelocity, DmgToAir, DmgToGrnd;
+	public Rigidbody rb;
     public bool isTracer;
     public bool isIncendiary;
     public bool selfDestruct;
@@ -44,6 +45,7 @@ public class Shell : MonoBehaviour
         }
 		
 		collider = GetComponents<Collider>();
+		rb = GetComponent<Rigidbody>();
     }
 
     private void InstantiateExplosions()
@@ -64,7 +66,6 @@ public class Shell : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Physics.IgnoreCollision(collision.collider, GetComponent<Collider>(), true);
         if (collision.collider.gameObject.GetComponent<HealthPoints>() != null)
         {
             HealthPoints hp = collision.collider.gameObject.GetComponent<HealthPoints>();
@@ -110,7 +111,8 @@ public class Shell : MonoBehaviour
         if (!collision.collider.CompareTag("Bullet"))
         {
             InstantiateExplosions();
-            Destroy(gameObject);
+            //Destroy(gameObject);
+			CheckToDestroy();
         }
     }
 
@@ -127,7 +129,8 @@ public class Shell : MonoBehaviour
                 {
                     GetComponent<RocketEngine>().KeepParticlesAlive();
                 }
-                Destroy(gameObject);
+                //Destroy(gameObject);
+				CheckToDestroy();
                 return;
             }
             float damageDealt = (DmgToAir + Random.Range(-5f, 5f)) / hp.Defense;
@@ -160,15 +163,15 @@ public class Shell : MonoBehaviour
                     }
                 }
             }
-        {
-            InstantiateExplosions();
-            RocketEngine[] engines = GetComponents<RocketEngine>();
-            foreach (RocketEngine engine in engines)
-            {
-                engine.KeepParticlesAlive();
-            }
-            Destroy(gameObject);
-        }
+			{
+				InstantiateExplosions();
+				RocketEngine[] engines = GetComponents<RocketEngine>();
+				foreach (RocketEngine engine in engines)
+				{
+					engine.KeepParticlesAlive();
+				}
+				CheckToDestroy();
+			}
         }
     }
 
@@ -176,7 +179,64 @@ public class Shell : MonoBehaviour
     {
         if (selfDestruct)
         {
-            InstantiateExplosions();
+            //InstantiateExplosions();
         }
     }
+	
+	[SerializeField] Transform parent;
+	
+	public void Enable(Vector3 position, Quaternion rotation, Vector3 velocity, float timeToDisable, Transform _parent)
+	{
+		parent = _parent;
+		transform.parent = null;
+		transform.position = position;
+		transform.rotation = transform.rotation;
+		rb.AddForce(velocity, ForceMode.VelocityChange);
+        if (isTracer)
+		{
+			trail.Clear();
+		}
+		if(selfDestruct)
+		{
+			InstantiateExplosions();
+			return;
+		}
+	}
+
+	public void Disable(Transform _parent)
+	{
+		parent = _parent;
+		transform.parent = _parent;
+		//transform.SetParent(_parent);
+		rb.velocity = Vector3.zero;
+		rb.angularVelocity = Vector3.zero;
+		gameObject.SetActive(false);
+        if (isTracer)
+		{
+			trail.Clear();
+		}
+	}
+	
+	public void Disable()
+	{
+		rb.velocity = Vector3.zero;
+		rb.angularVelocity = Vector3.zero;
+		gameObject.SetActive(false);
+        if (isTracer)
+		{
+			trail.Clear();
+		}
+	}
+	
+	void CheckToDestroy()
+	{
+				if(parent != null)
+				{
+					Disable(parent);
+				}
+				else
+				{
+					Disable();
+				}
+	}
 }

@@ -105,6 +105,7 @@ public class RocketEngine : MonoBehaviour
             mainS.loop = false;
             smoke.transform.parent = null;
             //transform.localScale = new Vector3(1, 1, 1);  
+			Destroy(smoke.gameObject, 30f);
         }
     }
 

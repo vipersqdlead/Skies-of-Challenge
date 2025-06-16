@@ -51,7 +51,7 @@ public class RandomPlaylist : MonoBehaviour
     }
 
     // Play the next song from the shuffled playlist
-    void PlayNextSong()
+    public void PlayNextSong()
     {
         if (shuffledPlaylist.Count > 0)
         {

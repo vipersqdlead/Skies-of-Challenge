@@ -128,6 +128,12 @@ public int engineNumber;
         float totalBurstMass = 0f;
         foreach (Gun gun in gunsControl.guns)
         {
+			if(gun == null)
+				continue;
+			
+			if(gun.shells[0] == null)
+				continue;
+			
             float gunBurstMass = (gun.shells[0].GetComponent<Rigidbody>().mass) * gun.rateOfFireRPM / 60f;
             totalBurstMass += gunBurstMass;
         }

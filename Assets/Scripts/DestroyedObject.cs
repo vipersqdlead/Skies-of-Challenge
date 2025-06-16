@@ -36,7 +36,7 @@ public class DestroyedObject : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
             var main = particle.main;
             main.loop = false;
-	    Destroy(particle, 60f);
+			Destroy(particle.gameObject, 60f);
         }
         Destroy(gameObject);
     }

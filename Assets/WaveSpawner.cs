@@ -111,12 +111,11 @@ public class WaveSpawner : MonoBehaviour
 
         int spawnRand = Random.Range(0, auxSpawnPositions.Count);
         int randomWave = Random.Range(0, propBonusWavePrefabs.Count);
-        print("Bonus wave ID is: " + randomWave);
+        print("Bonus wave ID is: " + randomWave + ": " + propBonusWavePrefabs[randomWave].name);
         GameObject newWave = Instantiate(propBonusWavePrefabs[randomWave], GetSafeSpawnAltitude(auxSpawnPositions[spawnRand].position, player.transform.position.y), auxSpawnPositions[spawnRand].rotation);
         Wave wave = newWave.GetComponent<Wave>();
         wave.AddRenderersToMarker(markers, status, player);
         Destroy(newWave, 180f);
-        print("Name of wave is: " + newWave.name);
     }
     public void TrainerSpawnWave(int numberOfEnemies)
     {
