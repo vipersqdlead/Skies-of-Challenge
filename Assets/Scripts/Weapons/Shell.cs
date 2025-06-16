@@ -14,6 +14,7 @@ public class Shell : MonoBehaviour
     public GameObject ExplosionSmaller;
     public AudioSource hitSound;
     public TrailRenderer trail;
+	public Collider[] collider;
 
     public delegate void KillEnemy(bool countsAsKill, int points);
     KillEnemy delKillEnemy;
@@ -41,12 +42,15 @@ public class Shell : MonoBehaviour
             trail = GetComponent<TrailRenderer>();
             trail.enabled = enabled;
         }
+		
+		collider = GetComponents<Collider>();
     }
 
     private void InstantiateExplosions()
     {
         Instantiate(ExplosionSmaller, transform.position, Quaternion.identity);
     }
+
 
     public void SetKillEnemyDelegate(KillEnemy killEnemyDel)
     {
@@ -60,7 +64,7 @@ public class Shell : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Physics.IgnoreCollision(collision.collider, GetComponent<Collider>());
+        Physics.IgnoreCollision(collision.collider, GetComponent<Collider>(), true);
         if (collision.collider.gameObject.GetComponent<HealthPoints>() != null)
         {
             HealthPoints hp = collision.collider.gameObject.GetComponent<HealthPoints>();
