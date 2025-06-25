@@ -1429,9 +1429,11 @@ MonoBehaviour:
   shellTimer: 4
   shells:
   - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
-  - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
-  - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
-  - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
+  - {fileID: 7005174183826454184, guid: 3dbbc1fd5af3a39429281088f0a08d3d, type: 3}
+  - {fileID: 7005174183826454184, guid: 3dbbc1fd5af3a39429281088f0a08d3d, type: 3}
+  - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
+  - {fileID: 7005174183826454184, guid: db392a94ddb4e3f418bca8e093272c61, type: 3}
+  - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   shellList: []
   rateOfFireRPM: 950
   muzzleVelocity: 700
@@ -2890,9 +2892,11 @@ MonoBehaviour:
   shellTimer: 4
   shells:
   - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
-  - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
-  - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
-  - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
+  - {fileID: 7005174183826454184, guid: 3dbbc1fd5af3a39429281088f0a08d3d, type: 3}
+  - {fileID: 7005174183826454184, guid: 3dbbc1fd5af3a39429281088f0a08d3d, type: 3}
+  - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
+  - {fileID: 7005174183826454184, guid: db392a94ddb4e3f418bca8e093272c61, type: 3}
+  - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   shellList: []
   rateOfFireRPM: 950
   muzzleVelocity: 700
@@ -3631,6 +3635,7 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
 --- !u!114 &8921916259647643811
 MonoBehaviour:
@@ -3756,6 +3761,9 @@ MonoBehaviour:
   hasDynamicConvergence: 0
   gunConvergenceDistance: 600
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 2991707313392165159}
   - {fileID: 0}
@@ -3865,6 +3873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!54 &707189148789588757
@@ -3985,7 +3994,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 8496934882494799891}
-  cameraOffset: {x: 0, y: 5, z: -20}
+  cameraOffset: {x: 0, y: 4, z: -19}
   lookAngle: {x: 0, y: 0}
   movementScale: 2
   lookAlpha: 1
@@ -4065,7 +4074,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   flapExtensionAngle: 60
-  flapExtensionSpeed: 1
+  flapExtensionSpeed: 0.5
   airbrakeExtensionAngle: 60
   airbrakeExtensionSpeed: 1
   flapExtensionValue: 0
@@ -4116,82 +4125,82 @@ MonoBehaviour:
   rocketAmmo: 0
   rocket: {fileID: 888724703871080596, guid: fbfaf4d178fa9804191b30562db3a122, type: 3}
   missilePos:
-  - {fileID: 1277191589015067936}
   - {fileID: 6374957824366100732}
-  - {fileID: 5706788137645561678}
-  - {fileID: 5511511245084999801}
-  - {fileID: 5220041026716188452}
-  - {fileID: 2615854002178791156}
-  - {fileID: 1076637598421917111}
-  - {fileID: 4905776601758112002}
-  - {fileID: 4876416789664714914}
-  - {fileID: 4784175765774381208}
-  - {fileID: 9149688406244082750}
-  - {fileID: 3410274284551658913}
-  - {fileID: 4190811585544325077}
-  - {fileID: 3057745153856540856}
-  - {fileID: 6304571971043593502}
-  - {fileID: 3271939782347368289}
-  - {fileID: 8435414056747430412}
-  - {fileID: 4500348262906349440}
-  - {fileID: 8463969169847719044}
-  - {fileID: 7655288965832988023}
   - {fileID: 2592969920142444715}
-  - {fileID: 3798478051737313049}
-  - {fileID: 4033149922004011054}
-  - {fileID: 3743966366232704883}
-  - {fileID: 6902069215282060963}
-  - {fileID: 8463545781891749344}
-  - {fileID: 4580341043082973525}
-  - {fileID: 4046749252403730677}
-  - {fileID: 4170540753911478479}
-  - {fileID: 395836392893910121}
-  - {fileID: 6113575326530704886}
-  - {fileID: 4732353932546494338}
-  - {fileID: 5902874678093404399}
-  - {fileID: 3240943525170070857}
-  - {fileID: 6263436017716817718}
-  - {fileID: 1050726703429139035}
-  - {fileID: 5039528928997871575}
-  - {fileID: 1077060868804238547}
-  - {fileID: 277361167647398636}
   - {fileID: 5339151657818130224}
-  - {fileID: 6724588839341822082}
-  - {fileID: 6781521905663641525}
-  - {fileID: 6490060693707061480}
-  - {fileID: 3903914043515523384}
-  - {fileID: 2058391636135959163}
-  - {fileID: 6229830319998459598}
-  - {fileID: 5894261123807909742}
-  - {fileID: 5765965395924350804}
-  - {fileID: 7825608363855578098}
-  - {fileID: 4410051100256344685}
-  - {fileID: 2902812498417041433}
-  - {fileID: 4039543584084121460}
-  - {fileID: 4980500381175925458}
-  - {fileID: 4541985352252448941}
-  - {fileID: 7453598244745262528}
-  - {fileID: 3176285262981627980}
-  - {fileID: 7428145960508838728}
-  - {fileID: 3384969887096075841}
   - {fileID: 7437919684960005021}
+  - {fileID: 5706788137645561678}
+  - {fileID: 3798478051737313049}
+  - {fileID: 6724588839341822082}
   - {fileID: 8102608247231069231}
+  - {fileID: 5511511245084999801}
+  - {fileID: 4033149922004011054}
+  - {fileID: 6781521905663641525}
   - {fileID: 8303644374986763032}
+  - {fileID: 5220041026716188452}
+  - {fileID: 3743966366232704883}
+  - {fileID: 6490060693707061480}
   - {fileID: 8588898294053164101}
+  - {fileID: 2615854002178791156}
+  - {fileID: 6902069215282060963}
+  - {fileID: 3903914043515523384}
   - {fileID: 1949438021157518741}
+  - {fileID: 1076637598421917111}
+  - {fileID: 8463545781891749344}
+  - {fileID: 2058391636135959163}
   - {fileID: 3580457254825621206}
+  - {fileID: 4905776601758112002}
+  - {fileID: 4580341043082973525}
+  - {fileID: 6229830319998459598}
   - {fileID: 8886863230369690211}
+  - {fileID: 4876416789664714914}
+  - {fileID: 4046749252403730677}
+  - {fileID: 5894261123807909742}
   - {fileID: 9001615857086512067}
+  - {fileID: 4784175765774381208}
+  - {fileID: 4170540753911478479}
+  - {fileID: 5765965395924350804}
   - {fileID: 9017442669409786873}
+  - {fileID: 9149688406244082750}
+  - {fileID: 395836392893910121}
+  - {fileID: 7825608363855578098}
   - {fileID: 4736260646816788319}
+  - {fileID: 3410274284551658913}
+  - {fileID: 6113575326530704886}
+  - {fileID: 4410051100256344685}
   - {fileID: 1158287888132388544}
+  - {fileID: 4190811585544325077}
+  - {fileID: 4732353932546494338}
+  - {fileID: 2902812498417041433}
   - {fileID: 389678160115625140}
+  - {fileID: 3057745153856540856}
+  - {fileID: 5902874678093404399}
+  - {fileID: 4039543584084121460}
   - {fileID: 1526687092906130393}
+  - {fileID: 6304571971043593502}
+  - {fileID: 3240943525170070857}
+  - {fileID: 4980500381175925458}
   - {fileID: 7511718424757495423}
+  - {fileID: 3271939782347368289}
+  - {fileID: 6263436017716817718}
+  - {fileID: 4541985352252448941}
   - {fileID: 1308552100087974912}
+  - {fileID: 8435414056747430412}
+  - {fileID: 1050726703429139035}
+  - {fileID: 7453598244745262528}
   - {fileID: 5354840096742381933}
+  - {fileID: 4500348262906349440}
+  - {fileID: 5039528928997871575}
+  - {fileID: 3176285262981627980}
   - {fileID: 86931995821157601}
+  - {fileID: 8463969169847719044}
+  - {fileID: 1077060868804238547}
+  - {fileID: 7428145960508838728}
   - {fileID: 5347643901467230181}
+  - {fileID: 1277191589015067936}
+  - {fileID: 7655288965832988023}
+  - {fileID: 277361167647398636}
+  - {fileID: 3384969887096075841}
   rocketLaunchersGO:
   - {fileID: 8212540030175788900}
   - {fileID: 755689530239022899}
@@ -4226,6 +4235,7 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 2000
   isCagedSeeker: 1
   Target: {fileID: 0}
@@ -4852,9 +4862,11 @@ MonoBehaviour:
   shellTimer: 4
   shells:
   - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
-  - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
-  - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
-  - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
+  - {fileID: 7005174183826454184, guid: 3dbbc1fd5af3a39429281088f0a08d3d, type: 3}
+  - {fileID: 7005174183826454184, guid: 3dbbc1fd5af3a39429281088f0a08d3d, type: 3}
+  - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
+  - {fileID: 7005174183826454184, guid: db392a94ddb4e3f418bca8e093272c61, type: 3}
+  - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   shellList: []
   rateOfFireRPM: 950
   muzzleVelocity: 700
@@ -5558,9 +5570,11 @@ MonoBehaviour:
   shellTimer: 4
   shells:
   - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
-  - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
-  - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
-  - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
+  - {fileID: 7005174183826454184, guid: 3dbbc1fd5af3a39429281088f0a08d3d, type: 3}
+  - {fileID: 7005174183826454184, guid: 3dbbc1fd5af3a39429281088f0a08d3d, type: 3}
+  - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
+  - {fileID: 7005174183826454184, guid: db392a94ddb4e3f418bca8e093272c61, type: 3}
+  - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   shellList: []
   rateOfFireRPM: 950
   muzzleVelocity: 700
@@ -5769,7 +5783,7 @@ Transform:
   m_GameObject: {fileID: 9087379864413589838}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: -20}
+  m_LocalPosition: {x: 0, y: 4, z: -19}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

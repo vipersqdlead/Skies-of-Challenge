@@ -10,15 +10,16 @@ public class GunsControl : MonoBehaviour
     public bool isPlayer;
     public bool trigger;
 	
-	[SerializeField] float baseVelocity;
+	public float baseVelocity;
     public bool useConvergence;
     public bool hasDynamicConvergence;
     public float gunConvergenceDistance = 500f;
     public Vector3 convergencePoint;
+	public int mainGunroundsFired, AGRoundsFired, totalRoundsFired;
 
     public Gun[] additionalGuns;
     public GameObject[] additionalGunsGO;
-    [SerializeField] bool enableAG;
+    public bool enableAG;
     [SerializeField] float AGTimer;
 
     private void Awake()
@@ -42,7 +43,7 @@ public class GunsControl : MonoBehaviour
                 trigger = false;
             }
         }
-
+		
         ApplyConvergence();
 		baseVelocity = aircraftHub.rb.velocity.magnitude;
         if(trigger)
@@ -145,24 +146,30 @@ public class GunsControl : MonoBehaviour
 
     void FireGuns()
     {
-		
+		int _tempShotsFiredMG = 0;
 		foreach(Gun gun in guns)
 		{
 			if(gun == null)
 					continue;
 			gun.baseVelocity = baseVelocity;
             gun.Fire();
+			//mainGunroundsFired = gun.shotsFired - mainGunroundsFired;
+			_tempShotsFiredMG += gun.shotsFired;
 		}
-
+		mainGunroundsFired = _tempShotsFiredMG;
+		
         if(enableAG)
         {
+			int _tempShotsFiredAG = 0;
 			foreach(Gun gun in additionalGuns)
 			{
 				if(gun == null)
 					continue;
 				gun.baseVelocity = baseVelocity;
 				gun.Fire();
+				_tempShotsFiredAG += gun.shotsFired;
 			}
+			AGRoundsFired = _tempShotsFiredAG;
         }
     }
 

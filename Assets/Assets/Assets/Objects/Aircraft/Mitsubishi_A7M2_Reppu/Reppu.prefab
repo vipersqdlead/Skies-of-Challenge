@@ -845,8 +845,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 7533204519348891505}
   rateOfFire: 0
@@ -855,6 +857,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &7533204519348891505
 AudioSource:
@@ -9016,8 +9019,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 6201998616931188264}
   rateOfFire: 0
@@ -9026,6 +9031,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &6201998616931188264
 AudioSource:
@@ -11801,6 +11807,7 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
 --- !u!114 &840625624679607077
 MonoBehaviour:
@@ -11839,15 +11846,19 @@ MonoBehaviour:
   - {fileID: 2628605430864329528}
   isPlayer: 1
   trigger: 0
+  baseVelocity: 0
   useConvergence: 1
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 1985000414621246854}
-  - {fileID: 2734790138267249424}
-  - {fileID: 8432998645870279469}
-  - {fileID: 596811099818609662}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   additionalGunsGO:
   - {fileID: 1370182639448058856}
   enableAG: 0
@@ -11882,7 +11893,6 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
-  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
@@ -11959,6 +11969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &2805436575942880223
@@ -12279,6 +12290,7 @@ MonoBehaviour:
   AcquisitionMaxTimer: 25
   AcquisitionTimer: 25
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 5000
   isCagedSeeker: 0
   Target: {fileID: 0}
@@ -12789,7 +12801,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 621f29b150308c64db58d4f33ff59793, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d6fb33d575701ef4f84c40b4812b035b, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -12885,7 +12897,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 028211606c9f491418b367126e6e1afb, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 20c0992b9bef78f4eb203615c6118667, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -16785,8 +16797,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 2161407618439347622}
   rateOfFire: 0
@@ -16795,6 +16809,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &2161407618439347622
 AudioSource:
@@ -17027,8 +17042,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 754160611055401101}
   rateOfFire: 0
@@ -17037,6 +17054,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &754160611055401101
 AudioSource:
@@ -18594,18 +18612,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 963456930c3dce54aa5788b9863861fe, type: 3}
---- !u!114 &596811099818609662 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4187758612736256571, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 3626986278639690181}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1370182639448058856 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2402240578495285805, guid: 963456930c3dce54aa5788b9863861fe,
@@ -18624,36 +18630,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2734790138267249424 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1704130777859607253, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 3626986278639690181}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &5304986378266872561 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8920150699076676404, guid: 963456930c3dce54aa5788b9863861fe,
     type: 3}
   m_PrefabInstance: {fileID: 3626986278639690181}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8432998645870279469 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5142445962408123112, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 3626986278639690181}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4083363271611832064
 PrefabInstance:
   m_ObjectHideFlags: 0

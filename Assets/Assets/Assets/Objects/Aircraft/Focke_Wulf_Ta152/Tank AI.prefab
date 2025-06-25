@@ -1915,8 +1915,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: db392a94ddb4e3f418bca8e093272c61, type: 3}
   - {fileID: 7005174183826454184, guid: db392a94ddb4e3f418bca8e093272c61, type: 3}
   - {fileID: 7005174183826454184, guid: db392a94ddb4e3f418bca8e093272c61, type: 3}
+  shellList: []
   rateOfFireRPM: 750
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 2945188179042946933}
   rateOfFire: 0
@@ -1925,6 +1927,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &2945188179042946933
 AudioSource:
@@ -6564,8 +6567,10 @@ MonoBehaviour:
   - {fileID: 9121515029916527743, guid: 2e02378945accbc418d20c576fc88b88, type: 3}
   - {fileID: 9121515029916527743, guid: b7778282701ee754da1b65f9d1963ae8, type: 3}
   - {fileID: 9121515029916527743, guid: 5a8bf6be91042ef419bc2eb3f8481aa5, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 900
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 5919047401243448475}
   rateOfFire: 0
@@ -6574,6 +6579,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &5919047401243448475
 AudioSource:
@@ -7649,8 +7655,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.08949191
-      value: 0.10245714
+      time: 0.25086886
+      value: 0.05210314
       inSlope: 0.021717256
       outSlope: 0.021717256
       tangentMode: 0
@@ -7658,13 +7664,13 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.9955414
-      value: 0.05423837
-      inSlope: -0.28917155
-      outSlope: -0.28917155
+      time: 0.8582123
+      value: 0.005654387
+      inSlope: -0.12871413
+      outSlope: -0.12871413
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.04085256
+      inWeight: 0.083127566
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -7696,10 +7702,14 @@ MonoBehaviour:
   - {fileID: 8058391831103271159}
   isPlayer: 0
   trigger: 0
+  baseVelocity: 0
   useConvergence: 1
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 0}
   - {fileID: 0}
@@ -7757,6 +7767,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &8921916259647643811
@@ -11159,8 +11170,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: db392a94ddb4e3f418bca8e093272c61, type: 3}
   - {fileID: 7005174183826454184, guid: db392a94ddb4e3f418bca8e093272c61, type: 3}
   - {fileID: 7005174183826454184, guid: db392a94ddb4e3f418bca8e093272c61, type: 3}
+  shellList: []
   rateOfFireRPM: 750
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 0}
   rateOfFire: 0
@@ -11169,6 +11182,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!1 &8765845787297026335
 GameObject:

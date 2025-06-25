@@ -195,7 +195,7 @@ public class FlightModel : MonoBehaviour
 
     void CheckForStalls()
     {
-        stalling = angleOfAttack >= maxAngleOfAttack || angleOfAttack <= (-maxAngleOfAttack / 2f) || Mathf.Abs(angleOfAttackHorizontal) >= maxAngleOfAttack;
+        stalling = Mathf.Abs(angleOfAttack) >= maxAngleOfAttack || Mathf.Abs(angleOfAttackHorizontal) >= (maxAngleOfAttack * 1.5f);
     }
 
 	public float authorityPercent;
@@ -222,10 +222,22 @@ public class FlightModel : MonoBehaviour
 
         // Roll force
         float rollOutput = roll * (RollForce.Evaluate(normalizedSpeed) * 100f);
-
-        //Quaternion rot = rb.rotation * Quaternion.Euler(pitchOutput * Time.deltaTime * AoADampFactor, yawOutput * Time.deltaTime, (-rollOutput + -yawOutput) * Time.deltaTime);
+		
+		/*
+		
+		Vector3 velDir = rb.velocity.normalized;
+		Quaternion rollRot = Quaternion.AngleAxis(-rollOutput * Time.deltaTime, velDir);
+		
+		transform.Rotate(pitchOutput * Time.deltaTime, yawOutput * Time.deltaTime, 0f, Space.Self);
+		
+		transform.Rotate(velDir, -rollOutput * Time.deltaTime, Space.World);
+		
+		*/
+		
+		
         Quaternion rot = rb.rotation * Quaternion.Euler(pitchOutput * Time.deltaTime, yawOutput * Time.deltaTime, (-rollOutput + -yawOutput) * Time.deltaTime);
         rb.MoveRotation(rot);
+		
 
 
         //Vector3 torque = rb.rotation * new Vector3(pitchOutput * Time.deltaTime, yawOutput * Time.deltaTime, -rollOutput * Time.deltaTime);
@@ -271,9 +283,17 @@ public class FlightModel : MonoBehaviour
     }
 
     public Vector3 controlInput;
+	public float AoADampFactor;
     public void SetControlInput(Vector3 input)
     {
-        float AoADampFactor = Mathf.Clamp01((maxAngleOfAttack - Mathf.Abs(angleOfAttack)) / (maxAngleOfAttack - criticalAoA));
+		if((Mathf.Abs(angleOfAttack) < maxAngleOfAttack * 1.05f))
+		{
+			AoADampFactor = Mathf.Clamp01((maxAngleOfAttack - Mathf.Abs(angleOfAttack)) / (maxAngleOfAttack - criticalAoA));
+		}
+		else
+		{
+			AoADampFactor = 1f;
+		}
         float dampedElevator = input.x * AoADampFactor;
         controlInput = new Vector3(dampedElevator, input.y, input.z);
         calculateControlForces(controlInput.x, controlInput.y, -controlInput.z);

@@ -15,7 +15,7 @@ public class IRMissileControl : BaseSpWeaponControl
 
     public float AcquisitionMaxTimer;
     public float AcquisitionTimer;
-    public float missileOuterFoV, missileLockRange;
+    public float missileOuterFoV, missileInnerFoV, missileLockRange;
     public bool isCagedSeeker;
     public GameObject Target;
     [SerializeField] float distanceToTarget;
@@ -49,6 +49,7 @@ public class IRMissileControl : BaseSpWeaponControl
     {
         weaponName = Missile.name;
         missileOuterFoV = Missile.GetComponent<IR_Missile>().missileOuterFoV;
+		missileInnerFoV = Missile.GetComponent<IR_Missile>().missileInnerFoV;
 		missileLockRange = Missile.GetComponent<IR_Missile>().searchRange;
         isCagedSeeker = Missile.GetComponent<IR_Missile>().isCagedSeeker;
     }
@@ -152,7 +153,7 @@ public class IRMissileControl : BaseSpWeaponControl
                 {
                     float angleToTarget = Vector3.Angle(transform.forward, hit.transform.position - transform.position);
                     float distToTempTarget = Vector3.Distance(transform.position, hit.transform.position);
-                    if (angleToTarget < missileOuterFoV)
+                    if (angleToTarget < missileInnerFoV)
                     {
                         float _dotProduct = Vector3.Dot(transform.forward, hit.transform.forward);
 
@@ -160,6 +161,8 @@ public class IRMissileControl : BaseSpWeaponControl
                         {
                             case MissileAspect.AllAspect:
                             {
+								
+								
                                     if (_dotProduct > 0f)
                                     {
                                         LockTarget(hit.collider.gameObject, angleToTarget);
@@ -172,7 +175,7 @@ public class IRMissileControl : BaseSpWeaponControl
                                         }
                                     }
                                     break;
-                                }
+                            }
 
                             case MissileAspect.FrontAspect:
                             {

@@ -53,7 +53,7 @@ public class HealthPoints : MonoBehaviour
             {
                 if (lastHit == false)
                 {
-                    if (extraLives == 0)
+                    if (extraLives <= 0)
                     {
                         lastHit = true;
                         Kill();
@@ -151,6 +151,8 @@ public class HealthPoints : MonoBehaviour
                     if (collision.collider.CompareTag("Water"))
                     {
                         destroyedObject.GetComponent<DestroyedObject>().InstantiateSplash();
+						KillNoExplosion();
+						return;
                     }
                     if (collision.collider.CompareTag("Ground"))
                     {
@@ -179,10 +181,21 @@ public class HealthPoints : MonoBehaviour
         Destroy(gameObject);
         return;
     }
+	
+	void KillNoExplosion()
+	{
+        InstantiateDestroyedObject();
+        Destroy(gameObject);
+        return;
+	}
 
     private void InstantiateExplosions()
     {
-        Instantiate(Explosion, transform.position, Quaternion.identity);
+		if(Explosion != null)
+			Instantiate(Explosion, transform.position, Quaternion.identity);
+		
+		else
+			print("Explosion for object " + gameObject.name + " is null!");
     }
 
     void InstantiateDestroyedObject()
@@ -209,6 +222,7 @@ public class HealthPoints : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
             var mainS = smoke.main;
             mainS.loop = false;
+			Destroy(smoke.gameObject, 30f);
         }
 
         if(fire != null)
@@ -217,6 +231,7 @@ public class HealthPoints : MonoBehaviour
             transform.localScale = new Vector3(1, 1, 1);
             var mainF = fire.main;
             mainF.loop = false;
+			Destroy(fire.gameObject, 30f);
         }
 
     }

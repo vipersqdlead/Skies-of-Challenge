@@ -8,7 +8,7 @@ public class Radar_Missile : MonoBehaviour
     GameObject Missile;
     public GameObject shooter;
 
-    public GameObject possibleTarget, target;
+    public AircraftHub possibleTarget, target;
 
     [SerializeField] float timerToFuze = 1f;
     [SerializeField] float lifeTime = 60f;
@@ -16,7 +16,8 @@ public class Radar_Missile : MonoBehaviour
     public bool ProxyFuse;
 
     public float maxGLoad = 20f;
-    public float energyBleedMultiplier;
+    public float energyBleedMultiplier, currentMaxGAvailable;
+	public AnimationCurve maxGLoadMultiplierAtMach;
     public float rampUpTime = 2f;
     [SerializeField] float launchTime, drag;
 
@@ -36,6 +37,7 @@ public class Radar_Missile : MonoBehaviour
     [SerializeField] public float gForce;
     private float maxGAchieved;
     private float maxSpeedAchievedMach;
+	Vector3 lastKnownTargetDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +62,7 @@ public class Radar_Missile : MonoBehaviour
 
         TargetReflection();
         rb.velocity = transform.forward * rb.velocity.magnitude;
+		currentMaxGAvailable = maxGLoad * maxGLoadMultiplierAtMach.Evaluate(speedMach);
 
         speed = rb.velocity.magnitude * 3.6f;
         speedMach = speed / 1234f;
@@ -77,64 +80,22 @@ public class Radar_Missile : MonoBehaviour
         {
             maxSpeedAchievedMach = speedMach;
         }
+		
+		if(target != null)
+		{
+			lastKnownTargetDirection = (target.transform.position - gameObject.transform.position).normalized;
+		}
     }
 
     float timerToSelfDestruct;
     void Guidance()
     {
-        /*if(target != null)
-        {
-            //var rotation = Quaternion.LookRotation(target.transform.position - transform.position);
-            var rotation = Quaternion.LookRotation(Utilities.FirstOrderIntercept(transform.position, Rigidbody.velocity, Rigidbody.velocity.magnitude, target.transform.position, target.GetComponent<Rigidbody>().velocity) - transform.position);
-            float angle = Quaternion.Angle(transform.rotation, rotation);
-            float timetocomplete = angle / maxGLoad;
-            float donePercentage = Mathf.Min(1f, Time.fixedDeltaTime / timetocomplete);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, donePercentage);
-        }
-
-
-        if(target != null)
-        {
-            Vector3 interceptPoint = Utilities.FirstOrderIntercept(
-            transform.position,
-            rb.velocity,
-            rb.velocity.magnitude,
-            target.transform.position,
-            target.GetComponent<Rigidbody>().velocity);
-
-            Vector3 desiredDirection = (interceptPoint - transform.position).normalized;
-
-            // 1. Calculate current speed
-            float speed = rb.velocity.magnitude;
-
-            // 2. Convert G-load to m/s 
-            float maxAccel = maxGLoad * 9.81f;
-
-            // 3. Calculate max angular turn rate in radians/sec
-            float maxTurnRate = maxAccel / Mathf.Max(speed, 0.1f); // avoid divide by zero
-
-            // 4. Compute how far along we are in the "turn ramp-up"
-            float timeSinceLaunch = Time.time - launchTime;
-            float rampProgress = Mathf.Clamp01(timeSinceLaunch / rampUpTime);
-
-            // Optional: smooth with a curve (ease in)
-            rampProgress = Mathf.SmoothStep(0f, 1f, rampProgress);
-
-            // 5. Apply turning
-            Quaternion currentRot = transform.rotation;
-            Quaternion targetRot = Quaternion.LookRotation(desiredDirection);
-
-            // Limit angular velocity
-            float maxDelta = maxTurnRate * Mathf.Rad2Deg * Time.fixedDeltaTime * rampProgress;
-            transform.rotation = Quaternion.RotateTowards(currentRot, targetRot, maxDelta);
-        }*/
-
         if (target != null)
         {
             transform.rotation = GuidancePN();
             if(IR_Guidance != null)
             {
-                IR_Guidance.target = target;
+                IR_Guidance.target = target.gameObject;
             }
         }
 
@@ -145,7 +106,7 @@ public class Radar_Missile : MonoBehaviour
                 timerToSelfDestruct += Time.deltaTime;
                 if (timerToSelfDestruct > 10f)
                 {
-                    Destroy(gameObject);
+                    GetComponent<RocketScript>().Explosion();
                 }
             }
             else
@@ -172,7 +133,7 @@ public class Radar_Missile : MonoBehaviour
         Vector3 missilePos = rb.position;
         Vector3 targetPos = target.transform.position;
         Vector3 missileVel = rb.velocity;
-        Vector3 targetVel = target.GetComponent<Rigidbody>().velocity;
+        Vector3 targetVel = target.rb.velocity;
 
         Vector3 relativePos = targetPos - missilePos;
         Vector3 relativeVel = targetVel - missileVel;
@@ -188,7 +149,7 @@ public class Radar_Missile : MonoBehaviour
         Vector3 lateralAcceleration = navigationConstant * closingVelocity * losRate;
 
         // Limit lateral acceleration to max G
-        float maxAccel = maxGLoad * 9.81f; // convert Gs to m/s 
+        float maxAccel = currentMaxGAvailable * 9.81f; // convert Gs to m/s 
         if (lateralAcceleration.magnitude > maxAccel)
         {
             lateralAcceleration = lateralAcceleration.normalized * maxAccel;
@@ -214,25 +175,37 @@ public class Radar_Missile : MonoBehaviour
 
     void Acquisition()
     {
+		Vector3 lookDirection = Vector3.zero;
+		
+		if(target == null)
+		{
+			lookDirection = lastKnownTargetDirection;
+		}
+		else
+		{
+			lookDirection = (target.transform.position - gameObject.transform.position).normalized;
+		}
+		
         print("Acquiring");
         RaycastHit hit;
         float thickness = 300f; //<-- Desired thickness here
-        if (Physics.SphereCast(transform.position, thickness, transform.forward, out hit))
+        if (Physics.SphereCast(transform.position, thickness, lookDirection, out hit))
         {
             if (hit.collider.CompareTag("Fighter") || hit.collider.CompareTag("Bomber"))
             {
-                possibleTarget = hit.collider.gameObject;
+                possibleTarget = hit.collider.GetComponent<AircraftHub>();
             }
         }
 
         if (possibleTarget != null)
         {
+			closingSpeed = Utilities.GetClosingVelocity(possibleTarget, rb);
             angleToMissile = Vector3.Angle(transform.forward, possibleTarget.transform.position - transform.position);
-            if (angleToMissile < 25f)
+            if (angleToMissile < 45f && closingSpeed - rb.velocity.magnitude > 30f)
             {
                 target = possibleTarget; Locked = true; print("Target Locked!");
             }
-            else if (angleToMissile >= 90f)
+            else if (angleToMissile >= 45f)
             {
                 target = null; Locked = false;
             }
@@ -241,14 +214,41 @@ public class Radar_Missile : MonoBehaviour
 
     void TargetReflection()
     {
-	if(target == null) return;
+		if(target == null) return;
 
         float missileToTargetAngle = Vector3.Angle(transform.forward, target.transform.position-transform.position);
-        if (missileToTargetAngle >= 60f)
+		NotchFilter();
+        if (missileToTargetAngle >= 45f)
         {
             target = null;
         }
     }
+	
+	public float closingSpeed;
+	public float timeToLockBreak = 3f;
+	float maxTimeToLockBreak;
+	void NotchFilter()
+	{
+		closingSpeed = Utilities.GetClosingVelocity(target, rb);
+		
+		if((closingSpeed - rb.velocity.magnitude) < 30f)
+		{
+			timeToLockBreak -= Time.deltaTime;
+		}
+		else
+		{
+			if(timeToLockBreak < maxTimeToLockBreak)
+			{
+				timeToLockBreak += Time.deltaTime;
+			}
+		}
+		
+		if(timeToLockBreak <= 0f)
+		{
+			print("Missile " + gameObject.name + " has been notched!");
+			target = null;
+		}
+	}
 
     Vector3 lastVelocity;
     Vector3 LocalGForce;

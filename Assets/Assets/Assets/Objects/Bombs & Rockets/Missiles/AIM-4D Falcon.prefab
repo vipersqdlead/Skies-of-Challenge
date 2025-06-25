@@ -621,6 +621,31 @@ MonoBehaviour:
   fuzeActivationTime: 0.4
   maxGLoad: 17
   energyBleedMultiplier: 0.4
+  currentMaxGAvailable: 0
+  maxGLoadMultiplierAtMach:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1.7876537
+      value: 1.0068666
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   rampUpTime: 1
   launchTime: 0
   doesPurePursuit: 0
@@ -740,7 +765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f390c48ce2cbe0249a71f601b89768bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerToFuze: 0.1
+  timerToFuze: 0.2
   explosionRadius: 20
   explosionPower: 10000
   proxyFuse: {fileID: 0}

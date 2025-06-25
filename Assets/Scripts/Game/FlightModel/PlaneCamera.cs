@@ -48,7 +48,7 @@ public class PlaneCamera : MonoBehaviour
         cameraParent = camera.transform.parent.gameObject;
     }
 
-    void LateUpdate()
+    void Update()
     {
         lookInput.x = inputs.currentInputVector.z + inputs.currentInputVector.y;
         lookInput.y = inputs.currentInputVector.x;

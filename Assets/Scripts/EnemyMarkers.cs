@@ -110,21 +110,16 @@ public class EnemyMarkers : MonoBehaviour
         }
         else if (Camera.main != null && targetLockedHub != null)
         {
-			if(targetLockedHub.fm.side == 1)
-			{
-				targetLockedMarker.SetActive(false);
-				leadMarkerGO.SetActive(false);
-				distanceMarker.gameObject.SetActive(false);
-				targetName.gameObject.SetActive(false);
-				return;
-			}
             screenPos = Camera.main.WorldToScreenPoint(transform.position);
             if (targetLockedHub.meshRenderer.isVisible)
             {
                 targetLockedMarker.SetActive(true);
                 targetLockedMarker.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, targetLockedHub.transform.TransformPoint(Vector3.zero));
-				ShowLeadMarker();
 				ShowTargetInfo();
+				if(player.gunsControl.guns.Length != 0 || player.gunsControl.enableAG == true)
+				{
+					ShowLeadMarker();
+				}
             }
 
             else
@@ -135,8 +130,11 @@ public class EnemyMarkers : MonoBehaviour
 				targetName.gameObject.SetActive(false);
             }
 			
+			if(targetLockedHub.fm.side == 1)
+			{
+				targetLockedMarker.SetActive(false);
+			}
         }
-
     }
 
     public void AddMarker(GameObject objWithRenderer)
@@ -182,12 +180,22 @@ public class EnemyMarkers : MonoBehaviour
             leadMarkerGO.SetActive(false);
 			return;
         }
-        else if(targetLockedHub != null)
-        {
+		
+		float muzzleVel = 0f;
+		if(player.gunsControl.guns.Length != 0)
+		{
+			muzzleVel = player.gunsControl.guns[0].muzzleVelocity;
+		}
+		else
+		{
+			muzzleVel = player.gunsControl.additionalGuns[0].muzzleVelocity;
+		}
+		muzzleVel += player.gunsControl.baseVelocity;
+
             float distToTarget = Vector3.Distance(player.transform.position, targetLockedHub.transform.position);
             if(distToTarget < distanceToLeadMarker)
             {
-                Vector3 leadPos = Utilities.FirstOrderIntercept(player.transform.position, player.rb.velocity, player.gunsControl.guns[0].muzzleVelocity, targetLockedHub.transform.position, targetLockedHub.rb.velocity);
+                Vector3 leadPos = Utilities.FirstOrderIntercept(player.transform.position, player.rb.velocity, muzzleVel, targetLockedHub.transform.position, targetLockedHub.rb.velocity);
 
                 var hudPos = Utilities.TransformToHUDSpace(leadPos);
 
@@ -205,7 +213,6 @@ public class EnemyMarkers : MonoBehaviour
             {
                 leadMarkerGO.SetActive(false);
             }
-        }
     }
 	
 	void ShowTargetInfo()
@@ -233,6 +240,8 @@ public class EnemyMarkers : MonoBehaviour
 			}
 			distanceMarker.text = distToTarget + " km";
 			
+			int targetSide = targetLockedHub.fm.side;
+			
 			if(distToTarget >= 1.5f)
 			{
 				targetName.text = targetLockedHub.nameShort;
@@ -244,6 +253,18 @@ public class EnemyMarkers : MonoBehaviour
 			else if(distToTarget < 0.4f)
 			{
 				targetName.text = targetLockedHub.aircraftName;
+			}
+			
+			if(targetSide == 1)
+			{
+				targetName.color = Color.blue;
+				distanceMarker.color = Color.blue;
+			}
+			
+			else if(targetSide == 0)
+			{
+				targetName.color = Color.white;
+				distanceMarker.color = Color.white;
 			}
         }
 	}

@@ -761,8 +761,16 @@ public class SurvivalMissionStatus : MonoBehaviour
                                     }
                                     break;
                                 case 5:
-                                    playerAcHub.gunsControl.EnableAG();
-                                    text = "Reward: Gunpods enabled for 4 minutes!";
+									if(playerAcHub.gunsControl.additionalGuns.Length != 0)
+									{
+										playerAcHub.gunsControl.EnableAG();
+										text = "Reward: Gunpods enabled for 4 minutes!";
+									}
+									else
+									{	
+										playerAcHub.hp.EnableInvulerability();
+										text = "Reward: Invulnerable for 3 minutes!";
+									}
                                     break;
                                 case 6:
                                     playerAcHub.rocketLauncherControl.EnableRockets();

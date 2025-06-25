@@ -462,6 +462,13 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
+			case PlaneTypes.ThunderboltM:
+			{
+				if (PlayerPrefs.GetInt("P-47D Thunderbolt Total Kills") >= 75)
+                { return true; }
+                else
+                { return false; }
+			}
             case PlaneTypes.Superbolt:
                 if (PlayerPrefs.GetInt("General Total Score") >= 1250000)
                 { return true; }
@@ -757,6 +764,11 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
+			case PlaneTypes.PulquiLate:
+                if (PlayerPrefs.GetInt("IAe 33 Pulqui II (Early) Total Score") >= 70000)
+                { return true; }
+                else
+                { return false; }
             case PlaneTypes.GinaPreserie:
                 if (PlayerPrefs.GetInt("G.91 R/4 Gina Highest Kills") >= 30)
                 { return true; }
@@ -867,21 +879,21 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
-            //case PlaneTypes.WhiteDazeII:
-            //    if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
-            //    { return true; }
-            //    else
-            //    { return false; }
-            //case PlaneTypes.Bison:
-            //    if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
-            //    { return true; }
-            //    else
-            //    { return false; }
-            //case PlaneTypes.FreedomFighter:
-            //    if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
-            //    { return true; }
-            //    else
-            //    { return false; }
+            /* case PlaneTypes.WhiteDazeII:
+                if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
+                { return true; }
+                else
+                { return false; }
+            case PlaneTypes.Bison:
+                if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
+                { return true; }
+                else
+                { return false; } */
+            case PlaneTypes.FreedomFighter:
+                if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
+                { return true; }
+                else
+                { return false; }
             case PlaneTypes.PhantomS:
                 if (PlayerPrefs.GetInt("F-4E Phantom II Highest Score") >= 30000)
                 { return true; }
@@ -914,6 +926,21 @@ public class SurvivalSettings : MonoBehaviour
                 { return false; }
             case PlaneTypes.MirageG8:
                 if (PlayerPrefs.GetInt("Mirage F1 Highest Time Alive") >= 600)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.TomcatB:
+                if (PlayerPrefs.GetInt("F-14A Tomcat Highest Score") >= 30000)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.PersianCat:
+                if (PlayerPrefs.GetInt("F-14A Tomcat Highest Score") >= 50000)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.Samurai:
+                if (PlayerPrefs.GetInt("F-14A Tomcat Total Kills") + PlayerPrefs.GetInt("A9M5 Yuurei Total Kills") >= 200)
                 { return true; }
                 else
                 { return false; }
@@ -956,6 +983,7 @@ public class SurvivalSettings : MonoBehaviour
         AiracobraN, 
         HispanoCobra,
         AiracobraL,
+		// MiG3,
         VargB,
         VargA,
         ReisenV,
@@ -967,8 +995,10 @@ public class SurvivalSettings : MonoBehaviour
         SuperHellcat,
         CorsairA,
         CorsairB,
+		//CorsairMkIV,
         SuperCorsair,
         Warhawk,
+		//Hawk,
         Truehawk,
         SuperWarhawk,
         MustangC,
@@ -1004,6 +1034,7 @@ public class SurvivalSettings : MonoBehaviour
         FalkeG,
         Moskito,
         Thunderbolt,
+		ThunderboltM,
         Superbolt,
         Ruina,
         Sismo,
@@ -1041,12 +1072,15 @@ public class SurvivalSettings : MonoBehaviour
         Senden,
         Kurfurst,
         WhiteFootFox,
+		// Yak3,
+		// Yak3_VK107,
         Dora,
         DoraLate,
         Kogarashi,
         KogarashiI,
         KogarashiOtsu,
-        Lavochkin,
+        Lavochkin7,
+		// Lavochkin5,
         Tempest,
 		Skyraider,
 		// Skyshark
@@ -1088,7 +1122,9 @@ public class SurvivalSettings : MonoBehaviour
         ZwillingK,
         Taka,
         TakaKai,
+		//MosquitoFB,
         SeaHornet,
+		// Volksjager,
         SchwalbeI,
         SchwalbeIb,
         SchwalbeIc,
@@ -1120,6 +1156,8 @@ public class SurvivalSettings : MonoBehaviour
         KaryuKai,
         SchwalbeII,
         Huckebein,
+		Pulqui,
+		PulquiLate,
         Thunderstrike,
         Gina,
 		// GinaY,
@@ -1170,13 +1208,15 @@ public class SurvivalSettings : MonoBehaviour
         DrakenJ,
         //Cipher,
         Mirage,
+		// MirageV,
+		// MiragePantera,
         Kfir,
         Fitter,
         //WhiteDazeII,
         Fishbed,
         //Bison,
         TigerII,
-        //FreedomFighter,
+        FreedomFighter,
         Phantom,
 		PhantomS,
 		YuureiEarly,
@@ -1190,11 +1230,12 @@ public class SurvivalSettings : MonoBehaviour
         //ViggenAJS,
         MirageF1,
         MirageG8,
-	    // ThunderboltII,
-	    // Frogfoot,
-        //Tomcat,
-        //Samurai,
-	    //PersianCat,
+	    //ThunderboltII,
+	    //Frogfoot,
+        Tomcat,
+		TomcatB,
+        Samurai,
+	    PersianCat,
         //TornadoGR3,
 	    //TornadoADV,
         //Fencer,

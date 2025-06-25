@@ -23,7 +23,8 @@ public class IR_Missile : MonoBehaviour
     public float missileTimer = 2f;
     public float fuzeActivationTime = 0.5f;
     float fuzeTimer;
-    public float maxGLoad, energyBleedMultiplier;
+    public float maxGLoad, energyBleedMultiplier, currentMaxGAvailable;
+	public AnimationCurve maxGLoadMultiplierAtMach;
     public float rampUpTime = 1f;
     [SerializeField] float launchTime;
     public bool doesPurePursuit;
@@ -77,6 +78,7 @@ public class IR_Missile : MonoBehaviour
 
         TargetReflection();
         rb.velocity = transform.forward * rb.velocity.magnitude;
+		currentMaxGAvailable = maxGLoad * maxGLoadMultiplierAtMach.Evaluate(speedMach);
 
         CalculateGForce();
         float newDrag = drag * Utilities.airDensityAnimCurve.Evaluate(transform.position.y / 10000f);
@@ -397,7 +399,7 @@ public class IR_Missile : MonoBehaviour
         Vector3 lateralAcceleration = navigationConstant * closingVelocity * losRate;
 
         // Limit lateral acceleration to max G
-        float maxAccel = maxGLoad * 9.81f; // convert Gs to m/s 
+        float maxAccel = currentMaxGAvailable * 9.81f; // convert Gs to m/s 
         if (lateralAcceleration.magnitude > maxAccel)
         {
             lateralAcceleration = lateralAcceleration.normalized * maxAccel;

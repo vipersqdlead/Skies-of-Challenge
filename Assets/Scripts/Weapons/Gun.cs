@@ -22,7 +22,7 @@ public class Gun : MonoBehaviour
     [SerializeField] float overheatResetTimer;
     [SerializeField] float overheatedRoF;
 	
-	public float shotsFired;
+	public int shotsFired;
 
     [SerializeField] KillCounter killCounter;
 
@@ -263,6 +263,8 @@ public class Gun : MonoBehaviour
 	{	        
 		GameObject shell = Instantiate(shells[index], transform.position, transform.rotation, gameObject.transform); // Instantiates the bullet...
         Shell sh = shell.GetComponent<Shell>();
+		sh.SetKillEnemyDelegate(EnemyKilled); // Sets the delegate
+        sh.SetHitBonusDelegate(HitBonus);
 		sh.Disable(transform);
 		return sh;
 	}

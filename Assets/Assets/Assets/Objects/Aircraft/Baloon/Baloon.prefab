@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2193227559986268000}
   - component: {fileID: 4114625574183938765}
   - component: {fileID: 1993146385789988430}
-  - component: {fileID: 1089677574816145943}
   - component: {fileID: 4882212449237089100}
   - component: {fileID: 5305657678387772461}
+  - component: {fileID: 576253388332193314}
   m_Layer: 0
   m_Name: Baloon
   m_TagString: Fighter
@@ -61,8 +61,7 @@ MonoBehaviour:
   extraLives: 0
   Explosion: {fileID: 1099838043991838807, guid: d008f59f95b1a154cba68e783d7c40bd,
     type: 3}
-  destroyedObject: {fileID: 4003906066148850437, guid: 70ccb8add52370440a5afb87b54c76dd,
-    type: 3}
+  destroyedObject: {fileID: 0}
   smoke: {fileID: 0}
   onFire: 0
   fireTimer: 5
@@ -114,30 +113,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 100
   m_Center: {x: 0, y: 30, z: 0}
---- !u!114 &1089677574816145943
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4267857362772381956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a01d6b66e3ee0354184120a4623124b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShellVelocity: 0
-  DmgToAir: 10000
-  DmgToGrnd: 10000
-  isTracer: 0
-  isIncendiary: 0
-  selfDestruct: 0
-  shellType: 0
-  reloadTimer: 0
-  ExplosionSmaller: {fileID: 1099838043991838807, guid: d008f59f95b1a154cba68e783d7c40bd,
-    type: 3}
-  hitSound: {fileID: 0}
-  trail: {fileID: 0}
 --- !u!114 &4882212449237089100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +144,8 @@ MonoBehaviour:
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 5463538411936905022}
   aircraftName: 
+  nameShort: 
+  nameLong: 
   speed_maxSpeed: 0
   power_maxPower: 0
   isJet: 0
@@ -210,6 +187,26 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &576253388332193314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4267857362772381956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f390c48ce2cbe0249a71f601b89768bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerToFuze: 0
+  explosionRadius: 0
+  explosionPower: 20000
+  proxyFuse: {fileID: 1993146385789988430}
+  explosion: {fileID: 1099838043991838807, guid: d008f59f95b1a154cba68e783d7c40bd,
+    type: 3}
+  waterSplash: {fileID: 5509927898478369345, guid: cf8b55990d3457944886a599ba485712,
+    type: 3}
 --- !u!1001 &333420319038743079
 PrefabInstance:
   m_ObjectHideFlags: 0

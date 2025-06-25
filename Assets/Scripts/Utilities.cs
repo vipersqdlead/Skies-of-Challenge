@@ -324,4 +324,14 @@ public static class Utilities {
         var screenSpace = camera.WorldToScreenPoint(worldSpace);
         return screenSpace - new Vector3(camera.pixelWidth / 2, camera.pixelHeight / 2);
     }
+	
+	public static float GetClosingVelocity(AircraftHub target, Rigidbody rb)
+	{
+		Vector3 losDirection = (target.transform.position - rb.transform.position).normalized;
+		Vector3 relativeVelocity = rb.velocity - target.rb.velocity;
+		
+		float closingSpeed = relativeVelocity.magnitude;
+		
+		return closingSpeed;
+	}
 }

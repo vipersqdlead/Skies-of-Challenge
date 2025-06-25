@@ -500,23 +500,15 @@ public class PlaneToUI : MonoBehaviour
     {
         if (hub.killcounter.comboCounting)
         {
-
-            if(hub.killcounter.currentCombo == 1)
-            {
-                killsCombo.enabled = true;
-                killsCombo.text = "Splash 1!";
-            }
-            else if(hub.killcounter.currentCombo  > 1)
-            {
-                killsCombo.text = "Splash " + hub.killcounter.currentCombo + "!";
-            }
+			killsCombo.enabled = true;
+			killsCombo.text = "Splash " + hub.killcounter.currentCombo + "!";
             if (hub.planeCam.camShaking || hub.killcounter.currentCombo > 1)
             {
                 killsCombo.color = Color.red;
             }
             else if(hub.planeCam.camShaking == false)
             {
-                killsCombo.color = Color.white;
+                killsCombo.color = Color.yellow;
             }
         }
         else

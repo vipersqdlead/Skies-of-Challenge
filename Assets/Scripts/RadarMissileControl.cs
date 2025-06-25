@@ -63,7 +63,7 @@ public class RadarMissileControl : BaseSpWeaponControl
 		
         if (isPlayer && LockGrowl != null)
         {
-            LockGrowl.enabled = Locked;
+            LockGrowl.enabled = (Locked && !Guiding);
         }
 
         if (Acquiring == true)
@@ -106,28 +106,33 @@ public class RadarMissileControl : BaseSpWeaponControl
             if (AcquisitionTimer > 0)
             {
                 print("Acquiring");
-                RaycastHit hit;
-                float thickness = 150f; //<-- Desired thickness here
-                if (Physics.SphereCast(transform.position, thickness, transform.forward, out hit))
-                {
-                    if (hit.collider.CompareTag("Fighter") || hit.collider.CompareTag("Bomber"))
-                    {
-                        possibleTarget = hit.collider.gameObject;
-                    }
-                }
+				float thickness = 150f; //<-- Desired thickness here
+				RaycastHit[] hits = Physics.SphereCastAll(transform.position, thickness, transform.forward, 19000f);
+				foreach (var hit in hits)
+				{
+					if(hit.collider.CompareTag("Bullet") || hit.collider.gameObject == gameObject)
+					{
+						continue;
+					}
+					
+					if (hit.collider.CompareTag("Fighter") || hit.collider.CompareTag("Bomber"))
+					{
+						possibleTarget = hit.collider.gameObject;
+					}
 
-                if(possibleTarget != null)
-                {
-                    angleToPlayer = Vector3.Angle(transform.forward, possibleTarget.transform.position - transform.position);
-                    if (angleToPlayer < 25f)
-                    {
-                        Target = possibleTarget; Locked = true;
-                    }
-                    else if (angleToPlayer > 60f)
-                    {
-                        Target = null; Locked = false;
-                    }
-                }
+					if(possibleTarget != null)
+					{
+						angleToPlayer = Vector3.Angle(transform.forward, possibleTarget.transform.position - transform.position);
+						if (angleToPlayer < 25f)
+						{
+							Target = possibleTarget; Locked = true;
+						}
+						else if (angleToPlayer > 60f)
+						{
+							Target = null; Locked = false;
+						}
+					}
+				}
             }
         }
 
@@ -145,7 +150,7 @@ public class RadarMissileControl : BaseSpWeaponControl
         }
         if (missile != null && angleToPlayer <= 60f)
         {
-            missile.target = Target;
+            missile.target = Target.GetComponent<AircraftHub>();
         }
 		else
 		{

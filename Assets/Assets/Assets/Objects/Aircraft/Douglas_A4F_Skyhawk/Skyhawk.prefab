@@ -6902,10 +6902,14 @@ MonoBehaviour:
   - {fileID: 3291435551894376931}
   isPlayer: 1
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 6799628370273163212}
   - {fileID: 6927362518891714906}
@@ -7039,6 +7043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &1524426330873798503
@@ -7087,7 +7092,6 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
-  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
@@ -7182,6 +7186,7 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 2000
   isCagedSeeker: 0
   Target: {fileID: 0}
@@ -21129,6 +21134,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3015590486485779523, guid: ed63e8aa0dc83e444a7fdfe88f139339,
         type: 3}
+      propertyPath: shot
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3015590486485779523, guid: ed63e8aa0dc83e444a7fdfe88f139339,
+        type: 3}
       propertyPath: killCounter
       value: 
       objectReference: {fileID: 3460177221028616539}
@@ -21182,7 +21192,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5748272894364775366, guid: ed63e8aa0dc83e444a7fdfe88f139339, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6931424036127594289, guid: ed63e8aa0dc83e444a7fdfe88f139339, type: 3}
     m_AddedGameObjects: []

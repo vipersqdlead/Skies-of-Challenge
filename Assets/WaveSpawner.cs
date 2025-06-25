@@ -115,7 +115,6 @@ public class WaveSpawner : MonoBehaviour
         GameObject newWave = Instantiate(propBonusWavePrefabs[randomWave], GetSafeSpawnAltitude(auxSpawnPositions[spawnRand].position, player.transform.position.y), auxSpawnPositions[spawnRand].rotation);
         Wave wave = newWave.GetComponent<Wave>();
         wave.AddRenderersToMarker(markers, status, player);
-        Destroy(newWave, 180f);
     }
     public void TrainerSpawnWave(int numberOfEnemies)
     {

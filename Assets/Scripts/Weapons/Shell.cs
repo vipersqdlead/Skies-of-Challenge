@@ -8,11 +8,12 @@ public class Shell : MonoBehaviour
     public int ShellVelocity, DmgToAir, DmgToGrnd;
 	public Rigidbody rb;
     public bool isTracer;
+	public bool isArmorPiercing;
     public bool isIncendiary;
     public bool selfDestruct;
     public ShellType shellType;
     public float reloadTimer;
-    public GameObject ExplosionSmaller;
+    public GameObject ExplosionSmaller, waterSplashPrefab;
     public AudioSource hitSound;
     public TrailRenderer trail;
 	public Collider[] collider;
@@ -52,6 +53,11 @@ public class Shell : MonoBehaviour
     {
         Instantiate(ExplosionSmaller, transform.position, Quaternion.identity);
     }
+	
+	private void InstantiateSplash()
+	{
+		Instantiate(waterSplashPrefab, transform.position, Quaternion.identity);
+	}
 
 
     public void SetKillEnemyDelegate(KillEnemy killEnemyDel)
@@ -63,6 +69,16 @@ public class Shell : MonoBehaviour
     {
         delHitBonus = hitBonusDel;
     }
+	
+	void GetAPDamage(Rigidbody targetRb)
+	{
+		float hitSpeed = rb.velocity.magnitude;
+		if(targetRb != null)
+		{
+			float targetSpeed = targetRb.velocity.magnitude;
+			hitSpeed -= targetSpeed;
+		}
+	}
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -110,12 +126,18 @@ public class Shell : MonoBehaviour
         }
         if (!collision.collider.CompareTag("Bullet"))
         {
-            InstantiateExplosions();
+			if(collision.collider.CompareTag("Water"))
+			{
+				InstantiateSplash();
+			}
+			else
+			{
+				InstantiateExplosions();
+			}
             //Destroy(gameObject);
 			CheckToDestroy();
         }
     }
-
     private void OnTriggerEnter(Collider other)
     {
         Physics.IgnoreCollision(other, GetComponent<Collider>());
@@ -124,7 +146,14 @@ public class Shell : MonoBehaviour
             HealthPoints hp = other.gameObject.GetComponent<HealthPoints>();
             if (hp == null)
             {
-                InstantiateExplosions();
+				if(other.CompareTag("Water"))
+				{
+					InstantiateSplash();
+				}
+				else
+				{
+					InstantiateExplosions();
+				}
                 if (GetComponent<RocketEngine>() != null)
                 {
                     GetComponent<RocketEngine>().KeepParticlesAlive();

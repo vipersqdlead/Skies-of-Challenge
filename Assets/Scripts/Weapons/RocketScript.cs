@@ -77,13 +77,17 @@ public class RocketScript : MonoBehaviour
 
     public void Explosion()
     {
-        Instantiate(explosion, transform.position, transform.rotation);
+		if(explosion != null)
+			Instantiate(explosion, transform.position, transform.rotation);
 		
-		    RocketEngine[] engines = GetComponents<RocketEngine>();
-            foreach (RocketEngine engine in engines)
-            {
-                engine.KeepParticlesAlive();
-            }
+		else
+			print("Rocket or missile " + gameObject.name + " has no Explosion !");
+		
+		RocketEngine[] engines = GetComponents<RocketEngine>();
+        foreach (RocketEngine engine in engines)
+        {
+            engine.KeepParticlesAlive();
+        }
 		
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius + proxyFuse.radius);
 
@@ -112,7 +116,6 @@ public class RocketScript : MonoBehaviour
 						{
 							delKillEnemy.Invoke(objHp.countsAsKill, objHp.pointsWorth);
 						}
-                        Destroy(gameObject);
                     }
                 }
                 else
@@ -123,11 +126,11 @@ public class RocketScript : MonoBehaviour
 						{
 							delKillEnemy.Invoke(objHp.countsAsKill, objHp.pointsWorth);
 						}
-                        Destroy(gameObject);
                     }
                 }
             }
         }
+		Destroy(gameObject);
     }
 
     public void SetKillEnemyDelegate(KillEnemy killEnemyDel)

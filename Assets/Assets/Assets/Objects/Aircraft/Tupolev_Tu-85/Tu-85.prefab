@@ -132,8 +132,10 @@ MonoBehaviour:
   shells:
   - {fileID: 7005174183826454184, guid: d39716df703db6f469ed80f968368122, type: 3}
   - {fileID: 7005174183826454184, guid: 75011b561d1079e40abd5a650b53f5d5, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 700
+  baseVelocity: 0
   accuracyError: 0.001
   shot: {fileID: 0}
   rateOfFire: 0
@@ -142,6 +144,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!1 &2656868918531263425
 GameObject:
@@ -275,8 +278,10 @@ MonoBehaviour:
   shells:
   - {fileID: 7005174183826454184, guid: d39716df703db6f469ed80f968368122, type: 3}
   - {fileID: 7005174183826454184, guid: 75011b561d1079e40abd5a650b53f5d5, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 700
+  baseVelocity: 0
   accuracyError: 0.001
   shot: {fileID: 0}
   rateOfFire: 0
@@ -285,6 +290,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!1 &3089277067628611170
 GameObject:
@@ -418,8 +424,10 @@ MonoBehaviour:
   shells:
   - {fileID: 7005174183826454184, guid: d39716df703db6f469ed80f968368122, type: 3}
   - {fileID: 7005174183826454184, guid: 75011b561d1079e40abd5a650b53f5d5, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 700
+  baseVelocity: 0
   accuracyError: 0.001
   shot: {fileID: 0}
   rateOfFire: 0
@@ -428,6 +436,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!1 &3466659050662682600
 GameObject:
@@ -634,8 +643,10 @@ MonoBehaviour:
   shells:
   - {fileID: 7005174183826454184, guid: d39716df703db6f469ed80f968368122, type: 3}
   - {fileID: 7005174183826454184, guid: 75011b561d1079e40abd5a650b53f5d5, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 700
+  baseVelocity: 0
   accuracyError: 0.001
   shot: {fileID: 0}
   rateOfFire: 0
@@ -644,6 +655,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!1 &4730177755278295366
 GameObject:
@@ -700,9 +712,12 @@ MonoBehaviour:
   firingRange: 450
   cannonBurstLength: 0.85
   cannonBurstCooldown: 3
+  shellRange: 0
   maxHorizontalAngle: 60
   maxVerticalAngle: 45
   rotationSpeed: 30
+  initialForward: {x: 0, y: 0, z: 0}
+  angleToTarget: 0
   targetDir: {x: 0, y: 0, z: 0}
 --- !u!1 &4835719069358617318
 GameObject:
@@ -791,8 +806,10 @@ MonoBehaviour:
   shells:
   - {fileID: 7005174183826454184, guid: d39716df703db6f469ed80f968368122, type: 3}
   - {fileID: 7005174183826454184, guid: 75011b561d1079e40abd5a650b53f5d5, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 700
+  baseVelocity: 0
   accuracyError: 0.001
   shot: {fileID: 0}
   rateOfFire: 0
@@ -801,6 +818,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!1 &5776552808058088964
 GameObject:
@@ -972,9 +990,12 @@ MonoBehaviour:
   firingRange: 700
   cannonBurstLength: 0.85
   cannonBurstCooldown: 3
+  shellRange: 0
   maxHorizontalAngle: 60
   maxVerticalAngle: 45
   rotationSpeed: 30
+  initialForward: {x: 0, y: 0, z: 0}
+  angleToTarget: 0
   targetDir: {x: 0, y: 0, z: 0}
 --- !u!1 &8593850972089402120
 GameObject:
@@ -1031,9 +1052,12 @@ MonoBehaviour:
   firingRange: 750
   cannonBurstLength: 0.5
   cannonBurstCooldown: 2.5
+  shellRange: 0
   maxHorizontalAngle: 60
   maxVerticalAngle: 45
   rotationSpeed: 30
+  initialForward: {x: 0, y: 0, z: 0}
+  angleToTarget: 0
   targetDir: {x: 0, y: 0, z: 0}
 --- !u!1 &8798626382859280185
 GameObject:
@@ -1090,9 +1114,12 @@ MonoBehaviour:
   firingRange: 750
   cannonBurstLength: 0.5
   cannonBurstCooldown: 2.5
+  shellRange: 0
   maxHorizontalAngle: 60
   maxVerticalAngle: 45
   rotationSpeed: 30
+  initialForward: {x: 0, y: 0, z: 0}
+  angleToTarget: 0
   targetDir: {x: 0, y: 0, z: 0}
 --- !u!1 &8892044307075024791
 GameObject:
@@ -1211,6 +1238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -1224,6 +1252,7 @@ MonoBehaviour:
   IAS_Speed: 0
   currentTurnRadius: 0
   currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 130
@@ -1348,6 +1377,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 3261447491580642048}
   health: {fileID: 544574892}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &6297298917442614017
@@ -1380,7 +1410,9 @@ MonoBehaviour:
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 5615112185330938318}
-  aircraftName: 
+  aircraftName: Tu-85 Barge
+  nameShort: Tu-85
+  nameLong: Tu-85
   speed_maxSpeed: 0
   power_maxPower: 0
   isJet: 0
@@ -1628,9 +1660,12 @@ MonoBehaviour:
   firingRange: 500
   cannonBurstLength: 0.5
   cannonBurstCooldown: 2.5
+  shellRange: 0
   maxHorizontalAngle: 60
   maxVerticalAngle: 45
   rotationSpeed: 30
+  initialForward: {x: 0, y: 0, z: 0}
+  angleToTarget: 0
   targetDir: {x: 0, y: 0, z: 0}
 --- !u!1001 &561356255028269949
 PrefabInstance:

@@ -3052,6 +3052,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3293580743225340431}
     m_Modifications:
+    - target: {fileID: -5835521841081839676, guid: 7d2a7a86fcb2e6b45b2d5fd5f08a29a7,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1472008142326156110, guid: 7d2a7a86fcb2e6b45b2d5fd5f08a29a7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4257,7 +4262,9 @@ MonoBehaviour:
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 7105474077257720994}
-  aircraftName: 
+  aircraftName: Su-17M4 (Mod) "White Daze"
+  nameShort: '"White Daze"'
+  nameLong: Su-17 "White Daze"
   speed_maxSpeed: 0
   power_maxPower: 0
   isJet: 0
@@ -4284,6 +4291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -4297,6 +4305,7 @@ MonoBehaviour:
   IAS_Speed: 0
   currentTurnRadius: 0
   currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 0
   SpawnSpeed: 300
@@ -4412,6 +4421,7 @@ MonoBehaviour:
   centerOfLift: {fileID: 4768934802081334869}
   health: {fileID: 6747458687842777627}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
   brakeInput: 0
 --- !u!114 &5410915704757073567
@@ -4541,10 +4551,14 @@ MonoBehaviour:
   - {fileID: 4600658203920846884}
   isPlayer: 0
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns: []
   additionalGunsGO: []
   enableAG: 0
@@ -4724,6 +4738,7 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 8500
   isCagedSeeker: 0
   Target: {fileID: 0}
@@ -4750,6 +4765,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!1001 &3295101983927709802
@@ -5165,6 +5181,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3293580743225340431}
     m_Modifications:
+    - target: {fileID: -5835521841081839676, guid: 7d2a7a86fcb2e6b45b2d5fd5f08a29a7,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1472008142326156110, guid: 7d2a7a86fcb2e6b45b2d5fd5f08a29a7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5425,6 +5446,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3293580743225340431}
     m_Modifications:
+    - target: {fileID: -5835521841081839676, guid: 7d2a7a86fcb2e6b45b2d5fd5f08a29a7,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1472008142326156110, guid: 7d2a7a86fcb2e6b45b2d5fd5f08a29a7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5594,6 +5620,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3293580743225340431}
     m_Modifications:
+    - target: {fileID: -5835521841081839676, guid: 7d2a7a86fcb2e6b45b2d5fd5f08a29a7,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1472008142326156110, guid: 7d2a7a86fcb2e6b45b2d5fd5f08a29a7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5928,6 +5959,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3293580743225340431}
     m_Modifications:
+    - target: {fileID: -5835521841081839676, guid: 7d2a7a86fcb2e6b45b2d5fd5f08a29a7,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1472008142326156110, guid: 7d2a7a86fcb2e6b45b2d5fd5f08a29a7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6017,6 +6053,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3293580743225340431}
     m_Modifications:
+    - target: {fileID: -5835521841081839676, guid: 7d2a7a86fcb2e6b45b2d5fd5f08a29a7,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1472008142326156110, guid: 7d2a7a86fcb2e6b45b2d5fd5f08a29a7,
         type: 3}
       propertyPath: m_LocalPosition.x
