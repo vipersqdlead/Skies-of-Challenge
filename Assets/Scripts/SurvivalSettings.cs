@@ -432,6 +432,11 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
+			case PlaneTypes.LightningI:
+                if (PlayerPrefs.GetInt("P-38L Lightning Total Kill Count") >= 100 && PlayerPrefs.GetInt("P-40M Warhawk Total Kill Count") >= 100)
+                { return true; }
+                else
+                { return false; }
             case PlaneTypes.SpitfireII:
                 if (PlayerPrefs.GetInt("Survival High Score") >= 30000)
                 { return true; }
@@ -463,12 +468,10 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
 			case PlaneTypes.ThunderboltM:
-			{
 				if (PlayerPrefs.GetInt("P-47D Thunderbolt Total Kills") >= 75)
                 { return true; }
                 else
                 { return false; }
-			}
             case PlaneTypes.Superbolt:
                 if (PlayerPrefs.GetInt("General Total Score") >= 1250000)
                 { return true; }
@@ -594,6 +597,11 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
+			case PlaneTypes.Skyshark:
+                if (PlayerPrefs.GetInt("Skyraider Total Kills") >= 150)
+                { return true; }
+                else
+                { return false; }
             case PlaneTypes.TankC:
                 if (PlayerPrefs.GetInt("Ta 152H Tank Total Score") >= 120000)
                 { return true; }
@@ -664,6 +672,11 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
+			/*case PlaneTypes.Wyvern:
+                if (PlayerPrefs.GetInt("Skyraider Total Kills") >= 150)
+                { return true; }
+                else
+                { return false; }*/
             case PlaneTypes.ShindenLate:
                 if (PlayerPrefs.GetInt("General Total Score") >= 2500000)
                 { return true; }
@@ -874,8 +887,18 @@ public class SurvivalSettings : MonoBehaviour
             //    { return true; }
             //    else
             //    { return false; }
-            case PlaneTypes.Kfir:
-                if (PlayerPrefs.GetInt("Mirage IIIC Total Time Alive") >= 1000)
+            case PlaneTypes.MirageV:
+                if (PlayerPrefs.GetInt("Mirage IIIC Total Time Alive") >= 1200)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.MiragePantera:
+                if (PlayerPrefs.GetInt("Mirage 5F Total Score") >= 250000)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.Kfir:
+                if (PlayerPrefs.GetInt("Mirage 5F Total Kill Count") >= 100 && PlayerPrefs.GetInt("A-4N Ayit Total Kill Count") >= 150 && PlayerPrefs.GetInt("F-4E Phantom II Total Kill Count") >= 200)
                 { return true; }
                 else
                 { return false; }
@@ -940,7 +963,7 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
 			case PlaneTypes.Samurai:
-                if (PlayerPrefs.GetInt("F-14A Tomcat Total Kills") + PlayerPrefs.GetInt("A9M5 Yuurei Total Kills") >= 200)
+                if (PlayerPrefs.GetInt("F-14A Tomcat Total Kills") + PlayerPrefs.GetInt("A9M5 Yuurei Total Kills") >= 250)
                 { return true; }
                 else
                 { return false; }
@@ -1001,6 +1024,7 @@ public class SurvivalSettings : MonoBehaviour
 		//Hawk,
         Truehawk,
         SuperWarhawk,
+		// Ascender,
         MustangC,
         Apache,
         MustangA,
@@ -1024,9 +1048,12 @@ public class SurvivalSettings : MonoBehaviour
         Raiko,
         LightningL,
         LightningK,
+		// ChainLightning,
+		LightningI,
         SpitfireVIII,
         SpitfireII,
         SpitfireXXIV,
+		// MB157,
         BearcatA,
         BearcatB,
         FalkeD,
@@ -1083,7 +1110,7 @@ public class SurvivalSettings : MonoBehaviour
 		// Lavochkin5,
         Tempest,
 		Skyraider,
-		// Skyshark
+		Skyshark,
         Tank,
         TankC,
         ShidenKai,
@@ -1139,6 +1166,7 @@ public class SurvivalSettings : MonoBehaviour
         ShootingStarT,
         Starfire,
         Thunderjet, 
+		// Banshee,
         Meteor,
 		KeiunKai_V1,
 		// KeiunKai_V2
@@ -1172,6 +1200,7 @@ public class SurvivalSettings : MonoBehaviour
         Faggot,
         Fresco,
         //WhiteDaze,
+		// Cutlass,
         Tunnan,
         TunnanD,
         SchwalbeIII,
@@ -1189,6 +1218,7 @@ public class SurvivalSettings : MonoBehaviour
 		//SuperEtendardModernise
         Vautour,
         Kyokkou,
+		// SeaDemon,
         Harrier,
         //HarrierC,
         Farmer,
@@ -1208,8 +1238,8 @@ public class SurvivalSettings : MonoBehaviour
         DrakenJ,
         //Cipher,
         Mirage,
-		// MirageV,
-		// MiragePantera,
+		MirageV,
+		MiragePantera,
         Kfir,
         Fitter,
         //WhiteDazeII,

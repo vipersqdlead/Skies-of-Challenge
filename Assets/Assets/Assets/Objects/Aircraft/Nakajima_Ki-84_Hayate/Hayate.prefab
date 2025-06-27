@@ -583,8 +583,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 700
   muzzleVelocity: 720
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 7533204519348891505}
   rateOfFire: 0
@@ -593,6 +595,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &7533204519348891505
 AudioSource:
@@ -606,7 +609,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: b7e1c44171a86354f82a1920d3b7269f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1141,8 +1144,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
   - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
   - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
+  shellList: []
   rateOfFireRPM: 950
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 0}
   rateOfFire: 0
@@ -1151,6 +1156,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!1 &639156778409162904
 GameObject:
@@ -6509,8 +6515,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 700
   muzzleVelocity: 720
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 0}
   rateOfFire: 0
@@ -6519,6 +6527,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!1 &4603207345602443112
 GameObject:
@@ -8466,6 +8475,7 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
 --- !u!114 &840625624679607077
 MonoBehaviour:
@@ -8504,10 +8514,14 @@ MonoBehaviour:
   - {fileID: 6729193045531746217}
   isPlayer: 1
   trigger: 0
+  baseVelocity: 0
   useConvergence: 1
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 8261637282620101741}
   - {fileID: 521254317455344395}
@@ -8546,7 +8560,6 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
-  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
@@ -8623,6 +8636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &2805436575942880223
@@ -8895,6 +8909,7 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 2500
   isCagedSeeker: 0
   Target: {fileID: 0}
@@ -9261,8 +9276,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
   - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
   - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
+  shellList: []
   rateOfFireRPM: 950
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 6318788914817192642}
   rateOfFire: 0
@@ -9271,6 +9288,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &6318788914817192642
 AudioSource:
@@ -9282,7 +9300,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 639e55c39e043054082bb890c6d6ef98, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f8228cf8faf18134fbaaf5deb8932028, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

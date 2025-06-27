@@ -2653,8 +2653,10 @@ MonoBehaviour:
   - {fileID: 9121515029916527743, guid: 2e02378945accbc418d20c576fc88b88, type: 3}
   - {fileID: 9121515029916527743, guid: 2e02378945accbc418d20c576fc88b88, type: 3}
   - {fileID: 9121515029916527743, guid: 2e02378945accbc418d20c576fc88b88, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 1000
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 2902924611822618407}
   rateOfFire: 0
@@ -2663,6 +2665,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 1952286437106927272}
 --- !u!82 &2902924611822618407
 AudioSource:
@@ -3727,8 +3730,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: db392a94ddb4e3f418bca8e093272c61, type: 3}
   - {fileID: 7005174183826454184, guid: db392a94ddb4e3f418bca8e093272c61, type: 3}
   - {fileID: 7005174183826454184, guid: a093639d6a9a001438aa4b010c491366, type: 3}
+  shellList: []
   rateOfFireRPM: 600
   muzzleVelocity: 900
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 5967639832567432590}
   rateOfFire: 0
@@ -3737,6 +3742,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 1952286437106927272}
 --- !u!82 &5967639832567432590
 AudioSource:
@@ -3748,9 +3754,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8b58d9c41e64cb244a3ae7d13806b618, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4ce14f001213ff2448fcd7e98ee23346, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4224,6 +4230,7 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
 --- !u!114 &5414683243659837352
 MonoBehaviour:
@@ -4262,10 +4269,14 @@ MonoBehaviour:
   - {fileID: 2285004723171802797}
   isPlayer: 1
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 8922653781074609807}
   - {fileID: 8722928836332930017}
@@ -4304,7 +4315,6 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
-  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
@@ -4381,6 +4391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &6008138568628923761
@@ -4662,6 +4673,7 @@ MonoBehaviour:
   AcquisitionMaxTimer: 25
   AcquisitionTimer: 0
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 5000
   isCagedSeeker: 0
   Target: {fileID: 0}
@@ -7514,8 +7526,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: db392a94ddb4e3f418bca8e093272c61, type: 3}
   - {fileID: 7005174183826454184, guid: db392a94ddb4e3f418bca8e093272c61, type: 3}
   - {fileID: 7005174183826454184, guid: db392a94ddb4e3f418bca8e093272c61, type: 3}
+  shellList: []
   rateOfFireRPM: 600
   muzzleVelocity: 900
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 0}
   rateOfFire: 0
@@ -7524,6 +7538,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 1952286437106927272}
 --- !u!1 &5650911147843384281
 GameObject:
@@ -11169,8 +11184,10 @@ MonoBehaviour:
   - {fileID: 9121515029916527743, guid: 2e02378945accbc418d20c576fc88b88, type: 3}
   - {fileID: 9121515029916527743, guid: 2e02378945accbc418d20c576fc88b88, type: 3}
   - {fileID: 9121515029916527743, guid: 2e02378945accbc418d20c576fc88b88, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 1000
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 0}
   rateOfFire: 0
@@ -11179,6 +11196,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 1952286437106927272}
 --- !u!1 &8225145936164010944
 GameObject:

@@ -6452,6 +6452,7 @@ GameObject:
   - component: {fileID: 14566874825395239}
   - component: {fileID: 5905980926499663757}
   - component: {fileID: 8204467355401237077}
+  - component: {fileID: 7290137982586334197}
   m_Layer: 0
   m_Name: Jaguar
   m_TagString: Fighter
@@ -6507,7 +6508,7 @@ MonoBehaviour:
   killcounter: {fileID: 6406513789558698803}
   planeCam: {fileID: 1294669515875774529}
   planeHUD: {fileID: 4079807363338068805}
-  weaponManager: {fileID: 0}
+  weaponManager: {fileID: 7290137982586334197}
   irControl: {fileID: 2554840628093595059}
   sagControl: {fileID: 0}
   radarMissileControl: {fileID: 0}
@@ -6516,6 +6517,8 @@ MonoBehaviour:
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 0}
   aircraftName: F10F Jaguar
+  nameShort: 
+  nameLong: 
   speed_maxSpeed: 1140
   power_maxPower: 4943
   isJet: 1
@@ -6628,6 +6631,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -6641,6 +6645,7 @@ MonoBehaviour:
   IAS_Speed: 0
   currentTurnRadius: 0
   currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 1
   SpawnSpeed: 280
@@ -6747,7 +6752,9 @@ MonoBehaviour:
   centerOfLift: {fileID: 7475012727370642860}
   health: {fileID: 3091880813656110447}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
 --- !u!114 &5826004335633451601
 MonoBehaviour:
@@ -6769,10 +6776,14 @@ MonoBehaviour:
   - {fileID: 2641005910609308053}
   isPlayer: 1
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 7991564172979227243}
   additionalGunsGO:
@@ -6978,6 +6989,7 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 3000
   isCagedSeeker: 0
   Target: {fileID: 0}
@@ -7004,6 +7016,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &1294669515875774529
@@ -7185,6 +7198,21 @@ MonoBehaviour:
   rollInput: 0
   yawInput: 0
   controlType: 0
+--- !u!114 &7290137982586334197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3057848942870415129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfd7b8248420da4aadcee591d9caec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specialWeapons:
+  - {fileID: 5905980926499663757}
+  - {fileID: 2554840628093595059}
 --- !u!1 &3118620625376772039
 GameObject:
   m_ObjectHideFlags: 0
@@ -17243,8 +17271,10 @@ MonoBehaviour:
   - {fileID: 9121515029916527743, guid: 2369c0e7694ca9844b45fe8cc5a914f2, type: 3}
   - {fileID: 9121515029916527743, guid: 2369c0e7694ca9844b45fe8cc5a914f2, type: 3}
   - {fileID: 9121515029916527743, guid: 2369c0e7694ca9844b45fe8cc5a914f2, type: 3}
+  shellList: []
   rateOfFireRPM: 60
   muzzleVelocity: 1500
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 2462365659174007606}
   rateOfFire: 0
@@ -17253,6 +17283,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 6406513789558698803}
 --- !u!1 &8327271539419433021
 GameObject:
@@ -21035,18 +21066,18 @@ PrefabInstance:
     - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_Volume
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: MinDistance
-      value: 50
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 8b58d9c41e64cb244a3ae7d13806b618, type: 3}
+      objectReference: {fileID: 8300000, guid: 7b7d65e3213795e46894e9bc5f72fe46, type: 3}
     - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value

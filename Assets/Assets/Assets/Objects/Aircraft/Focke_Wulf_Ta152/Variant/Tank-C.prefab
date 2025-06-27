@@ -6363,8 +6363,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 1fc2538a01e900f4bab6cf67984c3bfc, type: 3}
   - {fileID: 7005174183826454184, guid: 1fc2538a01e900f4bab6cf67984c3bfc, type: 3}
   - {fileID: 7005174183826454184, guid: 2a84c718180048f43b7099b5c43041ff, type: 3}
+  shellList: []
   rateOfFireRPM: 750
   muzzleVelocity: 720
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 0}
   rateOfFire: 0
@@ -6373,6 +6375,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 8375132272417320029}
 --- !u!1 &4753984714856633680
 GameObject:
@@ -7452,8 +7455,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 1fc2538a01e900f4bab6cf67984c3bfc, type: 3}
   - {fileID: 7005174183826454184, guid: 1fc2538a01e900f4bab6cf67984c3bfc, type: 3}
   - {fileID: 7005174183826454184, guid: 2a84c718180048f43b7099b5c43041ff, type: 3}
+  shellList: []
   rateOfFireRPM: 750
   muzzleVelocity: 720
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 0}
   rateOfFire: 0
@@ -7462,6 +7467,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 8375132272417320029}
 --- !u!1 &5465445103534052520
 GameObject:
@@ -13176,6 +13182,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6680854307914149069, guid: 00255b36fb7e7ae4ba765ac759ca2ea1,
         type: 3}
+      propertyPath: nameLong
+      value: Ta 152C
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680854307914149069, guid: 00255b36fb7e7ae4ba765ac759ca2ea1,
+        type: 3}
       propertyPath: aircraftName
       value: Ta 152C Tank
       objectReference: {fileID: 0}
@@ -13183,7 +13194,7 @@ PrefabInstance:
         type: 3}
       propertyPath: meshRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7350086777849970834}
     - target: {fileID: 6680854307914149069, guid: 00255b36fb7e7ae4ba765ac759ca2ea1,
         type: 3}
       propertyPath: aircraftModel

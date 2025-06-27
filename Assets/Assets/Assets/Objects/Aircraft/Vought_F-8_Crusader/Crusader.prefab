@@ -2190,7 +2190,6 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
-  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
@@ -2398,6 +2397,7 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
 --- !u!114 &2352633891778120682
 MonoBehaviour:
@@ -2419,15 +2419,19 @@ MonoBehaviour:
   - {fileID: 8210368542790072507}
   isPlayer: 1
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 8569221214780511079}
-  - {fileID: 5229861361866137073}
-  - {fileID: 1760865129987689932}
-  - {fileID: 7291207536530275615}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   additionalGunsGO:
   - {fileID: 9107408533532318985}
   enableAG: 0
@@ -2620,6 +2624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &318572683013198107
@@ -2690,6 +2695,7 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 6000
   isCagedSeeker: 0
   Target: {fileID: 0}
@@ -2716,6 +2722,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &10673027907317128
@@ -4743,18 +4750,18 @@ PrefabInstance:
     - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_Volume
-      value: 0.35
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: MinDistance
-      value: 50
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 639e55c39e043054082bb890c6d6ef98, type: 3}
+      objectReference: {fileID: 8300000, guid: 7b7d65e3213795e46894e9bc5f72fe46, type: 3}
     - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
@@ -5665,48 +5672,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 963456930c3dce54aa5788b9863861fe, type: 3}
---- !u!114 &1760865129987689932 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5142445962408123112, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 6859680263382996772}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2664098077880187920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8920150699076676404, guid: 963456930c3dce54aa5788b9863861fe,
     type: 3}
   m_PrefabInstance: {fileID: 6859680263382996772}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5229861361866137073 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1704130777859607253, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 6859680263382996772}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7291207536530275615 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4187758612736256571, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 6859680263382996772}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8569221214780511079 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3015590486485779523, guid: 963456930c3dce54aa5788b9863861fe,

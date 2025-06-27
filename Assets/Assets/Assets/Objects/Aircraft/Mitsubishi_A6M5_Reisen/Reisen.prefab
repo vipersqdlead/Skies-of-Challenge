@@ -408,8 +408,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
   - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
   - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
+  shellList: []
   rateOfFireRPM: 480
   muzzleVelocity: 780
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 7533204519348891505}
   rateOfFire: 0
@@ -418,6 +420,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &7533204519348891505
 AudioSource:
@@ -429,7 +432,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8b58d9c41e64cb244a3ae7d13806b618, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4ce14f001213ff2448fcd7e98ee23346, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -5202,8 +5205,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
   - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
   - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
+  shellList: []
   rateOfFireRPM: 480
   muzzleVelocity: 780
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 6201998616931188264}
   rateOfFire: 0
@@ -5212,6 +5217,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &6201998616931188264
 AudioSource:
@@ -7442,6 +7448,7 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
 --- !u!114 &840625624679607077
 MonoBehaviour:
@@ -7480,15 +7487,19 @@ MonoBehaviour:
   - {fileID: 2628605430864329528}
   isPlayer: 1
   trigger: 0
+  baseVelocity: 0
   useConvergence: 1
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 1985000414621246854}
-  - {fileID: 2734790138267249424}
-  - {fileID: 8432998645870279469}
-  - {fileID: 596811099818609662}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   additionalGunsGO:
   - {fileID: 1370182639448058856}
   enableAG: 0
@@ -7599,6 +7610,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &2805436575942880223
@@ -7883,6 +7895,7 @@ MonoBehaviour:
   AcquisitionMaxTimer: 25
   AcquisitionTimer: 0
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 5000
   isCagedSeeker: 0
   Target: {fileID: 0}
@@ -11304,8 +11317,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 3f88c09db90d7f441bac241c4b38d9aa, type: 3}
   - {fileID: 7005174183826454184, guid: 3f88c09db90d7f441bac241c4b38d9aa, type: 3}
   - {fileID: 7005174183826454184, guid: 3f88c09db90d7f441bac241c4b38d9aa, type: 3}
+  shellList: []
   rateOfFireRPM: 800
   muzzleVelocity: 950
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 2161407618439347622}
   rateOfFire: 0
@@ -11314,6 +11329,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &2161407618439347622
 AudioSource:
@@ -11462,8 +11478,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 3f88c09db90d7f441bac241c4b38d9aa, type: 3}
   - {fileID: 7005174183826454184, guid: 3f88c09db90d7f441bac241c4b38d9aa, type: 3}
   - {fileID: 7005174183826454184, guid: 3f88c09db90d7f441bac241c4b38d9aa, type: 3}
+  shellList: []
   rateOfFireRPM: 800
   muzzleVelocity: 950
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 0}
   rateOfFire: 0
@@ -11472,6 +11490,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &754160611055401101
 AudioSource:
@@ -12872,18 +12891,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 963456930c3dce54aa5788b9863861fe, type: 3}
---- !u!114 &596811099818609662 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4187758612736256571, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 3626986278639690181}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1370182639448058856 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2402240578495285805, guid: 963456930c3dce54aa5788b9863861fe,
@@ -12902,36 +12909,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2734790138267249424 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1704130777859607253, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 3626986278639690181}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &5304986378266872561 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8920150699076676404, guid: 963456930c3dce54aa5788b9863861fe,
     type: 3}
   m_PrefabInstance: {fileID: 3626986278639690181}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8432998645870279469 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5142445962408123112, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 3626986278639690181}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4310079818077714128
 PrefabInstance:
   m_ObjectHideFlags: 0

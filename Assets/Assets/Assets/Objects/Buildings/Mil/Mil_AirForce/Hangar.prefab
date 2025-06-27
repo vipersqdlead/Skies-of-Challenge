@@ -51,12 +51,23 @@ MonoBehaviour:
   countsAsKill: 1
   pointsWorth: 0
   HP: 1500
+  hpPercent: 0
   Defense: 70
   CritRate: 30
+  extraLives: 0
   Explosion: {fileID: 1099838043991838807, guid: 0e6b37ee9ce548f469e5c719ee44f294,
     type: 3}
   destroyedObject: {fileID: 7339654778987595378, guid: 388368319f67bce4bbf92927b8c24940,
     type: 3}
+  smoke: {fileID: 0}
+  onFire: 0
+  fireTimer: 5
+  fireDamageTimer: 0
+  fire: {fileID: 0}
+  hitSound: {fileID: 0}
+  fireSound: {fileID: 0}
+  invulnerable: 0
+  invulnerableTimer: 0
 --- !u!65 &6392357271591454640
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -151,6 +162,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1ef211edd892a5a4cacacee2559f1429,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 782b7b5ed1d76fd4b8a4f2cede8f8c9b, type: 2}
     - target: {fileID: 919132149155446097, guid: 1ef211edd892a5a4cacacee2559f1429,
         type: 3}
       propertyPath: m_Name
