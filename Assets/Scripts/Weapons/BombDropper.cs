@@ -16,6 +16,16 @@ public class BombDropper : MonoBehaviour
     {
         rateOfFire = 1 / (rateOfFireRPM / 60); // This turns the reference RPM into a small float (how much time happens between bullets being fired)
         estToImpact += Random.Range(-1f, 1f);
+		
+		//
+		
+		if(target == null)
+		{
+			this.enabled = false;
+		}
+		
+		
+		//
     }
 
     void Update()

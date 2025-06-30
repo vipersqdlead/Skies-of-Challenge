@@ -433,7 +433,7 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
 			case PlaneTypes.LightningI:
-                if (PlayerPrefs.GetInt("P-38L Lightning Total Kill Count") >= 100 && PlayerPrefs.GetInt("P-40M Warhawk Total Kill Count") >= 100)
+                if (PlayerPrefs.GetInt("P-38L Lightning Total Kill Count") >= 100 || PlayerPrefs.GetInt("P-40M Warhawk Total Kill Count") >= 100)
                 { return true; }
                 else
                 { return false; }
@@ -672,11 +672,11 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
-			/*case PlaneTypes.Wyvern:
-                if (PlayerPrefs.GetInt("Skyraider Total Kills") >= 150)
+			case PlaneTypes.Wyvern:
+                if (PlayerPrefs.GetInt("Skyshark Total Kills") >= 150)
                 { return true; }
                 else
-                { return false; }*/
+                { return false; }
             case PlaneTypes.ShindenLate:
                 if (PlayerPrefs.GetInt("General Total Score") >= 2500000)
                 { return true; }
@@ -867,6 +867,16 @@ public class SurvivalSettings : MonoBehaviour
             //    { return true; }
             //    else
             //    { return false; }
+		    case PlaneTypes.StarfighterG:
+                if (PlayerPrefs.GetInt("F-104A Starfighter Highest Round") >= 10)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.StarfighterASA:
+                if (PlayerPrefs.GetInt("F-104A Starfighter Total Kill Count") + PlayerPrefs.GetInt("F-104G Starfighter Total Kill Count") >= 250)
+                { return true; }
+                else
+                { return false; }
             case PlaneTypes.CrusaderE:
                 if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
                 { return true; }
@@ -1007,6 +1017,7 @@ public class SurvivalSettings : MonoBehaviour
         HispanoCobra,
         AiracobraL,
 		// MiG3,
+		// MiG3_Shvak,
         VargB,
         VargA,
         ReisenV,
@@ -1132,7 +1143,7 @@ public class SurvivalSettings : MonoBehaviour
         HayateII,
         BlueAngel,
         SeaFury,
-		// Wyvern
+		Wyvern,
         Shinden,
         ShindenLate,
         Reaper,
@@ -1158,7 +1169,10 @@ public class SurvivalSettings : MonoBehaviour
         Blitz,
         BlitzB,
         Kikka,
+		//Kikka_20mm,
         KikkaOtsu,
+		//Su9,
+		//Su11,
         Fargo,
         FargoLate,
         ShootingStar,
@@ -1167,13 +1181,15 @@ public class SurvivalSettings : MonoBehaviour
         Starfire,
         Thunderjet, 
 		// Banshee,
-        Meteor,
+        Meteor_Early,
+		//Meteor_Late,
 		KeiunKai_V1,
 		// KeiunKai_V2
 		// KeiunKai_Prod
         Vampire,
         SeaVenom,
         //SeaVixen,
+		//SeaVixen_Mod,
         Shinden_Kai,
         Hatsutaka,
 		HatsutakaII,
@@ -1182,6 +1198,7 @@ public class SurvivalSettings : MonoBehaviour
         //EnteB,
         Karyu,
         KaryuKai,
+		//Scorpion,
         SchwalbeII,
         Huckebein,
 		Pulqui,
@@ -1197,7 +1214,8 @@ public class SurvivalSettings : MonoBehaviour
         Gunval,
         FJ2Fury,
         CACSabre,
-        Faggot,
+        Fagot,
+		//Fagot_Early,
         Fresco,
         //WhiteDaze,
 		// Cutlass,
@@ -1216,13 +1234,16 @@ public class SurvivalSettings : MonoBehaviour
         Hunter,
         SuperEtendard,
 		//SuperEtendardModernise
-        Vautour,
+        VautourIS,
+		//VautourFR,
         Kyokkou,
 		// SeaDemon,
         Harrier,
         //HarrierC,
         Farmer,
-        Starfighter,
+        StarfighterA,
+		StarfighterG,
+		StarfighterASA,
         Skyray,
         DeltaDagger,
         Tiger,
@@ -1231,7 +1252,8 @@ public class SurvivalSettings : MonoBehaviour
         Fantan,
         Crusader,
         CrusaderE,
-		// Jaguar,
+		//Jaguar,
+		//JaguarM,
         Kaze,
         KazeLate,
         Draken,
@@ -1269,17 +1291,50 @@ public class SurvivalSettings : MonoBehaviour
         //TornadoGR3,
 	    //TornadoADV,
         //Fencer,
-        //Aardvark,
-        //Fulcrum,
-        //Falcon,
-        //Flanker,
-        //Eagle,
-        //Mirage2000,
-	    // Mirage4000,
+        //AardvarkA,
+		//AardvarkF,
+        //FulcrumA,
+		//FulcrumSMT,
+		//FulcrumK,
+		//SuperFulcrum,
+        //FalconA,
+		//FalconC,
+		//FalconF,
+		//FalconZero,
+		//FalconZeroKai,
+		//FalconV,
+        //Flanker27,
+		//Flanker33,
+		//Flanker30,
+		//Flanker34,
+		//Flanker35,
+		//Flanker37,
+		//J10A,
+		//J10C,
+        //EagleA,
+		//EagleC,
+		//EagleE,
+		//EagleEX,
+		//EagleJ,
+		//EagleSE,
+        //Mirage2000C,
+	    //Mirage4000A,
+		//Mirage4000C,
+		//HornetA,
+		//HornetC,
         //SuperHornet,
         //Eurofighter,
-        //Rafale,
-        //Gripen,
+        //RafaleC,
+		//RafaleM,
+        //GripenA,
+		//GripenC,
+		//GripenE,
+		//Raptor,
+		// BlackWidowII,
+		// Felon,
+		// J20A,
+		//LightningIIa,
+		//LightningIIc
     }
 
     public enum MapTypes

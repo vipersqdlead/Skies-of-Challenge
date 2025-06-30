@@ -549,7 +549,7 @@ MonoBehaviour:
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 2540619674447792711}
-  aircraftName: MiG-15bis Faggot
+  aircraftName: MiG-15bis Fagot
   nameShort: MiG-15
   nameLong: MiG-15bis
   speed_maxSpeed: 0
@@ -828,6 +828,7 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
 --- !u!114 &1225637261739395065
 MonoBehaviour:
@@ -929,10 +930,14 @@ MonoBehaviour:
   - {fileID: 647682638187187130}
   isPlayer: 0
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns: []
   additionalGunsGO: []
   enableAG: 0
@@ -1060,6 +1065,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!1 &7110382407074392605

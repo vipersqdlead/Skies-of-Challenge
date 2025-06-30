@@ -26,15 +26,15 @@ public class SurvivalMissionSetup : MonoBehaviour
         {
             status.aircraftType = SurvivalMissionStatus.AircraftType.Trainer;
         }
-        else if (PlayerPrefs.GetInt("Survival Aircraft") >= 1 && PlayerPrefs.GetInt("Survival Aircraft") < 144)
+        else if (PlayerPrefs.GetInt("Survival Aircraft") >= 1 && PlayerPrefs.GetInt("Survival Aircraft") < 149)
         {
             status.aircraftType = SurvivalMissionStatus.AircraftType.Prop;
         }
-        else if (PlayerPrefs.GetInt("Survival Aircraft") >= 144 && PlayerPrefs.GetInt("Survival Aircraft") < 197)
+        else if (PlayerPrefs.GetInt("Survival Aircraft") >= 148 && PlayerPrefs.GetInt("Survival Aircraft") < 211)
         {
             status.aircraftType = SurvivalMissionStatus.AircraftType.JetTier1;
         }
-        else if (PlayerPrefs.GetInt("Survival Aircraft") >= 197)
+        else if (PlayerPrefs.GetInt("Survival Aircraft") >= 211)
         {
             status.aircraftType = SurvivalMissionStatus.AircraftType.JetTier2;
         }

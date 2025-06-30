@@ -32,6 +32,7 @@ Transform:
   m_Children:
   - {fileID: 6802041350003371912}
   - {fileID: 5141681603589729707}
+  - {fileID: 1213626802616865863}
   - {fileID: 1729758405275104985}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49,6 +50,98 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skybox: {fileID: 2100000, guid: 20d4f77b9022eab48b4d94599ed4bf82, type: 2}
   fog: 0.000005
+--- !u!1 &5956903732581790056
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1213626802616865863}
+  - component: {fileID: 1197099206669891368}
+  - component: {fileID: 7158158521774161473}
+  m_Layer: 10
+  m_Name: Terrain (1)
+  m_TagString: Ground
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &1213626802616865863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5956903732581790056}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -32000, y: 0, z: -32000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7219423663361394291}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!218 &1197099206669891368
+Terrain:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5956903732581790056}
+  m_Enabled: 1
+  serializedVersion: 6
+  m_TerrainData: {fileID: 15600000, guid: 6c241ff445a072043a41daa3bfdbe5ae, type: 2}
+  m_TreeDistance: 5000
+  m_TreeBillboardDistance: 50
+  m_TreeCrossFadeLength: 5
+  m_TreeMaximumFullLODCount: 50
+  m_DetailObjectDistance: 80
+  m_DetailObjectDensity: 1
+  m_HeightmapPixelError: 5
+  m_SplatMapDistance: 1000
+  m_HeightmapMaximumLOD: 0
+  m_ShadowCastingMode: 2
+  m_DrawHeightmap: 1
+  m_DrawInstanced: 0
+  m_DrawTreesAndFoliage: 1
+  m_StaticShadowCaster: 0
+  m_IgnoreQualitySettings: 0
+  m_ReflectionProbeUsage: 1
+  m_MaterialTemplate: {fileID: 2100000, guid: 594ea882c5a793440b60ff72d896021e, type: 2}
+  m_BakeLightProbesForTrees: 1
+  m_PreserveTreePrototypeLayers: 0
+  m_DeringLightProbesForTrees: 1
+  m_ReceiveGI: 1
+  m_ScaleInLightmap: 0.0256
+  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
+  m_GroupingID: 0
+  m_RenderingLayerMask: 1
+  m_AllowAutoConnect: 1
+  m_EnableHeightmapRayTracing: 1
+  m_EnableTreesAndDetailsRayTracing: 0
+  m_TreeMotionVectorModeOverride: 3
+--- !u!154 &7158158521774161473
+TerrainCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5956903732581790056}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_TerrainData: {fileID: 15600000, guid: 6c241ff445a072043a41daa3bfdbe5ae, type: 2}
+  m_EnableTreeColliders: 1
 --- !u!1 &6169353589964060784
 GameObject:
   m_ObjectHideFlags: 0
@@ -233,7 +326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5141681603589729707
 Transform:
   m_ObjectHideFlags: 0
@@ -381,6 +474,11 @@ PrefabInstance:
       propertyPath: SAM_Launches
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -464,6 +562,11 @@ PrefabInstance:
         type: 3}
       propertyPath: SAM_Launches
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -549,6 +652,11 @@ PrefabInstance:
       propertyPath: SAM_Launches
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -632,6 +740,11 @@ PrefabInstance:
         type: 3}
       propertyPath: SAM_Launches
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -717,6 +830,11 @@ PrefabInstance:
       propertyPath: SAM_Launches
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -800,6 +918,11 @@ PrefabInstance:
         type: 3}
       propertyPath: SAM_Launches
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -885,6 +1008,11 @@ PrefabInstance:
       propertyPath: SAM_Launches
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -968,6 +1096,11 @@ PrefabInstance:
         type: 3}
       propertyPath: SAM_Launches
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1053,6 +1186,11 @@ PrefabInstance:
       propertyPath: SAM_Launches
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1136,6 +1274,11 @@ PrefabInstance:
         type: 3}
       propertyPath: SAM_Launches
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1221,6 +1364,11 @@ PrefabInstance:
       propertyPath: SAM_Launches
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1304,6 +1452,11 @@ PrefabInstance:
         type: 3}
       propertyPath: SAM_Launches
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1389,6 +1542,11 @@ PrefabInstance:
       propertyPath: SAM_Launches
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1472,6 +1630,11 @@ PrefabInstance:
         type: 3}
       propertyPath: SAM_Launches
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1557,6 +1720,11 @@ PrefabInstance:
       propertyPath: SAM_Launches
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1640,6 +1808,11 @@ PrefabInstance:
         type: 3}
       propertyPath: SAM_Launches
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1725,6 +1898,11 @@ PrefabInstance:
       propertyPath: SAM_Launches
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1808,6 +1986,11 @@ PrefabInstance:
         type: 3}
       propertyPath: SAM_Launches
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6060476978901929087, guid: 10ea05e0741105b46abb1753ed528e0a,
+        type: 3}
+      propertyPath: chanceOfLaunchPerSecond
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
