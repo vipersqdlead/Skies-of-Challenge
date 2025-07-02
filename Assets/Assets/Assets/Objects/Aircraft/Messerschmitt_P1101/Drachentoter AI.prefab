@@ -75,30 +75,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3091880813656110447, guid: 3c2b407d05bad2e46a040607480ffa14,
         type: 3}
-      propertyPath: HP
-      value: 170
-      objectReference: {fileID: 0}
-    - target: {fileID: 3091880813656110447, guid: 3c2b407d05bad2e46a040607480ffa14,
-        type: 3}
-      propertyPath: Defense
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 3091880813656110447, guid: 3c2b407d05bad2e46a040607480ffa14,
-        type: 3}
-      propertyPath: pointsWorth
-      value: 830
-      objectReference: {fileID: 0}
-    - target: {fileID: 3091880813656110447, guid: 3c2b407d05bad2e46a040607480ffa14,
-        type: 3}
       propertyPath: countsAsKill
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3091880813656110447, guid: 3c2b407d05bad2e46a040607480ffa14,
-        type: 3}
-      propertyPath: destroyedObject
-      value: 
-      objectReference: {fileID: 8300878517148045614, guid: 9526e90726d4b614c91b2d7d8bfc5ded,
-        type: 3}
     - target: {fileID: 3612149661656831037, guid: 3c2b407d05bad2e46a040607480ffa14,
         type: 3}
       propertyPath: m_IsActive
@@ -855,9 +834,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 5550382484144899183}
   targetLookRange: 15000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 0
   irController: {fileID: 8802727897444825988}
+  flares: {fileID: 0}
   missileCooldownTime: 20
   missileCooldownTimer: 20
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
 --- !u!114 &5550382484144899183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -871,6 +856,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 2391312675957511033}
+  hub: {fileID: 0}
   engineControl: {fileID: 530068227298232715}
   steeringSpeed: 50
   minSpeed: 200

@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class WaveSpawner : MonoBehaviour
 {
     public FlightModel player;
+	[SerializeField] List<GameObject> allAircraftPrefabs;
+	[SerializeField] List<GameObject> sortedAircraft;
+	[SerializeField] List<GameObject> eligibleAircraft;
     [SerializeField] List<GameObject> jetTier1WavePrefabs;
     [SerializeField] List<GameObject> jetTier1BonusWavePrefabs;
     [SerializeField] List<GameObject> propWavePrefabs;
@@ -15,6 +19,50 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] List<Transform> SpawnPositions;
     public EnemyMarkers markers;
     public SurvivalMissionStatus status;
+
+	public int currentDifficulty = 400;
+
+	public void OrderLists()
+	{	
+		sortedAircraft = allAircraftPrefabs.OrderBy(p => p.GetComponent<Wave>().aircraft[0].gameObject.GetComponent<HealthPoints>().pointsWorth).ToList();
+		eligibleAircraft = GetAircraftByDifficultyRange();
+	}
+	
+	public List<GameObject> GetAircraftByDifficultyRange(int range = 100)
+	{
+		int minPoints = currentDifficulty - range;
+		int maxPoints = currentDifficulty + range;
+
+		return sortedAircraft
+			.Where(p =>
+			{
+				var hp = p.GetComponent<Wave>().aircraft[0].gameObject.GetComponent<HealthPoints>();
+				return hp != null && hp.pointsWorth >= minPoints && hp.pointsWorth <= maxPoints;
+			})
+			.OrderBy(p => p.GetComponent<Wave>().aircraft[0].gameObject.GetComponent<HealthPoints>().pointsWorth)
+			.ToList();
+	}
+
+	public void spawnEnemyWave(int numberOfEnemies)
+	{
+		List<Transform> auxSpawnPositions = SpawnPositions;
+
+        for (int i = 0; i < numberOfEnemies; i++)
+        {
+            int spawnRand = Random.Range(0, auxSpawnPositions.Count);
+            GameObject newWave = Instantiate(eligibleAircraft[Random.Range(0, eligibleAircraft.Count)], GetSafeSpawnAltitude(auxSpawnPositions[spawnRand].position, player.transform.position.y), auxSpawnPositions[spawnRand].rotation);
+            //auxSpawnPositions.Remove(auxSpawnPositions[spawnRand]);
+            Wave wave = newWave.GetComponent<Wave>();
+            wave.AddRenderersToMarker(markers, status, player);
+            foreach (AircraftHub hub in wave.aircraft)
+            {
+                if (hub.transform.position.y < 0f)
+                {
+                    hub.transform.position = new Vector3(hub.transform.position.x, Mathf.Abs(hub.transform.position.y), hub.transform.position.z);
+                }
+            }
+        }
+	}
 
     public void JetTier1SpawnWave(int numberOfEnemies)
     {
@@ -36,6 +84,7 @@ public class WaveSpawner : MonoBehaviour
             }
         }
     }
+	
     public void JetTier1BonusSpawnWave()
     {
         List<Transform> auxSpawnPositions = SpawnPositions;

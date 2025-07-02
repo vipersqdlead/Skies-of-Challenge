@@ -171,8 +171,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 173ee719670c8e14aa2b9ff7a4fefd90, type: 3}
   - {fileID: 7005174183826454184, guid: 36bb9385ed8bf2e46b9863f8c945c1b3, type: 3}
   - {fileID: 7005174183826454184, guid: 173ee719670c8e14aa2b9ff7a4fefd90, type: 3}
+  shellList: []
   rateOfFireRPM: 1080
   muzzleVelocity: 900
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 7533204519348891505}
   rateOfFire: 0
@@ -181,6 +183,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &7533204519348891505
 AudioSource:
@@ -1750,8 +1753,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 173ee719670c8e14aa2b9ff7a4fefd90, type: 3}
   - {fileID: 7005174183826454184, guid: 36bb9385ed8bf2e46b9863f8c945c1b3, type: 3}
   - {fileID: 7005174183826454184, guid: 173ee719670c8e14aa2b9ff7a4fefd90, type: 3}
+  shellList: []
   rateOfFireRPM: 1080
   muzzleVelocity: 900
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 0}
   rateOfFire: 0
@@ -1760,6 +1765,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!1 &4804918420130652513
 GameObject:
@@ -2586,6 +2592,7 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
 --- !u!114 &840625624679607077
 MonoBehaviour:
@@ -2624,10 +2631,14 @@ MonoBehaviour:
   - {fileID: 2350010869743828868}
   isPlayer: 1
   trigger: 0
+  baseVelocity: 0
   useConvergence: 1
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 899135470932021634}
   - {fileID: 2665327740637057716}
@@ -2668,7 +2679,6 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
-  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
@@ -2712,7 +2722,7 @@ MonoBehaviour:
   isPlayer: 1
   isGroundTgt: 0
   countsAsKill: 0
-  pointsWorth: 370
+  pointsWorth: 330
   HP: 200
   hpPercent: 0
   Defense: 35
@@ -2745,6 +2755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &2805436575942880223
@@ -3006,6 +3017,7 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 0
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 2000
   isCagedSeeker: 0
   Target: {fileID: 0}
@@ -3204,8 +3216,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 173ee719670c8e14aa2b9ff7a4fefd90, type: 3}
   - {fileID: 7005174183826454184, guid: 36bb9385ed8bf2e46b9863f8c945c1b3, type: 3}
   - {fileID: 7005174183826454184, guid: 173ee719670c8e14aa2b9ff7a4fefd90, type: 3}
+  shellList: []
   rateOfFireRPM: 1080
   muzzleVelocity: 900
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 0}
   rateOfFire: 0
@@ -3214,6 +3228,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!1 &6630432600703455235
 GameObject:
@@ -4048,8 +4063,10 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 173ee719670c8e14aa2b9ff7a4fefd90, type: 3}
   - {fileID: 7005174183826454184, guid: 36bb9385ed8bf2e46b9863f8c945c1b3, type: 3}
   - {fileID: 7005174183826454184, guid: 173ee719670c8e14aa2b9ff7a4fefd90, type: 3}
+  shellList: []
   rateOfFireRPM: 1080
   muzzleVelocity: 900
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 0}
   rateOfFire: 0
@@ -4058,6 +4075,7 @@ MonoBehaviour:
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!1 &8856868854202658486
 GameObject:

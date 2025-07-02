@@ -14,7 +14,7 @@ public class SAM_Launcher : MonoBehaviour
     [SerializeField] protected Transform msslSpawn;
     [SerializeField] AudioSource fireSound;
     [SerializeField] bool pathOfFireObstructed = false;
-    [SerializeField] float firingRange;
+    [SerializeField] float firingRange, minimumRange;
     [SerializeField] Transform aimPoint;
     HealthPoints health;
     [SerializeField] GameObject missileAlert;
@@ -27,6 +27,8 @@ public class SAM_Launcher : MonoBehaviour
             LookingForTargets();
             return;
         }
+		
+		health = GetComponent<HealthPoints>();
     }
 
     // Update is called once per frame
@@ -41,10 +43,15 @@ public class SAM_Launcher : MonoBehaviour
 
         if (target != null)
         {
+			if(aimPoint == null)
+			{
+				aimPoint = target.transform;
+			}
+			
             transform.LookAt(target.transform);
             RaycastHit hitInfo;
 
-            if (Physics.SphereCast(transform.position, 20f, transform.forward, out hitInfo))
+            if (Physics.Raycast(transform.position, transform.forward.normalized * 10f, out hitInfo))
             {
                 if(hitInfo.collider.gameObject != target)
                 {
@@ -71,7 +78,8 @@ public class SAM_Launcher : MonoBehaviour
                         SAM_Launches--;
                         if(SAM_Launches == 0)
                         {
-                            health.pointsWorth = 50;
+							if(health != null) { health.pointsWorth = 50; }
+							this.enabled = false;
                         }
                         timer = 0f;
                     }
@@ -79,15 +87,15 @@ public class SAM_Launcher : MonoBehaviour
             }
             if(missile != null)
             {
-
-                if (Vector3.Distance(transform.position, target.transform.position) < Vector3.Distance(transform.position, missile.transform.position))
+				/*
+                if (Vector3.Distance(transform.position, target.transform.position) > Vector3.Distance(transform.position, missile.transform.position))
                 {
 					if(missile.GetComponent<SAG_Missile>() != null)
 					{
 						missile.GetComponent<SAG_Missile>().Guide = null;
 					}
                     missile = null;
-                }
+                } */
             }
 
         }
@@ -102,8 +110,6 @@ public class SAM_Launcher : MonoBehaviour
                 msslControl.isPlayerTheLauncher = false;
                 msslControl.LaunchingPlane = gameObject;
                 msslControl.Guide = aimPoint;
-                Shell msslShell = missile.GetComponent<Shell>();
-                msslShell.DmgToAir = 4000;
             }
     }
 

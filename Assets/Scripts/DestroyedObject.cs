@@ -84,6 +84,20 @@ public class DestroyedObject : MonoBehaviour
         }
     }
 	
+	void OnCollisionEnter(Collision collision)
+	{
+		if (collision.collider.gameObject.CompareTag("Water"))
+        {
+            InstantiateSplash();
+            FullyDestroy();
+        }
+        else if (collision.collider.gameObject.CompareTag("Ground"))
+        {
+            InstantiateWreckage();
+            FullyDestroy();
+        }
+	}
+	
 	IEnumerator SpawnParachute()
     {
 		float timeToChute = Random.Range(1.5f, 2f);

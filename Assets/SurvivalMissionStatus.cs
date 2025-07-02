@@ -15,6 +15,7 @@ public class SurvivalMissionStatus : MonoBehaviour
     int kills;
     public GameObject Player;
     public string aircraftName;
+	[SerializeField] int battleRating;
     [SerializeField] AircraftHub playerAcHub;
     public AircraftType aircraftType;
     public float MissionTimer;
@@ -54,7 +55,12 @@ public class SurvivalMissionStatus : MonoBehaviour
     {
         Fade(true);
         playerAcHub = Player.GetComponent<AircraftHub>();
-        MissionStart.GetComponent<AudioSource>().Play();
+		
+		battleRating = playerAcHub.hp.pointsWorth;
+		waveSpawner.currentDifficulty = battleRating;
+		waveSpawner.OrderLists();
+		
+        //MissionStart.GetComponent<AudioSource>().Play();
 
         bgm.volume = PlayerPrefs.GetFloat("BGM Volume", 0.7f);
         bgmVolume.value = bgm.volume;
@@ -79,6 +85,8 @@ public class SurvivalMissionStatus : MonoBehaviour
                 playerAcHub.sagControl.canReload = true;
             }
         }
+		
+
     }
 
     // Update is called once per frame
@@ -145,7 +153,7 @@ public class SurvivalMissionStatus : MonoBehaviour
         }
         TimeLeft.text = "Time: " + (int)MissionTimer;
         KillCountUI.text = "Destroyed: " + KillCounter.Kills;
-        PointCount.text = "Points: " + KillCounter.Points;
+        PointCount.text = "Points: " + (((int)MissionTimer * 10) + KillCounter.Points);
         currentWaveUI.text = "Wave " + currentWave;
         enemiesLeftText.text = enemyFighters.Count + " Enemies Left";
         BlackBG.fillClockwise = true;
@@ -599,23 +607,23 @@ public class SurvivalMissionStatus : MonoBehaviour
 						text = "";
                         if (currentWave <= 3)
                         {
-                            waveSpawner.TrainerSpawnWave(1);
+                            waveSpawner.spawnEnemyWave(1);
                         }
                         else if (currentWave > 3 && currentWave <= 6)
                         {
-                            waveSpawner.TrainerSpawnWave(2);
+                            waveSpawner.spawnEnemyWave(2);
                         }
                         else if (currentWave > 6 && currentWave <= 9)
                         {
-                            waveSpawner.TrainerSpawnWave(3);
+                            waveSpawner.spawnEnemyWave(3);
                         }
                         else if (currentWave > 9 && currentWave <= 12)
                         {
-                            waveSpawner.TrainerSpawnWave(4);
+                            waveSpawner.spawnEnemyWave(4);
                         }
                         else
                         {
-                            waveSpawner.TrainerSpawnWave(6);
+                            waveSpawner.spawnEnemyWave(6);
                         }
                     }
 
@@ -633,23 +641,23 @@ public class SurvivalMissionStatus : MonoBehaviour
 						text = "";
                         if (currentWave <= 2)
                         {
-                            waveSpawner.PropSpawnWave(1);
+                            waveSpawner.spawnEnemyWave(1);
                         }
                         else if (currentWave > 2 && currentWave < 5)
                         {
-                            waveSpawner.PropSpawnWave(2);
+                            waveSpawner.spawnEnemyWave(2);
                         }
                         else if (currentWave > 5 && currentWave <= 8)
                         {
-                            waveSpawner.PropSpawnWave(3);
+                            waveSpawner.spawnEnemyWave(3);
                         }
                         else if (currentWave > 8 && currentWave < 10)
                         {
-                            waveSpawner.PropSpawnWave(4);
+                            waveSpawner.spawnEnemyWave(4);
                         }
                         else
                         {
-                            waveSpawner.PropSpawnWave(6);
+                            waveSpawner.spawnEnemyWave(6);
                         }
                     }
                     break;
@@ -666,23 +674,23 @@ public class SurvivalMissionStatus : MonoBehaviour
 						text = "";
                         if (currentWave <= 3)
                         {
-                            waveSpawner.JetTier1SpawnWave(1);
+                            waveSpawner.spawnEnemyWave(1);
                         }
                         else if (currentWave > 3 && currentWave <= 6)
                         {
-                            waveSpawner.JetTier1SpawnWave(2);
+                            waveSpawner.spawnEnemyWave(2);
                         }
                         else if (currentWave > 6 && currentWave <= 9)
                         {
-                            waveSpawner.JetTier1SpawnWave(3);
+                            waveSpawner.spawnEnemyWave(3);
                         }
                         else if (currentWave > 9 && currentWave <= 12)
                         {
-                            waveSpawner.JetTier1SpawnWave(4);
+                            waveSpawner.spawnEnemyWave(4);
                         }
                         else
                         {
-                            waveSpawner.JetTier1SpawnWave(6);
+                            waveSpawner.spawnEnemyWave(6);
                         }
                     }
 
@@ -700,23 +708,23 @@ public class SurvivalMissionStatus : MonoBehaviour
 						text = "";
                         if (currentWave <= 3)
                         {
-                            waveSpawner.JetTier2SpawnWave(1);
+                            waveSpawner.spawnEnemyWave(1);
                         }
                         else if (currentWave > 3 && currentWave <= 6)
                         {
-                            waveSpawner.JetTier2SpawnWave(2);
+                            waveSpawner.spawnEnemyWave(2);
                         }
                         else if (currentWave > 6 && currentWave <= 9)
                         {
-                            waveSpawner.JetTier2SpawnWave(3);
+                            waveSpawner.spawnEnemyWave(3);
                         }
                         else if (currentWave > 9 && currentWave <= 12)
                         {
-                            waveSpawner.JetTier2SpawnWave(4);
+                            waveSpawner.spawnEnemyWave(4);
                         }
                         else
                         {
-                            waveSpawner.JetTier2SpawnWave(6);
+                            waveSpawner.spawnEnemyWave(6);
                         }
                     }
                     break;

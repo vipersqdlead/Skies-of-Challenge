@@ -223,11 +223,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 7803345591212753084}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &7803345591212753084
 AudioSource:
@@ -376,11 +384,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 552356511557082048}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &552356511557082048
 AudioSource:
@@ -782,11 +798,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.01
   shot: {fileID: 4436360961213074141}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &4436360961213074141
 AudioSource:
@@ -1018,11 +1042,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.01
   shot: {fileID: 2119084581778940175}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &2119084581778940175
 AudioSource:
@@ -1340,11 +1372,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 2101923554521185411}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &2101923554521185411
 AudioSource:
@@ -1717,9 +1757,11 @@ MonoBehaviour:
   - {fileID: 1567464782764049963}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 400
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &660393399168803367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1824,9 +1866,11 @@ MonoBehaviour:
   - {fileID: 9116874584952358530}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 420
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &713108985402652069
 GameObject:
   m_ObjectHideFlags: 0
@@ -1878,11 +1922,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 8494788598985581756}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &8494788598985581756
 AudioSource:
@@ -2085,8 +2137,10 @@ MonoBehaviour:
   trigger: 0
   pathOfFireObstructed: 0
   firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  cannonBurstLength: 0.52
+  cannonBurstCooldown: 2.8
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &836039547565566295
 GameObject:
   m_ObjectHideFlags: 0
@@ -2138,11 +2192,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 2450021343026982019}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &2450021343026982019
 AudioSource:
@@ -2594,8 +2656,10 @@ MonoBehaviour:
   trigger: 0
   pathOfFireObstructed: 0
   firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  cannonBurstLength: 0.4
+  cannonBurstCooldown: 2
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &1010087240594288306
 GameObject:
   m_ObjectHideFlags: 0
@@ -2815,11 +2879,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 351352539933975863}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &351352539933975863
 AudioSource:
@@ -3021,9 +3093,11 @@ MonoBehaviour:
   - {fileID: 8058448602653622004}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 430
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &1141147085248520532
 GameObject:
   m_ObjectHideFlags: 0
@@ -3158,11 +3232,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 6101908262028429846}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &6101908262028429846
 AudioSource:
@@ -3396,11 +3478,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.01
   shot: {fileID: 65361563802552620}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &65361563802552620
 AudioSource:
@@ -3602,9 +3692,11 @@ MonoBehaviour:
   - {fileID: 3259531352589360329}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 530
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &1354763582160736963
 GameObject:
   m_ObjectHideFlags: 0
@@ -3709,9 +3801,11 @@ MonoBehaviour:
   - {fileID: 4208080138053504950}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 550
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &1485527523484740888
 GameObject:
   m_ObjectHideFlags: 0
@@ -3933,11 +4027,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 5703560983086526660}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &5703560983086526660
 AudioSource:
@@ -4172,11 +4274,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 2970338976118957317}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &2970338976118957317
 AudioSource:
@@ -4660,11 +4770,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 4928519962274155703}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &4928519962274155703
 AudioSource:
@@ -4896,11 +5014,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.01
   shot: {fileID: 1410286688901422956}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &1410286688901422956
 AudioSource:
@@ -5185,9 +5311,11 @@ MonoBehaviour:
   - {fileID: 8626874358445161143}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 550
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &2262825387324676553
 GameObject:
   m_ObjectHideFlags: 0
@@ -5409,11 +5537,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 6512775869456191127}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &6512775869456191127
 AudioSource:
@@ -5562,11 +5698,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 5623685416632537219}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &5623685416632537219
 AudioSource:
@@ -5893,6 +6037,7 @@ MonoBehaviour:
   hitSound: {fileID: 0}
   fireSound: {fileID: 0}
   invulnerable: 0
+  invulnerableTimer: 0
 --- !u!1 &2877087312455697905
 GameObject:
   m_ObjectHideFlags: 0
@@ -6254,9 +6399,11 @@ MonoBehaviour:
   - {fileID: 8041400228364472906}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 2000
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 450
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &3170977354555037350
 GameObject:
   m_ObjectHideFlags: 0
@@ -6480,11 +6627,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 3054945923994486523}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &3054945923994486523
 AudioSource:
@@ -6633,11 +6788,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 6888565166586696457}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &6888565166586696457
 AudioSource:
@@ -7178,9 +7341,11 @@ MonoBehaviour:
   - {fileID: 6982645678902701617}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 470
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &3692454685443541333
 GameObject:
   m_ObjectHideFlags: 0
@@ -7911,11 +8076,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 995729949766198894}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &995729949766198894
 AudioSource:
@@ -8117,9 +8290,11 @@ MonoBehaviour:
   - {fileID: 8023722031504830544}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 540
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &4291315669091070656
 GameObject:
   m_ObjectHideFlags: 0
@@ -8649,9 +8824,11 @@ MonoBehaviour:
   - {fileID: 5930929268094382045}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 580
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &4591530754574289755
 GameObject:
   m_ObjectHideFlags: 0
@@ -8703,11 +8880,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.01
   shot: {fileID: 6348621888671569723}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &6348621888671569723
 AudioSource:
@@ -9025,11 +9210,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 376999262420460075}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &376999262420460075
 AudioSource:
@@ -9231,9 +9424,11 @@ MonoBehaviour:
   - {fileID: 5968561200649153737}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 450
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &4756632828713670834
 GameObject:
   m_ObjectHideFlags: 0
@@ -9338,9 +9533,11 @@ MonoBehaviour:
   - {fileID: 705949750303068324}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 530
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &4796392562714196893
 GameObject:
   m_ObjectHideFlags: 0
@@ -9784,9 +9981,11 @@ MonoBehaviour:
   - {fileID: 261718960780830541}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 560
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &4918426234996765402
 GameObject:
   m_ObjectHideFlags: 0
@@ -9838,11 +10037,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 563889422695394054}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &563889422695394054
 AudioSource:
@@ -10298,9 +10505,11 @@ MonoBehaviour:
   - {fileID: 7191516726100979682}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 430
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &5289059285615264782
 GameObject:
   m_ObjectHideFlags: 0
@@ -10352,11 +10561,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 6832896640654387910}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &6832896640654387910
 AudioSource:
@@ -10641,9 +10858,11 @@ MonoBehaviour:
   - {fileID: 6982311876692850008}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 420
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &5350753189888020880
 GameObject:
   m_ObjectHideFlags: 0
@@ -10695,11 +10914,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 1794124527539833604}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &1794124527539833604
 AudioSource:
@@ -11015,11 +11242,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.01
   shot: {fileID: 9012416822424993158}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &9012416822424993158
 AudioSource:
@@ -11307,9 +11542,11 @@ MonoBehaviour:
   - {fileID: 5267049287618682352}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 530
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &5625898166483171688
 GameObject:
   m_ObjectHideFlags: 0
@@ -11414,9 +11651,11 @@ MonoBehaviour:
   - {fileID: 2518376970193275541}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 500
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &5636008636512978511
 GameObject:
   m_ObjectHideFlags: 0
@@ -11634,11 +11873,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.01
   shot: {fileID: 4473118245780305966}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &4473118245780305966
 AudioSource:
@@ -11786,11 +12033,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.01
   shot: {fileID: 4829966344552943804}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &4829966344552943804
 AudioSource:
@@ -11939,11 +12194,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.01
   shot: {fileID: 5920161002680940521}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &5920161002680940521
 AudioSource:
@@ -12092,11 +12355,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 781037408292347444}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &781037408292347444
 AudioSource:
@@ -12499,11 +12770,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 1794094430885009218}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &1794094430885009218
 AudioSource:
@@ -13786,9 +14065,11 @@ MonoBehaviour:
   - {fileID: 532558444390532163}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 520
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &6843646431152952639
 GameObject:
   m_ObjectHideFlags: 0
@@ -13978,9 +14259,11 @@ MonoBehaviour:
   - {fileID: 1837918610096550331}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 620
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &6947580721920276820
 GameObject:
   m_ObjectHideFlags: 0
@@ -14338,9 +14621,11 @@ MonoBehaviour:
   - {fileID: 2556806188254330973}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 460
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &7402333328888424187
 GameObject:
   m_ObjectHideFlags: 0
@@ -14392,11 +14677,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 6676440715396988072}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &6676440715396988072
 AudioSource:
@@ -14710,11 +15003,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
   - {fileID: 7005174183826454184, guid: c08fd058805abfe41a5ac09e33c48c05, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.01
   shot: {fileID: 1290498485445558855}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &1290498485445558855
 AudioSource:
@@ -14863,11 +15164,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.01
   shot: {fileID: 5590331444892608036}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &5590331444892608036
 AudioSource:
@@ -15016,11 +15325,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.01
   shot: {fileID: 5524561600536061480}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &5524561600536061480
 AudioSource:
@@ -15222,9 +15539,11 @@ MonoBehaviour:
   - {fileID: 712281933539917457}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 540
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &7536322915483759068
 GameObject:
   m_ObjectHideFlags: 0
@@ -15500,9 +15819,11 @@ MonoBehaviour:
   - {fileID: 8262986094786328230}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 590
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &7636692592626643123
 GameObject:
   m_ObjectHideFlags: 0
@@ -15725,11 +16046,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.01
   shot: {fileID: 4068081794814612405}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &4068081794814612405
 AudioSource:
@@ -15931,9 +16260,11 @@ MonoBehaviour:
   - {fileID: 2559677088733304305}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 510
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &7757200330781673514
 GameObject:
   m_ObjectHideFlags: 0
@@ -16124,9 +16455,11 @@ MonoBehaviour:
   - {fileID: 6928400059322878820}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 490
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &7785757872116964668
 GameObject:
   m_ObjectHideFlags: 0
@@ -16178,11 +16511,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 6739253395503911909}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &6739253395503911909
 AudioSource:
@@ -16331,11 +16672,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 9102670632690129410}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &9102670632690129410
 AudioSource:
@@ -16484,11 +16833,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
+  shellList: []
   rateOfFireRPM: 500
   muzzleVelocity: 750
+  baseVelocity: 0
   accuracyError: 0.01
   shot: {fileID: 1748030205955190723}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &1748030205955190723
 AudioSource:
@@ -16637,11 +16994,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 3506869710551093668}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &3506869710551093668
 AudioSource:
@@ -16930,8 +17295,10 @@ MonoBehaviour:
   trigger: 0
   pathOfFireObstructed: 0
   firingRange: 2000
-  cannonBurstLength: 3
+  cannonBurstLength: 0.25
   cannonBurstCooldown: 1.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &8335922276574280621
 GameObject:
   m_ObjectHideFlags: 0
@@ -17068,11 +17435,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 5577921231147239883}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &5577921231147239883
 AudioSource:
@@ -17274,9 +17649,11 @@ MonoBehaviour:
   - {fileID: 7681333406519161592}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 2000
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 520
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &8465373877630669096
 GameObject:
   m_ObjectHideFlags: 0
@@ -17328,11 +17705,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 8893125839681875445}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &8893125839681875445
 AudioSource:
@@ -17534,9 +17919,11 @@ MonoBehaviour:
   - {fileID: 4123087273860608282}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 410
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &8573111616456671667
 GameObject:
   m_ObjectHideFlags: 0
@@ -17726,9 +18113,11 @@ MonoBehaviour:
   - {fileID: 5744671372501051113}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 480
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &8739895251991112789
 GameObject:
   m_ObjectHideFlags: 0
@@ -17946,11 +18335,19 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 650
   muzzleVelocity: 800
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 2490730585514445538}
   rateOfFire: 0
+  rofTimer: 0
+  overheatTimer: 0
+  overheated: 0
+  overheatResetTimer: 0
+  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &2490730585514445538
 AudioSource:
@@ -18238,9 +18635,11 @@ MonoBehaviour:
   - {fileID: 2892360583209212772}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 520
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &8901455326708176007
 GameObject:
   m_ObjectHideFlags: 0
@@ -18346,8 +18745,10 @@ MonoBehaviour:
   trigger: 0
   pathOfFireObstructed: 0
   firingRange: 2000
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  cannonBurstLength: 0.4
+  cannonBurstCooldown: 2.2
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &8945805249577004813
 GameObject:
   m_ObjectHideFlags: 0
@@ -18452,9 +18853,11 @@ MonoBehaviour:
   - {fileID: 8347562364226485096}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 570
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &9023634540408466409
 GameObject:
   m_ObjectHideFlags: 0
@@ -18816,9 +19219,11 @@ MonoBehaviour:
   - {fileID: 1533930196501808845}
   trigger: 0
   pathOfFireObstructed: 0
-  firingRange: 800
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  firingRange: 440
+  cannonBurstLength: 0.35
+  cannonBurstCooldown: 2.5
+  hasTimedFuze: 0
+  estimatedTimeToBurst: 0
 --- !u!1 &9197133758971224208
 GameObject:
   m_ObjectHideFlags: 0

@@ -52,7 +52,7 @@ public class SAG_Missile : MonoBehaviour
             {
                 Guidance();
                 Distance = Vector3.Distance(transform.position, Guide.transform.position);
-                RWRreturn();
+                // RWRreturn();
             }
         }
 
@@ -98,7 +98,7 @@ public class SAG_Missile : MonoBehaviour
 
     private void OnDisable()
     {
-        if (!isPlayerTheLauncher)
+        /*if (!isPlayerTheLauncher)
         {
             if(missileAlert != null)
             {
@@ -106,7 +106,7 @@ public class SAG_Missile : MonoBehaviour
                 missileAlert.GetComponent<AudioSource>().enabled = false;
                 print("Disable RWR warning: " + missileAlert.GetComponent<TMP_Text>().enabled + " & " + missileAlert.GetComponent<AudioSource>().enabled);
             }
-        }
+        }*/
     }
 
     Vector3 lastVelocity;

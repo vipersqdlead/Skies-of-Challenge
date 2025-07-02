@@ -10,7 +10,7 @@ public class RocketEngine : MonoBehaviour
 	float totalRocketTimer;
 	[SerializeField] float initialMass, finalMass;
     [SerializeField] Rigidbody rb;
-    [SerializeField] bool rocketDelay;
+    [SerializeField] bool rocketDelay, destroyOnceOutOfFuel;
     [SerializeField] ParticleSystem rocketTrailParticle, smoke;
     [SerializeField] AudioSource launchSnd, rocketSound;
 
@@ -77,7 +77,7 @@ public class RocketEngine : MonoBehaviour
                 }
                 if (smoke != null)
                 {
-		    var smokeEmission = smoke.emission;
+					var smokeEmission = smoke.emission;
                     smokeEmission.enabled = false;
                 }
                 if (rocketSound != null)
@@ -86,6 +86,12 @@ public class RocketEngine : MonoBehaviour
                 }
                 //KeepParticlesAlive();
                 isAlreadyOutofFuel = true;
+				
+				if(destroyOnceOutOfFuel)
+				{
+					GetComponent<RocketScript>().Explosion();
+				}
+				
                 this.enabled = false;
             }
             else

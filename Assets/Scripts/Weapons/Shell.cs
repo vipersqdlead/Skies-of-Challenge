@@ -54,6 +54,11 @@ public class Shell : MonoBehaviour
         Instantiate(ExplosionSmaller, transform.position, Quaternion.identity);
     }
 	
+	private void InstantiateExplosions(Vector3 hitPosition)
+    {
+        Instantiate(ExplosionSmaller, transform.position, Quaternion.identity);
+    }
+	
 	private void InstantiateSplash()
 	{
 		Instantiate(waterSplashPrefab, transform.position, Quaternion.identity);
@@ -132,7 +137,7 @@ public class Shell : MonoBehaviour
 			}
 			else
 			{
-				InstantiateExplosions();
+				InstantiateExplosions(collision.GetContact(0).point);
 			}
             //Destroy(gameObject);
 			CheckToDestroy();

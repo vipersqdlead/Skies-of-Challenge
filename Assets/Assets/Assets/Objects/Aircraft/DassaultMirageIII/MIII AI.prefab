@@ -139,7 +139,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119144134666846188}
   serializedVersion: 4
-  m_Mass: 6900
+  m_Mass: 6240
   m_Drag: 0
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -192,7 +192,7 @@ MonoBehaviour:
   wingSpan: 8.22
   wingArea: 34.85
   wingType: 2
-  sweepAngle: 60
+  sweepAngle: 58
   aspectRatio: 0
   drag: 0.01
   waveDragMultiplier: 2
@@ -203,7 +203,7 @@ MonoBehaviour:
   flaps: 0
   airbrake: 0
   stalling: 0
-  stallSpeed: 150
+  stallSpeed: 185
   neverExceedSpeed: 1460
   RollForce:
     serializedVersion: 2
@@ -233,32 +233,50 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.26328474
-      value: 0.22357485
-      inSlope: 1.3685657
-      outSlope: 1.3685657
+      time: 0
+      value: 0.0017361108
+      inSlope: 0.48156407
+      outSlope: 0.48156407
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.2886294
+    - serializedVersion: 3
+      time: 0.18735878
+      value: 0.11485331
+      inSlope: 1.128579
+      outSlope: 1.128579
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.0660504
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.7476758
-      value: 0.22277924
-      inSlope: -0.47514203
-      outSlope: -0.47514203
+      time: 0.6126799
+      value: 0.3782301
+      inSlope: 0.0034534214
+      outSlope: 0.0034534214
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.009596081
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1.1980734
-      value: 0.094329536
+      time: 0.61358625
+      value: 0.37828386
+      inSlope: -0.53327715
+      outSlope: -0.53327715
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.06497313
+    - serializedVersion: 3
+      time: 1.1914247
+      value: 0.19715688
       inSlope: 0.037374243
       outSlope: 0.037374243
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.4181736
-      outWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -293,6 +311,7 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
 --- !u!114 &3664102520621388802
 MonoBehaviour:
@@ -312,10 +331,14 @@ MonoBehaviour:
   - {fileID: 4390064768502402931}
   isPlayer: 0
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns: []
   additionalGunsGO: []
   enableAG: 0
@@ -369,6 +392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!65 &9075841929564007944
@@ -390,8 +414,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 6, y: 1.2990723, z: 8.765625}
-  m_Center: {x: 0, y: 0.25305176, z: -1.5}
+  m_Size: {x: 6, y: 1.203125, z: 8.7734375}
+  m_Center: {x: -0.07470703, y: 0.2866211, z: -1.5351562}
 --- !u!114 &4781588429107943575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,6 +440,7 @@ MonoBehaviour:
   AcquisitionMaxTimer: 25
   AcquisitionTimer: 25
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 5500
   isCagedSeeker: 0
   Target: {fileID: 0}
@@ -449,23 +474,41 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
+      time: 0.000462363
+      value: 0.999999
+      inSlope: -0.42047918
+      outSlope: -0.42047918
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.14581497
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
+      time: 0.5007717
+      value: 0.70341516
+      inSlope: -0.65260905
+      outSlope: -0.65260905
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.11292632
+    - serializedVersion: 3
+      time: 0.99941856
+      value: 0.46109402
+      inSlope: -0.4224647
+      outSlope: -0.4224647
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.5004992
+      value: 0.2625829
+      inSlope: -0.3680888
+      outSlope: -0.3680888
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10120809
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -473,23 +516,41 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.5002326
-      value: 0.9950756
-      inSlope: -0.05396396
-      outSlope: -0.05396396
-      tangentMode: 0
+      time: 0
+      value: 1
+      inSlope: -0.19214407
+      outSlope: -0.19214407
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.17167382
+      value: 0.9670139
+      inSlope: 0.20110433
+      outSlope: 0.20110433
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.08758242
-    - serializedVersion: 3
-      time: 0.99797815
-      value: 1.2617952
-      inSlope: 1.3996227
-      outSlope: 1.3996227
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.095895335
       outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9837036
+      value: 1.449646
+      inSlope: -0.15535524
+      outSlope: -0.15535524
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.8008585
+      value: 0.7100692
+      inSlope: -0.9050632
+      outSlope: -0.9050632
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

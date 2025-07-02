@@ -490,6 +490,7 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
 --- !u!114 &1257820892668996848
 MonoBehaviour:
@@ -526,15 +527,19 @@ MonoBehaviour:
   - {fileID: 4390064768502402931}
   isPlayer: 1
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 3338895880342125064}
-  - {fileID: 1164719698162955422}
-  - {fileID: 4670796684794307747}
-  - {fileID: 4436691906822198384}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   additionalGunsGO:
   - {fileID: 2799508994135913574}
   enableAG: 0
@@ -569,7 +574,6 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
-  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
@@ -646,6 +650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &4458270206114227055
@@ -800,6 +805,7 @@ MonoBehaviour:
   AcquisitionMaxTimer: 25
   AcquisitionTimer: 25
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 5500
   isCagedSeeker: 0
   Target: {fileID: 0}
@@ -833,23 +839,41 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
+      time: 0.000462363
+      value: 0.999999
+      inSlope: -0.42047918
+      outSlope: -0.42047918
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.14581497
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
+      time: 0.5007717
+      value: 0.70341516
+      inSlope: -0.65260905
+      outSlope: -0.65260905
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+      inWeight: 0.33333334
+      outWeight: 0.11292632
+    - serializedVersion: 3
+      time: 0.99941856
+      value: 0.46109402
+      inSlope: -0.4224647
+      outSlope: -0.4224647
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.5004992
+      value: 0.2625829
+      inSlope: -0.3680888
+      outSlope: -0.3680888
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.10120809
+      outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -857,23 +881,41 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.5002326
-      value: 0.9950756
-      inSlope: -0.05396396
-      outSlope: -0.05396396
-      tangentMode: 0
+      time: 0
+      value: 1
+      inSlope: -0.19214407
+      outSlope: -0.19214407
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.17167382
+      value: 0.9670139
+      inSlope: 0.20110433
+      outSlope: 0.20110433
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.08758242
-    - serializedVersion: 3
-      time: 0.99797815
-      value: 1.2617952
-      inSlope: 1.3996227
-      outSlope: 1.3996227
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.095895335
       outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9837036
+      value: 1.449646
+      inSlope: -0.15535524
+      outSlope: -0.15535524
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.8008585
+      value: 0.7100692
+      inSlope: -0.9050632
+      outSlope: -0.9050632
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -14781,18 +14823,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a22a602ae3926249af6808916f0650c, type: 3}
---- !u!114 &1164719698162955422 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1704130777859607253, guid: 8a22a602ae3926249af6808916f0650c,
-    type: 3}
-  m_PrefabInstance: {fileID: 544833906437193291}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2799508994135913574 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2402240578495285805, guid: 8a22a602ae3926249af6808916f0650c,
@@ -14802,30 +14832,6 @@ GameObject:
 --- !u!114 &3338895880342125064 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3015590486485779523, guid: 8a22a602ae3926249af6808916f0650c,
-    type: 3}
-  m_PrefabInstance: {fileID: 544833906437193291}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4436691906822198384 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4187758612736256571, guid: 8a22a602ae3926249af6808916f0650c,
-    type: 3}
-  m_PrefabInstance: {fileID: 544833906437193291}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4670796684794307747 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5142445962408123112, guid: 8a22a602ae3926249af6808916f0650c,
     type: 3}
   m_PrefabInstance: {fileID: 544833906437193291}
   m_PrefabAsset: {fileID: 0}

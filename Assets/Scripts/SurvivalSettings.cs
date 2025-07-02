@@ -1255,6 +1255,7 @@ public class SurvivalSettings : MonoBehaviour
 		//Jaguar,
 		//JaguarM,
         Kaze,
+		KazeEarly,
         KazeLate,
         Draken,
         DrakenJ,
