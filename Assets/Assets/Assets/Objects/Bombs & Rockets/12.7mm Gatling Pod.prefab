@@ -29,7 +29,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.019, z: 1.738}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6365250725662277454}
   m_Father: {fileID: 1238705791482686688}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5938774652813853297
@@ -47,16 +48,21 @@ MonoBehaviour:
   shellTimer: 5
   shells:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
-  rateOfFireRPM: 850
+  shellList: []
+  rateOfFireRPM: 3400
   muzzleVelocity: 1050
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 0}
   rateOfFire: 0
   rofTimer: 0
+  muzzleFlash: {fileID: 4825513748919523964}
+  muzzlePositionZOffset: 0
   overheatTimer: 0
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!1 &730206260934685410
 GameObject:
@@ -141,64 +147,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &3773316114471472834
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2349317940785297808}
-  - component: {fileID: 1506575666194944151}
-  m_Layer: 0
-  m_Name: Firing Point 1 (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2349317940785297808
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3773316114471472834}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0247, y: 0.0029, z: 2.087}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1238705791482686688}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1506575666194944151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3773316114471472834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shellTimer: 5
-  shells:
-  - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
-  rateOfFireRPM: 850
-  muzzleVelocity: 1050
-  accuracyError: 0.0001
-  shot: {fileID: 0}
-  rateOfFire: 0
-  rofTimer: 0
-  overheatTimer: 0
-  overheated: 0
-  overheatResetTimer: 0
-  overheatedRoF: 0
-  killCounter: {fileID: 0}
 --- !u!1 &5121265599934651765
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,9 +269,6 @@ Transform:
   - {fileID: 5196411841981321010}
   - {fileID: 869640662298051508}
   - {fileID: 3977433856971147600}
-  - {fileID: 2349317940785297808}
-  - {fileID: 6275699663990237509}
-  - {fileID: 8312659719460436255}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2204287900550684066
@@ -344,16 +289,21 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
   - {fileID: 7005174183826454184, guid: 0a4fe77f37fc84044bb2c25bcbb170cf, type: 3}
+  shellList: []
   rateOfFireRPM: 4000
   muzzleVelocity: 900
+  baseVelocity: 0
   accuracyError: 0
   shot: {fileID: 8644563230225802263}
   rateOfFire: 0
   rofTimer: 0
+  muzzleFlash: {fileID: 0}
+  muzzlePositionZOffset: 0
   overheatTimer: 0
   overheated: 0
   overheatResetTimer: 0
   overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!82 &8644563230225802263
 AudioSource:
@@ -617,64 +567,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &6990885428393705931
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6275699663990237509}
-  - component: {fileID: 6919303841342052669}
-  m_Layer: 0
-  m_Name: Firing Point 1 (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6275699663990237509
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6990885428393705931}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0247, y: 0.0029, z: 2.632}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1238705791482686688}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6919303841342052669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6990885428393705931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shellTimer: 5
-  shells:
-  - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
-  rateOfFireRPM: 850
-  muzzleVelocity: 1050
-  accuracyError: 0.0001
-  shot: {fileID: 0}
-  rateOfFire: 0
-  rofTimer: 0
-  overheatTimer: 0
-  overheated: 0
-  overheatResetTimer: 0
-  overheatedRoF: 0
-  killCounter: {fileID: 0}
 --- !u!1 &7537619954539201830
 GameObject:
   m_ObjectHideFlags: 0
@@ -924,61 +816,83 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &7913476695841647326
-GameObject:
+--- !u!1001 &13312316358312083
+PrefabInstance:
   m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8312659719460436255}
-  - component: {fileID: 722596614627150222}
-  m_Layer: 0
-  m_Name: Firing Point 1 (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8312659719460436255
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7913476695841647326}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.0162, z: 3.099}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1238705791482686688}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &722596614627150222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3977433856971147600}
+    m_Modifications:
+    - target: {fileID: 1099838043991838807, guid: 94e84b497de0c63499b60b1e01ef7011,
+        type: 3}
+      propertyPath: m_Name
+      value: MuzzleFlash_HMG
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375587117930217437, guid: 94e84b497de0c63499b60b1e01ef7011,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375587117930217437, guid: 94e84b497de0c63499b60b1e01ef7011,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375587117930217437, guid: 94e84b497de0c63499b60b1e01ef7011,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.136
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375587117930217437, guid: 94e84b497de0c63499b60b1e01ef7011,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375587117930217437, guid: 94e84b497de0c63499b60b1e01ef7011,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375587117930217437, guid: 94e84b497de0c63499b60b1e01ef7011,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375587117930217437, guid: 94e84b497de0c63499b60b1e01ef7011,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375587117930217437, guid: 94e84b497de0c63499b60b1e01ef7011,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375587117930217437, guid: 94e84b497de0c63499b60b1e01ef7011,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6375587117930217437, guid: 94e84b497de0c63499b60b1e01ef7011,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 94e84b497de0c63499b60b1e01ef7011, type: 3}
+--- !u!198 &4825513748919523964 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 4816846415016778479, guid: 94e84b497de0c63499b60b1e01ef7011,
+    type: 3}
+  m_PrefabInstance: {fileID: 13312316358312083}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7913476695841647326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shellTimer: 5
-  shells:
-  - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
-  rateOfFireRPM: 850
-  muzzleVelocity: 1050
-  accuracyError: 0.0001
-  shot: {fileID: 0}
-  rateOfFire: 0
-  rofTimer: 0
-  overheatTimer: 0
-  overheated: 0
-  overheatResetTimer: 0
-  overheatedRoF: 0
-  killCounter: {fileID: 0}
+--- !u!4 &6365250725662277454 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6375587117930217437, guid: 94e84b497de0c63499b60b1e01ef7011,
+    type: 3}
+  m_PrefabInstance: {fileID: 13312316358312083}
+  m_PrefabAsset: {fileID: 0}

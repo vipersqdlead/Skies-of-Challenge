@@ -1917,6 +1917,7 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
 --- !u!114 &5018022827151572806
 MonoBehaviour:
@@ -1995,10 +1996,14 @@ MonoBehaviour:
   - {fileID: 9073632148948294239}
   isPlayer: 0
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns: []
   additionalGunsGO: []
   enableAG: 0
@@ -2243,6 +2248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!1 &2687103159836159034
@@ -7723,6 +7729,11 @@ PrefabInstance:
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5249383256423757059, guid: 5fedf6142ab063a4cb59979acf8c2680,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.104
+      objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_RootOrder
@@ -7731,12 +7742,12 @@ PrefabInstance:
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.26
+      value: 0.138
       objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.15
+      value: 0.24
       objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
@@ -7894,6 +7905,11 @@ PrefabInstance:
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5249383256423757059, guid: 5fedf6142ab063a4cb59979acf8c2680,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.1040001
+      objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_RootOrder
@@ -7902,12 +7918,12 @@ PrefabInstance:
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.26
+      value: -0.142
       objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.15
+      value: 0.236
       objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
@@ -8465,6 +8481,11 @@ PrefabInstance:
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5249383256423757059, guid: 5fedf6142ab063a4cb59979acf8c2680,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.681
+      objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_RootOrder
@@ -8478,7 +8499,7 @@ PrefabInstance:
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.15
+      value: 0.291
       objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}

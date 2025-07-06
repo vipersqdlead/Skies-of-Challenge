@@ -16,6 +16,9 @@ public class Gun : MonoBehaviour
     [SerializeField] AudioSource shot; // piu piu sound
     public float rateOfFire; // This is used later, when firing.
     [SerializeField] float rofTimer; // Similar as the one above(?
+	
+	[SerializeField] ParticleSystem muzzleFlash;
+	[SerializeField] float muzzlePositionZOffset;
 
     [SerializeField]float overheatTimer;
     [SerializeField] bool overheated;
@@ -64,7 +67,6 @@ public class Gun : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     public void OldFire()
     {
         if(overheatTimer <= 12f)
@@ -228,6 +230,14 @@ public class Gun : MonoBehaviour
 		Vector3 pos = transform.position + (transform.forward * distanceFromSpawn);
 		Vector3 force = (transform.forward + error) * (muzzleVelocity + baseVelocity);
 		shell.Enable(pos, transform.rotation, force, shellTimer, transform);
+		
+		if(muzzleFlash != null)
+		{
+			//ParticleSystem.MainModule muzzleFlashP = muzzleFlash.main;
+			//muzzleFlashP.startLifetime = Mathf.Min(Time.deltaTime, rateOfFire);
+			muzzleFlash.Play();
+			//Instantiate(muzzleFlash, transform.position + (transform.forward * -muzzlePositionZOffset), transform.rotation, gameObject.transform);
+		}
 		
         if(shot != null)
 		{

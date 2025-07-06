@@ -8442,6 +8442,7 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
 --- !u!114 &8109282446555067161
 MonoBehaviour:
@@ -8462,10 +8463,14 @@ MonoBehaviour:
   - {fileID: 1924715948808134641}
   isPlayer: 1
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 3415162820140029945}
   - {fileID: 2651787824083792500}
@@ -8706,7 +8711,6 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
-  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
@@ -8766,6 +8770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &6410164019601690876
@@ -8889,6 +8894,7 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 2000
   isCagedSeeker: 0
   Target: {fileID: 0}
@@ -9276,6 +9282,11 @@ PrefabInstance:
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5249383256423757059, guid: 5fedf6142ab063a4cb59979acf8c2680,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.12
+      objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_RootOrder
@@ -9284,12 +9295,12 @@ PrefabInstance:
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.012
       objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.246
+      value: 0.281
       objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
@@ -9742,6 +9753,11 @@ PrefabInstance:
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5249383256423757059, guid: 5fedf6142ab063a4cb59979acf8c2680,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.137
+      objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_RootOrder
@@ -9750,12 +9766,12 @@ PrefabInstance:
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.158
+      value: -0.143
       objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.177
+      value: 0.236
       objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
@@ -10154,6 +10170,11 @@ PrefabInstance:
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5249383256423757059, guid: 5fedf6142ab063a4cb59979acf8c2680,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.145
+      objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_RootOrder
@@ -10162,12 +10183,12 @@ PrefabInstance:
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.158
+      value: 0.132
       objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.177
+      value: 0.248
       objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}

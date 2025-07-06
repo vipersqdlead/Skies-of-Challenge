@@ -3954,6 +3954,7 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
 --- !u!114 &1994996906693939299
 MonoBehaviour:
@@ -3973,10 +3974,14 @@ MonoBehaviour:
   - {fileID: 4116678202783384248}
   isPlayer: 0
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns: []
   additionalGunsGO: []
   enableAG: 0
@@ -4030,6 +4035,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &8921916259647643811
@@ -5945,6 +5951,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5578000899694424299}
     m_Modifications:
+    - target: {fileID: 147050653344835554, guid: a8c9cc9e284bd95408a875231397ec1b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.48
+      objectReference: {fileID: 0}
     - target: {fileID: 1238705791482686688, guid: a8c9cc9e284bd95408a875231397ec1b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6576,6 +6587,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5578000899694424299}
     m_Modifications:
+    - target: {fileID: 147050653344835554, guid: a8c9cc9e284bd95408a875231397ec1b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.4799998
+      objectReference: {fileID: 0}
     - target: {fileID: 1238705791482686688, guid: a8c9cc9e284bd95408a875231397ec1b,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -27,8 +27,8 @@ public class SurvivalSettings : MonoBehaviour
     public float modelRotationSpeed = 20f;
 
     // Battle options
-    public Toggle enableWaveBonusT, startWithBonusT, startWithAlliesT, alwaysReloadMissilesT;
-    public bool enableWaveBonus, startWithBonus, startWithAllies, alwaysReloadMissiles;
+    public Toggle enableWaveBonusT, startWithBonusT, startWithAlliesT, alwaysReloadMissilesT, oldMatchmakerT;
+    public bool enableWaveBonus, startWithBonus, startWithAllies, alwaysReloadMissiles, oldMatchmaker;
 
     [SerializeField] TMP_Text bestScore, bestRound, bestTime, lastScore, totalCompletion;
     [SerializeField] FadeInOut fadeEffect;
@@ -68,6 +68,12 @@ public class SurvivalSettings : MonoBehaviour
             alwaysReloadMissiles = true;
             alwaysReloadMissilesT.isOn = true;
         }
+		
+		if (PlayerPrefs.GetInt("Survival Old Matchmaker") == 1)
+        {
+            oldMatchmaker = true;
+            oldMatchmakerT.isOn = true;
+        }
 
         bestScore.text = "Highest Score: " + PlayerPrefs.GetInt("Survival High Score") + " pts.";
         bestRound.text = "Highest Round: Wave " + PlayerPrefs.GetInt("Survival Highest Round");
@@ -106,6 +112,7 @@ public class SurvivalSettings : MonoBehaviour
         startWithBonus = startWithBonusT.isOn;
         startWithAllies = startWithAlliesT.isOn;
         alwaysReloadMissiles = alwaysReloadMissilesT.isOn;
+		oldMatchmaker = oldMatchmakerT.isOn;
     }
 
     public void StartCoroutineChangeMenu(GameObject newMenu)
@@ -1360,6 +1367,7 @@ public class SurvivalSettings : MonoBehaviour
         PlayerPrefs.SetInt("Survival Start With Allies", startWithAllies ? 1  :0);
         PlayerPrefs.SetInt("Survival Start With Bonus", startWithBonus ? 1 : 0);
         PlayerPrefs.SetInt("Survival Always Reload Missiles", alwaysReloadMissiles ? 1 : 0);
+		PlayerPrefs.SetInt("Survival Old Matchmaker", oldMatchmaker ? 1 : 0);
     }
 
     public void SaveChanges(int manualPlaneType)

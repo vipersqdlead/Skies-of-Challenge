@@ -62,8 +62,11 @@ public class SAM_Launcher : MonoBehaviour
                     pathOfFireObstructed = false;
                 }
             }
+			else { pathOfFireObstructed = false; }
+			
+			float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
 
-            if (Vector3.Distance(transform.position, target.transform.position) < firingRange && !pathOfFireObstructed)
+            if ((distanceToTarget < firingRange && distanceToTarget > minimumRange) && !pathOfFireObstructed)
             {
 
                 timer += Time.deltaTime;

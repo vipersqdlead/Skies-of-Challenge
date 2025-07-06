@@ -16866,6 +16866,7 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
 --- !u!114 &2352633891778120682
 MonoBehaviour:
@@ -16894,6 +16895,9 @@ MonoBehaviour:
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 8569221214780511079}
   - {fileID: 0}
@@ -17131,6 +17135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &318572683013198107
@@ -17201,6 +17206,7 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 4000
   isCagedSeeker: 0
   Target: {fileID: 0}
@@ -17227,6 +17233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &10673027907317128
@@ -29979,6 +29986,11 @@ PrefabInstance:
       propertyPath: killCounter
       value: 
       objectReference: {fileID: 6609938941638052285}
+    - target: {fileID: 6380926201558118540, guid: e600df7985b472a47b749508f08d9678,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.113
+      objectReference: {fileID: 0}
     - target: {fileID: 7565410752736623396, guid: e600df7985b472a47b749508f08d9678,
         type: 3}
       propertyPath: killCounter
