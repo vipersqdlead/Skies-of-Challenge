@@ -7910,6 +7910,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 0
   canReload: 0
+  hub: {fileID: 0}
   Missile: {fileID: 9145924101538048397, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
   MissilePos:
   - {fileID: 8396885444511074290}
@@ -7922,9 +7923,11 @@ MonoBehaviour:
   missileInnerFoV: 0
   missileLockRange: 2000
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -8500,6 +8503,7 @@ Transform:
   - {fileID: 6556877797817518196}
   - {fileID: 463349131574503915}
   - {fileID: 711343208180381826}
+  - {fileID: 298631462322695064}
   - {fileID: 4983241770327277821}
   m_Father: {fileID: 8316351131785566571}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8912,8 +8916,7 @@ Transform:
   m_LocalPosition: {x: -0.05773995, y: 0.2813296, z: -2.5086212}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 298631462322695064}
+  m_Children: []
   m_Father: {fileID: 2393539330854271183}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &4195056313726611841
@@ -16162,15 +16165,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7355568790710024571}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -0.05773995, y: 0.2813296, z: -2.5086212}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4548775603287805140}
   - {fileID: 5415059917372289113}
   - {fileID: 3112574626268441829}
-  m_Father: {fileID: 4983241770327277821}
+  m_Father: {fileID: 2393539330854271183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5256276145383868032
 MonoBehaviour:

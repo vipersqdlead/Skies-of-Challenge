@@ -31,15 +31,10 @@ public class DogfightingState : StateBase
 
     public override void OnStateStart(StateUser user)
     {
+		
+		print("Starting State");
         controller = user as AIController;
-        if (controller.plane.target == null)
-        {
-            controller.plane.target = Utilities.GetNearestTarget(gameObject, controller.plane.side, targetLookRange);
-        }
-        if (controller.canUseMissiles)
-        {
-            irController = GetComponent<IRMissileControl>();
-        }
+        
 		
 		switch (pilotLevel)
 		{
@@ -94,6 +89,15 @@ public class DogfightingState : StateBase
 				break;
 			}
 		}
+
+		if (controller.plane.target == null)
+        {
+            controller.plane.target = Utilities.GetNearestTarget(gameObject, controller.plane.side, lookAroundRange);
+        }
+        if (controller.canUseMissiles)
+        {
+            irController = GetComponent<IRMissileControl>();
+        }
 
         missileCooldownTimer = missileCooldownTime;
 

@@ -40,7 +40,7 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
-        if(rofTimer <= rateOfFire)
+        if(rofTimer < rateOfFire)
         {
             rofTimer += Time.deltaTime; // just your typical timer
         }

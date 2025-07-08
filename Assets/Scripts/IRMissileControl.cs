@@ -9,6 +9,7 @@ public class IRMissileControl : BaseSpWeaponControl
     public int MissileAmmo;
     float MissileReload = 20;
     public bool canReload;
+	[SerializeField] AircraftHub hub;
 
     public GameObject Missile;
     public GameObject[] MissilePos;
@@ -16,10 +17,12 @@ public class IRMissileControl : BaseSpWeaponControl
     public float AcquisitionMaxTimer;
     public float AcquisitionTimer;
     public float missileOuterFoV, missileInnerFoV, missileLockRange;
-    public bool isCagedSeeker;
+    public bool isCagedSeeker, slaveToRadar;
     public GameObject Target;
     [SerializeField] float distanceToTarget;
     [SerializeField] float _angleToTarget;
+	
+	[HideInInspector] public Vector3 seekerDirection;
 
     public bool Acquiring = false;
     public bool Locked = false;
@@ -47,13 +50,21 @@ public class IRMissileControl : BaseSpWeaponControl
 
     private void Start()
     {
+		hub = GetComponent<AircraftHub>();
+		
+		if(hub == null && slaveToRadar)
+		{	slaveToRadar = false; }
+		
         weaponName = Missile.name;
         missileOuterFoV = Missile.GetComponent<IR_Missile>().missileOuterFoV;
 		missileInnerFoV = Missile.GetComponent<IR_Missile>().missileInnerFoV;
 		missileLockRange = Missile.GetComponent<IR_Missile>().searchRange;
         isCagedSeeker = Missile.GetComponent<IR_Missile>().isCagedSeeker;
+        slaveToRadar = Missile.GetComponent<IR_Missile>().slaveToRadar;
     }
-
+	
+	
+	FlightModel radarTarget;
     void Update()
     {
         if (isPlayer)
@@ -140,10 +151,29 @@ public class IRMissileControl : BaseSpWeaponControl
     void SearchForTarget()
     {
         AcquisitionTimer -= Time.deltaTime;
+		
+		if(slaveToRadar)
+		{
+			if(hub.fm.target != radarTarget)
+			{
+				ResetLock();
+			}
+			
+			if(hub.fm.target != null)
+			{
+				Vector3 dirToTgt = (hub.fm.target.transform.position - transform.position).normalized;
+				float angleToTarget = Vector3.Angle(transform.forward, dirToTgt);
+				if(angleToTarget < missileOuterFoV) { seekerDirection = dirToTgt; radarTarget = hub.fm.target; }
+				else { seekerDirection = transform.forward; }
+			}
+			else { seekerDirection = transform.forward; }
+		}
+		
+		else { seekerDirection = transform.forward; }
 
         if(AcquisitionTimer > 0)
         {
-            RaycastHit[] hits = Physics.SphereCastAll(transform.position, 300f, transform.forward, missileLockRange);
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, 300f, seekerDirection, missileLockRange);
             foreach (var hit in hits)
             {
                 if (hit.collider.gameObject == gameObject)
@@ -151,7 +181,7 @@ public class IRMissileControl : BaseSpWeaponControl
 
                 if (hit.collider.CompareTag("Fighter") || hit.collider.CompareTag("Bomber") || hit.collider.gameObject.CompareTag("Flare"))
                 {
-                    float angleToTarget = Vector3.Angle(transform.forward, hit.transform.position - transform.position);
+                    float angleToTarget = Vector3.Angle(seekerDirection, (hit.transform.position - transform.position).normalized);
                     float distToTempTarget = Vector3.Distance(transform.position, hit.transform.position);
                     if (angleToTarget < missileInnerFoV)
                     {

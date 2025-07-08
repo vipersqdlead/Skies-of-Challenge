@@ -62,7 +62,8 @@ public class EnemyMarkers : MonoBehaviour
             if (Camera.main != null && enemyRenderer[i] != null)
             {
                 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-                if (enemyRenderer[i].isVisible)
+                //if (enemyRenderer[i].isVisible)
+				if (CheckRendererVisibility(enemyRenderer[i]))
                 {
                     enemyMarkers[i].SetActive(true);
                     enemyMarkers[i].transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, enemyRenderer[i].transform.TransformPoint(Vector3.zero));
@@ -84,7 +85,8 @@ public class EnemyMarkers : MonoBehaviour
             if (Camera.main != null && alliesRenderers[i] != null)
             {
                 screenPos = Camera.main.WorldToScreenPoint(transform.position);
-                if (alliesRenderers[i].isVisible)
+                //if (alliesRenderers[i].isVisible)
+				if (CheckRendererVisibility(alliesRenderers[i]))
                 {
                     alliedMarkers[i].SetActive(true);
                     alliedMarkers[i].transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, alliesRenderers[i].transform.TransformPoint(Vector3.zero));
@@ -111,7 +113,8 @@ public class EnemyMarkers : MonoBehaviour
         else if (Camera.main != null && targetLockedHub != null)
         {
             screenPos = Camera.main.WorldToScreenPoint(transform.position);
-            if (targetLockedHub.meshRenderer.isVisible)
+            //if (targetLockedHub.meshRenderer.isVisible)
+			if (CheckRendererVisibility(targetLockedHub.meshRenderer))
             {
                 targetLockedMarker.SetActive(true);
                 targetLockedMarker.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, targetLockedHub.transform.TransformPoint(Vector3.zero));
@@ -275,5 +278,17 @@ public class EnemyMarkers : MonoBehaviour
 		leadMarkerGO.SetActive(false);
 		distanceMarker.gameObject.SetActive(false);
 		targetName.gameObject.SetActive(false);
+	}
+	
+	bool CheckRendererVisibility(Renderer rend)
+	{
+		if (!rend.isVisible)
+			return false;
+
+		Vector3 dirToRenderer = (rend.transform.position - Camera.main.transform.position).normalized;
+		float angle = Vector3.Angle(Camera.main.transform.forward, dirToRenderer);
+
+		float fov = Camera.VerticalToHorizontalFieldOfView(Camera.main.fieldOfView, Camera.main.aspect);
+		return angle < fov / 2f;
 	}
 }

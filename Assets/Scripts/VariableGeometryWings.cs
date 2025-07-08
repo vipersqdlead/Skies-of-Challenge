@@ -52,6 +52,8 @@ public class VariableGeometryWings : MonoBehaviour
 
     void UpdateAspectRatio()
     {
+		if(flightModel == null) { return; }
+		
         float speed = rb.velocity.magnitude * 3.6f;
         float t = Mathf.InverseLerp(minSpeed, maxSpeed, speed);
 

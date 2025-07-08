@@ -1542,6 +1542,7 @@ MonoBehaviour:
   missileInnerFoV: 5
   missileOuterFoV: 5
   isCagedSeeker: 1
+  slaveToRadar: 0
   irccmType: 0
   missileTimer: 2
   fuzeActivationTime: 0.5
@@ -1751,8 +1752,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 3
-  m_Center: {x: 0, y: 0, z: 4}
+  m_Radius: 10
+  m_Center: {x: 0, y: 0, z: 11}
 --- !u!114 &2139236655820031337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1765,12 +1766,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa22c512a0d78e1498c7a755eeba4d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocketTimer: 8.5
-  rocketThrust: 46
+  rocketTimer: 17
+  rocketThrust: 18
   initialMass: 60
   finalMass: 45
   rb: {fileID: 0}
   rocketDelay: 0
+  destroyOnceOutOfFuel: 1
   rocketTrailParticle: {fileID: 8006902232685034623}
   smoke: {fileID: 372220330003928162}
   launchSnd: {fileID: 8219502203030299332}
@@ -1884,11 +1886,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f390c48ce2cbe0249a71f601b89768bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerToFuze: 0.7
+  timerToFuze: 5
   explosionRadius: 0
-  explosionPower: 15000
-  proxyFuse: {fileID: 0}
-  explosion: {fileID: 1099838043991838807, guid: 0e6b37ee9ce548f469e5c719ee44f294,
+  explosionPower: 20000
+  proxyFuse: {fileID: 2871271111155695146}
+  explosion: {fileID: 1099838043991838807, guid: 778deeeddaf1b7e4996f34382bbb99e9,
     type: 3}
   waterSplash: {fileID: 5509927898478369345, guid: cf8b55990d3457944886a599ba485712,
     type: 3}

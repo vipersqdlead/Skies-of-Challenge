@@ -298,6 +298,7 @@ public class PlaneToUI : MonoBehaviour
             if (IRControl != null)
             {
                 AcquireCircle.transform.localScale = new Vector3(IRControl.missileOuterFoV / 5, IRControl.missileOuterFoV / 5, 1);
+				LockCircle.transform.localScale = new Vector3(IRControl.missileInnerFoV / 5, IRControl.missileInnerFoV / 5, 1);
                 if (!IRControl.Acquiring && !IRControl.Locked)
                 {
                     AcquireCircle.SetActive(false);
@@ -305,15 +306,23 @@ public class PlaneToUI : MonoBehaviour
                 }
                 if (IRControl.Acquiring || IRControl.Locked)
                 {
-		    if(IRControl.isCagedSeeker == false) { AcquireCircle.SetActive(true); }
+					if(IRControl.isCagedSeeker == false) { AcquireCircle.SetActive(true); }
                     LockCircle.SetActive(true);
+					if(IRControl.Target != null)
+                    {
+						Vector3 tgtPos = transform.position + IRControl.seekerDirection * IRControl.missileLockRange;
+                        Vector3 targetScreenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, IRControl.Target.transform.position); 
+                        LockCircle.transform.position = Vector3.Lerp(LockCircle.transform.position, targetScreenPosition, Time.deltaTime * 20f);
+                        //LockCircle.GetComponent<UnityEngine.UI.Image>().color = Color.red;
+                        //LockCircle.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, IRControl.Target.transform.TransformPoint(Vector3.zero));
+                    }
                 }
                 if (IRControl.Locked)
                 {
                     if(IRControl.Target != null)
                     {
-                        Vector3 targetScreenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, IRControl.Target.transform.position); 
-                        LockCircle.transform.position = Vector3.Lerp(LockCircle.transform.position, targetScreenPosition, Time.deltaTime * 20f);
+                        //Vector3 targetScreenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, IRControl.Target.transform.position); 
+                        //LockCircle.transform.position = Vector3.Lerp(LockCircle.transform.position, targetScreenPosition, Time.deltaTime * 20f);
                         LockCircle.GetComponent<UnityEngine.UI.Image>().color = Color.red;
                         //LockCircle.transform.position = RectTransformUtility.WorldToScreenPoint(Camera.main, IRControl.Target.transform.TransformPoint(Vector3.zero));
                     }
@@ -323,6 +332,7 @@ public class PlaneToUI : MonoBehaviour
                     LockCircle.transform.position = Vector3.Lerp(LockCircle.transform.position, AcquireCircle.transform.position, Time.deltaTime * 20f);
                     LockCircle.GetComponent<UnityEngine.UI.Image>().color = Color.white;
                 }
+				
                 if (IRControl.isPlayer)
                 {
                     MissilesIR.text = ">" + IRControl.weaponName + "    " + IRControl.MissileAmmo;
@@ -502,7 +512,7 @@ public class PlaneToUI : MonoBehaviour
         {
 			killsCombo.enabled = true;
 			killsCombo.text = "Splash " + hub.killcounter.currentCombo + "!";
-            if (hub.planeCam.camShaking || hub.killcounter.currentCombo > 1)
+            if (hub.planeCam.camShaking)
             {
                 killsCombo.color = Color.red;
             }

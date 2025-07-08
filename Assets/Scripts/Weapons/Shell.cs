@@ -56,7 +56,7 @@ public class Shell : MonoBehaviour
 	
 	private void InstantiateExplosions(Vector3 hitPosition)
     {
-        Instantiate(ExplosionSmaller, transform.position, Quaternion.identity);
+        Instantiate(ExplosionSmaller, hitPosition, Quaternion.identity);
     }
 	
 	private void InstantiateSplash()
@@ -232,9 +232,11 @@ public class Shell : MonoBehaviour
 		}
 		if(selfDestruct)
 		{
-			InstantiateExplosions();
+			Invoke("SelfDestruct", timeToDisable);
+			//InstantiateExplosions();
 			return;
 		}
+		else{ Invoke("Disable", timeToDisable); }
 	}
 
 	public void Disable(Transform _parent)
@@ -260,6 +262,12 @@ public class Shell : MonoBehaviour
 		{
 			trail.Clear();
 		}
+	}
+	
+	void SelfDestruct()
+	{
+		InstantiateExplosions();
+		Disable();
 	}
 	
 	void CheckToDestroy()

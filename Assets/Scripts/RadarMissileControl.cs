@@ -105,7 +105,6 @@ public class RadarMissileControl : BaseSpWeaponControl
         {
             if (AcquisitionTimer > 0)
             {
-                print("Acquiring");
 				float thickness = 150f; //<-- Desired thickness here
 				RaycastHit[] hits = Physics.SphereCastAll(transform.position, thickness, transform.forward, 19000f);
 				foreach (var hit in hits)

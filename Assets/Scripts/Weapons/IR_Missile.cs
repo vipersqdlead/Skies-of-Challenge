@@ -17,7 +17,7 @@ public class IR_Missile : MonoBehaviour
     Rigidbody rb;
     public float searchRange = 2000f;
     public float missileInnerFoV, missileOuterFoV;
-    public bool isCagedSeeker;
+    public bool isCagedSeeker, slaveToRadar;
     public IRCCMType irccmType;
 
     public float missileTimer = 2f;
@@ -118,6 +118,7 @@ public class IR_Missile : MonoBehaviour
 		if(SeekerIRCCM().CompareTag("Flare"))
 		{
 			target = SeekerIRCCM(); 
+			print("Saw a flare");
 		}
 	    }
         }
@@ -226,11 +227,11 @@ public class IR_Missile : MonoBehaviour
 
             if (hit.collider.CompareTag("Flare"))
             {
-		typePriority = 0;
+				typePriority = 0;
             }
             else if ((hit.collider.CompareTag("Fighter") && hit.collider.gameObject != launcherPlane) || hit.collider.CompareTag("Bomber"))
             {
-		typePriority = 1;
+				typePriority = 1;
             }
 
             else
@@ -243,9 +244,9 @@ public class IR_Missile : MonoBehaviour
                 typePriority = 0;
             }
 
-	    Vector3 toHit = (hit.point - transform.position).normalized;
-	    float angleToHit = Vector3.Angle(directionToTarget, toHit);
-            if (angleToHit < missileInnerFoV)
+			Vector3 toHit = (hit.point - transform.position).normalized;
+			float angleToHit = Vector3.Angle(directionToTarget, toHit);
+            if (angleToHit > missileInnerFoV)
             {
                 continue;
             }
@@ -287,26 +288,20 @@ public class IR_Missile : MonoBehaviour
 
             if (hit.collider.CompareTag("Flare"))
             {
-		typePriority = 0;
+				typePriority = 0;
             }
             else if ((hit.collider.CompareTag("Fighter") && hit.collider.gameObject != launcherPlane) || hit.collider.CompareTag("Bomber"))
             {
-		typePriority = 1;
+				typePriority = 1;
             }
-
             else
             {
                 continue;
             }
 
-            if (hit.collider.CompareTag("Flare"))
-            {
-                typePriority = 0;
-            }
-
-	    Vector3 toHit = (hit.point - transform.position).normalized;
-	    float angleToHit = Vector3.Angle(directionToTarget, toHit);
-            if (angleToHit < missileInnerFoV)
+			Vector3 toHit = (hit.point - transform.position).normalized;
+			float angleToHit = Vector3.Angle(directionToTarget, toHit);
+            if (angleToHit > missileInnerFoV)
             {
                 continue;
             }
