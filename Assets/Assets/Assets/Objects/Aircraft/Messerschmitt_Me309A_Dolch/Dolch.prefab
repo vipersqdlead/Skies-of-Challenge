@@ -4217,6 +4217,7 @@ Transform:
   m_Children:
   - {fileID: 4075994572494226204}
   - {fileID: 3218641232961175424}
+  - {fileID: 7831232516077865037}
   m_Father: {fileID: 2394548226951808463}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &2551788981081779350
@@ -8411,9 +8412,9 @@ GameObject:
   - component: {fileID: 707189148789588757}
   - component: {fileID: 1547327708895526828}
   - component: {fileID: 981535539719020587}
-  - component: {fileID: 5842392692512949275}
   - component: {fileID: 2066501957288533769}
   - component: {fileID: -4472835521261593159}
+  - component: {fileID: 7825426182321169033}
   m_Layer: 0
   m_Name: Dolch
   m_TagString: Fighter
@@ -8468,8 +8469,8 @@ MonoBehaviour:
   planeCam: {fileID: 2805436575942880223}
   planeHUD: {fileID: 7592240644414309653}
   weaponManager: {fileID: -4472835521261593159}
-  irControl: {fileID: 5842392692512949275}
-  sagControl: {fileID: 0}
+  irControl: {fileID: 0}
+  sagControl: {fileID: 7825426182321169033}
   radarMissileControl: {fileID: 0}
   rocketLauncherControl: {fileID: 981535539719020587}
   bombControl: {fileID: 0}
@@ -8745,7 +8746,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHp: {fileID: 8893305985367905589}
   IRControl: {fileID: 0}
-  SAGControl: {fileID: 0}
+  SAGControl: {fileID: 7825426182321169033}
   SARHControl: {fileID: 0}
   RktControl: {fileID: 0}
   bmbControl: {fileID: 0}
@@ -9129,43 +9130,6 @@ MonoBehaviour:
   rateOfFireRPM: 750
   rofTimer: 0
   killCounter: {fileID: 5350997912003756959}
---- !u!114 &5842392692512949275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6185050561958779977}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b37ea0e9101ccd24eadf1164f886e8be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: 
-  isPlayer: 1
-  MaxMissileAmmo: 2
-  MissileAmmo: 0
-  canReload: 0
-  Missile: {fileID: 9145924101538048397, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
-  MissilePos:
-  - {fileID: 9091484732994905067}
-  - {fileID: 7642977316476247927}
-  AcquisitionMaxTimer: 20
-  AcquisitionTimer: 0
-  missileOuterFoV: 0
-  missileInnerFoV: 0
-  missileLockRange: 2000
-  isCagedSeeker: 0
-  Target: {fileID: 0}
-  distanceToTarget: 0
-  _angleToTarget: 0
-  Acquiring: 0
-  Locked: 0
-  AcqGrowl: {fileID: 0}
-  LockGrowl: {fileID: 2551788981081779350}
-  killCounter: {fileID: 5350997912003756959}
-  aspect: 1
-  irccm: 0
 --- !u!114 &2066501957288533769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9246,7 +9210,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specialWeapons:
   - {fileID: 981535539719020587}
-  - {fileID: 5842392692512949275}
+  - {fileID: 7825426182321169033}
+--- !u!114 &7825426182321169033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6185050561958779977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5fb1eaee68e3c146b599721f41ae919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: 
+  isPlayer: 0
+  MaxMissileAmmo: 2
+  MissileAmmo: 0
+  canReload: 0
+  missilePrefab: {fileID: 9145924101538048397, guid: 8674a38ee5308184c8540740c6d6a393,
+    type: 3}
+  MissilePos:
+  - {fileID: 9091484732994905067}
+  - {fileID: 7642977316476247927}
+  GuidePoint: {fileID: 8948035201035731711}
+  guideRange: 2500
+  killCounter: {fileID: 5350997912003756959}
 --- !u!1 &6210293978010359901
 GameObject:
   m_ObjectHideFlags: 0
@@ -13966,6 +13955,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8948035201035731711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7831232516077865037}
+  m_Layer: 0
+  m_Name: GuidePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7831232516077865037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8948035201035731711}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.1, z: 7999.11}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2747572696477774011}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9025167642750936246
 GameObject:
   m_ObjectHideFlags: 0
@@ -14472,6 +14492,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2747572696477774011}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4059854080399886714, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14546,6 +14571,8 @@ PrefabInstance:
     - {fileID: 7094081631568012495, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 6670943407909229558, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 8219502203030299332, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 4175702456733164311, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1209656007742341176, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_AddedGameObjects: []
@@ -14651,6 +14678,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2747572696477774011}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4059854080399886714, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -14725,6 +14757,8 @@ PrefabInstance:
     - {fileID: 7094081631568012495, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 6670943407909229558, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 8219502203030299332, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 4175702456733164311, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1209656007742341176, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_AddedGameObjects: []

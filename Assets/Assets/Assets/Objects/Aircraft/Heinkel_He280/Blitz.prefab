@@ -6782,6 +6782,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8090545034708341959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6962294107012464725}
+  m_Layer: 0
+  m_Name: GuidePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6962294107012464725
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8090545034708341959}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.142, z: 8000.48}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1958624019685346508}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8101462691579207636
 GameObject:
   m_ObjectHideFlags: 0
@@ -7048,6 +7079,7 @@ Transform:
   - {fileID: 3917837135780800848}
   - {fileID: 7709210356445520434}
   - {fileID: 5888226506959188268}
+  - {fileID: 6962294107012464725}
   m_Father: {fileID: 7282442536800735905}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &4233032922642339576
@@ -8213,9 +8245,9 @@ GameObject:
   - component: {fileID: 6410164019601690876}
   - component: {fileID: 3988610282315736212}
   - component: {fileID: 3027282001112796788}
-  - component: {fileID: 6665344511175836223}
   - component: {fileID: 3733855362553355428}
   - component: {fileID: 6933911638036336774}
+  - component: {fileID: 5947128815293919838}
   m_Layer: 0
   m_Name: Blitz
   m_TagString: Fighter
@@ -8272,7 +8304,7 @@ MonoBehaviour:
   planeHUD: {fileID: 3988610282315736212}
   weaponManager: {fileID: 0}
   irControl: {fileID: 0}
-  sagControl: {fileID: 0}
+  sagControl: {fileID: 5947128815293919838}
   radarMissileControl: {fileID: 0}
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
@@ -8696,7 +8728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHp: {fileID: 8017073440922419029}
   IRControl: {fileID: 0}
-  SAGControl: {fileID: 0}
+  SAGControl: {fileID: 5947128815293919838}
   SARHControl: {fileID: 0}
   RktControl: {fileID: 0}
   bmbControl: {fileID: 0}
@@ -8868,45 +8900,6 @@ MonoBehaviour:
   rateOfFireRPM: 750
   rofTimer: 0
   killCounter: {fileID: 3868360549459907976}
---- !u!114 &6665344511175836223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9057123806642879620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b37ea0e9101ccd24eadf1164f886e8be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: 
-  isPlayer: 1
-  MaxMissileAmmo: 4
-  MissileAmmo: 4
-  canReload: 1
-  Missile: {fileID: 9145924101538048397, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
-  MissilePos:
-  - {fileID: 221083645843601288}
-  - {fileID: 8134998856987330983}
-  - {fileID: 3190584542512448197}
-  - {fileID: 1660852490635792859}
-  AcquisitionMaxTimer: 20
-  AcquisitionTimer: 20
-  missileOuterFoV: 0
-  missileInnerFoV: 0
-  missileLockRange: 2000
-  isCagedSeeker: 0
-  Target: {fileID: 0}
-  distanceToTarget: 0
-  _angleToTarget: 0
-  Acquiring: 0
-  Locked: 0
-  AcqGrowl: {fileID: 0}
-  LockGrowl: {fileID: 4233032922642339576}
-  killCounter: {fileID: 3868360549459907976}
-  aspect: 1
-  irccm: 0
 --- !u!114 &3733855362553355428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8988,7 +8981,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specialWeapons:
   - {fileID: 3027282001112796788}
-  - {fileID: 6665344511175836223}
+  - {fileID: 5947128815293919838}
+--- !u!114 &5947128815293919838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9057123806642879620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5fb1eaee68e3c146b599721f41ae919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: 
+  isPlayer: 0
+  MaxMissileAmmo: 4
+  MissileAmmo: 0
+  canReload: 0
+  missilePrefab: {fileID: 9145924101538048397, guid: 8674a38ee5308184c8540740c6d6a393,
+    type: 3}
+  MissilePos:
+  - {fileID: 221083645843601288}
+  - {fileID: 8134998856987330983}
+  - {fileID: 3190584542512448197}
+  - {fileID: 1660852490635792859}
+  GuidePoint: {fileID: 8090545034708341959}
+  guideRange: 2500
+  killCounter: {fileID: 3868360549459907976}
 --- !u!1 &9087835654873314172
 GameObject:
   m_ObjectHideFlags: 0
@@ -9029,6 +9049,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1958624019685346508}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4059854080399886714, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9992,6 +10017,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1958624019685346508}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4059854080399886714, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10267,6 +10297,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1958624019685346508}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4059854080399886714, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10606,6 +10641,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1958624019685346508}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4059854080399886714, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalPosition.x

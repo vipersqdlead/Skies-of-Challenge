@@ -1492,13 +1492,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4059854080399886714}
-  - component: {fileID: 4177844903502467950}
   - component: {fileID: 6670943407909229558}
   - component: {fileID: 3885259179208702769}
   - component: {fileID: 2871271111155695146}
   - component: {fileID: 2139236655820031337}
   - component: {fileID: 8219502203030299332}
   - component: {fileID: 195427683775136694}
+  - component: {fileID: 4175702456733164311}
   m_Layer: 0
   m_Name: X-4
   m_TagString: Missile
@@ -1524,66 +1524,6 @@ Transform:
   - {fileID: 3695738171764103270}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4177844903502467950
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9145924101538048397}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa299ec534ed48e4ebf1792d20bcc5b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  launcherPlane: {fileID: 0}
-  searchRange: 2000
-  missileInnerFoV: 5
-  missileOuterFoV: 5
-  isCagedSeeker: 1
-  slaveToRadar: 0
-  irccmType: 0
-  missileTimer: 2
-  fuzeActivationTime: 0.5
-  maxGLoad: 10
-  energyBleedMultiplier: 0.8
-  currentMaxGAvailable: 0
-  maxGLoadMultiplierAtMach:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  rampUpTime: 2
-  launchTime: 0
-  doesPurePursuit: 1
-  ProxyFuse: 0
-  proxyFuseCollider: {fileID: 2871271111155695146}
-  explosionSmall: {fileID: 1099838043991838807, guid: 22a7e3b5bff8bcb4991f3c90ab69b70e,
-    type: 3}
-  speed: 0
-  speedMach: 0
-  navigationConstant: 1
-  gForce: 0
 --- !u!54 &6670943407909229558
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1886,7 +1826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f390c48ce2cbe0249a71f601b89768bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerToFuze: 5
+  timerToFuze: 2.5
   explosionRadius: 0
   explosionPower: 20000
   proxyFuse: {fileID: 2871271111155695146}
@@ -1894,6 +1834,27 @@ MonoBehaviour:
     type: 3}
   waterSplash: {fileID: 5509927898478369345, guid: cf8b55990d3457944886a599ba485712,
     type: 3}
+--- !u!114 &4175702456733164311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9145924101538048397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35ea45d4a1ccf6049a649b0da78fa0ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlayerTheLauncher: 1
+  LaunchingPlane: {fileID: 0}
+  Distance: 0
+  timerToFuze: 0
+  MaxTurn: 40
+  ProxyFuse: 0
+  missileAlert: {fileID: 0}
+  Guide: {fileID: 0}
+  gForce: 0
 --- !u!1001 &295845783559779577
 PrefabInstance:
   m_ObjectHideFlags: 0

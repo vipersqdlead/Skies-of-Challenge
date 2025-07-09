@@ -331,7 +331,7 @@ public class PlaneToUI : MonoBehaviour
                 {
                     LockCircle.transform.position = Vector3.Lerp(LockCircle.transform.position, AcquireCircle.transform.position, Time.deltaTime * 20f);
                     LockCircle.GetComponent<UnityEngine.UI.Image>().color = Color.white;
-                }
+                }	
 				
                 if (IRControl.isPlayer)
                 {

@@ -286,7 +286,7 @@ MonoBehaviour:
   radarMissileControl: {fileID: 0}
   rocketLauncherControl: {fileID: 7107123546004588074}
   bombControl: {fileID: 0}
-  flareDispenser: {fileID: 6116082962174246818}
+  flareDispenser: {fileID: 0}
   meshRenderer: {fileID: 0}
   aircraftName: J35D Draken
   nameShort: J35
@@ -621,7 +621,7 @@ MonoBehaviour:
   isPlayer: 1
   isGroundTgt: 0
   countsAsKill: 1
-  pointsWorth: 1030
+  pointsWorth: 1000
   HP: 230
   hpPercent: 0
   Defense: 35
@@ -802,6 +802,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 4
   canReload: 1
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: 2a204be2cb1e0d04ab589831abda06dc, type: 3}
   MissilePos:
   - {fileID: 3603624954151043576}
@@ -814,9 +815,11 @@ MonoBehaviour:
   missileInnerFoV: 0
   missileLockRange: 4000
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -1022,12 +1025,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119144134666846188}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14b819a906094784d9aea3bf9ea0627c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 1
+  isPlayer: 0
   trigger: 0
   flarePrefab: {fileID: 5231318020974602043, guid: a644b4741f60d71478e4e8a7c48499cc,
     type: 3}
@@ -10235,6 +10238,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9121515029916527743, guid: 5a8bf6be91042ef419bc2eb3f8481aa5,
         type: 3}
+    - target: {fileID: 2296910755080182409, guid: 5fedf6142ab063a4cb59979acf8c2680,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_Volume
@@ -10505,6 +10513,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 9121515029916527743, guid: 5a8bf6be91042ef419bc2eb3f8481aa5,
         type: 3}
+    - target: {fileID: 2296910755080182409, guid: 5fedf6142ab063a4cb59979acf8c2680,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_Volume

@@ -1682,6 +1682,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4472835521261593159, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      propertyPath: specialWeapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 7553784111477672057}
     - target: {fileID: 18515882068335873, guid: 45d2f072b5d520b48af3451a52366ef1,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1726,6 +1731,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: -1.94
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316930332205353202, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      propertyPath: IRControl
+      value: 
+      objectReference: {fileID: 7553784111477672057}
+    - target: {fileID: 1316930332205353202, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      propertyPath: SAGControl
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1530215882475304236, guid: 45d2f072b5d520b48af3451a52366ef1,
         type: 3}
@@ -2256,6 +2271,16 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 399c0479ad6f0044e954311645fa73fd, type: 2}
     - target: {fileID: 6680854307914149069, guid: 45d2f072b5d520b48af3451a52366ef1,
         type: 3}
+      propertyPath: irControl
+      value: 
+      objectReference: {fileID: 7553784111477672057}
+    - target: {fileID: 6680854307914149069, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      propertyPath: sagControl
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680854307914149069, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
       propertyPath: aircraftName
       value: Me 309E Dolch
       objectReference: {fileID: 0}
@@ -2395,6 +2420,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: fad16f976a15aca419d2fd739e6b1d05, type: 2}
+    - target: {fileID: 7825426182321169033, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      propertyPath: MissilePos.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7825426182321169033, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      propertyPath: MissilePos.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7917925270001289256, guid: 45d2f072b5d520b48af3451a52366ef1,
         type: 3}
       propertyPath: m_IsActive
@@ -2530,6 +2565,7 @@ PrefabInstance:
     - {fileID: 1057354374384348470, guid: 45d2f072b5d520b48af3451a52366ef1, type: 3}
     - {fileID: 5853823937234994729, guid: 45d2f072b5d520b48af3451a52366ef1, type: 3}
     - {fileID: 753225429138371178, guid: 45d2f072b5d520b48af3451a52366ef1, type: 3}
+    - {fileID: 7825426182321169033, guid: 45d2f072b5d520b48af3451a52366ef1, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6359105305831547271, guid: 45d2f072b5d520b48af3451a52366ef1, type: 3}
     - {fileID: 3936541598876877825, guid: 45d2f072b5d520b48af3451a52366ef1, type: 3}
@@ -2615,7 +2651,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2296377846067262321}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6185050561958779977, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7553784111477672057}
   m_SourcePrefab: {fileID: 100100000, guid: 45d2f072b5d520b48af3451a52366ef1, type: 3}
 --- !u!82 &1741696371067298142 stripped
 AudioSource:
@@ -2629,6 +2669,66 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8115748238665305647}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2699161070979240550 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6185050561958779977, guid: 45d2f072b5d520b48af3451a52366ef1,
+    type: 3}
+  m_PrefabInstance: {fileID: 8115748238665305647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7553784111477672057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2699161070979240550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37ea0e9101ccd24eadf1164f886e8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: 
+  isPlayer: 0
+  MaxMissileAmmo: 4
+  MissileAmmo: 0
+  canReload: 0
+  hub: {fileID: 3177227545959047906}
+  Missile: {fileID: 888724703871080596, guid: 3dc6d62e5cfe6ed4ea70f0858b355fbc, type: 3}
+  MissilePos:
+  - {fileID: 5995231293742134938}
+  - {fileID: 3975115728472787011}
+  - {fileID: 2242728599409198210}
+  - {fileID: 5608053801094425163}
+  AcquisitionMaxTimer: 20
+  AcquisitionTimer: 20
+  missileOuterFoV: 0
+  missileInnerFoV: 0
+  missileLockRange: 0
+  isCagedSeeker: 0
+  slaveToRadar: 0
+  Target: {fileID: 0}
+  distanceToTarget: 0
+  _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
+  Acquiring: 0
+  Locked: 0
+  AcqGrowl: {fileID: 0}
+  LockGrowl: {fileID: 6037401343453782713}
+  killCounter: {fileID: 4243092638836886960}
+  aspect: 1
+  irccm: 0
+--- !u!114 &3177227545959047906 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6680854307914149069, guid: 45d2f072b5d520b48af3451a52366ef1,
+    type: 3}
+  m_PrefabInstance: {fileID: 8115748238665305647}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2699161070979240550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e7a39b02566b64fba11c5355cb02d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3297210427818578310 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6729193045531746217, guid: 45d2f072b5d520b48af3451a52366ef1,
@@ -2671,12 +2771,18 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 8115748238665305647}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2699161070979240550}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b1f85fd94634d8459b3f61b18c3fb79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &6037401343453782713 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2551788981081779350, guid: 45d2f072b5d520b48af3451a52366ef1,
+    type: 3}
+  m_PrefabInstance: {fileID: 8115748238665305647}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6233466533964381844 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2747572696477774011, guid: 45d2f072b5d520b48af3451a52366ef1,

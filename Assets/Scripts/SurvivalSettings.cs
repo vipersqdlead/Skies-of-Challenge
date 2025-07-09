@@ -905,7 +905,7 @@ public class SurvivalSettings : MonoBehaviour
             //    else
             //    { return false; }
             case PlaneTypes.MirageV:
-                if (PlayerPrefs.GetInt("Mirage IIIC Total Time Alive") >= 1200)
+                if (PlayerPrefs.GetInt("Mirage IIIC Total Time Alive") + PlayerPrefs.GetInt("Mirage IIIE Total Time Alive") >= 1200)
                 { return true; }
                 else
                 { return false; }
@@ -1267,7 +1267,8 @@ public class SurvivalSettings : MonoBehaviour
         Draken,
         DrakenJ,
         //Cipher,
-        Mirage,
+        MirageIIIC,
+		//MirageIIIE,
 		MirageV,
 		MiragePantera,
         Kfir,

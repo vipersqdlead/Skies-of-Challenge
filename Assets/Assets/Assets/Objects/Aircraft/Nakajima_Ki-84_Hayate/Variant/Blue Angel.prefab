@@ -32,6 +32,7 @@ Transform:
   - {fileID: 3148590150602459103}
   - {fileID: 4134780111927078017}
   - {fileID: 8682723426915303711}
+  - {fileID: 985411850293299315}
   m_Father: {fileID: 3969248772049275450}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &550874359605986217
@@ -162,6 +163,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1634695238501308900
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 985411850293299315}
+  m_Layer: 0
+  m_Name: GuidePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &985411850293299315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1634695238501308900}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 7997.897}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7732408103852099742}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2164105386173076789
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,6 +1120,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7732408103852099742}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3793118696845586092, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -1736,6 +1773,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7732408103852099742}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3793118696845586092, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -1845,6 +1887,11 @@ PrefabInstance:
       propertyPath: muzzleVelocity
       value: 720
       objectReference: {fileID: 0}
+    - target: {fileID: 254023628048936022, guid: 1f9602e78faf833428aa955ba8ee7c74,
+        type: 3}
+      propertyPath: sagControl
+      value: 
+      objectReference: {fileID: 5914144051640507099}
     - target: {fileID: 254023628048936022, guid: 1f9602e78faf833428aa955ba8ee7c74,
         type: 3}
       propertyPath: aircraftName
@@ -2043,15 +2090,19 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 785005170631630034, guid: 1f9602e78faf833428aa955ba8ee7c74,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5295849906679676502}
-    - targetCorrespondingSourceObject: {fileID: 785005170631630034, guid: 1f9602e78faf833428aa955ba8ee7c74,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8355487132683761309}
     - targetCorrespondingSourceObject: {fileID: 785005170631630034, guid: 1f9602e78faf833428aa955ba8ee7c74,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 132674656295983777}
+    - targetCorrespondingSourceObject: {fileID: 785005170631630034, guid: 1f9602e78faf833428aa955ba8ee7c74,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5914144051640507099}
+    - targetCorrespondingSourceObject: {fileID: 785005170631630034, guid: 1f9602e78faf833428aa955ba8ee7c74,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3081924233037723112}
   m_SourcePrefab: {fileID: 100100000, guid: 1f9602e78faf833428aa955ba8ee7c74, type: 3}
 --- !u!4 &1641558278808439993 stripped
 Transform:
@@ -2156,7 +2207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHp: {fileID: 4756654422966411324}
   IRControl: {fileID: 0}
-  SAGControl: {fileID: 0}
+  SAGControl: {fileID: 5914144051640507099}
   SARHControl: {fileID: 0}
   RktControl: {fileID: 0}
   bmbControl: {fileID: 0}
@@ -2244,42 +2295,6 @@ MonoBehaviour:
   velocityMarker: {fileID: 0}
   leadMarker: {fileID: 0}
   camera: {fileID: 7842311658632726229}
---- !u!114 &5295849906679676502
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7835682695264053568}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b37ea0e9101ccd24eadf1164f886e8be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: 
-  isPlayer: 1
-  MaxMissileAmmo: 2
-  MissileAmmo: 0
-  canReload: 0
-  Missile: {fileID: 9145924101538048397, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
-  MissilePos:
-  - {fileID: 9212701135364639862}
-  - {fileID: 4522912213446681064}
-  AcquisitionMaxTimer: 20
-  AcquisitionTimer: 20
-  missileOuterFoV: 0
-  missileLockRange: 2000
-  isCagedSeeker: 0
-  Target: {fileID: 0}
-  distanceToTarget: 0
-  _angleToTarget: 0
-  Acquiring: 0
-  Locked: 0
-  AcqGrowl: {fileID: 0}
-  LockGrowl: {fileID: 8229204958357153131}
-  killCounter: {fileID: 8298666343374714518}
-  aspect: 1
-  irccm: 0
 --- !u!114 &8355487132683761309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2399,6 +2414,46 @@ MonoBehaviour:
   rateOfFireRPM: 750
   rofTimer: 0
   killCounter: {fileID: 0}
+--- !u!114 &5914144051640507099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7835682695264053568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5fb1eaee68e3c146b599721f41ae919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: 
+  isPlayer: 0
+  MaxMissileAmmo: 2
+  MissileAmmo: 0
+  canReload: 0
+  missilePrefab: {fileID: 9145924101538048397, guid: 8674a38ee5308184c8540740c6d6a393,
+    type: 3}
+  MissilePos:
+  - {fileID: 9212701135364639862}
+  - {fileID: 4522912213446681064}
+  GuidePoint: {fileID: 1634695238501308900}
+  guideRange: 2500
+  killCounter: {fileID: 8298666343374714518}
+--- !u!114 &3081924233037723112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7835682695264053568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfd7b8248420da4aadcee591d9caec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specialWeapons:
+  - {fileID: 132674656295983777}
+  - {fileID: 5914144051640507099}
 --- !u!114 &8298666343374714518 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1545791287626728196, guid: 1f9602e78faf833428aa955ba8ee7c74,

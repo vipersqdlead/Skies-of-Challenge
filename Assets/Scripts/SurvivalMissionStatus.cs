@@ -568,6 +568,13 @@ public class SurvivalMissionStatus : MonoBehaviour
 	
 	void SpawnAllies()
 	{
+		if(!oldMatchmaking)
+		{
+			waveSpawner.SpawnAllyWave(1);
+			return;
+		}
+		
+		
 		switch (aircraftType)
 		{
 			case AircraftType.Trainer:

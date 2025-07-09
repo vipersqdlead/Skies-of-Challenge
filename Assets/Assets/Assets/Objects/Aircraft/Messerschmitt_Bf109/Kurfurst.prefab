@@ -966,6 +966,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &566777420935655975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8569957164872827808}
+  m_Layer: 0
+  m_Name: GuidePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8569957164872827808
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566777420935655975}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 8000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6320447072591155639}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &656778450621929084
 GameObject:
   m_ObjectHideFlags: 0
@@ -5520,6 +5551,7 @@ Transform:
   m_Children:
   - {fileID: 794449783251957928}
   - {fileID: 5643128003179568864}
+  - {fileID: 8569957164872827808}
   m_Father: {fileID: 3840997961407148079}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1200345403729665728
@@ -6390,6 +6422,7 @@ GameObject:
   - component: {fileID: 999837719298215320}
   - component: {fileID: 4195656058912414126}
   - component: {fileID: 8283150671077912905}
+  - component: {fileID: 9126019616812560535}
   m_Layer: 0
   m_Name: Kurfurst
   m_TagString: Fighter
@@ -6979,8 +7012,8 @@ MonoBehaviour:
   planeCam: {fileID: 4077503548756846558}
   planeHUD: {fileID: 4630970122354565908}
   weaponManager: {fileID: 8283150671077912905}
-  irControl: {fileID: 999837719298215320}
-  sagControl: {fileID: 0}
+  irControl: {fileID: 0}
+  sagControl: {fileID: 9126019616812560535}
   radarMissileControl: {fileID: 0}
   rocketLauncherControl: {fileID: 3666408298555060195}
   bombControl: {fileID: 0}
@@ -7037,7 +7070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHp: {fileID: 5795742398092081325}
   IRControl: {fileID: 0}
-  SAGControl: {fileID: 0}
+  SAGControl: {fileID: 9126019616812560535}
   SARHControl: {fileID: 0}
   RktControl: {fileID: 0}
   bmbControl: {fileID: 0}
@@ -7199,6 +7232,7 @@ MonoBehaviour:
   MaxMissileAmmo: 2
   MissileAmmo: 0
   canReload: 0
+  hub: {fileID: 0}
   Missile: {fileID: 9145924101538048397, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
   MissilePos:
   - {fileID: 5601868375671330911}
@@ -7209,9 +7243,11 @@ MonoBehaviour:
   missileInnerFoV: 0
   missileLockRange: 2000
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -7301,7 +7337,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specialWeapons:
   - {fileID: 3666408298555060195}
-  - {fileID: 999837719298215320}
+  - {fileID: 9126019616812560535}
+--- !u!114 &9126019616812560535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5795742398092081329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5fb1eaee68e3c146b599721f41ae919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: 
+  isPlayer: 0
+  MaxMissileAmmo: 2
+  MissileAmmo: 0
+  canReload: 0
+  missilePrefab: {fileID: 9145924101538048397, guid: 8674a38ee5308184c8540740c6d6a393,
+    type: 3}
+  MissilePos:
+  - {fileID: 5601868375671330911}
+  - {fileID: 642833049870925335}
+  GuidePoint: {fileID: 566777420935655975}
+  guideRange: 2500
+  killCounter: {fileID: 4685521581379726749}
 --- !u!1 &5841937905073684918
 GameObject:
   m_ObjectHideFlags: 0
@@ -12742,6 +12803,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6320447072591155639}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4059854080399886714, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12816,6 +12882,8 @@ PrefabInstance:
     - {fileID: 2871271111155695146, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 2139236655820031337, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 8219502203030299332, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 4175702456733164311, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -13800,6 +13868,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6320447072591155639}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4059854080399886714, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13874,6 +13947,8 @@ PrefabInstance:
     - {fileID: 2871271111155695146, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 2139236655820031337, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 8219502203030299332, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 4175702456733164311, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

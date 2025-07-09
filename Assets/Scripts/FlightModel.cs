@@ -65,7 +65,7 @@ public class FlightModel : MonoBehaviour
         {
             CalculateMaxAoA();
         }        
-	if(criticalAoA == 0)
+		if(criticalAoA == 0)
         {
             criticalAoA = maxAngleOfAttack * 0.9f;
         }

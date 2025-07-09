@@ -15,12 +15,14 @@ public class SAGMissileControl : BaseSpWeaponControl
     public GameObject missilePrefab;
     public GameObject[] MissilePos;
     public GameObject GuidePoint;
+	[SerializeField] float guideRange = 8000f;
     [SerializeField] KillCounter killCounter;
 
 
     void Start()
     {
         weaponName = missilePrefab.name;
+		GuidePoint.transform.localPosition = new Vector3(0, 0, guideRange);
     }
 
     void Update()

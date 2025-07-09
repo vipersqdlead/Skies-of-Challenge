@@ -1180,7 +1180,6 @@ GameObject:
   - component: {fileID: 7160021290123139819}
   - component: {fileID: 5160225766580429515}
   - component: {fileID: 5393735990614257057}
-  - component: {fileID: 2762982554527229539}
   - component: {fileID: 2726497995332553526}
   - component: {fileID: 8745190652845005266}
   - component: {fileID: 7384599778373647072}
@@ -1188,6 +1187,7 @@ GameObject:
   - component: {fileID: 2884729399333096637}
   - component: {fileID: 5038970896733329131}
   - component: {fileID: 2627759904429582689}
+  - component: {fileID: 5225825379124807933}
   m_Layer: 0
   m_Name: Emil
   m_TagString: Fighter
@@ -1683,16 +1683,16 @@ MonoBehaviour:
   planeCam: {fileID: 2911325316445730417}
   planeHUD: {fileID: 2884729399333096637}
   weaponManager: {fileID: 2627759904429582689}
-  irControl: {fileID: 2762982554527229539}
-  sagControl: {fileID: 0}
+  irControl: {fileID: 0}
+  sagControl: {fileID: 5225825379124807933}
   radarMissileControl: {fileID: 0}
   rocketLauncherControl: {fileID: 5393735990614257057}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
-  meshRenderer: {fileID: 0}
+  meshRenderer: {fileID: 1799702809249097124}
   aircraftName: Bf 109E Emil
-  nameShort: 
-  nameLong: 
+  nameShort: Bf 109
+  nameLong: Bf 109E
   speed_maxSpeed: 570
   power_maxPower: 1175
   isJet: 0
@@ -1765,43 +1765,6 @@ MonoBehaviour:
   rateOfFireRPM: 750
   rofTimer: 0
   killCounter: {fileID: 7384599778373647072}
---- !u!114 &2762982554527229539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540922269036293049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b37ea0e9101ccd24eadf1164f886e8be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: 
-  isPlayer: 1
-  MaxMissileAmmo: 2
-  MissileAmmo: 0
-  canReload: 0
-  Missile: {fileID: 9145924101538048397, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
-  MissilePos:
-  - {fileID: 7017194153295465950}
-  - {fileID: 3346458818078925027}
-  AcquisitionMaxTimer: 20
-  AcquisitionTimer: 20
-  missileOuterFoV: 0
-  missileInnerFoV: 0
-  missileLockRange: 2000
-  isCagedSeeker: 0
-  Target: {fileID: 0}
-  distanceToTarget: 0
-  _angleToTarget: 0
-  Acquiring: 0
-  Locked: 0
-  AcqGrowl: {fileID: 0}
-  LockGrowl: {fileID: 868631594664470501}
-  killCounter: {fileID: 7384599778373647072}
-  aspect: 1
-  irccm: 0
 --- !u!114 &2726497995332553526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1815,8 +1778,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHp: {fileID: 1540922269036293029}
-  IRControl: {fileID: 2762982554527229539}
-  SAGControl: {fileID: 0}
+  IRControl: {fileID: 0}
+  SAGControl: {fileID: 5225825379124807933}
   SARHControl: {fileID: 0}
   RktControl: {fileID: 5393735990614257057}
   bmbControl: {fileID: 0}
@@ -2017,7 +1980,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specialWeapons:
   - {fileID: 5393735990614257057}
-  - {fileID: 2762982554527229539}
+  - {fileID: 5225825379124807933}
+--- !u!114 &5225825379124807933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540922269036293049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5fb1eaee68e3c146b599721f41ae919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: 
+  isPlayer: 0
+  MaxMissileAmmo: 2
+  MissileAmmo: 0
+  canReload: 0
+  missilePrefab: {fileID: 9145924101538048397, guid: 8674a38ee5308184c8540740c6d6a393,
+    type: 3}
+  MissilePos:
+  - {fileID: 7017194153295465950}
+  - {fileID: 3346458818078925027}
+  GuidePoint: {fileID: 6250968659594422148}
+  guideRange: 2500
+  killCounter: {fileID: 7384599778373647072}
 --- !u!1 &1540922269994766545
 GameObject:
   m_ObjectHideFlags: 0
@@ -7806,6 +7794,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6250968659594422148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2250079014092419723}
+  m_Layer: 0
+  m_Name: GuidePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2250079014092419723
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6250968659594422148}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 8000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6830268714335930088}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6280253801880639778
 GameObject:
   m_ObjectHideFlags: 0
@@ -9740,6 +9759,7 @@ Transform:
   m_Children:
   - {fileID: 2871522649163689257}
   - {fileID: 7551028961651539988}
+  - {fileID: 2250079014092419723}
   m_Father: {fileID: 2763883787741988183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &868631594664470501
@@ -11079,7 +11099,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8b58d9c41e64cb244a3ae7d13806b618, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4ce14f001213ff2448fcd7e98ee23346, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -11815,6 +11835,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6830268714335930088}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4059854080399886714, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11889,6 +11914,8 @@ PrefabInstance:
     - {fileID: 7094081631568012495, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 6670943407909229558, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 8219502203030299332, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 4175702456733164311, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1209656007742341176, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_AddedGameObjects: []
@@ -12436,6 +12463,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6830268714335930088}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4059854080399886714, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -12510,6 +12542,8 @@ PrefabInstance:
     - {fileID: 7094081631568012495, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 6670943407909229558, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 8219502203030299332, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 4175702456733164311, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1209656007742341176, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_AddedGameObjects: []

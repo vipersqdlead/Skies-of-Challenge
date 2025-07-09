@@ -709,6 +709,37 @@ Transform:
   - {fileID: 6042501087617074191}
   m_Father: {fileID: 1113706824321626511}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1151466135885102662
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7411993590898538037}
+  m_Layer: 0
+  m_Name: GuidePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7411993590898538037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151466135885102662}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.17, z: 8000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1927036329704193531}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1242641854155981136
 GameObject:
   m_ObjectHideFlags: 0
@@ -1868,6 +1899,7 @@ Transform:
   - {fileID: 3386128940309355852}
   - {fileID: 7361342339067177340}
   - {fileID: 8419096487468202540}
+  - {fileID: 7411993590898538037}
   m_Father: {fileID: 3994357573345532401}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &3124790903502017903
@@ -4184,6 +4216,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1927036329704193531}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4059854080399886714, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4258,6 +4295,8 @@ PrefabInstance:
     - {fileID: 2871271111155695146, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 2139236655820031337, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 8219502203030299332, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 4175702456733164311, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1209656007742341176, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_AddedGameObjects: []
@@ -4697,6 +4736,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1927036329704193531}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4059854080399886714, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4771,6 +4815,8 @@ PrefabInstance:
     - {fileID: 2871271111155695146, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 2139236655820031337, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 8219502203030299332, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 4175702456733164311, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1209656007742341176, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_AddedGameObjects: []
@@ -5097,14 +5143,14 @@ PrefabInstance:
       objectReference: {fileID: 736045786519334328}
     - target: {fileID: 4352631604214522454, guid: 4aa1545ef247a3e439b0f969b1380a0b,
         type: 3}
-      propertyPath: irControl
-      value: 
-      objectReference: {fileID: 6052010588993614335}
-    - target: {fileID: 4352631604214522454, guid: 4aa1545ef247a3e439b0f969b1380a0b,
-        type: 3}
       propertyPath: planeToUI
       value: 
       objectReference: {fileID: 7094223136593978403}
+    - target: {fileID: 4352631604214522454, guid: 4aa1545ef247a3e439b0f969b1380a0b,
+        type: 3}
+      propertyPath: sagControl
+      value: 
+      objectReference: {fileID: 2475454009123863636}
     - target: {fileID: 4352631604214522454, guid: 4aa1545ef247a3e439b0f969b1380a0b,
         type: 3}
       propertyPath: defense_def
@@ -5594,15 +5640,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6218402562724485394, guid: 4aa1545ef247a3e439b0f969b1380a0b,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6052010588993614335}
-    - targetCorrespondingSourceObject: {fileID: 6218402562724485394, guid: 4aa1545ef247a3e439b0f969b1380a0b,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 76675737970244629}
     - targetCorrespondingSourceObject: {fileID: 6218402562724485394, guid: 4aa1545ef247a3e439b0f969b1380a0b,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1171093598382617064}
+    - targetCorrespondingSourceObject: {fileID: 6218402562724485394, guid: 4aa1545ef247a3e439b0f969b1380a0b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2475454009123863636}
   m_SourcePrefab: {fileID: 100100000, guid: 4aa1545ef247a3e439b0f969b1380a0b, type: 3}
 --- !u!4 &647670089318337122 stripped
 Transform:
@@ -5654,7 +5700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHp: {fileID: 844937897969581012}
   IRControl: {fileID: 0}
-  SAGControl: {fileID: 0}
+  SAGControl: {fileID: 2475454009123863636}
   SARHControl: {fileID: 0}
   RktControl: {fileID: 0}
   bmbControl: {fileID: 0}
@@ -5669,7 +5715,6 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
-  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
@@ -5729,6 +5774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &7174999271654513500
@@ -5884,44 +5930,6 @@ MonoBehaviour:
   rateOfFireRPM: 750
   rofTimer: 0
   killCounter: {fileID: 6360850042034843432}
---- !u!114 &6052010588993614335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 844937897969581019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b37ea0e9101ccd24eadf1164f886e8be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: 
-  isPlayer: 1
-  MaxMissileAmmo: 4
-  MissileAmmo: 4
-  canReload: 1
-  Missile: {fileID: 9145924101538048397, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
-  MissilePos:
-  - {fileID: 826181245134999548}
-  - {fileID: 7513785461818736059}
-  - {fileID: 2347250200618748299}
-  - {fileID: 3633566950526540507}
-  AcquisitionMaxTimer: 20
-  AcquisitionTimer: 20
-  missileOuterFoV: 0
-  missileLockRange: 2000
-  isCagedSeeker: 0
-  Target: {fileID: 0}
-  distanceToTarget: 0
-  _angleToTarget: 0
-  Acquiring: 0
-  Locked: 0
-  AcqGrowl: {fileID: 0}
-  LockGrowl: {fileID: 3124790903502017903}
-  killCounter: {fileID: 6360850042034843432}
-  aspect: 1
-  irccm: 0
 --- !u!114 &76675737970244629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6006,7 +6014,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specialWeapons:
   - {fileID: 6568921899832251027}
-  - {fileID: 6052010588993614335}
+  - {fileID: 2475454009123863636}
+--- !u!114 &2475454009123863636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 844937897969581019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5fb1eaee68e3c146b599721f41ae919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: 
+  isPlayer: 0
+  MaxMissileAmmo: 4
+  MissileAmmo: 0
+  canReload: 0
+  missilePrefab: {fileID: 9145924101538048397, guid: 8674a38ee5308184c8540740c6d6a393,
+    type: 3}
+  MissilePos:
+  - {fileID: 826181245134999548}
+  - {fileID: 7513785461818736059}
+  - {fileID: 2347250200618748299}
+  - {fileID: 3633566950526540507}
+  GuidePoint: {fileID: 1151466135885102662}
+  guideRange: 2500
+  killCounter: {fileID: 6360850042034843432}
 --- !u!82 &1008220838925511063 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 5766873785401772894, guid: 4aa1545ef247a3e439b0f969b1380a0b,
@@ -6069,6 +6104,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1927036329704193531}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4059854080399886714, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6143,6 +6183,8 @@ PrefabInstance:
     - {fileID: 2871271111155695146, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 2139236655820031337, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 8219502203030299332, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 4175702456733164311, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1209656007742341176, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_AddedGameObjects: []
@@ -6316,6 +6358,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1927036329704193531}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4059854080399886714, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6390,6 +6437,8 @@ PrefabInstance:
     - {fileID: 2871271111155695146, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 2139236655820031337, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     - {fileID: 8219502203030299332, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
+    - {fileID: 4175702456733164311, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1209656007742341176, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
     m_AddedGameObjects: []

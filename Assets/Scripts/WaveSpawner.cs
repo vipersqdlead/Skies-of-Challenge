@@ -63,6 +63,31 @@ public class WaveSpawner : MonoBehaviour
             }
         }
 	}
+	
+	public void SpawnAllyWave(int numberOfAllies)
+	{
+		List<Transform> auxSpawnPositions = SpawnPositions;
+
+        for (int i = 0; i < numberOfAllies; i++)
+        {
+			GameObject newWave = Instantiate(eligibleAircraft[Random.Range(0, eligibleAircraft.Count)], GetSafeSpawnAltitude(new Vector3(0, 4250, 0), player.transform.position.y), transform.rotation);
+			//auxSpawnPositions.Remove(auxSpawnPositions[spawnRand]);
+			Wave wave = newWave.GetComponent<Wave>();
+			wave.AddAllyRenderersToMarker(markers, status);
+			foreach (AircraftHub hub in wave.aircraft)
+			{
+				hub.hp.extraLives = 1;
+				if(hub.irControl != null)
+				{
+					hub.irControl.canReload = true;
+				}
+				if (hub.transform.position.y < 0f)
+				{
+					hub.transform.position = new Vector3(hub.transform.position.x, Mathf.Abs(hub.transform.position.y), hub.transform.position.z);
+				}
+			}
+        }
+	}
 
     public void JetTier1SpawnWave(int numberOfEnemies)
     {

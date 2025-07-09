@@ -86,7 +86,7 @@ public class Shell : MonoBehaviour
 	}
 
     private void OnCollisionEnter(Collision collision)
-    {
+    {	
         if (collision.collider.gameObject.GetComponent<HealthPoints>() != null)
         {
             HealthPoints hp = collision.collider.gameObject.GetComponent<HealthPoints>();

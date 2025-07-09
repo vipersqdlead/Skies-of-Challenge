@@ -830,6 +830,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2615634334258253940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8249328018887328546}
+  m_Layer: 0
+  m_Name: GuidePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8249328018887328546
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2615634334258253940}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 8000}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 230861608510225023}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2650342025122141148
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,6 +977,7 @@ Transform:
   m_Children:
   - {fileID: 1071466997029892979}
   - {fileID: 89726774589583095}
+  - {fileID: 8249328018887328546}
   m_Father: {fileID: 7700545287378808767}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1069871990028888666
@@ -3688,6 +3720,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 230861608510225023}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3793118696845586092, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -3792,6 +3829,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 230861608510225023}
     m_Modifications:
+    - target: {fileID: 195427683775136694, guid: 8674a38ee5308184c8540740c6d6a393,
+        type: 3}
+      propertyPath: proxyFuse
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3793118696845586092, guid: 8674a38ee5308184c8540740c6d6a393,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -4019,6 +4061,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 5031f577da5c58b41ba0971bd016f8a9, type: 2}
+    - target: {fileID: 1727475912777361655, guid: 64f8350dc79c19949bc1eebccd8ce6d6,
+        type: 3}
+      propertyPath: sagControl
+      value: 
+      objectReference: {fileID: 7737261925598054692}
     - target: {fileID: 1727475912777361655, guid: 64f8350dc79c19949bc1eebccd8ce6d6,
         type: 3}
       propertyPath: aircraftName
@@ -4519,10 +4566,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4974088820625432965, guid: 64f8350dc79c19949bc1eebccd8ce6d6,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4401964704425570452}
-    - targetCorrespondingSourceObject: {fileID: 4974088820625432965, guid: 64f8350dc79c19949bc1eebccd8ce6d6,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1874709231379917280}
     - targetCorrespondingSourceObject: {fileID: 4974088820625432965, guid: 64f8350dc79c19949bc1eebccd8ce6d6,
         type: 3}
@@ -4544,6 +4587,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 6218265587482464466}
+    - targetCorrespondingSourceObject: {fileID: 4974088820625432965, guid: 64f8350dc79c19949bc1eebccd8ce6d6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7737261925598054692}
   m_SourcePrefab: {fileID: 100100000, guid: 64f8350dc79c19949bc1eebccd8ce6d6, type: 3}
 --- !u!114 &3770502846847818827 stripped
 MonoBehaviour:
@@ -4599,8 +4646,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHp: {fileID: 3770502846847818827}
-  IRControl: {fileID: 4401964704425570452}
-  SAGControl: {fileID: 0}
+  IRControl: {fileID: 0}
+  SAGControl: {fileID: 7737261925598054692}
   SARHControl: {fileID: 0}
   RktControl: {fileID: 5393735990614257057, guid: 565ccb654fabd674c988c670d31e48b7,
     type: 3}
@@ -4647,42 +4694,6 @@ MonoBehaviour:
   climbRate: 0
   clampedClimbRate: 0
   climbArrow: {fileID: 0}
---- !u!114 &4401964704425570452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3770502846847818839}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b37ea0e9101ccd24eadf1164f886e8be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponName: 
-  isPlayer: 1
-  MaxMissileAmmo: 2
-  MissileAmmo: 0
-  canReload: 0
-  Missile: {fileID: 9145924101538048397, guid: 8674a38ee5308184c8540740c6d6a393, type: 3}
-  MissilePos:
-  - {fileID: 5216641488095105924}
-  - {fileID: 5153631191063907840}
-  AcquisitionMaxTimer: 20
-  AcquisitionTimer: 20
-  missileOuterFoV: 0
-  missileLockRange: 2000
-  isCagedSeeker: 0
-  Target: {fileID: 0}
-  distanceToTarget: 0
-  _angleToTarget: 0
-  Acquiring: 0
-  Locked: 0
-  AcqGrowl: {fileID: 0}
-  LockGrowl: {fileID: 1069871990028888666}
-  killCounter: {fileID: 1874709231379917280}
-  aspect: 1
-  irccm: 0
 --- !u!114 &1874709231379917280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4697,6 +4708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &813902699092132508
@@ -4878,7 +4890,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specialWeapons:
   - {fileID: 1821197356250649914}
-  - {fileID: 4401964704425570452}
+  - {fileID: 7737261925598054692}
+--- !u!114 &7737261925598054692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3770502846847818839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5fb1eaee68e3c146b599721f41ae919, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponName: 
+  isPlayer: 0
+  MaxMissileAmmo: 2
+  MissileAmmo: 0
+  canReload: 0
+  missilePrefab: {fileID: 9145924101538048397, guid: 8674a38ee5308184c8540740c6d6a393,
+    type: 3}
+  MissilePos:
+  - {fileID: 5216641488095105924}
+  - {fileID: 5153631191063907840}
+  GuidePoint: {fileID: 2615634334258253940}
+  guideRange: 2500
+  killCounter: {fileID: 1874709231379917280}
 --- !u!114 &4786325378225745157 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3690830339313062103, guid: 64f8350dc79c19949bc1eebccd8ce6d6,
