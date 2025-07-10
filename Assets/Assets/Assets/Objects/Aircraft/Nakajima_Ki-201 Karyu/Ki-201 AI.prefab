@@ -2882,10 +2882,14 @@ MonoBehaviour:
   - {fileID: 9182381885662286713}
   isPlayer: 0
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns: []
   additionalGunsGO: []
   enableAG: 0
@@ -3026,6 +3030,7 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
 --- !u!114 &4209244844265319870
 MonoBehaviour:
@@ -3040,7 +3045,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 6316799077558946458}
-  hub: {fileID: 0}
+  hub: {fileID: 6134149069097181395}
   engineControl: {fileID: 592596380222555223}
   steeringSpeed: 50
   minSpeed: 170
@@ -3050,11 +3055,11 @@ MonoBehaviour:
   groundCollisionMask:
     serializedVersion: 2
     m_Bits: 1024
-  groundCollisionDistance: 100
-  groundAvoidanceAngle: 20
+  groundCollisionDistance: 0
+  groundAvoidanceAngle: 0
   groundAvoidanceMinSpeed: 0
-  groundAvoidanceMaxSpeed: 300
-  pitchUpThreshold: -30
+  groundAvoidanceMaxSpeed: 0
+  pitchUpThreshold: -45
   fineSteeringAngle: 5
   rollFactor: 0.01
   yawFactor: 1
@@ -3069,9 +3074,9 @@ MonoBehaviour:
   missileMaxFireAngle: 0
   bulletSpeed: 825
   cannonRange: 800
-  cannonMaxFireAngle: 15
-  cannonBurstLength: 2
-  cannonBurstCooldown: 1.5
+  cannonMaxFireAngle: 5
+  cannonBurstLength: 1
+  cannonBurstCooldown: 2
   minMissileDodgeDistance: 0
   reactionDelayMin: 0
   reactionDelayMax: 1
@@ -3359,6 +3364,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 4
   canReload: 0
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: 0ff927640a0088e43aea261990330728, type: 3}
   MissilePos:
   - {fileID: 7798052179357703387}
@@ -3368,11 +3374,14 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 2700
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -3394,6 +3403,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &6134149069097181395

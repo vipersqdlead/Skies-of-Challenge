@@ -60,6 +60,11 @@ public class WaveSpawner : MonoBehaviour
                 {
                     hub.transform.position = new Vector3(hub.transform.position.x, Mathf.Abs(hub.transform.position.y), hub.transform.position.z);
                 }
+				int agGuns = Random.Range(1, 10);
+				if(agGuns <= 1)
+				{
+					hub.gunsControl.EnableAG();
+				}
             }
         }
 	}
@@ -81,6 +86,12 @@ public class WaveSpawner : MonoBehaviour
 				{
 					hub.irControl.canReload = true;
 				}
+				int agGuns = Random.Range(1, 10);
+				if(agGuns <= 3)
+				{
+					hub.gunsControl.EnableAG();
+				}
+				
 				if (hub.transform.position.y < 0f)
 				{
 					hub.transform.position = new Vector3(hub.transform.position.x, Mathf.Abs(hub.transform.position.y), hub.transform.position.z);

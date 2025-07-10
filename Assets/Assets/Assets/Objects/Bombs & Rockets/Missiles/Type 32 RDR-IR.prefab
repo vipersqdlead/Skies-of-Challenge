@@ -777,6 +777,7 @@ MonoBehaviour:
   finalMass: 150
   rb: {fileID: 6942089147527653431}
   rocketDelay: 0
+  destroyOnceOutOfFuel: 0
   rocketTrailParticle: {fileID: 2790442067080665284}
   smoke: {fileID: 1707956918175693564}
   launchSnd: {fileID: -2093118144529544845}
@@ -800,6 +801,7 @@ MonoBehaviour:
   missileInnerFoV: 3
   missileOuterFoV: 60
   isCagedSeeker: 0
+  slaveToRadar: 0
   irccmType: 1
   missileTimer: 0
   fuzeActivationTime: 0
@@ -956,7 +958,7 @@ MonoBehaviour:
   lifeTime: 60
   ProxyFuse: 0
   maxGLoad: 20
-  energyBleedMultiplier: 0
+  energyBleedMultiplier: 0.2
   currentMaxGAvailable: 0
   maxGLoadMultiplierAtMach:
     serializedVersion: 2
@@ -994,6 +996,8 @@ MonoBehaviour:
   speedMach: 0
   gForce: 0
   navigationConstant: 2
+  closingSpeed: 0
+  timeToLockBreak: 3
 --- !u!114 &2586341619110967897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1012,6 +1016,7 @@ MonoBehaviour:
   finalMass: 115
   rb: {fileID: 6942089147527653431}
   rocketDelay: 1
+  destroyOnceOutOfFuel: 0
   rocketTrailParticle: {fileID: 1546648312291034044}
   smoke: {fileID: 8214342220484497035}
   launchSnd: {fileID: -2093118144529544845}

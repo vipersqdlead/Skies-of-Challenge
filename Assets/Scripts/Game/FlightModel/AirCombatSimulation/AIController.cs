@@ -33,6 +33,7 @@ public class AIController : MonoBehaviour , StateUser
     public GunsControl guns;
     public bool canUseMissiles;
     [SerializeField] bool canUseCannon;
+	public bool advancedGunnery;
     [SerializeField] float missileLockFiringDelay;
     [SerializeField] float missileFiringCooldown;
     [SerializeField] float missileMinRange;
@@ -171,21 +172,19 @@ public class AIController : MonoBehaviour , StateUser
             pitch += 360f;
         }
         targetInput.x = pitch;
-
-        if (Vector3.Angle(Vector3.forward, errorDir) < fineSteeringAngle)
-        {
-            var yaw = Vector3.SignedAngle(Vector3.forward, yawError, Vector3.up);
-            targetInput.y = yaw * yawFactor;
-        }
-        else
+        
+		var yaw = Vector3.SignedAngle(Vector3.forward, yawError, Vector3.up);
+        targetInput.y = yaw * yawFactor;
+        
+        if(Vector3.Angle(Vector3.forward, errorDir) > fineSteeringAngle)
         {
             var roll = Vector3.SignedAngle(Vector3.up, rollError, Vector3.forward);
             targetInput.z = roll * rollFactor;
         }
 
-        targetInput.x = Mathf.Clamp(targetInput.x, -1, 1);
-        targetInput.y = Mathf.Clamp(targetInput.y, -1, 1);
-        targetInput.z = Mathf.Clamp(targetInput.z, -1, 1);
+        targetInput.x = Mathf.Clamp(targetInput.x, -1f, 1f);
+        targetInput.y = Mathf.Clamp(targetInput.y, -1f, 1f);
+        targetInput.z = Mathf.Clamp(targetInput.z, -1f, 1f);
 
         var input = Vector3.MoveTowards(lastInput, targetInput, steeringSpeed * Time.deltaTime);
         lastInput = input;
@@ -273,29 +272,31 @@ public class AIController : MonoBehaviour , StateUser
         }
     }
 
-    //void CalculateMissiles(float dt)
-    //{
-    //    missileDelayTimer = Mathf.Max(0, missileDelayTimer - dt);
-    //    missileCooldownTimer = Mathf.Max(0, missileCooldownTimer - dt);
+	/*
+    void CalculateMissiles(float dt)
+    {
+        missileDelayTimer = Mathf.Max(0, missileDelayTimer - dt);
+        missileCooldownTimer = Mathf.Max(0, missileCooldownTimer - dt);
 
-    //    var error = plane.Target.Position - plane.Rigidbody.position;
-    //    var range = error.magnitude;
-    //    var targetDir = error.normalized;
-    //    var targetAngle = Vector3.Angle(targetDir, plane.Rigidbody.rotation * Vector3.forward);
+        var error = plane.Target.Position - plane.Rigidbody.position;
+        var range = error.magnitude;
+        var targetDir = error.normalized;
+        var targetAngle = Vector3.Angle(targetDir, plane.Rigidbody.rotation * Vector3.forward);
 
-    //    if (!plane.MissileLocked || !(targetAngle < missileMaxFireAngle || (180f - targetAngle) < missileMaxFireAngle))
-    //    {
-    //        //don't fire if not locked or target is too off angle
-    //        //can fire if angle is close to 0 (chasing) or 180 (head on)
-    //        missileDelayTimer = missileLockFiringDelay;
-    //    }
+        if (!plane.MissileLocked || !(targetAngle < missileMaxFireAngle || (180f - targetAngle) < missileMaxFireAngle))
+        {
+            //don't fire if not locked or target is too off angle
+            //can fire if angle is close to 0 (chasing) or 180 (head on)
+            missileDelayTimer = missileLockFiringDelay;
+        }
 
-    //    if (range < missileMaxRange && range > missileMinRange && missileDelayTimer == 0 && missileCooldownTimer == 0)
-    //    {
-    //        plane.TryFireMissile();
-    //        missileCooldownTimer = missileFiringCooldown;
-    //    }
-    //}
+        if (range < missileMaxRange && range > missileMinRange && missileDelayTimer == 0 && missileCooldownTimer == 0)
+        {
+            plane.TryFireMissile();
+            missileCooldownTimer = missileFiringCooldown;
+        }
+    }
+	*/
 
     void CalculateCannon(float dt)
     {
@@ -304,6 +305,29 @@ public class AIController : MonoBehaviour , StateUser
             cannonFiring = false;
             return;
         }
+		
+		float _bulletSpeed = 0f;
+		
+		if(advancedGunnery) { _bulletSpeed = bulletSpeed + plane.rb.velocity.magnitude; }
+		else { _bulletSpeed = bulletSpeed; }
+		
+		var targetPosition = Utilities.FirstOrderIntercept(plane.rb.position, plane.rb.velocity, _bulletSpeed, plane.target.transform.position, plane.target.rb.velocity);
+
+        var error = targetPosition - plane.rb.position;
+        var range = error.magnitude;
+        var targetDir = error.normalized;
+		var targetAngle = Vector3.Angle(targetDir, transform.forward);
+		//var targetAngle = Vector3.Angle(targetDir, plane.rb.rotation * Vector3.forward);
+		
+		if(advancedGunnery)
+		{
+			if (range < cannonRange && targetAngle < 1f)
+			{
+				cannonFiring = true;
+				guns.trigger = true;
+				return;
+			}
+		}
 
         if (cannonFiring)
         {
@@ -321,20 +345,28 @@ public class AIController : MonoBehaviour , StateUser
         {
             cannonCooldownTimer = Mathf.Max(0, cannonCooldownTimer - dt);
 
-            var targetPosition = Utilities.FirstOrderIntercept(plane.rb.position, plane.rb.velocity, bulletSpeed, plane.target.transform.position, plane.target.rb.velocity);
+			if(!advancedGunnery)
+			{
+				if (range < cannonRange && targetAngle < plane.criticalAoA && cannonCooldownTimer == 0)
+				{
+					cannonFiring = true;
+					cannonBurstTimer = cannonBurstLength;
+					guns.trigger = true;
+					//plane.SetCannonInput(true);
+				}
+			}
+			
+			if(advancedGunnery)
+			{
+				if (range < cannonRange && targetAngle < cannonMaxFireAngle && cannonCooldownTimer == 0)
+				{
+					cannonFiring = true;
+					cannonBurstTimer = cannonBurstLength;
+					guns.trigger = true;
+					//plane.SetCannonInput(true);
+				}
+			}
 
-            var error = targetPosition - plane.rb.position;
-            var range = error.magnitude;
-            var targetDir = error.normalized;
-            var targetAngle = Vector3.Angle(targetDir, plane.rb.rotation * Vector3.forward);
-
-            if (range < cannonRange && targetAngle < plane.criticalAoA && cannonCooldownTimer == 0)
-            {
-                cannonFiring = true;
-                cannonBurstTimer = cannonBurstLength;
-                guns.trigger = true;
-                //plane.SetCannonInput(true);
-            }
         }
     }
 

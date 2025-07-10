@@ -3693,7 +3693,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  rampUpTime: 1.5
+  rampUpTime: 5
   launchTime: 0
   drag: 0
   angleToMissile: 0
@@ -3705,6 +3705,8 @@ MonoBehaviour:
   speedMach: 0
   gForce: 0
   navigationConstant: 2
+  closingSpeed: 0
+  timeToLockBreak: 3
 --- !u!54 &2806993683341460876
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3989,6 +3991,7 @@ MonoBehaviour:
   finalMass: 415
   rb: {fileID: 2806993683341460876}
   rocketDelay: 0
+  destroyOnceOutOfFuel: 0
   rocketTrailParticle: {fileID: 3034043757769928337}
   smoke: {fileID: 4269494909908804134}
   launchSnd: {fileID: -9182242353373441545}
@@ -4108,6 +4111,7 @@ MonoBehaviour:
   finalMass: 312
   rb: {fileID: 2806993683341460876}
   rocketDelay: 1
+  destroyOnceOutOfFuel: 0
   rocketTrailParticle: {fileID: 3034043757769928337}
   smoke: {fileID: 4269494909908804134}
   launchSnd: {fileID: -9182242353373441545}
@@ -4131,6 +4135,7 @@ MonoBehaviour:
   missileInnerFoV: 3
   missileOuterFoV: 60
   isCagedSeeker: 0
+  slaveToRadar: 0
   irccmType: 1
   missileTimer: 2
   fuzeActivationTime: 0

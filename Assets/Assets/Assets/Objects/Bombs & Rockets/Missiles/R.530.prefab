@@ -616,6 +616,7 @@ MonoBehaviour:
   finalMass: 160
   rb: {fileID: 6942089147527653431}
   rocketDelay: 0
+  destroyOnceOutOfFuel: 0
   rocketTrailParticle: {fileID: 1869778482100521050}
   smoke: {fileID: 7032926577999782248}
   launchSnd: {fileID: -4027492773483778785}
@@ -639,6 +640,7 @@ MonoBehaviour:
   finalMass: 148
   rb: {fileID: 6942089147527653431}
   rocketDelay: 1
+  destroyOnceOutOfFuel: 0
   rocketTrailParticle: {fileID: 354841966628193202}
   smoke: {fileID: 2892905083191239005}
   launchSnd: {fileID: 6467208130037599213}
@@ -755,7 +757,7 @@ MonoBehaviour:
   shooter: {fileID: 0}
   possibleTarget: {fileID: 0}
   target: {fileID: 0}
-  timerToFuze: 2
+  timerToFuze: 0.5
   lifeTime: 60
   ProxyFuse: 0
   maxGLoad: 20
@@ -785,7 +787,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  rampUpTime: 2
+  rampUpTime: 4
   launchTime: 0
   drag: 0
   angleToMissile: 0
@@ -797,6 +799,8 @@ MonoBehaviour:
   speedMach: 0
   gForce: 0
   navigationConstant: 1
+  closingSpeed: 0
+  timeToLockBreak: 3
 --- !u!114 &-2590612065999762496
 MonoBehaviour:
   m_ObjectHideFlags: 0

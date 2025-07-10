@@ -46,7 +46,7 @@ public class Radar_Missile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         drag = rb.drag;
         launchTime = Time.time;
-	Destroy(gameObject, lifeTime);
+		Destroy(gameObject, lifeTime);
     }
 
     // Update is called once per frame
@@ -62,7 +62,12 @@ public class Radar_Missile : MonoBehaviour
 
         TargetReflection();
         rb.velocity = transform.forward * rb.velocity.magnitude;
-		currentMaxGAvailable = maxGLoad * maxGLoadMultiplierAtMach.Evaluate(speedMach);
+		
+		// "Wake-up" factor: ramp up control authority
+        float timeSinceLaunch = Time.time - launchTime;
+        float authorityFactor = Mathf.Clamp01(timeSinceLaunch / rampUpTime);
+		
+		currentMaxGAvailable = (maxGLoad * authorityFactor) * maxGLoadMultiplierAtMach.Evaluate(speedMach);
 
         speed = rb.velocity.magnitude * 3.6f;
         speedMach = speed / 1234f;
@@ -155,10 +160,7 @@ public class Radar_Missile : MonoBehaviour
             lateralAcceleration = lateralAcceleration.normalized * maxAccel;
         }
 
-        // "Wake-up" factor: ramp up control authority
-        float timeSinceLaunch = Time.time - launchTime;
-        float authorityFactor = Mathf.Clamp01(timeSinceLaunch / rampUpTime);
-        lateralAcceleration *= authorityFactor;
+
 
         // Now steer missile towards commanded acceleration
         Vector3 desiredDirection = (missileVel.normalized + lateralAcceleration.normalized * 0.5f).normalized;
@@ -217,7 +219,7 @@ public class Radar_Missile : MonoBehaviour
 		if(target == null) return;
 
         float missileToTargetAngle = Vector3.Angle(transform.forward, target.transform.position-transform.position);
-		NotchFilter();
+		if(hasTerminalGuidance) { NotchFilter(); }
         if (missileToTargetAngle >= 45f)
         {
             target = null;

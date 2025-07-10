@@ -40,9 +40,9 @@ public class DogfightingState : StateBase
 		{
 			case PilotLevel.Novice:
 			{
-				controller.steeringSpeed = 1f;
+				controller.steeringSpeed = 1.5f;
 				controller.reactionDelayMin = 0.5f;
-				controller.reactionDelayMax = 2.5f;
+				controller.reactionDelayMax = 2f;
 				controller.reactionDelayDistance = 200f;
 				controller.minMissileDodgeDistance = 100f;
 				lookAroundCooldownTime = UnityEngine.Random.Range(3f, 6f);
@@ -70,6 +70,7 @@ public class DogfightingState : StateBase
 				controller.reactionDelayMax = 0.8f;
 				controller.reactionDelayDistance = 450f;
 				controller.minMissileDodgeDistance = UnityEngine.Random.Range(1200f, 1800f);
+				controller.advancedGunnery = true;
 				lookAroundCooldownTime = UnityEngine.Random.Range(0.8f, 2f);
 				lookAroundRange = UnityEngine.Random.Range(2300f, 3200f);
 				flares = controller.hub.flareDispenser;
@@ -83,6 +84,7 @@ public class DogfightingState : StateBase
 				controller.reactionDelayMax = 0.5f;
 				controller.reactionDelayDistance = 650f;
 				controller.minMissileDodgeDistance = UnityEngine.Random.Range(1500f, 2000f);
+				controller.advancedGunnery = true;
 				lookAroundCooldownTime = UnityEngine.Random.Range(0.15f, 0.6f);
 				lookAroundRange = UnityEngine.Random.Range(4500f, 7000f);
 				flares = controller.hub.flareDispenser;

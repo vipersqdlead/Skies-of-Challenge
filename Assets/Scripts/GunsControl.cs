@@ -175,11 +175,21 @@ public class GunsControl : MonoBehaviour
 
     public void EnableAG()
     {
-        enableAG = true;
-        AGTimer += 240f;
-        foreach (GameObject AGgun in additionalGunsGO)
-        {
-            AGgun.SetActive(true);
-        }
+		if(additionalGunsGO.Length == 0)
+			return;
+		
+		try
+		{
+			enableAG = true;
+			AGTimer += 240f;
+			foreach (GameObject AGgun in additionalGunsGO)
+			{
+				AGgun.SetActive(true);
+			}
+		}
+		catch (System.Exception e)
+		{
+			Debug.Log($"Tried enabling Additional Guns on aircraft " + gameObject.name + " but there was an error.");
+		}
     }
 }

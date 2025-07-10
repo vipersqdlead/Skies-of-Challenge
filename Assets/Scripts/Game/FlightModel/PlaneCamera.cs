@@ -146,13 +146,18 @@ public class PlaneCamera : MonoBehaviour
 		List<Transform> possibleTargets = GetNearbyEnemyTargets(transform, 32000f);
 		
 		Transform target = GetTargetClosestToCenter(SortTargetsByScreenCenter(possibleTargets));
+		
+		FlightModel fm = null;
 
 		if (target == null)
 		{
 			target = GetClosestTargetByDistance(self, possibleTargets);
 		}
 		
-		FlightModel fm = target.GetComponent<FlightModel>();
+		if(target != null)
+		{
+			fm = target.GetComponent<FlightModel>();
+		}
 		
 		if(fm != null)
 		{
@@ -227,12 +232,18 @@ public class PlaneCamera : MonoBehaviour
 		foreach (Transform _target in possibleTargets)
 		{
 			
+			FlightModel targetFm = _target.GetComponent<FlightModel>();
+			
 			if(hub.fm.target != null)
 			{
 				if(hub.fm.target.transform == _target)
 				{
 					continue;
 				}	
+				if(hub.fm.target.side == hub.fm.side && targetFm.side == hub.fm.side)
+				{
+					continue;
+				}
 			}
 			
 			Vector3 viewportPos = camera.WorldToViewportPoint(_target.position);

@@ -53,6 +53,7 @@ public class IR_Missile : MonoBehaviour
     void Start()
     {
 		if(target != null) {        directionToTarget = (target.transform.position - transform.position).normalized;}
+		launchTime = Time.time;
     }
 
     // Update is called once per frame
@@ -75,10 +76,14 @@ public class IR_Missile : MonoBehaviour
             ProxyFuse = true;
             Guidance();
         }
+		
+        // "Wake-up" factor: ramp up control authority
+        float timeSinceLaunch = Time.time - launchTime;
+        float authorityFactor = Mathf.Clamp01(timeSinceLaunch / rampUpTime);
 
         TargetReflection();
         rb.velocity = transform.forward * rb.velocity.magnitude;
-		currentMaxGAvailable = maxGLoad * maxGLoadMultiplierAtMach.Evaluate(speedMach);
+		currentMaxGAvailable = (maxGLoad * authorityFactor) * maxGLoadMultiplierAtMach.Evaluate(speedMach);
 
         CalculateGForce();
         float newDrag = drag * Utilities.airDensityAnimCurve.Evaluate(transform.position.y / 10000f);
@@ -102,25 +107,26 @@ public class IR_Missile : MonoBehaviour
     {
         if (irccmType == IRCCMType.NoIRCCM)
         {
-	    if(SeekerNoIRCCM() != null)
-	    {
-		if(SeekerNoIRCCM().CompareTag("Flare"))
-		{
-			target = SeekerNoIRCCM(); 
-			print("Saw a flare");
-		}
-	    }
+			if(SeekerNoIRCCM() != null)
+			{
+				if(SeekerNoIRCCM().CompareTag("Flare"))
+				{
+					target = SeekerNoIRCCM(); 
+					print("Saw a flare");
+				}
+			}
         }
         else if (irccmType == IRCCMType.IRCCM)
-        {
-	    if(SeekerIRCCM() != null)
-	    {
-		if(SeekerIRCCM().CompareTag("Flare"))
 		{
-			target = SeekerIRCCM(); 
-			print("Saw a flare");
-		}
-	    }
+			missileInnerFoV = 1f;
+			if(SeekerNoIRCCM() != null)
+			{
+				if(SeekerNoIRCCM().CompareTag("Flare"))
+				{
+					target = SeekerNoIRCCM(); 
+					print("Saw a flare");
+				}
+			}
         }
 
         return;
@@ -399,11 +405,6 @@ public class IR_Missile : MonoBehaviour
         {
             lateralAcceleration = lateralAcceleration.normalized * maxAccel;
         }
-
-        // "Wake-up" factor: ramp up control authority
-        float timeSinceLaunch = Time.time - launchTime;
-        float authorityFactor = Mathf.Clamp01(timeSinceLaunch / rampUpTime);
-        lateralAcceleration *= authorityFactor;
 
         // Now steer missile towards commanded acceleration
         Vector3 desiredDirection = (missileVel.normalized + lateralAcceleration.normalized * 0.5f).normalized;
