@@ -34,8 +34,29 @@ public class DogfightingState : StateBase
 		
 		print("Starting State");
         controller = user as AIController;
-        
 		
+		AssignPilotVariables();
+
+		if (controller.plane.target == null)
+        {
+            controller.plane.target = Utilities.GetNearestTarget(gameObject, controller.plane.side, lookAroundRange);
+        }
+        if (controller.canUseMissiles)
+        {
+            irController = GetComponent<IRMissileControl>();
+        }
+
+        missileCooldownTimer = missileCooldownTime;
+
+    }
+	
+	public void ChangePilotLevel(int level)
+	{
+		pilotLevel = (PilotLevel)level;
+	}
+	
+	void AssignPilotVariables()
+	{
 		switch (pilotLevel)
 		{
 			case PilotLevel.Novice:
@@ -91,19 +112,7 @@ public class DogfightingState : StateBase
 				break;
 			}
 		}
-
-		if (controller.plane.target == null)
-        {
-            controller.plane.target = Utilities.GetNearestTarget(gameObject, controller.plane.side, lookAroundRange);
-        }
-        if (controller.canUseMissiles)
-        {
-            irController = GetComponent<IRMissileControl>();
-        }
-
-        missileCooldownTimer = missileCooldownTime;
-
-    }
+	}
 
     public override void OnStateStay()
     {   if(controller == null)

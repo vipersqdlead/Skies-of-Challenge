@@ -334,4 +334,28 @@ public static class Utilities {
 		
 		return closingSpeed;
 	}
+	
+    public static Vector3 GetSafeSpawnAltitude(Vector3 spawnPoint, float playerAltitude)
+    {
+        Vector3 rayStart = new Vector3(spawnPoint.x, 10000f, spawnPoint.z);
+        Ray ray = new Ray(rayStart, Vector3.down);
+        RaycastHit hit;
+
+        float terrainY = 0f;
+
+        if(Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            terrainY = hit.point.y;
+        }
+        else
+        {
+            terrainY = 50f;
+        }
+
+        float safeAltitude = terrainY + 500f;
+
+        float finalAltitude = Mathf.Max(safeAltitude, playerAltitude);
+
+        return new Vector3(spawnPoint.x, finalAltitude, spawnPoint.z);
+    }
 }

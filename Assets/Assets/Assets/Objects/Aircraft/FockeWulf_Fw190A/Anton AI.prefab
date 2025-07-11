@@ -490,13 +490,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 7269848120885298367}
-  hub: {fileID: 0}
+  hub: {fileID: 7705137990416681388}
   engineControl: {fileID: 5586728687441495490}
   steeringSpeed: 50
   minSpeed: 200
   maxSpeed: 300
   recoverSpeedMin: 72
-  recoverSpeedMax: 144
+  recoverSpeedMax: 180
   groundCollisionMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -504,14 +504,15 @@ MonoBehaviour:
   groundAvoidanceAngle: 20
   groundAvoidanceMinSpeed: 0
   groundAvoidanceMaxSpeed: 300
-  pitchUpThreshold: -25
+  pitchUpThreshold: -45
   fineSteeringAngle: 5
-  rollFactor: 0.1
-  yawFactor: 1
+  rollFactor: 0.01
+  yawFactor: 0.1
   currentState: {fileID: 8298116664900776405}
   guns: {fileID: 3312020018505839874}
   canUseMissiles: 0
   canUseCannon: 1
+  advancedGunnery: 0
   missileLockFiringDelay: 0
   missileFiringCooldown: 0
   missileMinRange: 0
@@ -519,9 +520,9 @@ MonoBehaviour:
   missileMaxFireAngle: 0
   bulletSpeed: 700
   cannonRange: 800
-  cannonMaxFireAngle: 20
-  cannonBurstLength: 3
-  cannonBurstCooldown: 1.5
+  cannonMaxFireAngle: 5
+  cannonBurstLength: 1
+  cannonBurstCooldown: 3
   minMissileDodgeDistance: 0
   reactionDelayMin: 0
   reactionDelayMax: 1

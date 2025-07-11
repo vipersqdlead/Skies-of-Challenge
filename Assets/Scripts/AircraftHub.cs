@@ -22,6 +22,9 @@ public class AircraftHub : MonoBehaviour
     public RocketLauncherControl rocketLauncherControl;
     public BombControl bombControl;
     public FlareDispenser flareDispenser;
+	
+	public AIController aiController;
+	public DogfightingState dfState;
 
     public MeshRenderer meshRenderer;
 
@@ -63,7 +66,12 @@ public int engineNumber;
         radarMissileControl = GetComponent<RadarMissileControl>();
         rocketLauncherControl = GetComponent<RocketLauncherControl>();
         bombControl = GetComponent<BombControl>();
+		
+		aiController = GetComponent<AIController>();
+		dfState = GetComponent<DogfightingState>();
+		
         flareDispenser = GetComponent<FlareDispenser>();
+		if(!flareDispenser.enabled) { flareDispenser = null; }
 		
 		CalculateSomeStats();
 

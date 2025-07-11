@@ -448,7 +448,8 @@ public class SurvivalMissionStatus : MonoBehaviour
 		aircraft.transform.rotation = Quaternion.LookRotation(directionToCenter, Vector3.up);
 		
 		Vector3 directionFromCenter = (aircraft.transform.position - Vector3.zero).normalized;
-		aircraft.transform.position = directionFromCenter * distanceToReposition;
+		Vector3 spawnPosition = directionFromCenter * distanceToReposition;
+		aircraft.transform.position = Utilities.GetSafeSpawnAltitude(spawnPosition, spawnPosition.y);
 
 		// Apply forward "spawn" speed
 		float spawnSpeed = aircraft.fm.SpawnSpeed; // You can make this configurable per aircraft

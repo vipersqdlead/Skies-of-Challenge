@@ -118,7 +118,7 @@ public class FlightModel : MonoBehaviour
                     break;
                 }
         }
-        criticalAoA = maxAngleOfAttack * 0.9f;
+        //criticalAoA = maxAngleOfAttack * 0.9f;
     }
     private void FixedUpdate()
     {
@@ -325,6 +325,7 @@ public class FlightModel : MonoBehaviour
         wingSpan = newWingspan;
         aspectRatio = (newWingspan * newWingspan) / wingArea;
         CalculateMaxAoA();
+		criticalAoA = maxAngleOfAttack * 0.9f;
     }
 
     void NeverExceedSpeedPenalty()

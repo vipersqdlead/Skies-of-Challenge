@@ -50,7 +50,7 @@ public class WaveSpawner : MonoBehaviour
         for (int i = 0; i < numberOfEnemies; i++)
         {
             int spawnRand = Random.Range(0, auxSpawnPositions.Count);
-            GameObject newWave = Instantiate(eligibleAircraft[Random.Range(0, eligibleAircraft.Count)], GetSafeSpawnAltitude(auxSpawnPositions[spawnRand].position, player.transform.position.y), auxSpawnPositions[spawnRand].rotation);
+            GameObject newWave = Instantiate(eligibleAircraft[Random.Range(0, eligibleAircraft.Count)], Utilities.GetSafeSpawnAltitude(auxSpawnPositions[spawnRand].position, player.transform.position.y), auxSpawnPositions[spawnRand].rotation);
             //auxSpawnPositions.Remove(auxSpawnPositions[spawnRand]);
             Wave wave = newWave.GetComponent<Wave>();
             wave.AddRenderersToMarker(markers, status, player);
@@ -75,7 +75,7 @@ public class WaveSpawner : MonoBehaviour
 
         for (int i = 0; i < numberOfAllies; i++)
         {
-			GameObject newWave = Instantiate(eligibleAircraft[Random.Range(0, eligibleAircraft.Count)], GetSafeSpawnAltitude(new Vector3(0, 4250, 0), player.transform.position.y), transform.rotation);
+			GameObject newWave = Instantiate(eligibleAircraft[Random.Range(0, eligibleAircraft.Count)], Utilities.GetSafeSpawnAltitude(new Vector3(0, 4250, 0), player.transform.position.y), transform.rotation);
 			//auxSpawnPositions.Remove(auxSpawnPositions[spawnRand]);
 			Wave wave = newWave.GetComponent<Wave>();
 			wave.AddAllyRenderersToMarker(markers, status);
