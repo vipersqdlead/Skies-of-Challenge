@@ -26,6 +26,7 @@ public class WaveSpawner : MonoBehaviour
 	{	
 		sortedAircraft = allAircraftPrefabs.OrderBy(p => p.GetComponent<Wave>().aircraft[0].gameObject.GetComponent<HealthPoints>().pointsWorth).ToList();
 		eligibleAircraft = GetAircraftByDifficultyRange();
+		print("Current Rating is: " + currentDifficulty + ". Number of possible enemies at this rating is " + eligibleAircraft.Count);
 	}
 	
 	public List<GameObject> GetAircraftByDifficultyRange(int range = 100)

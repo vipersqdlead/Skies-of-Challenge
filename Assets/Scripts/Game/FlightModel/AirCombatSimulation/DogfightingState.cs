@@ -31,8 +31,6 @@ public class DogfightingState : StateBase
 
     public override void OnStateStart(StateUser user)
     {
-		
-		print("Starting State");
         controller = user as AIController;
 		
 		AssignPilotVariables();
@@ -117,7 +115,7 @@ public class DogfightingState : StateBase
     public override void OnStateStay()
     {   if(controller == null)
         {
-            print("Controller is null!");
+            print("Controller is null on aircraft " + gameObject.name + "!");
             return;
         }
         

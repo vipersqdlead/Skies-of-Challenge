@@ -71,7 +71,7 @@ public int engineNumber;
 		dfState = GetComponent<DogfightingState>();
 		
         flareDispenser = GetComponent<FlareDispenser>();
-		if(!flareDispenser.enabled) { flareDispenser = null; }
+		if(flareDispenser != null) { if(!flareDispenser.enabled) { flareDispenser = null; } }
 		
 		CalculateSomeStats();
 

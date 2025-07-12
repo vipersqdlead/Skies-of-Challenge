@@ -29,7 +29,7 @@ public class Wave : MonoBehaviour
             aircraft[i].fm.side = 1;
             aircraft[i].fm.health.countsAsKill = false;
             aircraft[i].fm.health.pointsWorth = -1000;
-			aircraft[i].dfState.ChangePilotLevel(3);
+			aircraft[i].dfState.ChangePilotLevel(2);
             markers.AddAllyMarker(aircraft[i]);
         }
     }

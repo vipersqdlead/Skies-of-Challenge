@@ -48,6 +48,7 @@ public class AATurret : MonoBehaviour
     public Vector3 targetDir;
     void Update()
     {
+		if(hub.fm.side != side) { side = hub.fm.side; }
 
 		
 		if (ownTarget == null)
