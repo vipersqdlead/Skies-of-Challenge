@@ -64,6 +64,10 @@ public class DogfightingState : StateBase
 				controller.reactionDelayMax = 2f;
 				controller.reactionDelayDistance = 200f;
 				controller.minMissileDodgeDistance = 100f;
+				
+				controller.plane.gTolerance = 5f;
+				controller.plane.gMax = 8f;
+				
 				lookAroundCooldownTime = UnityEngine.Random.Range(3f, 6f);
 				lookAroundRange = UnityEngine.Random.Range(1500f, 2200f);
 				break;
@@ -76,8 +80,13 @@ public class DogfightingState : StateBase
 				controller.reactionDelayMax = 1.5f;
 				controller.reactionDelayDistance = 350f;
 				controller.minMissileDodgeDistance = UnityEngine.Random.Range(800f, 1500f);
+				
+				controller.plane.gTolerance = 6f;
+				controller.plane.gMax = 9f;
+				
 				lookAroundCooldownTime = UnityEngine.Random.Range(1.5f, 3f);
 				lookAroundRange = UnityEngine.Random.Range(1800f, 2500f);
+				
 				flares = controller.hub.flareDispenser;
 				break;
 			}
@@ -89,9 +98,15 @@ public class DogfightingState : StateBase
 				controller.reactionDelayMax = 0.8f;
 				controller.reactionDelayDistance = 450f;
 				controller.minMissileDodgeDistance = UnityEngine.Random.Range(1200f, 1800f);
+				
+				controller.plane.gTolerance = 7f;
+				controller.plane.gMax = 11f;
+				
 				controller.advancedGunnery = true;
+				
 				lookAroundCooldownTime = UnityEngine.Random.Range(0.8f, 2f);
 				lookAroundRange = UnityEngine.Random.Range(2300f, 3200f);
+				
 				flares = controller.hub.flareDispenser;
 				break;
 			}
@@ -103,9 +118,15 @@ public class DogfightingState : StateBase
 				controller.reactionDelayMax = 0.5f;
 				controller.reactionDelayDistance = 650f;
 				controller.minMissileDodgeDistance = UnityEngine.Random.Range(1500f, 2000f);
+				
+				controller.plane.gTolerance = 8f;
+				controller.plane.gMax = 14f;
+				
 				controller.advancedGunnery = true;
+				
 				lookAroundCooldownTime = UnityEngine.Random.Range(0.15f, 0.6f);
 				lookAroundRange = UnityEngine.Random.Range(4500f, 7000f);
+				
 				flares = controller.hub.flareDispenser;
 				break;
 			}
@@ -222,6 +243,8 @@ public class DogfightingState : StateBase
 
     void CalculateMissiles()
     {
+		return;
+		
         if(controller.canUseMissiles)
         {
             if (missileCooldown)

@@ -16,6 +16,7 @@ public class IR_Missile : MonoBehaviour
     public GameObject target, launcherPlane;
     Rigidbody rb;
     public float searchRange = 2000f;
+	public float minRange = 800f;
     public float missileInnerFoV, missileOuterFoV;
     public bool isCagedSeeker, slaveToRadar;
     public IRCCMType irccmType;

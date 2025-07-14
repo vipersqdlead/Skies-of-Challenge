@@ -10,10 +10,11 @@ public class EngineControl : MonoBehaviour
     [Header("Engine Settings")]
     [SerializeField] float currentEnginePower;
     [SerializeField]public float engineStaticThrust;
+	[SerializeField] float currentHorsepower;
     public float serviceCeiling = 12000f;
     [SerializeField] AnimationCurve powerByAltitudeMultiplier;
     [SerializeField] AnimationCurve thrustBySpeedMultiplier;
-    [SerializeField] bool isAfterburningEngine;
+    public bool isAfterburningEngine;
     [SerializeField] bool useAirDensityMultiplier;
     public float maxPropEfficiency = 0.85f;
     public float propEfficiencyMach = 0.42f;
@@ -90,6 +91,7 @@ public class EngineControl : MonoBehaviour
         if (useAirDensityMultiplier && aircraft.rb.velocity.magnitude > 0f)
         {
             currentEnginePower = ((currentThrust * powerByAltitudeMultiplier.Evaluate(transform.position.y / 10000f) * Utilities.GetPropEfficiencyNumber(maxPropEfficiency, propEfficiencyMach, aircraft.machSpeed) * 326f) / (aircraft.currentSpeed / 1.85200426f)) * 4.44822f * ThrottleInput;
+			currentHorsepower = currentThrust * powerByAltitudeMultiplier.Evaluate(transform.position.y / 10000f);
 			//* Utilities.airDensityAnimCurve.Evaluate(transform.position.y / 10000f);
         }
         else

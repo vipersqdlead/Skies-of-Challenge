@@ -176,15 +176,57 @@ public class SurvivalSettings : MonoBehaviour
         weightText.text = "Weight: " + selectedHub.rb.mass + " Kg";
         if (selectedHub.isJet == false)
         {
-	    if(selectedHub.engineNumber == 1) { powerText.text = "Power: " + selectedHub.power_maxPower + " PS"; }
-            else { powerText.text = "Power: " + selectedHub.power_maxPower + " PS x" + selectedHub.engineNumber; }
-            climbText.text = "Power-to-Weight: " + selectedHub.powerToWeight + " Kg/PS";
-        }
+			if(selectedHub.engineNumber == 1) 
+			{ 
+				if(selectedHub.engineControl.isAfterburningEngine)
+				{
+					powerText.text = "Power: " + selectedHub.power_maxPower + " PS Mil; " + selectedHub.power_WepPower + " PS WEP"; 
+				}
+				else
+				{
+					powerText.text = "Power: " + selectedHub.power_maxPower + " PS"; 
+				}
+			}
+			else 
+			{ 
+				if(selectedHub.engineControl.isAfterburningEngine)
+				{
+					powerText.text = "Power: x" + selectedHub.engineNumber + " " + selectedHub.power_maxPower + " PS Mil; " + selectedHub.power_WepPower + " PS WEP"; 
+				}
+				else
+				{
+					powerText.text = "Power: x" + selectedHub.engineNumber + " " + selectedHub.power_maxPower + " PS"; 
+				}
+			}
+
+			climbText.text = "Power-to-Weight: " + selectedHub.powerToWeight + " Kg/PS";
+		}
         else
-        {
-            if(selectedHub.engineNumber == 1) { powerText.text = "Thrust: " + selectedHub.power_maxPower + " Kgf"; } 
-	    else { powerText.text = "Thrust: " + selectedHub.power_maxPower + " Kgf x" + selectedHub.engineNumber; }
-            climbText.text = "Thrust-to-Weight: " + selectedHub.powerToWeight + " Kgf/Kg";
+		{
+			if(selectedHub.engineNumber == 1) 
+			{ 
+				if(selectedHub.engineControl.isAfterburningEngine)
+				{
+					powerText.text = "Thrust: " + selectedHub.power_maxPower + " Kgf Dry; " + selectedHub.power_WepPower + " Kgf Wet"; 
+				}
+				else
+				{
+					powerText.text = "Thrust: " + selectedHub.power_maxPower + " Kgf Dry"; 
+				}
+			}
+			else 
+			{ 
+				if(selectedHub.engineControl.isAfterburningEngine)
+				{
+					powerText.text = "Thrust: x" + selectedHub.engineNumber + " " + selectedHub.power_maxPower + " Kgf Dry; " + selectedHub.power_WepPower + " Kgf Wet"; 
+				}
+				else
+				{
+					powerText.text = "Thrust: x" + selectedHub.engineNumber + " " + selectedHub.power_maxPower + " Kgf Dry"; 
+				}
+			}
+			
+			climbText.text = "Thrust-to-Weight: " + selectedHub.powerToWeight + " Kgf/Kg";
         }
 	
 	    wingLoadingText.text = "Wing Loading: " + selectedHub.agility_wingLoading + " kg/m2";
@@ -1224,11 +1266,12 @@ public class SurvivalSettings : MonoBehaviour
         FJ2Fury,
         CACSabre,
         Fagot,
-		//Fagot_Early,
+		Fagot_Early,
         Fresco,
         //WhiteDaze,
 		// Cutlass,
         Tunnan,
+		TunnanF,
         TunnanD,
         SchwalbeIII,
         //SchwalbeIIIb,

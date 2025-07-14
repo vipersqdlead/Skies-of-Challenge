@@ -16,7 +16,7 @@ public class IRMissileControl : BaseSpWeaponControl
 
     public float AcquisitionMaxTimer;
     public float AcquisitionTimer;
-    public float missileOuterFoV, missileInnerFoV, missileLockRange;
+    public float missileOuterFoV, missileInnerFoV, missileLockRange, missileMinRange;
     public bool isCagedSeeker, slaveToRadar;
     public GameObject Target;
     [SerializeField] float distanceToTarget;
@@ -59,6 +59,7 @@ public class IRMissileControl : BaseSpWeaponControl
         missileOuterFoV = Missile.GetComponent<IR_Missile>().missileOuterFoV;
 		missileInnerFoV = Missile.GetComponent<IR_Missile>().missileInnerFoV;
 		missileLockRange = Missile.GetComponent<IR_Missile>().searchRange;
+		missileMinRange = Missile.GetComponent<IR_Missile>().minRange;
         isCagedSeeker = Missile.GetComponent<IR_Missile>().isCagedSeeker;
         slaveToRadar = Missile.GetComponent<IR_Missile>().slaveToRadar;
     }

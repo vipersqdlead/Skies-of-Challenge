@@ -33,7 +33,7 @@ public class AircraftHub : MonoBehaviour
     public string aircraftName;
 	public string nameShort, nameLong;
     public int speed_maxSpeed;
-    public float power_maxPower;
+    public float power_maxPower, power_WepPower;
     public bool isJet;
 public int engineNumber;
     public float powerToWeight;
@@ -86,12 +86,14 @@ public int engineNumber;
         agility_weight = rb.mass;
 	    agility_wingLoading = (int)(agility_weight / fm.wingArea);
 
+		engineNumber = engineControl.engines.Length;
         if (engineControl.enginePropellers.Length == 0)
         {
-            power_maxPower = (int)((engineControl.engineStaticThrust + engineControl.afterburnerThrust) * 0.101972f);
-            isJet = true;
-	    engineNumber = engineControl.engines.Length;
+            power_maxPower = (int)(engineControl.engineStaticThrust * 0.101972f); 
             powerToWeight = (power_maxPower * engineNumber) / agility_weight;
+			if(engineControl.isAfterburningEngine) { power_WepPower = power_maxPower + (int)(engineControl.afterburnerThrust * 0.101972f); 
+            powerToWeight = (power_WepPower * engineNumber) / agility_weight; }
+            isJet = true;
         {
             float x = powerToWeight;
             x *= 100;
@@ -102,16 +104,17 @@ public int engineNumber;
         }
         else if (engineControl.enginePropellers[0] != null)
         {
-            power_maxPower = (int)(engineControl.engineStaticThrust + engineControl.afterburnerThrust) / 5;
-	    engineNumber = engineControl.engines.Length;
-            powerToWeight = agility_weight / (power_maxPower * engineNumber);
-        {
+            power_maxPower = (int)engineControl.engineStaticThrust / 5; 
+			powerToWeight = agility_weight / (power_maxPower * engineNumber);
+			if(engineControl.isAfterburningEngine) { power_WepPower = power_maxPower + (int)(engineControl.afterburnerThrust / 5); 
+			powerToWeight = agility_weight / (power_WepPower * engineNumber);}
+			{
             float x = powerToWeight;
             x *= 100;
             x = Mathf.Floor(x);
             x /= 100;
             powerToWeight = x;
-        }
+			}
         }
 
         agility_maxTurnDegS = 0f;

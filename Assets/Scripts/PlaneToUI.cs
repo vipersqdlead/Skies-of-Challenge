@@ -18,7 +18,7 @@ public class PlaneToUI : MonoBehaviour
 
     public GameObject UI;
     public TMP_Text Health, MissilesIR, MissilesSAG, MissilesRadar, Rockets1, Bombs, flaresTxt, guidedBombs, killsCombo; /*	currentTarget; */
-    public RawImage healthIcon;
+    public RawImage healthIcon, blackOutBlack;
     public GameObject AcquireCircle, LockCircle, SARHPovCircle, SARHLockCircle;
 
     public bool IRMissiles, SAGMissiles, SARHMissiles, Rockets, bomb, guidedBomb, flares;
@@ -82,6 +82,7 @@ public class PlaneToUI : MonoBehaviour
         //GuidedBomb();
 		//ShowTarget();
         CountKillsCombo();
+		BlackOut();
     }
 
     void ShowHealth()
@@ -527,4 +528,11 @@ public class PlaneToUI : MonoBehaviour
             killsCombo.enabled = false;
         }
     }
+	
+	void BlackOut()
+	{
+		var tempColor = blackOutBlack.color;
+		tempColor.a = hub.fm.blackOutFactor;
+		blackOutBlack.color = tempColor;
+	}
 }

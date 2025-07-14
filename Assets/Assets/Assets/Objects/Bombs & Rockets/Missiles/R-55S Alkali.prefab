@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 8979203020597317813}
   - component: {fileID: 4661544994850581923}
   m_Layer: 0
-  m_Name: K-5 Alkali
+  m_Name: R-55S Alkali
   m_TagString: Missile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -685,12 +685,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa22c512a0d78e1498c7a755eeba4d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocketTimer: 4.5
-  rocketThrust: 200
+  rocketTimer: 3
+  rocketThrust: 250
   initialMass: 90
   finalMass: 60
   rb: {fileID: 6942089147527653431}
-  rocketDelay: 1
+  rocketDelay: 0
+  destroyOnceOutOfFuel: 0
   rocketTrailParticle: {fileID: 3785028234303018737}
   smoke: {fileID: 6459818648854915271}
   launchSnd: {fileID: 8979203020597317813}
@@ -714,9 +715,10 @@ MonoBehaviour:
   missileInnerFoV: 5
   missileOuterFoV: 5
   isCagedSeeker: 1
+  slaveToRadar: 0
   irccmType: 0
   missileTimer: 2
-  fuzeActivationTime: 0.8
+  fuzeActivationTime: 0.7
   maxGLoad: 10
   energyBleedMultiplier: 0.8
   currentMaxGAvailable: 0
@@ -744,7 +746,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  rampUpTime: 1
+  rampUpTime: 2
   launchTime: 0
   doesPurePursuit: 1
   ProxyFuse: 0

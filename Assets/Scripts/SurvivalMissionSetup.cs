@@ -101,7 +101,7 @@ public class SurvivalMissionSetup : MonoBehaviour
     [SerializeField] TMP_Text UI_HP, UI_Missiles, UI_MissilesSAG, UI_MissilesRadar, UI_Rockets, UI_Combo, UI_Flares, UI_Target;
     [SerializeField] GameObject UI_Crosshair, UI_LeadMarker, UI_FPM, UI_MsslAcq, UI_MsslLock, UI_SARHAcq, UI_SARHLock, UI_Center;
     [SerializeField] AudioSource UI_stallWarning_SFX;
-    [SerializeField] RawImage UI_healthIcon;
+    [SerializeField] RawImage UI_healthIcon, UI_blackOut;
     [SerializeField] EnemyMarkers markers;
     [SerializeField] RadarMinimap minimap;
     void UISetup()
@@ -117,6 +117,7 @@ public class SurvivalMissionSetup : MonoBehaviour
         hub.planeToUI.climbArrow = UI_climbArrow;
         hub.planeToUI.Health = UI_HP;
         hub.planeToUI.healthIcon = UI_healthIcon;
+        hub.planeToUI.blackOutBlack = UI_blackOut;
         hub.planeToUI.killsCombo = UI_Combo;
         hub.planeToUI.Rockets = true;
         hub.planeToUI.Rockets1 = UI_Rockets;

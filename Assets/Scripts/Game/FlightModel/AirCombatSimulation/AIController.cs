@@ -31,14 +31,12 @@ public class AIController : MonoBehaviour , StateUser
 
     [Header("Weaponry-related")]
     public GunsControl guns;
+	public IRMissileControl irMissile;
     public bool canUseMissiles;
     [SerializeField] bool canUseCannon;
 	public bool advancedGunnery;
-    [SerializeField] float missileLockFiringDelay;
-    [SerializeField] float missileFiringCooldown;
-    [SerializeField] float missileMinRange;
-    [SerializeField] float missileMaxRange;
-    [SerializeField] float missileMaxFireAngle;
+    float missileLockFiringDelay = 1f;
+    float missileFiringCooldown = 20f;
     [SerializeField] float bulletSpeed;
     public float cannonRange;
     [SerializeField] float cannonMaxFireAngle;
@@ -78,36 +76,41 @@ public class AIController : MonoBehaviour , StateUser
 
     void Start()
     {
-		    try
-    {
-		hub = plane.GetComponent<AircraftHub>();
+		try
+		{
+			hub = plane.GetComponent<AircraftHub>();
 		
-        engineControl = GetComponent<EngineControl>();
+			engineControl = GetComponent<EngineControl>();
 
-        selfTarget = plane.GetComponent<Target>();
+			selfTarget = plane.GetComponent<Target>();
 
-        if (plane.target != null)
-        {
-            targetPlane = plane.target.GetComponent<FlightModel>();
-        }
+			if (plane.target != null)
+			{
+				targetPlane = plane.target.GetComponent<FlightModel>();
+			}
+			
+			if(canUseMissiles)
+			{
+				irMissile = hub.irControl;
+			}
 
-        dodgeOffsets = new List<Vector3>();
-        inputQueue = new Queue<ControlInput>();
+			dodgeOffsets = new List<Vector3>();
+			inputQueue = new Queue<ControlInput>();
 
-        recoverSpeedMin = recoverSpeedMin * 3.6f;
-        recoverSpeedMax = recoverSpeedMax * 3.6f;
+			recoverSpeedMin = recoverSpeedMin * 3.6f;
+			recoverSpeedMax = recoverSpeedMax * 3.6f;
 		
-		if (currentState == null)
-{
-    Debug.LogError("currentState is NULL at ExecuteStateOnStart()");
-}
-		ExecuteStateOnStart();
-	}
+			if (currentState == null)
+			{
+				Debug.LogError("currentState is NULL at ExecuteStateOnStart()");
+			}
+			ExecuteStateOnStart();
+		}
 	
 	    catch (System.Exception e)
-    {
-        Debug.LogError("Error in Start(): " + e);
-    }
+		{
+				Debug.LogError("Error in Start(): " + e);
+		}
     }
 
     Vector3 AvoidGround()
@@ -263,7 +266,7 @@ public class AIController : MonoBehaviour , StateUser
 
         if (canUseMissiles)
         {
-            //CalculateMissiles(dt);
+            CalculateMissiles(dt);
         }
 
         if (canUseCannon)
@@ -272,31 +275,39 @@ public class AIController : MonoBehaviour , StateUser
         }
     }
 
-	/*
+	
     void CalculateMissiles(float dt)
     {
         missileDelayTimer = Mathf.Max(0, missileDelayTimer - dt);
         missileCooldownTimer = Mathf.Max(0, missileCooldownTimer - dt);
 
-        var error = plane.Target.Position - plane.Rigidbody.position;
+        var error = plane.target.transform.position - hub.rb.position;
         var range = error.magnitude;
         var targetDir = error.normalized;
-        var targetAngle = Vector3.Angle(targetDir, plane.Rigidbody.rotation * Vector3.forward);
+        var targetAngle = Vector3.Angle(targetDir, hub.rb.rotation * Vector3.forward);
 
-        if (!plane.MissileLocked || !(targetAngle < missileMaxFireAngle || (180f - targetAngle) < missileMaxFireAngle))
+        if (!irMissile.Locked)
         {
-            //don't fire if not locked or target is too off angle
-            //can fire if angle is close to 0 (chasing) or 180 (head on)
+            //don't fire if not locked
             missileDelayTimer = missileLockFiringDelay;
         }
+		
+		if(range < irMissile.missileLockRange)
+		{
+			irMissile.Acquiring = true;
+		}
+		else
+		{
+			irMissile.Acquiring = false;
+		}
 
-        if (range < missileMaxRange && range > missileMinRange && missileDelayTimer == 0 && missileCooldownTimer == 0)
+        if (range < irMissile.missileLockRange && range > irMissile.missileMinRange && missileDelayTimer == 0 && missileCooldownTimer == 0)
         {
-            plane.TryFireMissile();
+            irMissile.FireMissile();
             missileCooldownTimer = missileFiringCooldown;
         }
     }
-	*/
+	
 
     void CalculateCannon(float dt)
     {
@@ -344,10 +355,10 @@ public class AIController : MonoBehaviour , StateUser
         else
         {
             cannonCooldownTimer = Mathf.Max(0, cannonCooldownTimer - dt);
-
+			cannonMaxFireAngle = Mathf.Min(5f, plane.angleOfAttack);
 			if(!advancedGunnery)
 			{
-				if (range < cannonRange && targetAngle < plane.criticalAoA && cannonCooldownTimer == 0)
+				if (range < cannonRange && targetAngle < cannonMaxFireAngle && cannonCooldownTimer == 0)
 				{
 					cannonFiring = true;
 					cannonBurstTimer = cannonBurstLength;

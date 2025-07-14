@@ -114,12 +114,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 6444134827852753299}
   aircraftName: J35D Draken
   nameShort: J35
   nameLong: J35D
   speed_maxSpeed: 0
   power_maxPower: 0
+  power_WepPower: 0
   isJet: 0
   engineNumber: 0
   powerToWeight: 0
@@ -177,9 +180,9 @@ MonoBehaviour:
   currentSpeed: 0
   gForce: 0
   angleOfAttack: 0
-  criticalAoA: 0
+  criticalAoA: 15
   angleOfAttackHorizontal: 0
-  maxAngleOfAttack: 0
+  maxAngleOfAttack: 25
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -323,6 +326,12 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  gTolerance: 7.5
+  gMax: 13.5
+  gRecoveryRate: 1.5
+  gDrainRate: 3
+  blackOutFactor: 0
 --- !u!114 &3664102520621388802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -484,6 +493,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 54600
+  currentHorsepower: 0
   serviceCeiling: 12500
   powerByAltitudeMultiplier:
     serializedVersion: 2

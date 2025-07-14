@@ -20,10 +20,11 @@ public class Gun : MonoBehaviour
 	[SerializeField] ParticleSystem muzzleFlash;
 	[SerializeField] float muzzlePositionZOffset;
 
-    [SerializeField]float overheatTimer;
+    float overheatTimer;
+	public float overheatTimerPercent;
     [SerializeField] bool overheated;
     [SerializeField] float overheatResetTimer;
-    [SerializeField] float overheatedRoF;
+    float overheatedRoF;
 	
 	public int shotsFired;
 
@@ -48,7 +49,9 @@ public class Gun : MonoBehaviour
 		{
 			rofTimer = rateOfFire;
 		}
-			
+		
+		overheatTimerPercent = Mathf.InverseLerp(0f, 12f, overheatTimer);
+		accuracyError = Mathf.Lerp(0.0005f, 0.01f, overheatTimerPercent);
 
         if (overheated)
         {

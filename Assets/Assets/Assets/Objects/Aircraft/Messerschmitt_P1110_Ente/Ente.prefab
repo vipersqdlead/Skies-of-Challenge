@@ -924,10 +924,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 3046639428534769398}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6406513789558698803}
 --- !u!82 &7299215160090053565
@@ -1282,12 +1281,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 4745807250048111125}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
-  meshRenderer: {fileID: 0}
-  aircraftName: Me 355 Ente
-  nameShort: 
-  nameLong: 
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
+  meshRenderer: {fileID: 7751048567003175417}
+  aircraftName: Me 355A Ente
+  nameShort: Me 355
+  nameLong: Me 355A
   speed_maxSpeed: 1050
   power_maxPower: 1869
+  power_WepPower: 0
   isJet: 1
   engineNumber: 1
   powerToWeight: 0.72
@@ -1567,6 +1569,12 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  gTolerance: 7.5
+  gMax: 13.5
+  gRecoveryRate: 1
+  gDrainRate: 1
+  blackOutFactor: 0
 --- !u!114 &5826004335633451601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1615,6 +1623,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 16670
+  currentHorsepower: 0
   serviceCeiling: 13100
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -1754,6 +1763,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -1857,6 +1867,7 @@ MonoBehaviour:
   MaxMissileAmmo: 2
   MissileAmmo: 2
   canReload: 1
+  hub: {fileID: 0}
   Missile: {fileID: 888724703871080596, guid: 3dc6d62e5cfe6ed4ea70f0858b355fbc, type: 3}
   MissilePos:
   - {fileID: 8640854502886562590}
@@ -1867,9 +1878,11 @@ MonoBehaviour:
   missileInnerFoV: 0
   missileLockRange: 3000
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -2862,10 +2875,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 1338009753097033978}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6406513789558698803}
 --- !u!82 &3743722702402768700
@@ -3253,10 +3265,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 1583561840304595318}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6406513789558698803}
 --- !u!82 &1523225021520153055
@@ -4825,6 +4836,12 @@ PrefabInstance:
 --- !u!4 &1717949567405222191 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5178218515941708768, guid: 3faf5603ddf168f429cf63b8a9023b04,
+    type: 3}
+  m_PrefabInstance: {fileID: 5767941558090808015}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7751048567003175417 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4294914327748633398, guid: 3faf5603ddf168f429cf63b8a9023b04,
     type: 3}
   m_PrefabInstance: {fileID: 5767941558090808015}
   m_PrefabAsset: {fileID: 0}

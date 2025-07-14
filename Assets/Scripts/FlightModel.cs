@@ -201,6 +201,8 @@ public class FlightModel : MonoBehaviour
 	public float authorityPercent;
     public void calculateControlForces(float pitch, float yaw, float roll)
     {
+		UpdateBlackOut(gForce);
+		
         float normalizedSpeed = IAS_Speed / 1234f;
 		currentTurnRate = PitchForce.Evaluate(normalizedSpeed) * 100f;
 
@@ -210,7 +212,7 @@ public class FlightModel : MonoBehaviour
 		authorityPercent = Mathf.Clamp01((IAS_Speed * 100 / (stallSpeed * 2f)) / 100f);
         // Pitch force
         float pitchOutput = Mathf.Clamp(pitch, -1.0f, 0.5f);
-        pitchOutput = pitchOutput * ((Mathf.Max(noseAuthority,(PitchForce.Evaluate(normalizedSpeed) * 100f))) * authorityPercent);
+        pitchOutput = pitchOutput * ((Mathf.Max(noseAuthority,(PitchForce.Evaluate(normalizedSpeed) * 100f))) * authorityPercent * blackOutAuthorityModifier);
         if(anims != null)
         {
                 pitchOutput -= anims.flapExtensionValue * (anims.flapExtensionAngle / 10f);
@@ -218,10 +220,10 @@ public class FlightModel : MonoBehaviour
 
 
         // Yaw force
-        float yawOutput = yaw * (YawForce.Evaluate(normalizedSpeed) * 100f);
+        float yawOutput = yaw * (YawForce.Evaluate(normalizedSpeed) * 100f) * blackOutAuthorityModifier;
 
         // Roll force
-        float rollOutput = roll * (RollForce.Evaluate(normalizedSpeed) * 100f);
+        float rollOutput = roll * (RollForce.Evaluate(normalizedSpeed) * 100f) * blackOutAuthorityModifier;
 		
 		/*
 		
@@ -357,4 +359,31 @@ public class FlightModel : MonoBehaviour
         flaps = false;
         airbrake = false;
     }
+	
+	[Header("G Force Effects")]
+	public bool experiencesG = true;
+	public float gTolerance = 7.5f;
+	public float gMax = 13.5f;
+	float gRecoveryRate = 0.25f;
+	float gDrainRate = 0.5f;
+	
+	public float blackOutFactor = 0f;
+	float blackOutAuthorityModifier; /* => 1f - blackOutFactor; */
+	
+	void UpdateBlackOut(float currentG)
+	{
+		if(currentG > gTolerance)
+		{
+			float normalizedG = Mathf.InverseLerp(gTolerance, gMax, currentG);
+			
+			blackOutFactor += normalizedG * gDrainRate * Time.deltaTime;
+		}
+		else
+		{
+			blackOutFactor -= gRecoveryRate * Time.deltaTime;
+		}
+		
+		blackOutFactor = Mathf.Clamp01(blackOutFactor);
+		blackOutAuthorityModifier = 1f - Mathf.InverseLerp(0.8f, 1f, blackOutFactor);
+	}
 }
