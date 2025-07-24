@@ -364,14 +364,20 @@ public class FlightModel : MonoBehaviour
 	public bool experiencesG = true;
 	public float gTolerance = 7.5f;
 	public float gMax = 13.5f;
-	float gRecoveryRate = 0.25f;
-	float gDrainRate = 0.5f;
+	float gRecoveryRate = 0.225f;
+	float gDrainRate = 0.35f;
 	
 	public float blackOutFactor = 0f;
 	float blackOutAuthorityModifier; /* => 1f - blackOutFactor; */
 	
 	void UpdateBlackOut(float currentG)
 	{
+		if(!experiencesG)
+		{
+			blackOutAuthorityModifier = 1f;
+			return;
+		}
+		
 		if(currentG > gTolerance)
 		{
 			float normalizedG = Mathf.InverseLerp(gTolerance, gMax, currentG);
@@ -384,6 +390,6 @@ public class FlightModel : MonoBehaviour
 		}
 		
 		blackOutFactor = Mathf.Clamp01(blackOutFactor);
-		blackOutAuthorityModifier = 1f - Mathf.InverseLerp(0.8f, 1f, blackOutFactor);
+		blackOutAuthorityModifier = 1f - Mathf.InverseLerp(0.8f, 1.05f, blackOutFactor);
 	}
 }

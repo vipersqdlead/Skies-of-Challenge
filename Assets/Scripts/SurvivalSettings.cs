@@ -27,8 +27,8 @@ public class SurvivalSettings : MonoBehaviour
     public float modelRotationSpeed = 20f;
 
     // Battle options
-    public Toggle enableWaveBonusT, startWithBonusT, startWithAlliesT, alwaysReloadMissilesT, oldMatchmakerT;
-    public bool enableWaveBonus, startWithBonus, startWithAllies, alwaysReloadMissiles, oldMatchmaker;
+    public Toggle enableWaveBonusT, startWithBonusT, startWithAlliesT, alwaysReloadMissilesT, oldMatchmakerT, enableBlackoutRedoutT;
+    public bool enableWaveBonus, startWithBonus, startWithAllies, alwaysReloadMissiles, oldMatchmaker, enableBlackoutRedout;
 
     [SerializeField] TMP_Text bestScore, bestRound, bestTime, lastScore, totalCompletion;
     [SerializeField] FadeInOut fadeEffect;
@@ -74,6 +74,12 @@ public class SurvivalSettings : MonoBehaviour
             oldMatchmaker = true;
             oldMatchmakerT.isOn = true;
         }
+		
+		if (PlayerPrefs.GetInt("Survival Enable Blackouts") == 1)
+        {
+            enableBlackoutRedout = true;
+            enableBlackoutRedoutT.isOn = true;
+        }
 
         bestScore.text = "Highest Score: " + PlayerPrefs.GetInt("Survival High Score") + " pts.";
         bestRound.text = "Highest Round: Wave " + PlayerPrefs.GetInt("Survival Highest Round");
@@ -113,6 +119,7 @@ public class SurvivalSettings : MonoBehaviour
         startWithAllies = startWithAlliesT.isOn;
         alwaysReloadMissiles = alwaysReloadMissilesT.isOn;
 		oldMatchmaker = oldMatchmakerT.isOn;
+		enableBlackoutRedout = enableBlackoutRedoutT.isOn;
     }
 
     public void StartCoroutineChangeMenu(GameObject newMenu)
@@ -666,13 +673,18 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
-            case PlaneTypes.PyorremyrskyLate:
-                if (PlayerPrefs.GetInt("VL Pyorremyrsky Total Kill Count") >= 80)
+            case PlaneTypes.Pyorremyrsky:
+                if (PlayerPrefs.GetInt("VL Pyorremyrsky (Early) Total Kill Count") >= 80)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.PyorremyrskyLate:
+                if (PlayerPrefs.GetInt("VL Pyorremyrsky (Late) Highest Kill Count") >= 50)
                 { return true; }
                 else
                 { return false; }
             case PlaneTypes.MathiasFleisher:
-                if (PlayerPrefs.GetInt("Mathias Fleisher Times Killed") >= 3 && (PlayerPrefs.GetInt("VL Pyorremyrsky Highest Kill Count") >= 50 || PlayerPrefs.GetInt("VL Pyorremyrsky (Late) Highest Kill Count") >= 50))
+                if (PlayerPrefs.GetInt("Mathias Fleisher Times Killed") >= 3 && (PlayerPrefs.GetInt("VL Pyorremyrsky (Early) Highest Kill Count") >= 75 || PlayerPrefs.GetInt("VL Pyorremyrsky Highest Kill Count") >= 75 || PlayerPrefs.GetInt("VL Pyorremyrsky (Late) Highest Kill Count") >= 75))
                 { return true; }
                 else
                 { return false; }
@@ -707,7 +719,7 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
             case PlaneTypes.HayateHei:
-                if (PlayerPrefs.GetInt("Ki-84-Ia Hayate Highest Score") >= 50000 || PlayerPrefs.GetInt("Ki-84-Ia Hayate Highest Score") >= 50000)
+                if (PlayerPrefs.GetInt("Ki-84-Ia Hayate Highest Score") >= 50000 || PlayerPrefs.GetInt("Ki-84-Ib Hayate Highest Score") >= 50000)
                 { return true; }
                 else
                 { return false; }
@@ -991,8 +1003,18 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
+            case PlaneTypes.PhantomICE:    
+				if (PlayerPrefs.GetInt("F-4E Phantom II Highest Kill Count") >= 100 && PlayerPrefs.GetInt("F/A-18C Hornet Total Kill Count") >= 100)
+                { return true; }
+                else
+                { return false; }
             case PlaneTypes.Fengren:
-                if (PlayerPrefs.GetInt("MiG-23MLD Flogger Highest Round") >= 25)
+                if (PlayerPrefs.GetInt("MiG-23MLD Flogger Highest Round") >= 20)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.FloggerJ:
+                if (PlayerPrefs.GetInt("MiG-23MLD Flogger Total Kill Count") >= 50)
                 { return true; }
                 else
                 { return false; }
@@ -1026,6 +1048,15 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
+			case PlaneTypes.Raptor:
+				if(totalAvailable >= aircraftPrefabs.Length - 1)
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
         }
         return true;
     }
@@ -1148,6 +1179,7 @@ public class SurvivalSettings : MonoBehaviour
         DolchA,
         DolchD,
         DolchE,
+		DolchV,
         XinyiYongnian,
         Macchi,
         MacchiC,
@@ -1178,8 +1210,9 @@ public class SurvivalSettings : MonoBehaviour
         ShidenKai,
         Kyofu,
         ShidenKaiIV,
+        PyorremyrskyEarly,
         Pyorremyrsky,
-        PyorremyrskyLate,
+		PyorremyrskyLate,
         MathiasFleisher,
         Ghost,
         Seafire,
@@ -1334,10 +1367,11 @@ public class SurvivalSettings : MonoBehaviour
 		PhantomS,
 		YuureiEarly,
         Yuurei,
-		//PhantomICE,
+		PhantomICE,
         Flogger,
         Fengren,
-		// FloggerM,
+		FloggerJ,
+		Flogger98,
         DeltaDart,
         SuperDeltaDart,
         Viggen,
@@ -1350,6 +1384,7 @@ public class SurvivalSettings : MonoBehaviour
 		TomcatB,
         Samurai,
 	    PersianCat,
+		//TomcatD,
         //TornadoGR3,
 	    //TornadoADV,
         //Fencer,
@@ -1391,7 +1426,7 @@ public class SurvivalSettings : MonoBehaviour
         //GripenA,
 		//GripenC,
 		//GripenE,
-		//Raptor,
+		Raptor
 		// BlackWidowII,
 		// Felon,
 		// J20A,
@@ -1422,6 +1457,7 @@ public class SurvivalSettings : MonoBehaviour
         PlayerPrefs.SetInt("Survival Start With Bonus", startWithBonus ? 1 : 0);
         PlayerPrefs.SetInt("Survival Always Reload Missiles", alwaysReloadMissiles ? 1 : 0);
 		PlayerPrefs.SetInt("Survival Old Matchmaker", oldMatchmaker ? 1 : 0);
+		PlayerPrefs.SetInt("Survival Enable Blackouts", enableBlackoutRedout ? 1 : 0);
     }
 
     public void SaveChanges(int manualPlaneType)

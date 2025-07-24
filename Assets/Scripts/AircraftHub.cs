@@ -74,12 +74,22 @@ public int engineNumber;
 		if(flareDispenser != null) { if(!flareDispenser.enabled) { flareDispenser = null; } }
 		
 		CalculateSomeStats();
+		CheckKillCounterQuantity();
 
         if(meshRenderer == false)
         {
             print("Mesh Renderer hasn't been assigned!");
         }
     }
+
+	void CheckKillCounterQuantity()
+	{
+		KillCounter[] kcs = GetComponents<KillCounter>();
+		if(kcs.Length > 1)
+		{
+			print("Vehicle " + aircraftName + " has more than one Kill Counter. Check Prefab components!");
+		}
+	}
 
     public void CalculateSomeStats()
     {

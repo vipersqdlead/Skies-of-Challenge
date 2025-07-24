@@ -51,7 +51,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3148590150602459103
 Transform:
   m_ObjectHideFlags: 0
@@ -74,7 +74,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 550874359605986217}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 11abeea83087f7b47a43ab7d4dd81669, type: 3}
@@ -1583,6 +1583,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2684020220946805778, guid: a8c9cc9e284bd95408a875231397ec1b,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8b58d9c41e64cb244a3ae7d13806b618, type: 3}
+    - target: {fileID: 4837989733108401047, guid: a8c9cc9e284bd95408a875231397ec1b,
+        type: 3}
+      propertyPath: shot
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4837989733108401047, guid: a8c9cc9e284bd95408a875231397ec1b,
         type: 3}
       propertyPath: killCounter
@@ -1614,9 +1624,15 @@ PrefabInstance:
     - target: {fileID: 5452733808826387961, guid: a8c9cc9e284bd95408a875231397ec1b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 7537619955870182533, guid: a8c9cc9e284bd95408a875231397ec1b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 930147a7b7f7d4543b0ad3709c6f6bef, type: 2}
+    m_RemovedComponents:
+    - {fileID: 2684020220946805778, guid: a8c9cc9e284bd95408a875231397ec1b, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1703,6 +1719,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2684020220946805778, guid: a8c9cc9e284bd95408a875231397ec1b,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8b58d9c41e64cb244a3ae7d13806b618, type: 3}
     - target: {fileID: 4837989733108401047, guid: a8c9cc9e284bd95408a875231397ec1b,
         type: 3}
       propertyPath: killCounter
@@ -1734,8 +1755,13 @@ PrefabInstance:
     - target: {fileID: 5452733808826387961, guid: a8c9cc9e284bd95408a875231397ec1b,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7537619955870182533, guid: a8c9cc9e284bd95408a875231397ec1b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 930147a7b7f7d4543b0ad3709c6f6bef, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1940,6 +1966,11 @@ PrefabInstance:
         type: 3}
       propertyPath: isPlayer
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2619421598129608110, guid: 1f9602e78faf833428aa955ba8ee7c74,
+        type: 3}
+      propertyPath: pointsWorth
+      value: 530
       objectReference: {fileID: 0}
     - target: {fileID: 2619421598129608110, guid: 1f9602e78faf833428aa955ba8ee7c74,
         type: 3}
@@ -2223,6 +2254,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}

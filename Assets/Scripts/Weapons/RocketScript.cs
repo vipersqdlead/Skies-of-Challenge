@@ -65,13 +65,11 @@ public class RocketScript : MonoBehaviour
         if(other.CompareTag("Fighter") || other.CompareTag("Bomber") || other.CompareTag("Enemy") || other.CompareTag("Ground"))
         {
             Explosion();
-            Destroy(gameObject);
         }
         if (other.CompareTag("Water"))
         {
             Instantiate(waterSplash, transform.position, Quaternion.identity);
             Explosion();
-            Destroy(gameObject);
         }
     }
 
@@ -82,12 +80,6 @@ public class RocketScript : MonoBehaviour
 		
 		else
 			print("Rocket or missile " + gameObject.name + " has no Explosion !");
-		
-		RocketEngine[] engines = GetComponents<RocketEngine>();
-        foreach (RocketEngine engine in engines)
-        {
-            engine.KeepParticlesAlive();
-        }
 		
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius + proxyFuse.radius);
 
@@ -130,6 +122,13 @@ public class RocketScript : MonoBehaviour
                 }
             }
         }
+		
+		RocketEngine[] engines = GetComponents<RocketEngine>();
+        foreach (RocketEngine engine in engines)
+        {
+            engine.KeepParticlesAlive();
+        }
+		
 		Destroy(gameObject);
     }
 

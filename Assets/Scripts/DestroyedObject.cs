@@ -57,7 +57,6 @@ public class DestroyedObject : MonoBehaviour
         if (waterSplash != null)
         {
             GameObject splash = Instantiate(waterSplash, transform.position, Quaternion.identity);
-			Destroy(splash, 30f);
         }
     }
 
@@ -66,7 +65,6 @@ public class DestroyedObject : MonoBehaviour
         if(wreckage != null)
         {
             GameObject wreck = Instantiate(wreckage, transform.position, Quaternion.identity);
-			Destroy(wreck, 180f);
         }
     }
 

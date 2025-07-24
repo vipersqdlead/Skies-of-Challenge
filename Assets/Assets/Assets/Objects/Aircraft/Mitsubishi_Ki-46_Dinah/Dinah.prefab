@@ -4093,10 +4093,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 2305919623096427824}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 1952286437106927272}
 --- !u!82 &2902924611822618407
@@ -5993,10 +5992,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 8028952682226397934}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 1952286437106927272}
 --- !u!82 &5967639832567432590
@@ -6329,12 +6327,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 4020768985841787574}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 0}
   aircraftName: Ki-46-III Dinah
   nameShort: Ki-46
   nameLong: Ki-46-III
   speed_maxSpeed: 650
   power_maxPower: 1560
+  power_WepPower: 0
   isJet: 0
   engineNumber: 2
   powerToWeight: 1.23
@@ -6357,7 +6358,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537050823985110030}
   serializedVersion: 4
-  m_Mass: 3850
+  m_Mass: 3995
   m_Drag: 0
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -6579,6 +6580,10 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &5414683243659837352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6662,6 +6667,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -6798,6 +6804,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 6750
+  currentHorsepower: 0
   serviceCeiling: 12500
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -7020,6 +7027,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 0
   canReload: 0
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: 0ff927640a0088e43aea261990330728, type: 3}
   MissilePos:
   - {fileID: 432279004052611282}
@@ -7031,10 +7039,13 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 2500
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -10385,10 +10396,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 8705848873897136745}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 1952286437106927272}
 --- !u!1 &5758063327443416085

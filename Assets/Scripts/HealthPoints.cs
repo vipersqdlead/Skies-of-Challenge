@@ -102,7 +102,7 @@ public class HealthPoints : MonoBehaviour
         if (onFire)
         {
             var emission = fire.emission;
-            if(invulnerable || HP < 15f)
+            if(invulnerable || HP < 3f)
             {
                 emission.enabled = false;
                 onFire = false;

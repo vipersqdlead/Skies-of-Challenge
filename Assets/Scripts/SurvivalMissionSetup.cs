@@ -73,6 +73,16 @@ public class SurvivalMissionSetup : MonoBehaviour
             {
                 status.oldMatchmaking = true;
             }
+			
+			if(PlayerPrefs.GetInt("Survival Enable Blackouts") == 1)
+            {
+				hub.fm.experiencesG = true;
+                status.enableBlackouts = true;
+            }
+			else
+			{
+				hub.fm.experiencesG = false;
+			}
         }
     }
 
@@ -90,7 +100,7 @@ public class SurvivalMissionSetup : MonoBehaviour
     public TMP_Text UI_rpmLabel;
     public RectTransform UI_rpmArrow; // The arrow in the speedometer
     public TMP_Text UI_speedLabel; // The label that displays the speed;
-    public RectTransform UI_speedArrow; // The arrow in the speedometer
+    public RectTransform UI_speedArrow, UI_iasArrow; // The arrow in the speedometer
 
     public RectTransform UI_smallAltArrow;
     public RectTransform UI_altBigArrow;
@@ -111,6 +121,7 @@ public class SurvivalMissionSetup : MonoBehaviour
         hub.planeToUI.rpmArrow = UI_rpmArrow;
         hub.planeToUI.speedLabel = UI_speedLabel;
         hub.planeToUI.speedArrow = UI_speedArrow;
+		hub.planeToUI.IAS_Arrow = UI_iasArrow;
         hub.planeToUI.stallAlarm = UI_stallWarning_SFX;
         hub.planeToUI.smallAltArrow = UI_smallAltArrow;
         hub.planeToUI.altBigArrow = UI_altBigArrow;

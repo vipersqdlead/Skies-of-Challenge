@@ -1200,6 +1200,7 @@ GameObject:
   - component: {fileID: 7341856678049264174}
   - component: {fileID: 7156686821503673435}
   - component: {fileID: 5479521968416842711}
+  - component: {fileID: 287293805778590060}
   m_Layer: 0
   m_Name: Senden
   m_TagString: Fighter
@@ -1253,19 +1254,22 @@ MonoBehaviour:
   killcounter: {fileID: 3994730411621308197}
   planeCam: {fileID: 6647260933171983311}
   planeHUD: {fileID: 609878955725220712}
-  weaponManager: {fileID: 0}
+  weaponManager: {fileID: 287293805778590060}
   irControl: {fileID: 0}
   sagControl: {fileID: 0}
   radarMissileControl: {fileID: 0}
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
-  meshRenderer: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
+  meshRenderer: {fileID: 6944711195607871281}
   aircraftName: J4M1 Senden
-  nameShort: 
-  nameLong: 
+  nameShort: J4M
+  nameLong: J4M1
   speed_maxSpeed: 680
   power_maxPower: 0
+  power_WepPower: 0
   isJet: 0
   engineNumber: 0
   powerToWeight: 0
@@ -1511,6 +1515,10 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &5505046470353225340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1527,6 +1535,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 8000
+  currentHorsepower: 0
   serviceCeiling: 12000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -1740,6 +1749,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -1942,10 +1952,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponName: 
-  isPlayer: 1
+  isPlayer: 0
   MaxMissileAmmo: 4
   MissileAmmo: 0
   canReload: 0
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: 1f8fa826239400240aa1e60d37196aec, type: 3}
   MissilePos:
   - {fileID: 2247744507984078984}
@@ -1957,10 +1968,13 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 6000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -2035,6 +2049,21 @@ MonoBehaviour:
   rollInput: 0
   yawInput: 0
   controlType: 0
+--- !u!114 &287293805778590060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745458644793492265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfd7b8248420da4aadcee591d9caec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specialWeapons:
+  - {fileID: 7341856678049264174}
+  - {fileID: 7156686821503673435}
 --- !u!1 &1859076302861197463
 GameObject:
   m_ObjectHideFlags: 0
@@ -2194,10 +2223,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 478176066948952760}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 3994730411621308197}
 --- !u!82 &2782704796650931310
@@ -3644,10 +3672,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 1009346308423780798}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 3994730411621308197}
 --- !u!82 &5938381385999174729
@@ -4380,10 +4407,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 7260231758640922820}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 3994730411621308197}
 --- !u!1 &6455549730477751080
@@ -7756,6 +7782,12 @@ PrefabInstance:
 --- !u!4 &6021171695285482044 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cf626ffc5dd03ad409aee0cb3f62f905,
+    type: 3}
+  m_PrefabInstance: {fileID: 6054463785423197655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6944711195607871281 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -5447855035545322778, guid: cf626ffc5dd03ad409aee0cb3f62f905,
     type: 3}
   m_PrefabInstance: {fileID: 6054463785423197655}
   m_PrefabAsset: {fileID: 0}

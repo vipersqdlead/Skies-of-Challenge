@@ -92,7 +92,6 @@ public class FlareDispenser : MonoBehaviour
             GameObject flare = Instantiate(flarePrefab, flareSpawnPoint[i].position, transform.rotation);
             flare.GetComponent<Rigidbody>().AddForce(rb.velocity + ((flareSpawnPoint[i].forward + error) * 115f), ForceMode.VelocityChange);
             flareCount--;
-            Destroy(flare, 10f);
         }
     }
 }

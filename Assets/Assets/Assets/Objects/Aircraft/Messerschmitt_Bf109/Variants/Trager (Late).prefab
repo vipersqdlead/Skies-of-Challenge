@@ -5598,7 +5598,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5123523287108414197}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 11abeea83087f7b47a43ab7d4dd81669, type: 3}
@@ -6231,10 +6231,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 3681644895260048847}
   muzzlePositionZOffset: 0.5
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 4685521581379726749}
 --- !u!82 &7126997604346870
@@ -6247,7 +6246,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8b58d9c41e64cb244a3ae7d13806b618, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4313dfbe8caa4214b9c9e74a7ddce758, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -6395,10 +6394,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 127083046272752078}
   muzzlePositionZOffset: 0.5
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 4685521581379726749}
 --- !u!1 &5795742397603694666
@@ -6854,6 +6852,10 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &5642030537859285521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6905,6 +6907,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 8600
+  currentHorsepower: 0
   serviceCeiling: 12000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -7063,12 +7066,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 3666408298555060195}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 6585829843964959019}
   aircraftName: Bf 109T Trager (Late)
   nameShort: Bf 109
   nameLong: Bf 109T (late)
-  speed_maxSpeed: 675
+  speed_maxSpeed: 760
   power_maxPower: 2100
+  power_WepPower: 0
   isJet: 0
   engineNumber: 1
   powerToWeight: 1.35
@@ -7132,6 +7138,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -11769,7 +11776,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 8b58d9c41e64cb244a3ae7d13806b618, type: 3}
+      objectReference: {fileID: 8300000, guid: 4313dfbe8caa4214b9c9e74a7ddce758, type: 3}
     - target: {fileID: 4837989733108401047, guid: a8c9cc9e284bd95408a875231397ec1b,
         type: 3}
       propertyPath: shot

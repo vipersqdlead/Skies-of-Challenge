@@ -311,12 +311,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 346304950599324575}
   aircraftName: Me 262D Schwalbe II
   nameShort: Me 262
   nameLong: Me 262D
   speed_maxSpeed: 0
   power_maxPower: 0
+  power_WepPower: 0
   isJet: 0
   engineNumber: 0
   powerToWeight: 0
@@ -591,7 +594,12 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &8676490642689346423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,10 +622,14 @@ MonoBehaviour:
   - {fileID: 5501016170557599772}
   isPlayer: 0
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 0}
   - {fileID: 0}
@@ -643,6 +655,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 13100
+  currentHorsepower: 0
   serviceCeiling: 13000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -761,6 +774,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &7249035971703339558
@@ -796,13 +810,10 @@ MonoBehaviour:
   yawFactor: 1
   currentState: {fileID: 2771779540808050634}
   guns: {fileID: 8676490642689346423}
+  irMissile: {fileID: 0}
   canUseMissiles: 0
   canUseCannon: 1
-  missileLockFiringDelay: 0
-  missileFiringCooldown: 0
-  missileMinRange: 0
-  missileMaxRange: 0
-  missileMaxFireAngle: 0
+  advancedGunnery: 0
   bulletSpeed: 500
   cannonRange: 800
   cannonMaxFireAngle: 15
@@ -4206,7 +4217,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 8b58d9c41e64cb244a3ae7d13806b618, type: 3}
+      objectReference: {fileID: 8300000, guid: 4313dfbe8caa4214b9c9e74a7ddce758, type: 3}
     - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value

@@ -313,10 +313,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 3244332414404624856}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 4243092638836886960}
 --- !u!82 &277689583596459529
@@ -810,10 +809,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 5652306285814757240}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 4243092638836886960}
 --- !u!82 &1381483922940289454
@@ -1727,6 +1725,16 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 3410
       objectReference: {fileID: 0}
+    - target: {fileID: 812847573188231473, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 812847573188231473, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 4.214
+      objectReference: {fileID: 0}
     - target: {fileID: 961037443573477600, guid: 45d2f072b5d520b48af3451a52366ef1,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -1892,11 +1900,31 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.044
       objectReference: {fileID: 0}
+    - target: {fileID: 3522436808875604062, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fad16f976a15aca419d2fd739e6b1d05, type: 2}
+    - target: {fileID: 3522436808875604062, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: fad16f976a15aca419d2fd739e6b1d05, type: 2}
     - target: {fileID: 3715990199966842503, guid: 45d2f072b5d520b48af3451a52366ef1,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 399c0479ad6f0044e954311645fa73fd, type: 2}
+    - target: {fileID: 3867296764993717244, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.17
+      objectReference: {fileID: 0}
+    - target: {fileID: 3867296764993717244, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.214
+      objectReference: {fileID: 0}
     - target: {fileID: 4032975828754081850, guid: 45d2f072b5d520b48af3451a52366ef1,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2122,12 +2150,12 @@ PrefabInstance:
     - target: {fileID: 5961288077834183134, guid: 45d2f072b5d520b48af3451a52366ef1,
         type: 3}
       propertyPath: wingArea
-      value: 16.2
+      value: 17.96
       objectReference: {fileID: 0}
     - target: {fileID: 5961288077834183134, guid: 45d2f072b5d520b48af3451a52366ef1,
         type: 3}
       propertyPath: wingSpan
-      value: 10.2
+      value: 10.68
       objectReference: {fileID: 0}
     - target: {fileID: 5961288077834183134, guid: 45d2f072b5d520b48af3451a52366ef1,
         type: 3}
@@ -2244,6 +2272,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -4.11
       objectReference: {fileID: 0}
+    - target: {fileID: 6318788914817192642, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4313dfbe8caa4214b9c9e74a7ddce758, type: 3}
     - target: {fileID: 6585053684876412516, guid: 45d2f072b5d520b48af3451a52366ef1,
         type: 3}
       propertyPath: m_Name
@@ -2269,6 +2302,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 399c0479ad6f0044e954311645fa73fd, type: 2}
+    - target: {fileID: 6680854307914149069, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      propertyPath: nameLong
+      value: Me 309E
+      objectReference: {fileID: 0}
     - target: {fileID: 6680854307914149069, guid: 45d2f072b5d520b48af3451a52366ef1,
         type: 3}
       propertyPath: irControl
@@ -2480,6 +2518,16 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 5.144
       objectReference: {fileID: 0}
+    - target: {fileID: 8408631224475502562, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fad16f976a15aca419d2fd739e6b1d05, type: 2}
+    - target: {fileID: 8408631224475502562, guid: 45d2f072b5d520b48af3451a52366ef1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: fad16f976a15aca419d2fd739e6b1d05, type: 2}
     - target: {fileID: 8510275003459405569, guid: 45d2f072b5d520b48af3451a52366ef1,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2704,6 +2752,7 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 0
+  missileMinRange: 0
   isCagedSeeker: 0
   slaveToRadar: 0
   Target: {fileID: 0}

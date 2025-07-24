@@ -96,10 +96,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 3476392163890627368}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &7533204519348891505
@@ -645,10 +644,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 1156251616369058855}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!1 &5436571905712841226
@@ -846,12 +844,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 5537867479650374303}
   aircraftName: F8F-1 Bearcat
   nameShort: F8F
   nameLong: F8F-1
   speed_maxSpeed: 0
   power_maxPower: 0
+  power_WepPower: 0
   isJet: 0
   engineNumber: 0
   powerToWeight: 0
@@ -1046,6 +1047,10 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &1994996906693939299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1146,6 +1151,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 11000
+  currentHorsepower: 0
   serviceCeiling: 12000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -1373,8 +1379,8 @@ MonoBehaviour:
   steeringSpeed: 50
   minSpeed: 162
   maxSpeed: 252
-  recoverSpeedMin: 80
-  recoverSpeedMax: 144
+  recoverSpeedMin: 40
+  recoverSpeedMax: 100
   groundCollisionMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -1388,13 +1394,10 @@ MonoBehaviour:
   yawFactor: 1
   currentState: {fileID: 9146050408650086045}
   guns: {fileID: 1994996906693939299}
+  irMissile: {fileID: 0}
   canUseMissiles: 0
   canUseCannon: 1
-  missileLockFiringDelay: 0
-  missileFiringCooldown: 0
-  missileMinRange: 0
-  missileMaxRange: 0
-  missileMaxFireAngle: 0
+  advancedGunnery: 0
   bulletSpeed: 700
   cannonRange: 700
   cannonMaxFireAngle: 20
@@ -1474,10 +1477,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 2515379806050153119}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!1 &6630432600703455235
@@ -1705,10 +1707,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 8354478777228270969}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!1001 &962771664179285096

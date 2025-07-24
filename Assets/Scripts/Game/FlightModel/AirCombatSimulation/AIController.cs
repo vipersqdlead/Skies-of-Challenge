@@ -301,7 +301,39 @@ public class AIController : MonoBehaviour , StateUser
 			irMissile.Acquiring = false;
 		}
 
-        if (range < irMissile.missileLockRange && range > irMissile.missileMinRange && missileDelayTimer == 0 && missileCooldownTimer == 0)
+        if (irMissile.Locked && range < irMissile.missileLockRange && range > irMissile.missileMinRange && missileDelayTimer == 0 && missileCooldownTimer == 0)
+        {
+            irMissile.FireMissile();
+            missileCooldownTimer = missileFiringCooldown;
+        }
+    }
+	
+	void CalculateRadarMissiles(float dt)
+    {
+        missileDelayTimer = Mathf.Max(0, missileDelayTimer - dt);
+        missileCooldownTimer = Mathf.Max(0, missileCooldownTimer - dt);
+
+        var error = plane.target.transform.position - hub.rb.position;
+        var range = error.magnitude;
+        var targetDir = error.normalized;
+        var targetAngle = Vector3.Angle(targetDir, hub.rb.rotation * Vector3.forward);
+
+        if (!irMissile.Locked)
+        {
+            //don't fire if not locked
+            missileDelayTimer = missileLockFiringDelay;
+        }
+		
+		if(range < irMissile.missileLockRange)
+		{
+			irMissile.Acquiring = true;
+		}
+		else
+		{
+			irMissile.Acquiring = false;
+		}
+
+        if (irMissile.Locked && range < irMissile.missileLockRange && range > irMissile.missileMinRange && missileDelayTimer == 0 && missileCooldownTimer == 0)
         {
             irMissile.FireMissile();
             missileCooldownTimer = missileFiringCooldown;
@@ -355,7 +387,7 @@ public class AIController : MonoBehaviour , StateUser
         else
         {
             cannonCooldownTimer = Mathf.Max(0, cannonCooldownTimer - dt);
-			cannonMaxFireAngle = Mathf.Min(5f, plane.angleOfAttack);
+			cannonMaxFireAngle = Mathf.Min(5f, Mathf.Abs(plane.angleOfAttack));
 			if(!advancedGunnery)
 			{
 				if (range < cannonRange && targetAngle < cannonMaxFireAngle && cannonCooldownTimer == 0)

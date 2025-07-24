@@ -19,6 +19,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] List<Transform> SpawnPositions;
     public EnemyMarkers markers;
     public SurvivalMissionStatus status;
+	public bool enableBlackouts;
 
 	public int currentDifficulty = 400;
 
@@ -57,6 +58,7 @@ public class WaveSpawner : MonoBehaviour
             wave.AddRenderersToMarker(markers, status, player);
             foreach (AircraftHub hub in wave.aircraft)
             {
+				hub.fm.experiencesG = enableBlackouts;
                 if (hub.transform.position.y < 0f)
                 {
                     hub.transform.position = new Vector3(hub.transform.position.x, Mathf.Abs(hub.transform.position.y), hub.transform.position.z);
@@ -82,6 +84,8 @@ public class WaveSpawner : MonoBehaviour
 			wave.AddAllyRenderersToMarker(markers, status);
 			foreach (AircraftHub hub in wave.aircraft)
 			{
+				hub.fm.experiencesG = enableBlackouts;
+								
 				hub.hp.extraLives = 1;
 				if(hub.irControl != null)
 				{
@@ -113,7 +117,8 @@ public class WaveSpawner : MonoBehaviour
             Wave wave = newWave.GetComponent<Wave>();
             wave.AddRenderersToMarker(markers, status, player);
             foreach (AircraftHub hub in wave.aircraft)
-            {
+            {				
+				hub.fm.experiencesG = enableBlackouts;
                 if (hub.transform.position.y < 0f)
                 {
                     hub.transform.position = new Vector3(hub.transform.position.x, Mathf.Abs(hub.transform.position.y), hub.transform.position.z);
@@ -133,7 +138,6 @@ public class WaveSpawner : MonoBehaviour
         //auxSpawnPositions.Remove(auxSpawnPositions[spawnRand]);
         Wave wave = newWave.GetComponent<Wave>();
         wave.AddRenderersToMarker(markers, status, player);
-        Destroy(newWave, 150f);
     }
 
     public void JetTier2SpawnWave(int numberOfEnemies)
@@ -149,6 +153,7 @@ public class WaveSpawner : MonoBehaviour
             wave.AddRenderersToMarker(markers, status, player);
             foreach (AircraftHub hub in wave.aircraft)
             {
+				hub.fm.experiencesG = enableBlackouts;
                 if (hub.transform.position.y < 0f)
                 {
                     hub.transform.position = new Vector3(hub.transform.position.x, Mathf.Abs(hub.transform.position.y), hub.transform.position.z);
@@ -167,7 +172,6 @@ public class WaveSpawner : MonoBehaviour
         GameObject newWave = Instantiate(jetTier2BonusWavePrefabs[randomWave], GetSafeSpawnAltitude(auxSpawnPositions[spawnRand].position, player.transform.position.y), auxSpawnPositions[spawnRand].rotation);
         Wave wave = newWave.GetComponent<Wave>();
         wave.AddRenderersToMarker(markers, status, player);
-        Destroy(newWave, 150f);
     }
 
     public void PropSpawnWave(int numberOfEnemies)
@@ -183,6 +187,7 @@ public class WaveSpawner : MonoBehaviour
             wave.AddRenderersToMarker(markers, status, player);
             foreach (AircraftHub hub in wave.aircraft)
             {
+				hub.fm.experiencesG = enableBlackouts;
                 if (hub.transform.position.y < 0f)
                 {
                     hub.transform.position = new Vector3(hub.transform.position.x, Mathf.Abs(hub.transform.position.y), hub.transform.position.z);
@@ -215,6 +220,7 @@ public class WaveSpawner : MonoBehaviour
             wave.AddRenderersToMarker(markers, status, player);
             foreach (AircraftHub hub in wave.aircraft)
             {
+				hub.fm.experiencesG = enableBlackouts;
                 if (hub.transform.position.y < 0f)
                 {
                     hub.transform.position = new Vector3(hub.transform.position.x, Mathf.Abs(hub.transform.position.y), hub.transform.position.z);
@@ -231,6 +237,7 @@ public class WaveSpawner : MonoBehaviour
         wave.AddAllyRenderersToMarker(markers, status);
         foreach(AircraftHub hub in wave.aircraft)
         {
+			hub.fm.experiencesG = enableBlackouts;
             hub.hp.extraLives = 1;
             if(hub.transform.position.y < 0f)
             {
@@ -247,6 +254,7 @@ public class WaveSpawner : MonoBehaviour
         wave.AddAllyRenderersToMarker(markers, status);
         foreach (AircraftHub hub in wave.aircraft)
         {
+			hub.fm.experiencesG = enableBlackouts;
             hub.hp.extraLives = 1;
 			if(hub.irControl != null)
 			{
@@ -266,6 +274,7 @@ public class WaveSpawner : MonoBehaviour
         wave.AddAllyRenderersToMarker(markers, status);
         foreach (AircraftHub hub in wave.aircraft)
         {
+			hub.fm.experiencesG = enableBlackouts;			
             hub.hp.extraLives = 1;
 			if(hub.irControl != null)
 			{

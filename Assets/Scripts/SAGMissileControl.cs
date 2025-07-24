@@ -72,7 +72,6 @@ public class SAGMissileControl : BaseSpWeaponControl
                 return;
             }
         }
-
     }
 
     void MissilePositions()
@@ -92,12 +91,10 @@ public class SAGMissileControl : BaseSpWeaponControl
 
     public void EnemyKilled(bool countsAsKill, int points)
     {
-        if (countsAsKill)
+        if (killCounter != null)
         {
-            killCounter.Kills++;
+            killCounter.GiveKill(countsAsKill, points);
         }
-        killCounter.Points += points;
-        print("Got a kill!");
     }
 
     public override void DisableWeapon()

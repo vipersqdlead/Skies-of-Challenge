@@ -39,7 +39,7 @@ public class PlaneToUI : MonoBehaviour
     float minSpeedArrowAngle = 125;
     float maxSpeedArrowAngle = -125;
     public TMP_Text speedLabel; // The label that displays the speed;
-    public RectTransform speedArrow; // The arrow in the speedometer
+    public RectTransform speedArrow, IAS_Arrow; // The arrow in the speedometer
     private float speed = 0.0f;
     public AudioSource stallAlarm;
 
@@ -148,6 +148,11 @@ public class PlaneToUI : MonoBehaviour
         if (speedArrow != null)
             speedArrow.localEulerAngles =
                 new Vector3(0, 0, Mathf.Lerp(minSpeedArrowAngle, maxSpeedArrowAngle, speed / maxSpeed));
+				
+		
+		if (IAS_Arrow != null)
+			IAS_Arrow.localEulerAngles =
+                new Vector3(0, 0, Mathf.Lerp(minSpeedArrowAngle, maxSpeedArrowAngle, hub.fm.IAS_Speed / maxSpeed));
     }
 
     void ShowPower()
@@ -534,5 +539,13 @@ public class PlaneToUI : MonoBehaviour
 		var tempColor = blackOutBlack.color;
 		tempColor.a = hub.fm.blackOutFactor;
 		blackOutBlack.color = tempColor;
+	}
+	
+	void OnDestroy()
+	{
+		if(blackOutBlack != null)
+		{
+			blackOutBlack.enabled = false;	
+		}
 	}
 }

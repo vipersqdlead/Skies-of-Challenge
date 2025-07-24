@@ -34,7 +34,7 @@ public class SurvivalMissionStatus : MonoBehaviour
     public AudioListener camListener;
 
 
-    public bool enableWaveBonus, startWithBonus, startWithAllies, missilesAllowed, oldMatchmaking;
+    public bool enableWaveBonus, startWithBonus, startWithAllies, missilesAllowed, oldMatchmaking, enableBlackouts;
 
 
     [SerializeField] GameObject currentLockedTarget;
@@ -58,6 +58,7 @@ public class SurvivalMissionStatus : MonoBehaviour
 		
 		battleRating = playerAcHub.hp.pointsWorth;
 		waveSpawner.currentDifficulty = battleRating;
+		waveSpawner.enableBlackouts = enableBlackouts;
 		waveSpawner.OrderLists();
 		
         //MissionStart.GetComponent<AudioSource>().Play();

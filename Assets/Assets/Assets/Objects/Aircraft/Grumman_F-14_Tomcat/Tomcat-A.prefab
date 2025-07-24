@@ -26,12 +26,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 75395151366587427}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00000003717546, y: -0.17364816, z: -0.000000006555036, w: 0.9848078}
-  m_LocalPosition: {x: -2.497786, y: -0.6356611, z: -1.2070894}
+  m_LocalRotation: {x: 0.579228, y: -0.579228, z: 0.40557978, w: 0.40557984}
+  m_LocalPosition: {x: 0.56066114, y: 1.5970895, z: -5.377786}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 506886884479770514}
+  m_Father: {fileID: 413589592350897804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &314729825798452911
 MeshFilter:
@@ -747,6 +747,38 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &881140728999938011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8797177112646478817}
+  m_Layer: 0
+  m_Name: Slats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8797177112646478817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881140728999938011}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: -2.88, y: -0.075, z: 0.39}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4309022018826464841}
+  m_Father: {fileID: 5734768348410998440}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
 --- !u!1 &942188472210493702
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,6 +1948,38 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &2782715450461683362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4309022018826464841}
+  m_Layer: 0
+  m_Name: Slat_L
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4309022018826464841
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2782715450461683362}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5239487699861599420}
+  m_Father: {fileID: 8797177112646478817}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2940283127592905723
 GameObject:
   m_ObjectHideFlags: 0
@@ -2414,12 +2478,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3451913036773807109}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00000003717546, y: 0.17364825, z: 0.000000006555039, w: 0.9848078}
-  m_LocalPosition: {x: 2.4977858, y: -0.6356611, z: -1.2070899}
+  m_LocalRotation: {x: 0.40557975, y: -0.40557978, z: 0.579228, w: 0.57922804}
+  m_LocalPosition: {x: 0.56066114, y: 1.59709, z: 5.3777857}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5734768348410998440}
+  m_Father: {fileID: 4309022018826464841}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &105444345064009797
 MeshFilter:
@@ -3592,7 +3656,6 @@ GameObject:
   - component: {fileID: 318572683013198107}
   - component: {fileID: 380917441431592461}
   - component: {fileID: 8043938010775167576}
-  - component: {fileID: 6260101966612786703}
   - component: {fileID: 2910103348142659168}
   - component: {fileID: 1235148904917075726}
   - component: {fileID: 8016609097383479047}
@@ -3689,12 +3752,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 1235148904917075726}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 8016609097383479047}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 4221884912122949960}
   aircraftName: F-14A Tomcat
   nameShort: F-14
   nameLong: F-14A
   speed_maxSpeed: 1470
   power_maxPower: 7148
+  power_WepPower: 0
   isJet: 1
   engineNumber: 2
   powerToWeight: 0.96
@@ -3740,6 +3806,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -3957,6 +4024,10 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &7797861975468167017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4090,6 +4161,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 47660
+  currentHorsepower: 0
   serviceCeiling: 18500
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -4282,11 +4354,13 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 5500
+  missileMinRange: 0
   isCagedSeeker: 0
   slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -4294,23 +4368,6 @@ MonoBehaviour:
   killCounter: {fileID: 6609938941638052285}
   aspect: 0
   irccm: 0
---- !u!114 &6260101966612786703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5229710937259975155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b1f85fd94634d8459b3f61b18c3fb79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Kills: 0
-  Points: 0
-  hits: 0
-  comboCounting: 0
-  currentCombo: 0
 --- !u!114 &2910103348142659168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4333,7 +4390,9 @@ MonoBehaviour:
   rudders:
   - {fileID: 3050253297889663962}
   - {fileID: 8528889932896066104}
-  slats: []
+  slats:
+  - {fileID: 413589592350897804}
+  - {fileID: 4309022018826464841}
   flaps:
   - {fileID: 377124967058668071}
   - {fileID: 7562794895209117393}
@@ -4683,10 +4742,10 @@ Transform:
   - {fileID: 114698094100475068}
   - {fileID: 4476838542514444230}
   - {fileID: 1709672226080029152}
-  - {fileID: 7868473975789178175}
   - {fileID: 8258657152832716741}
   - {fileID: 1923214116106805952}
   - {fileID: 1437207046395034415}
+  - {fileID: 8282861808323885651}
   m_Father: {fileID: 3737436467463435385}
   m_LocalEulerAnglesHint: {x: 0, y: 20, z: 0}
 --- !u!1 &5401218195822205552
@@ -5549,6 +5608,38 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!1 &6516726323200131542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8282861808323885651}
+  m_Layer: 0
+  m_Name: Slats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8282861808323885651
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6516726323200131542}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: 0.5}
+  m_LocalPosition: {x: 2.88, y: -0.075, z: 0.39}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 413589592350897804}
+  m_Father: {fileID: 506886884479770514}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
 --- !u!1 &6568174372975281104
 GameObject:
   m_ObjectHideFlags: 0
@@ -6608,10 +6699,10 @@ Transform:
   - {fileID: 388404282654204706}
   - {fileID: 7290244661832207719}
   - {fileID: 1633058354657754772}
-  - {fileID: 5239487699861599420}
   - {fileID: 6490492727846645479}
   - {fileID: 7096763603759551301}
   - {fileID: 7053517792847192730}
+  - {fileID: 8797177112646478817}
   m_Father: {fileID: 3737436467463435385}
   m_LocalEulerAnglesHint: {x: 0, y: -20, z: 0}
 --- !u!1 &8743960008725042963
@@ -6646,6 +6737,38 @@ Transform:
   - {fileID: 3050253297889663962}
   m_Father: {fileID: 2164151878554184698}
   m_LocalEulerAnglesHint: {x: 28.207, y: 183.059, z: 86.23}
+--- !u!1 &8818363399957079777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 413589592350897804}
+  m_Layer: 0
+  m_Name: Slat_R
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &413589592350897804
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8818363399957079777}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7868473975789178175}
+  m_Father: {fileID: 8282861808323885651}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &193400304318637081
 PrefabInstance:
   m_ObjectHideFlags: 0

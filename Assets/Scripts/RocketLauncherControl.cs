@@ -78,9 +78,10 @@ public class RocketLauncherControl : BaseSpWeaponControl
     void FireRocket()
     {
 		int rktIndex = rocketAmmo - 1;
+		Vector3 error = new Vector3(Random.Range(-0.05f, 0.05f), Random.Range(-0.05f, 0.05f), 0);
         GameObject rktGo = Instantiate(rocket, missilePos[rktIndex].transform.position, missilePos[rktIndex].transform.rotation);
         Rigidbody RktRb = rktGo.GetComponent<Rigidbody>();
-        RktRb.AddForce(gameObject.GetComponent<Rigidbody>().velocity, ForceMode.VelocityChange);
+        RktRb.AddForce(gameObject.GetComponent<Rigidbody>().velocity + error, ForceMode.VelocityChange);
         rktGo.GetComponent<RocketScript>().SetKillEnemyDelegate(EnemyKilled);
         rocketAmmo--;
 		

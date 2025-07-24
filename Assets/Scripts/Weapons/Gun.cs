@@ -28,7 +28,7 @@ public class Gun : MonoBehaviour
 	
 	public int shotsFired;
 
-    [SerializeField] KillCounter killCounter;
+    public KillCounter killCounter;
 
 
     // Start is called before the first frame update
@@ -50,7 +50,7 @@ public class Gun : MonoBehaviour
 			rofTimer = rateOfFire;
 		}
 		
-		overheatTimerPercent = Mathf.InverseLerp(0f, 12f, overheatTimer);
+		overheatTimerPercent = Mathf.InverseLerp(0f, 10f, overheatTimer);
 		accuracyError = Mathf.Lerp(0.0005f, 0.01f, overheatTimerPercent);
 
         if (overheated)

@@ -192,4 +192,23 @@ public class GunsControl : MonoBehaviour
 			Debug.Log($"Tried enabling Additional Guns on aircraft " + gameObject.name + " but there was an error.");
 		}
     }
+	
+	void AssignKC()
+	{
+		foreach(Gun gun in guns)
+		{
+			if(gun != null)
+			{
+				gun.killCounter = aircraftHub.killcounter;
+			}
+		}
+		
+		foreach(Gun gun in additionalGuns)
+		{
+			if(gun != null)
+			{
+				gun.killCounter = aircraftHub.killcounter;
+			}
+		}
+	}
 }

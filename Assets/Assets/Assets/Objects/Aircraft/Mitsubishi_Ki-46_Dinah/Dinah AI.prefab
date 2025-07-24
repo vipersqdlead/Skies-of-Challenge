@@ -3908,10 +3908,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 9071064648330279631}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 1952286437106927272}
 --- !u!82 &2902924611822618407
@@ -5678,10 +5677,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 4513812681347806980}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 1952286437106927272}
 --- !u!82 &5967639832567432590
@@ -5972,12 +5970,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 8893256694848065848}
   aircraftName: Ki-46-III Dinah
   nameShort: Ki-46
   nameLong: Ki-46-III
   speed_maxSpeed: 0
   power_maxPower: 0
+  power_WepPower: 0
   isJet: 0
   engineNumber: 0
   powerToWeight: 0
@@ -5998,7 +5999,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3537050823985110030}
   serializedVersion: 4
-  m_Mass: 3850
+  m_Mass: 3995
   m_Drag: 0
   m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -6220,6 +6221,10 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &3512189422470826710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6323,6 +6328,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 6750
+  currentHorsepower: 0
   serviceCeiling: 12500
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -6498,13 +6504,10 @@ MonoBehaviour:
   yawFactor: 1
   currentState: {fileID: 1230186871142582698}
   guns: {fileID: 3512189422470826710}
+  irMissile: {fileID: 0}
   canUseMissiles: 0
   canUseCannon: 1
-  missileLockFiringDelay: 0
-  missileFiringCooldown: 0
-  missileMinRange: 0
-  missileMaxRange: 0
-  missileMaxFireAngle: 0
+  advancedGunnery: 0
   bulletSpeed: 700
   cannonRange: 800
   cannonMaxFireAngle: 30
@@ -9448,10 +9451,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 814575349464339230}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 1952286437106927272}
 --- !u!1 &5758063327443416085

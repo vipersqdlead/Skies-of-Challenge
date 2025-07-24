@@ -952,6 +952,10 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &810768066963378457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1004,6 +1008,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 5750
+  currentHorsepower: 0
   serviceCeiling: 12000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -1217,12 +1222,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 5393735990614257057}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 3779196057615199675}
   aircraftName: He 100K Krahe
   nameShort: He 100
   nameLong: He 100K
   speed_maxSpeed: 730
   power_maxPower: 1475
+  power_WepPower: 0
   isJet: 0
   engineNumber: 1
   powerToWeight: 1.53
@@ -1268,6 +1276,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -5765,10 +5774,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 4803366546383399097}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 7384599778373647072}
 --- !u!1 &8531133335203655952
@@ -5917,10 +5925,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 5083014242901557914}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 7384599778373647072}
 --- !u!82 &608705996958402283
@@ -5933,7 +5940,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8b58d9c41e64cb244a3ae7d13806b618, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4313dfbe8caa4214b9c9e74a7ddce758, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
@@ -6314,10 +6321,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 5904650458301908234}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 7384599778373647072}
 --- !u!1001 &31556153429013078
@@ -7254,7 +7260,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 8b58d9c41e64cb244a3ae7d13806b618, type: 3}
+      objectReference: {fileID: 8300000, guid: 4313dfbe8caa4214b9c9e74a7ddce758, type: 3}
     - target: {fileID: 4837989733108401047, guid: a8c9cc9e284bd95408a875231397ec1b,
         type: 3}
       propertyPath: shot
