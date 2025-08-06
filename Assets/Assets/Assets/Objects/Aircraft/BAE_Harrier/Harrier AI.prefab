@@ -265,6 +265,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -280,6 +281,8 @@ MonoBehaviour:
   wingType: 1
   sweepAngle: 40
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.016
   waveDragMultiplier: 2
   newWaveDragMultiplier: 4.5
@@ -418,6 +421,7 @@ MonoBehaviour:
   AoADampFactor: 0
   brakeInput: 0
   experiencesG: 1
+  baseGTolerance: 2
   gTolerance: 7.5
   gMax: 13.5
   blackOutFactor: 0
@@ -676,6 +680,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 550
   engines:
   - {fileID: 8105143573206336220}

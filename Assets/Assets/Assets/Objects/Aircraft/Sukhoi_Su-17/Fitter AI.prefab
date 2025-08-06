@@ -2229,9 +2229,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8778359935498896057}
   serializedVersion: 4
-  m_Mass: 12000
+  m_Mass: 11245
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2277,12 +2277,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: -6617816783653885222}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 137792687146893814}
   aircraftName: Su-17M4 Fitter
   nameShort: Su-17
   nameLong: Su-17M4
   speed_maxSpeed: 0
   power_maxPower: 0
+  power_WepPower: 0
   isJet: 0
   engineNumber: 0
   powerToWeight: 0
@@ -2316,6 +2319,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -2331,6 +2335,8 @@ MonoBehaviour:
   wingType: 1
   sweepAngle: 0
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.03
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2
@@ -2379,40 +2385,58 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.19786857
+      time: 1.1641532e-10
+      value: 0.003472222
+      inSlope: 0.2212185
+      outSlope: 0.2212185
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.2764323
+    - serializedVersion: 3
+      time: 0.19701408
       value: 0.08962898
-      inSlope: 0.6403424
-      outSlope: 0.6403424
+      inSlope: 0.39981097
+      outSlope: 0.39981097
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.32020825
+      outWeight: 0.075002655
     - serializedVersion: 3
-      time: 0.50112283
-      value: 0.23532389
-      inSlope: 0.24406019
-      outSlope: 0.24406019
+      time: 0.79760617
+      value: 0.24634476
+      inSlope: 0.059677757
+      outSlope: 0.059677757
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.1666359
-    - serializedVersion: 3
-      time: 0.7529895
-      value: 0.17688675
-      inSlope: -0.5851736
-      outSlope: -0.5851736
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.089073114
+      inWeight: 0.091770925
       outWeight: 0.35262215
     - serializedVersion: 3
-      time: 1.0018854
-      value: 0.06603773
-      inSlope: -0.17808117
-      outSlope: -0.17808117
+      time: 0.8999311
+      value: 0.23014668
+      inSlope: -0.17446564
+      outSlope: -0.17446564
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.48279843
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9030092
+      value: 0.2291334
+      inSlope: -0.65752167
+      outSlope: -0.65752167
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.2962431
+    - serializedVersion: 3
+      time: 1.143487
+      value: 0.18407972
+      inSlope: -0.03156278
+      outSlope: -0.03156278
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.2218836
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -2459,6 +2483,11 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 2
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &2910822432914297803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2520,13 +2549,10 @@ MonoBehaviour:
   yawFactor: 1
   currentState: {fileID: 6178074885087455511}
   guns: {fileID: 7274720485536749384}
+  irMissile: {fileID: 0}
   canUseMissiles: 1
   canUseCannon: 1
-  missileLockFiringDelay: 0
-  missileFiringCooldown: 0
-  missileMinRange: 0
-  missileMaxRange: 0
-  missileMaxFireAngle: 0
+  advancedGunnery: 0
   bulletSpeed: 600
   cannonRange: 800
   cannonMaxFireAngle: 20
@@ -2670,6 +2696,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 76000
+  currentHorsepower: 0
   serviceCeiling: 12000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -2677,24 +2704,24 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.000462363
       value: 0.999999
-      inSlope: -0.42047918
-      outSlope: -0.42047918
+      inSlope: -0.84615433
+      outSlope: -0.84615433
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.14581497
+      outWeight: 0.13699985
     - serializedVersion: 3
-      time: 0.49820822
-      value: 0.8023684
-      inSlope: -0.28965393
-      outSlope: -0.28965393
+      time: 0.5033352
+      value: 0.57667565
+      inSlope: -0.71231663
+      outSlope: -0.71231663
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.117911644
     - serializedVersion: 3
-      time: 0.9977096
-      value: 0.5930368
+      time: 1.0028365
+      value: 0.31872952
       inSlope: -0.4224647
       outSlope: -0.4224647
       tangentMode: 0
@@ -2703,12 +2730,12 @@ MonoBehaviour:
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1.5013537
-      value: 0.3007909
-      inSlope: -0.6643539
-      outSlope: -0.6643539
+      value: 0.20704092
+      inSlope: -0.18716414
+      outSlope: -0.18716414
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.22297661
+      inWeight: 0.10688625
       outWeight: 0.33333334
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -2742,6 +2769,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 25000
   engines:
   - {fileID: 4897516330128497490}
@@ -2771,6 +2799,7 @@ MonoBehaviour:
   MaxMissileAmmo: 6
   MissileAmmo: 6
   canReload: 0
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: 83c091079a32b5c4789475a333294de5, type: 3}
   MissilePos:
   - {fileID: 3970719659437795733}
@@ -2784,10 +2813,13 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 3000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}

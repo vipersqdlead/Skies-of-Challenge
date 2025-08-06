@@ -1609,12 +1609,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: 
   isPlayer: 0
+  hub: {fileID: 0}
   MaxMissileAmmo: 2
   MissileAmmo: 0
   MissileReload: 20
   canReload: 0
   angleToPlayer: 0
-  MissilePrefab: {fileID: 5186579997882432130, guid: 17e179aeeac8c144e84c7ac4cdb7ebb2,
+  seekerDirection: {x: 0, y: 0, z: 0}
+  MissilePrefab: {fileID: 5186579997882432130, guid: 27cb825f172e18740a56762b8ef1f3ca,
     type: 3}
   MissilePos:
   - {fileID: 7468068368815625092}
@@ -1622,6 +1624,9 @@ MonoBehaviour:
   missile: {fileID: 0}
   AcquisitionMaxTimer: 30
   AcquisitionTimer: 30
+  radarRange: 19000
+  radarGimbalLimit: 60
+  pulseDoppler: 1
   possibleTarget: {fileID: 0}
   Target: {fileID: 0}
   Acquiring: 0
@@ -1630,6 +1635,9 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 4603956850770534968}
   killCounter: {fileID: 4701565282151344973}
+  closingSpeed: 0
+  filterSize: 20
+  timeToLockBreak: 3
 --- !u!4 &7861803518465583490 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3987494994548447151, guid: 36f30b0dea904ef478568d453f328481,

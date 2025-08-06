@@ -515,10 +515,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 3016125809174733883}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &7533204519348891505
@@ -1930,10 +1929,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 412131694764485269}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &5272445856374229486
@@ -5159,10 +5157,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 2819340726374350667}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!1 &4818742836433641933
@@ -6520,12 +6517,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 8140315091545873446}
   aircraftName: C.205 S3 Veltro
   nameShort: C.205
   nameLong: C.205 S3
   speed_maxSpeed: 0
   power_maxPower: 0
+  power_WepPower: 0
   isJet: 0
   engineNumber: 0
   powerToWeight: 0
@@ -6720,6 +6720,10 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &1994996906693939299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6824,6 +6828,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 5750
+  currentHorsepower: 0
   serviceCeiling: 12000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -7057,18 +7062,15 @@ MonoBehaviour:
   yawFactor: 1
   currentState: {fileID: 321004725469562387}
   guns: {fileID: 1994996906693939299}
+  irMissile: {fileID: 0}
   canUseMissiles: 0
   canUseCannon: 1
-  missileLockFiringDelay: 0
-  missileFiringCooldown: 0
-  missileMinRange: 0
-  missileMaxRange: 0
-  missileMaxFireAngle: 0
-  bulletSpeed: 600
+  advancedGunnery: 0
+  bulletSpeed: 720
   cannonRange: 600
   cannonMaxFireAngle: 40
-  cannonBurstLength: 3
-  cannonBurstCooldown: 2
+  cannonBurstLength: 1
+  cannonBurstCooldown: 3
   minMissileDodgeDistance: 0
   reactionDelayMin: 0
   reactionDelayMax: 1
@@ -9527,10 +9529,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 8645591621742433365}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &7632324714010348800

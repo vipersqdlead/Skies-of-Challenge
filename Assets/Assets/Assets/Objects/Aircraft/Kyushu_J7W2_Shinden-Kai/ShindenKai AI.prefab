@@ -5082,10 +5082,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 6736068862166371492}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6686903900661511475}
 --- !u!82 &4167478817893183071
@@ -6282,10 +6281,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 8038965244295577920}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6686903900661511475}
 --- !u!1 &3727132238213606298
@@ -9182,10 +9180,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 6030290616698515090}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6686903900661511475}
 --- !u!1 &5317512993692422274
@@ -12549,10 +12546,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 3823083452156909009}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6686903900661511475}
 --- !u!1 &7365894563948207403
@@ -14360,12 +14356,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 1756164154478379848}
   aircraftName: J7W3 Shinden-Kai
   nameShort: J7W
   nameLong: J7W3
   speed_maxSpeed: 0
   power_maxPower: 0
+  power_WepPower: 0
   isJet: 0
   engineNumber: 0
   powerToWeight: 0
@@ -14447,6 +14446,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -14462,6 +14462,8 @@ MonoBehaviour:
   wingType: 2
   sweepAngle: 15
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.01
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2
@@ -14572,6 +14574,11 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 2
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &2871430788762903658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14588,6 +14595,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 15200
+  currentHorsepower: 0
   serviceCeiling: 13500
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -14660,6 +14668,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 0
   engines:
   - {fileID: 6256722340276485250}
@@ -14793,13 +14802,10 @@ MonoBehaviour:
   yawFactor: 1
   currentState: {fileID: 3917582876939043896}
   guns: {fileID: 5663815983322212383}
+  irMissile: {fileID: 0}
   canUseMissiles: 0
   canUseCannon: 1
-  missileLockFiringDelay: 0
-  missileFiringCooldown: 0
-  missileMinRange: 0
-  missileMaxRange: 0
-  missileMaxFireAngle: 0
+  advancedGunnery: 0
   bulletSpeed: 600
   cannonRange: 700
   cannonMaxFireAngle: 20

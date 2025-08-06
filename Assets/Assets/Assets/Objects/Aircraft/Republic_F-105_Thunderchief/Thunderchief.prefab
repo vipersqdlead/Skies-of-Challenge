@@ -1772,7 +1772,6 @@ MonoBehaviour:
   blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
-  SARHPovCircle: {fileID: 0}
   SARHLockCircle: {fileID: 0}
   IRMissiles: 0
   SAGMissiles: 0
@@ -1789,6 +1788,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -1835,7 +1835,9 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
+  radarAltitude: 0
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
@@ -1850,6 +1852,8 @@ MonoBehaviour:
   wingType: 1
   sweepAngle: 45
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.0135
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2.75
@@ -1979,6 +1983,7 @@ MonoBehaviour:
   AoADampFactor: 0
   brakeInput: 0
   experiencesG: 1
+  baseGTolerance: 2
   gTolerance: 7.5
   gMax: 13.5
   blackOutFactor: 0
@@ -2193,6 +2198,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 50000
   engines:
   - {fileID: 551051679402674160}
@@ -2296,6 +2302,7 @@ MonoBehaviour:
   missileMinRange: 0
   isCagedSeeker: 0
   slaveToRadar: 0
+  allAspectSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
@@ -2305,8 +2312,6 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 7750478190715863860}
   killCounter: {fileID: 6609938941638052285}
-  aspect: 1
-  irccm: 0
 --- !u!114 &10673027907317128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2388,9 +2393,12 @@ MonoBehaviour:
   ailerons:
   - {fileID: 4722058520344821767}
   - {fileID: 6357933922527690283}
+  spoilers: []
   elevators:
   - {fileID: 1908659923939618987}
   - {fileID: 0}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 850072893861215133}
   slats: []
@@ -3949,7 +3957,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3017928104872544868, guid: e600df7985b472a47b749508f08d9678, type: 3}
+    - {fileID: 102188869688433984, guid: e600df7985b472a47b749508f08d9678, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e600df7985b472a47b749508f08d9678, type: 3}

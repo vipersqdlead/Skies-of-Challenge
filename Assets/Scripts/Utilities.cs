@@ -328,9 +328,10 @@ public static class Utilities {
 	public static float GetClosingVelocity(AircraftHub target, Rigidbody rb)
 	{
 		Vector3 losDirection = (target.transform.position - rb.transform.position).normalized;
-		Vector3 relativeVelocity = rb.velocity - target.rb.velocity;
+		Vector3 relativeVelocity = target.rb.velocity - rb.velocity;
 		
-		float closingSpeed = relativeVelocity.magnitude;
+		float closingSpeed = Vector3.Dot(relativeVelocity, losDirection);
+		//relativeVelocity.magnitude;
 		
 		return closingSpeed;
 	}
@@ -358,4 +359,40 @@ public static class Utilities {
 
         return new Vector3(spawnPoint.x, finalAltitude, spawnPoint.z);
     }
+	
+	public static float GetRadarAltitude(Vector3 position)
+	{
+		Vector3 rayStart = position;
+        Ray ray = new Ray(rayStart, Vector3.down);
+        RaycastHit hit;
+
+        float terrainY = 0f;
+
+        if(Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            terrainY = hit.point.y;
+        }
+        else
+        {
+            terrainY = -1f;
+        }
+
+        return position.y - terrainY;
+	}
+	
+	public static float GetIRLockRange(float dotProduct, float maxRange, bool isAllAspect)
+	{
+		float lockStrength = (dotProduct + 1f) / 2f;
+		
+		if(isAllAspect)
+		{
+			float range = Mathf.Lerp(maxRange / 2f, maxRange, lockStrength);
+			return range;
+		}
+		else
+		{
+			float range = Mathf.Lerp(0f, maxRange, lockStrength);
+			return range;
+		}
+	}
 }

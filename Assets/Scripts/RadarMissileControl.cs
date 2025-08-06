@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class RadarMissileControl : BaseSpWeaponControl
 {
+	public AircraftHub hub;
+	
     public int MaxMissileAmmo;
     public int MissileAmmo;
     public float MissileReload = 20f;
     public bool canReload;
 
     public float angleToPlayer;
+	[HideInInspector] public Vector3 seekerDirection;
 
     public GameObject MissilePrefab;
     public GameObject[] MissilePos;
@@ -19,6 +22,10 @@ public class RadarMissileControl : BaseSpWeaponControl
 
     public float AcquisitionMaxTimer;
     public float AcquisitionTimer;
+	
+	public float radarRange = 19000f;
+	public float radarGimbalLimit = 60f;
+	public bool pulseDoppler = true;
 
     public GameObject possibleTarget, Target;
 
@@ -29,9 +36,10 @@ public class RadarMissileControl : BaseSpWeaponControl
     public AudioSource AcqGrowl, LockGrowl;
 
     [SerializeField] KillCounter killCounter;
-    void Start()
+    void Awake()
     {
-            weaponName = MissilePrefab.name;
+        weaponName = MissilePrefab.name;
+		hub = GetComponent<AircraftHub>();
     }
 
     void Update()
@@ -58,7 +66,11 @@ public class RadarMissileControl : BaseSpWeaponControl
 		
 		if(missile == null)
         {
-            Guiding = false;
+			if(Guiding)
+			{
+				Guiding = false;
+				ResetLock();
+			}
         }
 		
         if (isPlayer && LockGrowl != null)
@@ -98,6 +110,7 @@ public class RadarMissileControl : BaseSpWeaponControl
         }
     }
 
+	FlightModel radarTarget;
     void Aqcuisition()
     {
         AcquisitionTimer -= Time.deltaTime;
@@ -105,8 +118,24 @@ public class RadarMissileControl : BaseSpWeaponControl
         {
             if (AcquisitionTimer > 0)
             {
+				
+				if(hub.fm.target != radarTarget)
+				{
+					ResetLock();
+					radarTarget = hub.fm.target;
+				}
+			
+				if(hub.fm.target != null)
+				{
+					Vector3 dirToTgt = (hub.fm.target.transform.position - transform.position).normalized;
+					float angleToTarget = Vector3.Angle(transform.forward, dirToTgt);
+					if(angleToTarget < radarGimbalLimit) { seekerDirection = dirToTgt; radarTarget = hub.fm.target; }
+					else { seekerDirection = transform.forward; }
+				}
+				
+				
 				float thickness = 150f; //<-- Desired thickness here
-				RaycastHit[] hits = Physics.SphereCastAll(transform.position, thickness, transform.forward, 19000f);
+				RaycastHit[] hits = Physics.SphereCastAll(transform.position, thickness, seekerDirection, radarRange);
 				foreach (var hit in hits)
 				{
 					if(hit.collider.CompareTag("Bullet") || hit.collider.gameObject == gameObject)
@@ -122,14 +151,32 @@ public class RadarMissileControl : BaseSpWeaponControl
 					if(possibleTarget != null)
 					{
 						angleToPlayer = Vector3.Angle(transform.forward, possibleTarget.transform.position - transform.position);
-						if (angleToPlayer < 25f)
+						
+						if(pulseDoppler)
 						{
-							Target = possibleTarget; Locked = true;
+							if (angleToPlayer < radarGimbalLimit && Mathf.Abs((Utilities.GetClosingVelocity(possibleTarget.GetComponent<AircraftHub>(), hub.rb) - hub.rb.velocity.magnitude)) > filterSize)
+							{
+								Target = possibleTarget; Locked = true;
+							}
+							else
+							{
+								ResetLock();
+							}
 						}
-						else if (angleToPlayer > 60f)
+						
+						else
 						{
-							Target = null; Locked = false;
+							if (angleToPlayer < radarGimbalLimit && possibleTarget.transform.position.y > 3500f)
+							{
+								Target = possibleTarget; Locked = true;
+							}
+							else
+							{
+								ResetLock();
+							}
 						}
+						
+						
 					}
 				}
             }
@@ -145,28 +192,64 @@ public class RadarMissileControl : BaseSpWeaponControl
     {
         if(Target != null)
         {
+			if(pulseDoppler) { NotchFilter(); }
             angleToPlayer = Vector3.Angle(transform.forward, Target.transform.position - transform.position);
         }
-        if (missile != null && angleToPlayer <= 60f)
+        if (missile != null && angleToPlayer <= radarGimbalLimit)
         {
             missile.target = Target.GetComponent<AircraftHub>();
         }
 		else
 		{
-			if(missile != null)
+			if(missile != null || Target == null)
 			{
 				missile.target = null;
 			}
 			TurnSeekerOff();
 		}
-
+    }
+	
+	public float closingSpeed;
+	public float filterSize = 20f;
+	public float timeToLockBreak = 3f;
+	float maxTimeToLockBreak = 3f;
+	void NotchFilter()
+	{
+		closingSpeed = Mathf.Abs(Utilities.GetClosingVelocity(Target.GetComponent<AircraftHub>(), hub.rb));
+		
+		if((closingSpeed - hub.rb.velocity.magnitude) < filterSize)
+		{
+			timeToLockBreak -= Time.deltaTime;
+		}
+		else
+		{
+			if(timeToLockBreak < maxTimeToLockBreak)
+			{
+				timeToLockBreak += Time.deltaTime;
+			}
+		}
+		
+		if(timeToLockBreak <= 0f)
+		{
+			print("Radar " + gameObject.name + " has been notched!");
+			timeToLockBreak = maxTimeToLockBreak;
+			ResetLock();
+		}
+	}
+	
+	void ResetLock()
+    {
+        Target = null;
+        Locked = false;
+		if(missile != null) missile.target = null;
+		missile = null;
+        Acquiring = true;
     }
 
     void TurnSeekerOff()
     {
-        Target = null;
-        Locked = false;
-        Acquiring = false;
+        ResetLock();
+		Acquiring = false;
         AcquisitionTimer = AcquisitionMaxTimer;
         return;
     }

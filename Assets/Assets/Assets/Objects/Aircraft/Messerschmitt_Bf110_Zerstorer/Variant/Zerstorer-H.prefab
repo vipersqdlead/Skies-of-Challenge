@@ -13152,11 +13152,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: X-8
   isPlayer: 0
+  hub: {fileID: 0}
   MaxMissileAmmo: 2
   MissileAmmo: 2
   MissileReload: 20
   canReload: 1
   angleToPlayer: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   MissilePrefab: {fileID: 888724703871080596, guid: 1d1de52f37c4fd6429daccd55279e5d7,
     type: 3}
   MissilePos:
@@ -13165,6 +13167,9 @@ MonoBehaviour:
   missile: {fileID: 0}
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
+  radarRange: 19000
+  radarGimbalLimit: 60
+  pulseDoppler: 0
   possibleTarget: {fileID: 0}
   Target: {fileID: 0}
   Acquiring: 0
@@ -13173,6 +13178,9 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 6396728860313800604}
   killCounter: {fileID: 6844531977648638501}
+  closingSpeed: 0
+  filterSize: 20
+  timeToLockBreak: 3
 --- !u!1 &8546306789635778695 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3706980384033022986, guid: 50b231024f16c33449297ddf0cd90aa4,

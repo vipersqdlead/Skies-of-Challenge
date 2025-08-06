@@ -368,12 +368,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 5493701817591966072}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 0}
   aircraftName: Hunter F.6
   nameShort: Hunter
   nameLong: Hunter F.6
   speed_maxSpeed: 1150
   power_maxPower: 4242
+  power_WepPower: 0
   isJet: 1
   engineNumber: 1
   powerToWeight: 0.65
@@ -437,6 +440,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -452,6 +456,8 @@ MonoBehaviour:
   wingType: 1
   sweepAngle: 35
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.008
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2.4
@@ -578,7 +584,13 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 2
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &1257820892668996848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -616,10 +628,14 @@ MonoBehaviour:
   - {fileID: 4473333065636002410}
   isPlayer: 1
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 4735402879447149644}
   additionalGunsGO:
@@ -656,8 +672,8 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
-  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -677,6 +693,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -733,6 +750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &4458270206114227055
@@ -815,6 +833,7 @@ MonoBehaviour:
   MaxMissileAmmo: 2
   MissileAmmo: 2
   canReload: 1
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: 2a204be2cb1e0d04ab589831abda06dc, type: 3}
   MissilePos:
   - {fileID: 3603624954151043576}
@@ -822,11 +841,15 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 3000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -850,6 +873,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 41600
+  currentHorsepower: 0
   serviceCeiling: 15500
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -940,6 +964,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 0
   engines:
   - {fileID: 8105143573206336220}
@@ -1032,8 +1057,11 @@ MonoBehaviour:
   ailerons:
   - {fileID: 3441412141061040107}
   - {fileID: 133176692427622662}
+  spoilers: []
   elevators:
   - {fileID: 4039176825363115357}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 1909883366790238311}
   slats: []

@@ -28,6 +28,7 @@ public class GunsControl : MonoBehaviour
         {
             aircraftHub = GetComponent<AircraftHub>();
         }
+		AssignKC();
     }
 
     private void Update()

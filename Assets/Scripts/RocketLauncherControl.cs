@@ -79,7 +79,11 @@ public class RocketLauncherControl : BaseSpWeaponControl
     {
 		int rktIndex = rocketAmmo - 1;
 		Vector3 error = new Vector3(Random.Range(-0.05f, 0.05f), Random.Range(-0.05f, 0.05f), 0);
-        GameObject rktGo = Instantiate(rocket, missilePos[rktIndex].transform.position, missilePos[rktIndex].transform.rotation);
+		Vector3 startRotation = missilePos[rktIndex].transform.rotation.eulerAngles;
+		startRotation.x += error.x;
+		startRotation.y += error.y;
+		Quaternion finalRot = Quaternion.Euler(startRotation);
+        GameObject rktGo = Instantiate(rocket, missilePos[rktIndex].transform.position, finalRot);
         Rigidbody RktRb = rktGo.GetComponent<Rigidbody>();
         RktRb.AddForce(gameObject.GetComponent<Rigidbody>().velocity + error, ForceMode.VelocityChange);
         rktGo.GetComponent<RocketScript>().SetKillEnemyDelegate(EnemyKilled);

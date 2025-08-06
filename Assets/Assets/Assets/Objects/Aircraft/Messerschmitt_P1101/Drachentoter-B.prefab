@@ -504,6 +504,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4320583360311802631, guid: 3c2b407d05bad2e46a040607480ffa14,
         type: 3}
+      propertyPath: nameLong
+      value: Me 510C
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320583360311802631, guid: 3c2b407d05bad2e46a040607480ffa14,
+        type: 3}
       propertyPath: irControl
       value: 
       objectReference: {fileID: 0}
@@ -1296,11 +1301,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: 
   isPlayer: 0
+  hub: {fileID: 0}
   MaxMissileAmmo: 2
   MissileAmmo: 2
   MissileReload: 20
   canReload: 1
   angleToPlayer: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   MissilePrefab: {fileID: 888724703871080596, guid: 1d1de52f37c4fd6429daccd55279e5d7,
     type: 3}
   MissilePos:
@@ -1309,6 +1316,9 @@ MonoBehaviour:
   missile: {fileID: 0}
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
+  radarRange: 19000
+  radarGimbalLimit: 60
+  pulseDoppler: 1
   possibleTarget: {fileID: 0}
   Target: {fileID: 0}
   Acquiring: 0
@@ -1317,6 +1327,8 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 7402384266585336046}
   killCounter: {fileID: 7890806400910118446}
+  closingSpeed: 0
+  timeToLockBreak: 3
 --- !u!1 &5906447604831710466 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7250423808029003807, guid: 3c2b407d05bad2e46a040607480ffa14,

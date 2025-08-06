@@ -186,12 +186,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 108972723614827296}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 0}
   aircraftName: F-104A Starfighter
   nameShort: F-104
   nameLong: F-104A
   speed_maxSpeed: 1450
   power_maxPower: 6352
+  power_WepPower: 0
   isJet: 1
   engineNumber: 1
   powerToWeight: 0.96
@@ -255,7 +258,9 @@ MonoBehaviour:
   criticalAoA: 4
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
+  radarAltitude: 0
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
@@ -270,6 +275,8 @@ MonoBehaviour:
   wingType: 1
   sweepAngle: 25
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.01
   waveDragMultiplier: 2
   newWaveDragMultiplier: 3.9
@@ -425,6 +432,11 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 2
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &1257820892668996848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,9 +524,9 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
-  SARHPovCircle: {fileID: 0}
   SARHLockCircle: {fileID: 0}
   IRMissiles: 0
   SAGMissiles: 0
@@ -531,6 +543,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -691,6 +704,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 4
   canReload: 1
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: e195638c96a24f746a1c0f816b61c83d, type: 3}
   MissilePos:
   - {fileID: 3603624954151043576}
@@ -702,17 +716,19 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 3000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
+  allAspectSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 7180611819124486595}
   killCounter: {fileID: 1978067054733514080}
-  aspect: 1
-  irccm: 0
 --- !u!114 &6982110809263645009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -729,6 +745,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 40500
+  currentHorsepower: 0
   serviceCeiling: 22000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -819,6 +836,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 21800
   engines:
   - {fileID: 8105143573206336220}
@@ -846,8 +864,11 @@ MonoBehaviour:
   ailerons:
   - {fileID: 5785590832909566698}
   - {fileID: 6186750513197535598}
+  spoilers: []
   elevators:
   - {fileID: 7860512815323296952}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 8725436256365906814}
   slats:
@@ -6237,6 +6258,8 @@ PrefabInstance:
     - {fileID: 7624331564152523351, guid: e600df7985b472a47b749508f08d9678, type: 3}
     - {fileID: 171551300084342824, guid: e600df7985b472a47b749508f08d9678, type: 3}
     - {fileID: 6931424036127594289, guid: e600df7985b472a47b749508f08d9678, type: 3}
+    - {fileID: 3017928104872544868, guid: e600df7985b472a47b749508f08d9678, type: 3}
+    - {fileID: 102188869688433984, guid: e600df7985b472a47b749508f08d9678, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e600df7985b472a47b749508f08d9678, type: 3}

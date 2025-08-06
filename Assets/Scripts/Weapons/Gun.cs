@@ -281,4 +281,12 @@ public class Gun : MonoBehaviour
 		sh.Disable(transform);
 		return sh;
 	}
+	
+	void OnDestroy()
+	{
+		foreach(Shell shell in shellList)
+		{
+			Destroy(shell.gameObject, shellTimer); 
+		}
+	}
 }

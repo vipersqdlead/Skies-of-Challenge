@@ -44,10 +44,12 @@ public class SurvivalMissionStatus : MonoBehaviour
 
     public enum AircraftType
     {
-        Trainer,
-        Prop,
-        JetTier1,
-        JetTier2
+        Trainer, // Reserved for T-7
+        Prop, // Up to 6.7
+        JetTier1, // Up to 9.3, mostly subsonics
+        JetTier2, // Second Gens, up to 1100
+		JetTier3, // Third Gens, up to 1270
+		JetTier4 // Fourth Gens
     }
 
     // Update is called once per frame
@@ -450,7 +452,7 @@ public class SurvivalMissionStatus : MonoBehaviour
 		
 		Vector3 directionFromCenter = (aircraft.transform.position - Vector3.zero).normalized;
 		Vector3 spawnPosition = directionFromCenter * distanceToReposition;
-		aircraft.transform.position = Utilities.GetSafeSpawnAltitude(spawnPosition, spawnPosition.y);
+		aircraft.transform.position = Utilities.GetSafeSpawnAltitude(spawnPosition, aircraft.transform.position.y);
 
 		// Apply forward "spawn" speed
 		float spawnSpeed = aircraft.fm.SpawnSpeed; // You can make this configurable per aircraft
@@ -812,6 +814,94 @@ public class SurvivalMissionStatus : MonoBehaviour
                         }	*/
                     }
                     break;
+				case AircraftType.JetTier3:
+                    if (currentWave % 5 == 0)
+                    {
+                        waveSpawner.JetTier2BonusSpawnWave();
+                        text = "Bonus Wave: Intercept the Enemy!";
+                    }
+
+                    else
+                    {
+						text = "";
+						
+						if(oldMatchmaking)
+						{
+							waveSpawner.JetTier2SpawnWave(enemyQuantity);
+						}
+						
+						else
+						{
+							waveSpawner.spawnEnemyWave(enemyQuantity);
+						}
+						
+						/*
+                        if (currentWave <= 3)
+                        {
+                            waveSpawner.spawnEnemyWave(1);
+                        }
+                        else if (currentWave > 3 && currentWave <= 6)
+                        {
+                            waveSpawner.spawnEnemyWave(2);
+                        }
+                        else if (currentWave > 6 && currentWave <= 9)
+                        {
+                            waveSpawner.spawnEnemyWave(3);
+                        }
+                        else if (currentWave > 9 && currentWave <= 12)
+                        {
+                            waveSpawner.spawnEnemyWave(4);
+                        }
+                        else
+                        {
+                            waveSpawner.spawnEnemyWave(6);
+                        }	*/
+                    }
+                    break;
+				case AircraftType.JetTier4:
+                    if (currentWave % 5 == 0)
+                    {
+                        waveSpawner.JetTier2BonusSpawnWave();
+                        text = "Bonus Wave: Intercept the Enemy!";
+                    }
+
+                    else
+                    {
+						text = "";
+						
+						if(oldMatchmaking)
+						{
+							waveSpawner.JetTier2SpawnWave(enemyQuantity);
+						}
+						
+						else
+						{
+							waveSpawner.spawnEnemyWave(enemyQuantity);
+						}
+						
+						/*
+                        if (currentWave <= 3)
+                        {
+                            waveSpawner.spawnEnemyWave(1);
+                        }
+                        else if (currentWave > 3 && currentWave <= 6)
+                        {
+                            waveSpawner.spawnEnemyWave(2);
+                        }
+                        else if (currentWave > 6 && currentWave <= 9)
+                        {
+                            waveSpawner.spawnEnemyWave(3);
+                        }
+                        else if (currentWave > 9 && currentWave <= 12)
+                        {
+                            waveSpawner.spawnEnemyWave(4);
+                        }
+                        else
+                        {
+                            waveSpawner.spawnEnemyWave(6);
+                        }	*/
+                    }
+                    break;
             }
 			
 		if (currentWave % 5 == 1 && currentWave != 1)
@@ -865,8 +955,16 @@ public class SurvivalMissionStatus : MonoBehaviour
 									}
                                     break;
                                 case 6:
-                                    playerAcHub.rocketLauncherControl.EnableRockets();
-                                    text = "Reward: Rocketpods enabled!";
+                                    if (playerAcHub.rocketLauncherControl != null)
+                                    {
+                                        playerAcHub.rocketLauncherControl.EnableRockets();
+                                        text = "Reward: Rocketpods enabled!";
+                                    }
+                                    else
+                                    {
+                                        playerAcHub.hp.HealHPAmmount(UnityEngine.Random.Range(70, 150));
+										text = "Reward: Health Restored!";
+                                    }
                                     break;
                                 case 7:
 									SpawnAllies();

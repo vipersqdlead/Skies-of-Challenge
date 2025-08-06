@@ -3459,12 +3459,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 1656786523624735108}
   aircraftName: F-102A Delta Dagger
   nameShort: F-102
   nameLong: F-102A
   speed_maxSpeed: 0
   power_maxPower: 0
+  power_WepPower: 0
   isJet: 0
   engineNumber: 0
   powerToWeight: 0
@@ -3580,6 +3583,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -3595,6 +3599,8 @@ MonoBehaviour:
   wingType: 2
   sweepAngle: 60
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.007
   waveDragMultiplier: 2
   newWaveDragMultiplier: 1.55
@@ -3703,7 +3709,13 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 2
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &5826004335633451601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3719,19 +3731,23 @@ MonoBehaviour:
   aircraftHub: {fileID: 0}
   guns:
   - {fileID: 843771471331665993}
-  - {fileID: 3876020203611268831}
-  - {fileID: 7291760335665968866}
-  - {fileID: 1761402760506852913}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 8345975784220415665}
-  - {fileID: 5597150501231777831}
-  - {fileID: 2114149802643703834}
-  - {fileID: 6923918381788313801}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   isPlayer: 0
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns: []
   additionalGunsGO: []
   enableAG: 0
@@ -3753,6 +3769,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 52000
+  currentHorsepower: 0
   serviceCeiling: 16300
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -3834,6 +3851,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 24000
   engines:
   - {fileID: 5473227254048185997}
@@ -3860,6 +3878,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &4174714995952344821
@@ -3879,6 +3898,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 4
   canReload: 0
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: de4882f41acafc94f818d472f0f566a5, type: 3}
   MissilePos:
   - {fileID: 120342504673496940}
@@ -3888,11 +3908,15 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 3000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -3956,13 +3980,10 @@ MonoBehaviour:
   yawFactor: 1
   currentState: {fileID: 2054586098863216407}
   guns: {fileID: 5826004335633451601}
+  irMissile: {fileID: 0}
   canUseMissiles: 1
   canUseCannon: 1
-  missileLockFiringDelay: 0
-  missileFiringCooldown: 0
-  missileMinRange: 0
-  missileMaxRange: 0
-  missileMaxFireAngle: 0
+  advancedGunnery: 0
   bulletSpeed: 500
   cannonRange: 800
   cannonMaxFireAngle: 45
@@ -11083,48 +11104,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1761402760506852913 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4187758612736256571, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 2480403945707367434}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3876020203611268831 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1704130777859607253, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 2480403945707367434}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &6460017789506127678 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8920150699076676404, guid: 963456930c3dce54aa5788b9863861fe,
     type: 3}
   m_PrefabInstance: {fileID: 2480403945707367434}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7291760335665968866 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5142445962408123112, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 2480403945707367434}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2707713655547223421
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11610,48 +11595,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 963456930c3dce54aa5788b9863861fe, type: 3}
---- !u!114 &2114149802643703834 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5142445962408123112, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 6488380088209380082}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2432478835541473734 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8920150699076676404, guid: 963456930c3dce54aa5788b9863861fe,
     type: 3}
   m_PrefabInstance: {fileID: 6488380088209380082}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5597150501231777831 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1704130777859607253, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 6488380088209380082}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6923918381788313801 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4187758612736256571, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 6488380088209380082}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8345975784220415665 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3015590486485779523, guid: 963456930c3dce54aa5788b9863861fe,

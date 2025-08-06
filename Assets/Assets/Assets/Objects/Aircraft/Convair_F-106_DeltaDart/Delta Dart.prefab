@@ -1529,7 +1529,9 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
+  radarAltitude: 0
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
@@ -1544,6 +1546,8 @@ MonoBehaviour:
   wingType: 2
   sweepAngle: 60
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.007
   waveDragMultiplier: 2
   newWaveDragMultiplier: 1.35
@@ -1664,6 +1668,7 @@ MonoBehaviour:
   AoADampFactor: 0
   brakeInput: 0
   experiencesG: 1
+  baseGTolerance: 2
   gTolerance: 7.5
   gMax: 13.5
   blackOutFactor: 0
@@ -1818,6 +1823,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 28580
   engines:
   - {fileID: 5473227254048185997}
@@ -1880,7 +1886,6 @@ MonoBehaviour:
   blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
-  SARHPovCircle: {fileID: 0}
   SARHLockCircle: {fileID: 0}
   IRMissiles: 0
   SAGMissiles: 0
@@ -1897,6 +1902,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -1996,6 +2002,7 @@ MonoBehaviour:
   missileMinRange: 0
   isCagedSeeker: 0
   slaveToRadar: 0
+  allAspectSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
@@ -2005,8 +2012,6 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 7756966592612738934}
   killCounter: {fileID: 6406513789558698803}
-  aspect: 0
-  irccm: 0
 --- !u!114 &6245114012831932686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2023,9 +2028,12 @@ MonoBehaviour:
   ailerons:
   - {fileID: 8589959035528386953}
   - {fileID: 3387608787715847623}
-  elevators:
+  spoilers: []
+  elevators: []
+  elevons:
   - {fileID: 8121675141151562798}
   - {fileID: 2930085261408617048}
+  vTails: []
   rudders:
   - {fileID: 886655571738819680}
   slats: []
@@ -2193,11 +2201,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: 
   isPlayer: 0
+  hub: {fileID: 0}
   MaxMissileAmmo: 1
   MissileAmmo: 1
   MissileReload: 20
   canReload: 1
   angleToPlayer: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   MissilePrefab: {fileID: 2244568564740985332, guid: c6c8ce158322922429ad0388c2cdc45e,
     type: 3}
   MissilePos:
@@ -2205,6 +2215,9 @@ MonoBehaviour:
   missile: {fileID: 0}
   AcquisitionMaxTimer: 30
   AcquisitionTimer: 30
+  radarRange: 19000
+  radarGimbalLimit: 60
+  pulseDoppler: 1
   possibleTarget: {fileID: 0}
   Target: {fileID: 0}
   Acquiring: 0
@@ -2213,6 +2226,9 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 2188737198251748225}
   killCounter: {fileID: 6406513789558698803}
+  closingSpeed: 0
+  filterSize: 20
+  timeToLockBreak: 3
 --- !u!1 &3312025921134221885
 GameObject:
   m_ObjectHideFlags: 0
@@ -5013,6 +5029,8 @@ PrefabInstance:
     - {fileID: 7624331564152523351, guid: e600df7985b472a47b749508f08d9678, type: 3}
     - {fileID: 171551300084342824, guid: e600df7985b472a47b749508f08d9678, type: 3}
     - {fileID: 171551299750865746, guid: e600df7985b472a47b749508f08d9678, type: 3}
+    - {fileID: 3017928104872544868, guid: e600df7985b472a47b749508f08d9678, type: 3}
+    - {fileID: 102188869688433984, guid: e600df7985b472a47b749508f08d9678, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e600df7985b472a47b749508f08d9678, type: 3}

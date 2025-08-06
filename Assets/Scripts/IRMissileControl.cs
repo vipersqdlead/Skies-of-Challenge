@@ -17,7 +17,7 @@ public class IRMissileControl : BaseSpWeaponControl
     public float AcquisitionMaxTimer;
     public float AcquisitionTimer;
     public float missileOuterFoV, missileInnerFoV, missileLockRange, missileMinRange;
-    public bool isCagedSeeker, slaveToRadar;
+    public bool isCagedSeeker, slaveToRadar, allAspectSeeker;
     public GameObject Target;
     [SerializeField] float distanceToTarget;
     [SerializeField] float _angleToTarget;
@@ -31,22 +31,7 @@ public class IRMissileControl : BaseSpWeaponControl
 
     [SerializeField] KillCounter killCounter;
 
-    [SerializeField] MissileAspect aspect;
-    [SerializeField] IRCCMType irccm;
     GameObject missilego;
-
-    public enum MissileAspect
-    {
-        AllAspect,
-        RearAspect,
-        FrontAspect
-    }
-
-    public enum IRCCMType
-    {
-        NoIRCCM,
-        IRCCM
-    }
 
     private void Start()
     {
@@ -62,6 +47,7 @@ public class IRMissileControl : BaseSpWeaponControl
 		missileMinRange = Missile.GetComponent<IR_Missile>().minRange;
         isCagedSeeker = Missile.GetComponent<IR_Missile>().isCagedSeeker;
         slaveToRadar = Missile.GetComponent<IR_Missile>().slaveToRadar;
+		allAspectSeeker = Missile.GetComponent<IR_Missile>().allAspectSeeker;
     }
 	
 	
@@ -158,6 +144,7 @@ public class IRMissileControl : BaseSpWeaponControl
 			if(hub.fm.target != radarTarget)
 			{
 				ResetLock();
+				radarTarget = hub.fm.target;
 			}
 			
 			if(hub.fm.target != null)
@@ -188,55 +175,16 @@ public class IRMissileControl : BaseSpWeaponControl
                     {
                         float _dotProduct = Vector3.Dot(transform.forward, hit.transform.forward);
 
-                        switch (aspect)
-                        {
-                            case MissileAspect.AllAspect:
-                            {
+						float range = Utilities.GetIRLockRange(_dotProduct, missileLockRange, allAspectSeeker);
 								
-								
-                                    if (_dotProduct > 0f)
-                                    {
-                                        LockTarget(hit.collider.gameObject, angleToTarget);
-                                    }
-                                    else
-                                    {
-                                        if (distToTempTarget < missileLockRange / 2f)
-                                        {
-                                            LockTarget(hit.collider.gameObject, angleToTarget);
-                                        }
-                                    }
-                                    break;
-                            }
-
-                            case MissileAspect.FrontAspect:
-                            {
-                                if (_dotProduct < -0.2f)
-                                {
-                                    LockTarget(hit.collider.gameObject, angleToTarget);
-                                }
-                                else
-                                {
-                                    if(distToTempTarget < missileLockRange / 4f)
-                                    {
-                                        LockTarget(hit.collider.gameObject, angleToTarget);
-                                    }
-                                }
-                                break;
-                            }
-
-                            case MissileAspect.RearAspect:
-                            {
-                                    if (_dotProduct > 0.5f)
-                                    {
-                                        LockTarget(hit.collider.gameObject, angleToTarget);
-                                    }
-                                    else if(_dotProduct <= 0.5f && distToTempTarget < missileLockRange / 4f)
-                                    {
-                                        LockTarget(hit.collider.gameObject, angleToTarget);
-                                    }
-                                    break;
-                            }
-                        }
+						if(distToTempTarget < range)
+						{
+							LockTarget(hit.collider.gameObject, angleToTarget);
+						}
+						else 
+						{ 
+							continue; 
+						}
                     }
                 }
             }
@@ -266,10 +214,13 @@ public class IRMissileControl : BaseSpWeaponControl
             return;
         }
 
+		distanceToTarget = Vector3.Distance(transform.position, Target.transform.position);
         float angleToTarget = Vector3.Angle(transform.forward, Target.transform.position - transform.position);
-        if (angleToTarget < missileOuterFoV)
+		float _dotProduct = Vector3.Dot(transform.forward, Target.transform.forward);
+		float maxLockableRange = Utilities.GetIRLockRange(_dotProduct, missileLockRange, allAspectSeeker);
+						
+        if (angleToTarget < missileOuterFoV && distanceToTarget < maxLockableRange)
         {
-            distanceToTarget = Vector3.Distance(transform.position, Target.transform.position);
             _angleToTarget = angleToTarget;
         }
         else

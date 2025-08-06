@@ -214,16 +214,20 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
+  shellList: []
   rateOfFireRPM: 1300
   muzzleVelocity: 1050
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 8640292143598889785}
   rateOfFire: 0
   rofTimer: 0
-  overheatTimer: 0
+  muzzleFlash: {fileID: 0}
+  muzzlePositionZOffset: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 6406513789558698803}
 --- !u!82 &8640292143598889785
 AudioSource:
@@ -1022,12 +1026,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 2084687110704600557}
   aircraftName: F-84F Thunderstrike
   nameShort: F-84
   nameLong: F-84F
   speed_maxSpeed: 0
   power_maxPower: 0
+  power_WepPower: 0
   isJet: 0
   engineNumber: 0
   powerToWeight: 0
@@ -1143,6 +1150,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -1158,6 +1166,8 @@ MonoBehaviour:
   wingType: 1
   sweepAngle: 38.5
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.007
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2.22
@@ -1284,7 +1294,13 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 2
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &5826004335633451601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1307,10 +1323,14 @@ MonoBehaviour:
   - {fileID: 3320590364004312028}
   isPlayer: 0
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 0}
   additionalGunsGO:
@@ -1334,6 +1354,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 34000
+  currentHorsepower: 0
   serviceCeiling: 12500
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -1415,6 +1436,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 0
   engines:
   - {fileID: 5473227254048185997}
@@ -1440,6 +1462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &4405083029998414695
@@ -1459,6 +1482,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 4
   canReload: 0
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: 86e47f0f2e83a804e8980d5314a31270, type: 3}
   MissilePos:
   - {fileID: 500279200375674694}
@@ -1468,11 +1492,15 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 2000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -1513,13 +1541,10 @@ MonoBehaviour:
   yawFactor: 1
   currentState: {fileID: 8728473176667772981}
   guns: {fileID: 5826004335633451601}
+  irMissile: {fileID: 0}
   canUseMissiles: 1
   canUseCannon: 1
-  missileLockFiringDelay: 0
-  missileFiringCooldown: 0
-  missileMinRange: 0
-  missileMaxRange: 0
-  missileMaxFireAngle: 0
+  advancedGunnery: 0
   bulletSpeed: 800
   cannonRange: 800
   cannonMaxFireAngle: 20
@@ -1612,16 +1637,20 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
+  shellList: []
   rateOfFireRPM: 1300
   muzzleVelocity: 1050
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 250353432286548587}
   rateOfFire: 0
   rofTimer: 0
-  overheatTimer: 0
+  muzzleFlash: {fileID: 0}
+  muzzlePositionZOffset: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 6406513789558698803}
 --- !u!82 &250353432286548587
 AudioSource:
@@ -2764,16 +2793,20 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
+  shellList: []
   rateOfFireRPM: 1300
   muzzleVelocity: 1050
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 4290176947181094430}
   rateOfFire: 0
   rofTimer: 0
-  overheatTimer: 0
+  muzzleFlash: {fileID: 0}
+  muzzlePositionZOffset: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 6406513789558698803}
 --- !u!82 &4290176947181094430
 AudioSource:
@@ -2922,16 +2955,20 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
+  shellList: []
   rateOfFireRPM: 1300
   muzzleVelocity: 1050
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 4413282888228344077}
   rateOfFire: 0
   rofTimer: 0
-  overheatTimer: 0
+  muzzleFlash: {fileID: 0}
+  muzzlePositionZOffset: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 6406513789558698803}
 --- !u!82 &4413282888228344077
 AudioSource:
@@ -3710,16 +3747,20 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
+  shellList: []
   rateOfFireRPM: 1300
   muzzleVelocity: 1050
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 4763599970156329732}
   rateOfFire: 0
   rofTimer: 0
-  overheatTimer: 0
+  muzzleFlash: {fileID: 0}
+  muzzlePositionZOffset: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 6406513789558698803}
 --- !u!82 &4763599970156329732
 AudioSource:
@@ -3900,16 +3941,20 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
   - {fileID: 7005174183826454184, guid: a634e714261d77845b99574b3a69db4e, type: 3}
+  shellList: []
   rateOfFireRPM: 1300
   muzzleVelocity: 1050
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 5653907274619220620}
   rateOfFire: 0
   rofTimer: 0
-  overheatTimer: 0
+  muzzleFlash: {fileID: 0}
+  muzzlePositionZOffset: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 6406513789558698803}
 --- !u!82 &5653907274619220620
 AudioSource:

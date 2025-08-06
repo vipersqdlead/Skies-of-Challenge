@@ -1126,6 +1126,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 35000
+  currentHorsepower: 0
   serviceCeiling: 16000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -1207,6 +1208,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 0
   engines:
   - {fileID: 4452557345233823483}
@@ -1244,6 +1246,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -1259,6 +1262,8 @@ MonoBehaviour:
   wingType: 1
   sweepAngle: 35
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.01
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2.55
@@ -1385,7 +1390,13 @@ MonoBehaviour:
   anims: {fileID: 0}
   authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 2
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &3966597516042868046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1406,10 +1417,14 @@ MonoBehaviour:
   - {fileID: 2090198433347258254}
   isPlayer: 0
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns: []
   additionalGunsGO: []
   enableAG: 0
@@ -1432,6 +1447,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 4
   canReload: 0
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: 39be24dc5dd68504b877d9120147e54a, type: 3}
   MissilePos:
   - {fileID: 452369889454374496}
@@ -1441,11 +1457,15 @@ MonoBehaviour:
   AcquisitionMaxTimer: 25
   AcquisitionTimer: 20
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 4000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -1501,6 +1521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &5695656988064226052
@@ -1532,12 +1553,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 1001067094333237125}
   aircraftName: Vautour IIN
   nameShort: Vautour II
   nameLong: Vautour IIN
   speed_maxSpeed: 0
   power_maxPower: 0
+  power_WepPower: 0
   isJet: 0
   engineNumber: 0
   powerToWeight: 0
@@ -1606,13 +1630,10 @@ MonoBehaviour:
   yawFactor: 1
   currentState: {fileID: 4147959951855141421}
   guns: {fileID: 3966597516042868046}
+  irMissile: {fileID: 0}
   canUseMissiles: 1
   canUseCannon: 1
-  missileLockFiringDelay: 0
-  missileFiringCooldown: 0
-  missileMinRange: 0
-  missileMaxRange: 0
-  missileMaxFireAngle: 0
+  advancedGunnery: 0
   bulletSpeed: 750
   cannonRange: 800
   cannonMaxFireAngle: 25

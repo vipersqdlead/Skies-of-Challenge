@@ -639,10 +639,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 81577637939589590}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 2537224597472735804}
 --- !u!1 &346894995054919954
@@ -2033,10 +2032,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 461382017675215046}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 2537224597472735804}
 --- !u!1 &1406238659909670264
@@ -5686,10 +5684,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 3330421192401608406}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 2537224597472735804}
 --- !u!1 &4336993121127790378
@@ -5799,6 +5796,7 @@ GameObject:
   - component: {fileID: 5762309691035039041}
   - component: {fileID: 3140754311946270457}
   - component: {fileID: 6296126995372244019}
+  - component: {fileID: 8278707468984362485}
   m_Layer: 0
   m_Name: Shoki
   m_TagString: Fighter
@@ -5852,19 +5850,22 @@ MonoBehaviour:
   killcounter: {fileID: 2537224597472735804}
   planeCam: {fileID: 5736022040194783868}
   planeHUD: {fileID: 11706157088421046}
-  weaponManager: {fileID: 0}
+  weaponManager: {fileID: 8278707468984362485}
   irControl: {fileID: 3140754311946270457}
   sagControl: {fileID: 0}
   radarMissileControl: {fileID: 0}
   rocketLauncherControl: {fileID: 5762309691035039041}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
-  meshRenderer: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
+  meshRenderer: {fileID: 9054677907096056712}
   aircraftName: Ki-44-II Shoki
-  nameShort: 
-  nameLong: 
+  nameShort: Ki-44
+  nameLong: Ki-44-II
   speed_maxSpeed: 600
-  power_maxPower: 1515
+  power_maxPower: 1364
+  power_WepPower: 1515
   isJet: 0
   engineNumber: 1
   powerToWeight: 1.38
@@ -5901,6 +5902,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -5916,6 +5918,8 @@ MonoBehaviour:
   wingType: 0
   sweepAngle: 0
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.01
   waveDragMultiplier: 2
   newWaveDragMultiplier: 3.2
@@ -6062,6 +6066,10 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &7124158707322575494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6148,6 +6156,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -6167,6 +6176,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -6190,7 +6200,7 @@ MonoBehaviour:
   isPlayer: 1
   isGroundTgt: 0
   countsAsKill: 0
-  pointsWorth: 150
+  pointsWorth: 370
   HP: 140
   hpPercent: 0
   Defense: 25
@@ -6284,6 +6294,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 6820
+  currentHorsepower: 0
   serviceCeiling: 11200
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -6365,6 +6376,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.77
   propEfficiencyMach: 0.38
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 755
   engines:
   - {fileID: 6071499616394092890}
@@ -6495,7 +6507,8 @@ MonoBehaviour:
   MaxMissileAmmo: 2
   MissileAmmo: 0
   canReload: 0
-  Missile: {fileID: 2244568564740985332, guid: 1f8fa826239400240aa1e60d37196aec, type: 3}
+  hub: {fileID: 0}
+  Missile: {fileID: 2244568564740985332, guid: 0ff927640a0088e43aea261990330728, type: 3}
   MissilePos:
   - {fileID: 4611894969736723625}
   - {fileID: 4236944402342869450}
@@ -6504,10 +6517,13 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 5000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -6531,8 +6547,11 @@ MonoBehaviour:
   ailerons:
   - {fileID: 6188590562236712487}
   - {fileID: 6504634839162924742}
+  spoilers: []
   elevators:
   - {fileID: 4502856466590738811}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 636257434837685586}
   slats: []
@@ -6581,6 +6600,21 @@ MonoBehaviour:
   rollInput: 0
   yawInput: 0
   controlType: 0
+--- !u!114 &8278707468984362485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4368824392382918122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfd7b8248420da4aadcee591d9caec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  specialWeapons:
+  - {fileID: 5762309691035039041}
+  - {fileID: 3140754311946270457}
 --- !u!1 &4382238667190041451
 GameObject:
   m_ObjectHideFlags: 0
@@ -6979,10 +7013,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 2705840875304779300}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 2537224597472735804}
 --- !u!82 &5007772331759547379

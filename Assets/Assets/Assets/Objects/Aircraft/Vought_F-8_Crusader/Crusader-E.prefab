@@ -276,6 +276,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4030484103480532706, guid: fa7697fede0ce33499a6e355c62e8f3c,
         type: 3}
+      propertyPath: nameLong
+      value: F-8E
+      objectReference: {fileID: 0}
+    - target: {fileID: 4030484103480532706, guid: fa7697fede0ce33499a6e355c62e8f3c,
+        type: 3}
+      propertyPath: nameShort
+      value: F-8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4030484103480532706, guid: fa7697fede0ce33499a6e355c62e8f3c,
+        type: 3}
       propertyPath: aircraftName
       value: F-8E Crusader
       objectReference: {fileID: 0}
@@ -464,11 +474,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: 
   isPlayer: 0
+  hub: {fileID: 0}
   MaxMissileAmmo: 2
   MissileAmmo: 2
   MissileReload: 20
   canReload: 1
   angleToPlayer: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   MissilePrefab: {fileID: 2244568564740985332, guid: 28c699579cac18d4e8bcd1c84c9456e3,
     type: 3}
   MissilePos:
@@ -477,6 +489,9 @@ MonoBehaviour:
   missile: {fileID: 0}
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
+  radarRange: 19000
+  radarGimbalLimit: 60
+  pulseDoppler: 0
   possibleTarget: {fileID: 0}
   Target: {fileID: 0}
   Acquiring: 0
@@ -485,6 +500,9 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 1895655021834456628}
   killCounter: {fileID: 7468231886030608533}
+  closingSpeed: 0
+  filterSize: 20
+  timeToLockBreak: 3
 --- !u!1001 &5367438064863378253
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class ControlSurfaceAnimation : MonoBehaviour
 {
     [SerializeField] AircraftHub hub;
 
-    public Transform[] ailerons, elevators, rudders, slats, flaps, airbrakes;
+    public Transform[] ailerons, spoilers, elevators, elevons, vTails, rudders, slats, flaps, airbrakes;
 
     public float maxDeflectionAngle = 30f;  // Maximum deflection angle in degrees
     public AnimationCurve deflectionCurve = AnimationCurve.Linear(0, 1, 1, 0.1f); // Curve to adjust deflection based on speed
@@ -51,12 +51,24 @@ public class ControlSurfaceAnimation : MonoBehaviour
         //rollInput = hub.playerInputs.currentInputVector.z;
 
         deflectionMultiplier = deflectionCurve.Evaluate(speed);
-
-        // Calculate deflection based on control type
-        ailerons[0].localRotation = calculateDeflections(rollInput);
-        ailerons[1].localRotation = calculateDeflections(-rollInput);
+		
+			Ailerons();
+			Elevators();
+			Rudders();
+			Spoilers();
+			Elevons();
+			SlatsAnim();
+			Flaperons();
+			VTail();
+			FlapsAndAirbrakeAnim();
+			
+		/*
         switch (controlType)
         {
+
+			
+			return;
+			
             case ControlType.Standard:
                 foreach (Transform elevator in elevators)
                 {
@@ -96,10 +108,108 @@ public class ControlSurfaceAnimation : MonoBehaviour
                 float inputVR = (pitchInput - yawInput) / 2f;
                 elevators[1].localRotation = calculateDeflections(inputVR);
                 break;
-        }
-        SlatsAnim();
-        FlapsAndAirbrakeAnim();
+        }*/
+
     }
+	
+	void Ailerons()
+	{
+		
+		if(ailerons.Length == 0) return;
+		ailerons[0].localRotation = calculateDeflections(rollInput);
+        ailerons[1].localRotation = calculateDeflections(-rollInput);
+	}
+	
+	void Elevators()
+	{
+		if(elevators.Length == 0) return;
+		
+		foreach (Transform elevator in elevators)
+        {
+			if(elevator == null) return;
+            elevator.localRotation = calculateDeflections(pitchInput);
+        }
+	}
+	
+	void Rudders()
+	{
+		
+		if(rudders.Length == 0) return;
+		
+		foreach (Transform rudder in rudders)
+        {
+            rudder.localRotation = calculateDeflections(-yawInput);
+        }
+	}
+	
+	void Elevons()
+	{
+		
+		if(elevons.Length == 0) return;
+		
+		float inputL = (pitchInput + rollInput) / 2f;
+        //elevators[0].localRotation = calculateDeflections(inputL);
+        float inputR = (pitchInput - rollInput) / 2f;
+        //elevators[1].localRotation = calculateDeflections(inputR);
+
+        for (int i = 0; i < elevons.Length; i++)
+        {
+			if(elevons[i] == null) return;
+            if(i % 2 == 0)
+            {
+                elevons[i].localRotation = calculateDeflections(inputL);
+            }
+            else
+            {
+                elevons[i].localRotation = calculateDeflections(inputR);
+            }
+		}
+	}
+	
+	void Spoilers()
+	{
+		
+		if(spoilers.Length == 0) return;
+		
+		float inputL = (pitchInput + rollInput) / 2f;
+        //elevators[0].localRotation = calculateDeflections(inputL);
+        float inputR = (pitchInput - rollInput) / 2f;
+        //elevators[1].localRotation = calculateDeflections(inputR);
+
+        for (int i = 0; i < spoilers.Length; i++)
+        {
+			float targetDeflection = 0f;
+			
+			if(spoilers[i] == null) return;
+			if(i % 2 == 0)
+            {
+				targetDeflection = Mathf.Clamp01(rollInput) * maxDeflectionAngle;
+				Quaternion deflection = Quaternion.Euler(targetDeflection, 0, 0f);
+                spoilers[i].localRotation = deflection;
+            }
+            else
+            {	targetDeflection = Mathf.Clamp01(-rollInput) * maxDeflectionAngle;
+				Quaternion deflection = Quaternion.Euler(targetDeflection, 0, 0f);
+                spoilers[i].localRotation = deflection;
+            }
+        }
+	}
+	
+	void Flaperons()
+	{
+		return;
+	}
+	
+	void VTail()
+	{
+		
+		if(controlType != ControlType.VTail) return;
+		
+        float inputVL = (pitchInput + yawInput) / 2f;
+        elevators[0].localRotation = calculateDeflections(inputVL);
+        float inputVR = (pitchInput - yawInput) / 2f;
+        elevators[1].localRotation = calculateDeflections(inputVR);
+	}
 
     Quaternion calculateDeflections(float input)
     {

@@ -20,6 +20,7 @@ public class Radar_Missile : MonoBehaviour
 	public AnimationCurve maxGLoadMultiplierAtMach;
     public float rampUpTime = 2f;
     [SerializeField] float launchTime, drag;
+	float multipathAltitude = 150f;
 
     public float angleToMissile;
     public bool hasTerminalGuidance;
@@ -101,7 +102,7 @@ public class Radar_Missile : MonoBehaviour
             if(IR_Guidance != null)
             {
                 IR_Guidance.target = target.gameObject;
-            }
+            }			
         }
 
         else if(target == null)
@@ -136,7 +137,19 @@ public class Radar_Missile : MonoBehaviour
     Quaternion GuidancePN()
     {
         Vector3 missilePos = rb.position;
-        Vector3 targetPos = target.transform.position;
+		
+		Vector3 targetPos;
+		float radarAltitude = target.GetComponent<AircraftHub>().fm.radarAltitude;
+		if(radarAltitude > multipathAltitude)
+		{
+			targetPos = target.transform.position;
+		}
+        else
+		{
+			float negativeAlt = target.transform.position.y - (radarAltitude * 2f);
+			targetPos = new Vector3(target.transform.position.x, negativeAlt, target.transform.position.z);
+		}
+		
         Vector3 missileVel = rb.velocity;
         Vector3 targetVel = target.rb.velocity;
 
@@ -160,8 +173,6 @@ public class Radar_Missile : MonoBehaviour
             lateralAcceleration = lateralAcceleration.normalized * maxAccel;
         }
 
-
-
         // Now steer missile towards commanded acceleration
         Vector3 desiredDirection = (missileVel.normalized + lateralAcceleration.normalized * 0.5f).normalized;
 
@@ -183,14 +194,10 @@ public class Radar_Missile : MonoBehaviour
 		{
 			lookDirection = lastKnownTargetDirection;
 		}
-		else
-		{
-			lookDirection = (target.transform.position - gameObject.transform.position).normalized;
-		}
 		
         print("Acquiring");
         RaycastHit hit;
-        float thickness = 300f; //<-- Desired thickness here
+        float thickness = 150f; //<-- Desired thickness here
         if (Physics.SphereCast(transform.position, thickness, lookDirection, out hit))
         {
             if (hit.collider.CompareTag("Fighter") || hit.collider.CompareTag("Bomber"))
@@ -203,13 +210,13 @@ public class Radar_Missile : MonoBehaviour
         {
 			closingSpeed = Utilities.GetClosingVelocity(possibleTarget, rb);
             angleToMissile = Vector3.Angle(transform.forward, possibleTarget.transform.position - transform.position);
-            if (angleToMissile < 45f && closingSpeed - rb.velocity.magnitude > 30f)
+            if (angleToMissile <= 90f && Mathf.Abs(closingSpeed - rb.velocity.magnitude) > 30f)
             {
-                target = possibleTarget; Locked = true; print("Target Locked!");
+                target = possibleTarget; Locked = true; print("Target Locked by Missile!");
             }
-            else if (angleToMissile >= 45f)
+            else
             {
-                target = null; Locked = false;
+                target = null; Locked = false; 
             }
         }
     }
@@ -220,7 +227,7 @@ public class Radar_Missile : MonoBehaviour
 
         float missileToTargetAngle = Vector3.Angle(transform.forward, target.transform.position-transform.position);
 		if(hasTerminalGuidance) { NotchFilter(); }
-        if (missileToTargetAngle >= 45f)
+        if (missileToTargetAngle >= 90f)
         {
             target = null;
         }
@@ -228,12 +235,12 @@ public class Radar_Missile : MonoBehaviour
 	
 	public float closingSpeed;
 	public float timeToLockBreak = 3f;
-	float maxTimeToLockBreak;
+	float maxTimeToLockBreak = 3f;
 	void NotchFilter()
 	{
 		closingSpeed = Utilities.GetClosingVelocity(target, rb);
 		
-		if((closingSpeed - rb.velocity.magnitude) < 30f)
+		if(Mathf.Abs(closingSpeed - rb.velocity.magnitude) < 30f)
 		{
 			timeToLockBreak -= Time.deltaTime;
 		}

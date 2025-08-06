@@ -120,12 +120,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 7107123546004588074}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 3970171617375295710}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 0}
   aircraftName: Q-5A Fantan
   nameShort: Q-5
   nameLong: Q-5A
   speed_maxSpeed: 1220
   power_maxPower: 3701
+  power_WepPower: 0
   isJet: 1
   engineNumber: 2
   powerToWeight: 1.26
@@ -189,6 +192,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -204,6 +208,8 @@ MonoBehaviour:
   wingType: 1
   sweepAngle: 55
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.011
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2.478
@@ -350,6 +356,11 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 2
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &1257820892668996848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,6 +394,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 26000
+  currentHorsepower: 0
   serviceCeiling: 17500
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -482,6 +494,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 10300
   engines:
   - {fileID: 8105143573206336220}
@@ -566,6 +579,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -585,6 +599,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -817,6 +832,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 4
   canReload: 1
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: 3e56fad5624275044845b4dbdec42bfa, type: 3}
   MissilePos:
   - {fileID: 3603624954151043576}
@@ -828,10 +844,13 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 5500
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -855,8 +874,11 @@ MonoBehaviour:
   ailerons:
   - {fileID: 8730708849113871588}
   - {fileID: 8748672967032599799}
+  spoilers: []
   elevators:
   - {fileID: 4634797189340707876}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 1375563210117221030}
   slats: []

@@ -1704,6 +1704,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2d7042d4b7e76ac4595622d96d69b090, type: 2}
     - target: {fileID: 6680854307914149069, guid: 35daba6c59856e8429b40041701ba78f,
         type: 3}
+      propertyPath: nameLong
+      value: A7M3-J
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680854307914149069, guid: 35daba6c59856e8429b40041701ba78f,
+        type: 3}
       propertyPath: irControl
       value: 
       objectReference: {fileID: 0}
@@ -2279,11 +2284,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: 
   isPlayer: 0
+  hub: {fileID: 0}
   MaxMissileAmmo: 2
   MissileAmmo: 2
   MissileReload: 20
   canReload: 1
   angleToPlayer: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   MissilePrefab: {fileID: 2244568564740985332, guid: 1fb12bbe62d925a4a91df349eec3126d,
     type: 3}
   MissilePos:
@@ -2292,6 +2299,9 @@ MonoBehaviour:
   missile: {fileID: 0}
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
+  radarRange: 19000
+  radarGimbalLimit: 60
+  pulseDoppler: 0
   possibleTarget: {fileID: 0}
   Target: {fileID: 0}
   Acquiring: 0
@@ -2300,6 +2310,9 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 4858994815279361220}
   killCounter: {fileID: 3153833642804194196}
+  closingSpeed: 0
+  filterSize: 20
+  timeToLockBreak: 3
 --- !u!4 &4701569537822770408 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2358037000909171939, guid: 35daba6c59856e8429b40041701ba78f,

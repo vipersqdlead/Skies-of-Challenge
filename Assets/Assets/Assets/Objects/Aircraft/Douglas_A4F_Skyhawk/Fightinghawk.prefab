@@ -785,7 +785,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Missile
       value: 
-      objectReference: {fileID: 2244568564740985332, guid: ea833334c86d19c42845590cc86fba34,
+      objectReference: {fileID: 2244568564740985332, guid: 037e84772a7da4044a7f70f42d6906f7,
         type: 3}
     - target: {fileID: 4174714995952344821, guid: ba8c4a7d0c4650142ba281d6b644f602,
         type: 3}
@@ -802,6 +802,11 @@ PrefabInstance:
       propertyPath: MissilePos.Array.data[1]
       value: 
       objectReference: {fileID: 2561681227895048573}
+    - target: {fileID: 4320583360311802631, guid: ba8c4a7d0c4650142ba281d6b644f602,
+        type: 3}
+      propertyPath: nameLong
+      value: A-4AR
+      objectReference: {fileID: 0}
     - target: {fileID: 4320583360311802631, guid: ba8c4a7d0c4650142ba281d6b644f602,
         type: 3}
       propertyPath: aircraftName
@@ -1107,11 +1112,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: 
   isPlayer: 0
+  hub: {fileID: 0}
   MaxMissileAmmo: 2
   MissileAmmo: 2
   MissileReload: 20
   canReload: 1
   angleToPlayer: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   MissilePrefab: {fileID: 5186579997882432130, guid: c75db2966d4b093479b19ad5f6a34269,
     type: 3}
   MissilePos:
@@ -1120,6 +1127,9 @@ MonoBehaviour:
   missile: {fileID: 0}
   AcquisitionMaxTimer: 30
   AcquisitionTimer: 30
+  radarRange: 19000
+  radarGimbalLimit: 60
+  pulseDoppler: 1
   possibleTarget: {fileID: 0}
   Target: {fileID: 0}
   Acquiring: 0
@@ -1128,6 +1138,9 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 5230654608390070753}
   killCounter: {fileID: 6081698304431736518}
+  closingSpeed: 0
+  filterSize: 20
+  timeToLockBreak: 3
 --- !u!114 &6081698304431736518 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3460177221028616539, guid: ba8c4a7d0c4650142ba281d6b644f602,

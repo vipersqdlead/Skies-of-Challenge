@@ -19,6 +19,7 @@ public class EngineControl : MonoBehaviour
     public float maxPropEfficiency = 0.85f;
     public float propEfficiencyMach = 0.42f;
     public bool afterBurner = false;
+	public bool thrustVectoring = false;
     [SerializeField] public float afterburnerThrust;
     [SerializeField] public Transform[] engines;
     [SerializeField] AudioSource[] engineSound;
@@ -99,6 +100,8 @@ public class EngineControl : MonoBehaviour
             currentEnginePower = (currentThrust * thrustBySpeedMultiplier.Evaluate(aircraft.machSpeed) * powerByAltitudeMultiplier.Evaluate(transform.position.y / 10000f)) * (60 * Time.fixedDeltaTime) * ThrottleInput;
         }
     }
+	
+	float milPowerPercent;
 
     void ApplyThrust()
     {
@@ -109,8 +112,18 @@ public class EngineControl : MonoBehaviour
 					print("Current Engine Power returns NaN - Check variables for vehicle " + gameObject.name);
 					return;
 				}
-                aircraft.rb.AddForce(transform.forward * currentEnginePower, ForceMode.Force);
+				
+				if(thrustVectoring)
+				{
+					aircraft.rb.AddForce((engine.transform.forward) * currentEnginePower, ForceMode.Force);
+					aircraft.AoALimiter = aircraft.currentSpeed < 600f;
+				}
+				else
+				{
+					aircraft.rb.AddForce(transform.forward * currentEnginePower, ForceMode.Force);
+				}
             }
+			
             foreach (var engine in engineSound)
             {
                 engine.volume = ThrottleInput * 0.85f;
@@ -142,15 +155,19 @@ public class EngineControl : MonoBehaviour
             }
             foreach (var prop in enginePropellers)
             {
+				if(milPowerPercent == 0)
+				{
+					milPowerPercent = maxSpeed * ((engineStaticThrust * 100f / afterburnerThrust) / 100f);
+				}
                 //float speed = minSpeed + (maxSpeed * ThrottleInput);
                 float speed = Mathf.Lerp(minSpeed, maxSpeed, ThrottleInput);
                 if (!afterBurner)
                 {
-                    prop.transform.Rotate(0, 0, speed * Time.fixedDeltaTime * 60f);
+                    prop.transform.Rotate(0, 0, Mathf.Lerp(minSpeed, milPowerPercent, ThrottleInput) * Time.fixedDeltaTime * 60f);
                 }
                 if (afterBurner)
                 {
-                    prop.transform.Rotate(0, 0, (speed * 1.2f) * Time.fixedDeltaTime * 60f);
+                    prop.transform.Rotate(0, 0, speed * Time.fixedDeltaTime * 60f);
                 }
             }
         
@@ -182,4 +199,92 @@ public class EngineControl : MonoBehaviour
             afterBurner = false;
         }
     }
+	
+	
+	
+	/*
+	
+	public bool leakingOil, leakingWater;
+	[SerializeField] ParticleSystem[] oil, water;
+	float leakPenalty;
+	
+	public void EnableOilLeak()
+	{
+		Invoke("OilLeak");
+	}
+	public void EnableWaterLeak()
+	{
+		Invoke("WaterLeak");
+	}
+	
+	IEnumrator OilLeak()
+	{
+		if(leakingOil) yield return null;
+		
+		if(leakPenalty == 0)
+		{
+			leakPenalty = engineStaticThrust * 0.2f;
+		}
+		
+		leakingOil = true;
+		foreach(ParticleSystem oilRad in oil)	oilRad.particle.enableEmission = true;
+		
+		engineStaticThrust = engineStaticThrust - leakPenalty;
+		
+		yield return new WaitForSeconds(180f)
+		
+		engineStaticThrust = engineStaticThrust + leakPenalty;
+		foreach(ParticleSystem oilRad in oil)	oilRad.particle.enableEmission = false;
+		
+		leakingOil = false;
+		
+		yield return null;
+	}
+	
+	IEnumrator WaterLeak()
+	{
+		if(leakingWater) yield return null;
+		
+		leakingWater = true;
+		foreach(ParticleSystem waterRad in water)	waterRad.particle.enableEmission = true;
+		
+		isAfterburningEngine = false;
+		
+		yield return new WaitForSeconds(180f)
+		
+		foreach(ParticleSystem waterRad in water)	waterRad.particle.enableEmission = false;
+		
+		isAfterburningEngine = true;
+		
+		leakingWater = false;
+		
+		yield return null;
+	}
+	
+	void OnDestroy()
+	{
+		KeepParticlesAlive();
+	}
+	
+	void KeepParticlesAlive()
+    {
+        foreach(ParticleSystem waterRad in water)
+        {
+            waterRad.transform.parent = null;
+            transform.localScale = new Vector3(1, 1, 1);
+            var mainS = waterRad.main;
+            mainS.loop = false;
+			Destroy(waterRad.gameObject, 30f);
+        }
+
+        foreach(ParticleSystem oilRad in oil)
+        {
+            oilRad.transform.parent = null;
+            transform.localScale = new Vector3(1, 1, 1);
+            var mainF = oilRad.main;
+            mainF.loop = false;
+			Destroy(oilRad.gameObject, 30f);
+        }
+    }
+	*/
 }

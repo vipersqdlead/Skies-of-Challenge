@@ -153,12 +153,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 7107123546004588074}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 1372948868202894757}
-  meshRenderer: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
+  meshRenderer: {fileID: 9115268294773294943}
   aircraftName: T-2A Kaze
   nameShort: T-2
   nameLong: T-2A
   speed_maxSpeed: 1310
   power_maxPower: 3099
+  power_WepPower: 0
   isJet: 1
   engineNumber: 2
   powerToWeight: 0.99
@@ -222,7 +225,9 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
+  radarAltitude: 0
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
@@ -237,6 +242,8 @@ MonoBehaviour:
   wingType: 1
   sweepAngle: 27.5
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.02
   waveDragMultiplier: 2
   newWaveDragMultiplier: 1.55
@@ -365,6 +372,11 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 2
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &1257820892668996848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,9 +469,9 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
-  SARHPovCircle: {fileID: 0}
   SARHLockCircle: {fileID: 0}
   IRMissiles: 0
   SAGMissiles: 0
@@ -476,6 +488,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -718,8 +731,10 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 5000
+  missileMinRange: 0
   isCagedSeeker: 0
   slaveToRadar: 0
+  allAspectSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
@@ -729,8 +744,6 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 7180611819124486595}
   killCounter: {fileID: 1978067054733514080}
-  aspect: 0
-  irccm: 0
 --- !u!114 &6982110809263645009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,6 +760,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 19120
+  currentHorsepower: 0
   serviceCeiling: 15200
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -828,6 +842,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 11280
   engines:
   - {fileID: 8105143573206336220}
@@ -855,12 +870,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hub: {fileID: 8320289180716399917}
-  ailerons:
+  ailerons: []
+  spoilers:
   - {fileID: 8588517154601325611}
   - {fileID: 6277845652796012597}
   elevators:
   - {fileID: 1392995642023625606}
   - {fileID: 2730863151652429545}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 6281553292891590702}
   slats:
@@ -1059,7 +1077,7 @@ GameObject:
   m_Component:
   - component: {fileID: 253284217278316409}
   m_Layer: 0
-  m_Name: PivotA-L
+  m_Name: PivotF-L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1255,12 +1273,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1854530757416130905}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.000000011175871, y: 0.7071068, z: 0.7071068, w: -0.000000014901161}
-  m_LocalPosition: {x: 2.0930004, y: 0.35193527, z: -1.7840003}
+  m_LocalRotation: {x: -0.70454603, y: -0.0540077, z: -0.14088513, w: 0.69343317}
+  m_LocalPosition: {x: -0.046630092, y: -0.003347035, z: 0.015021786}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4263850618646154580}
+  m_Father: {fileID: 3980260961893195372}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9069166881989062665
 MeshFilter:
@@ -1336,14 +1354,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1926489390497891318}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.061670907, y: -0.9729448, z: 0.0056688096, w: 0.22258282}
+  m_LocalRotation: {x: -0.005668815, y: -0.2225829, z: -0.061670907, w: -0.97294474}
   m_LocalPosition: {x: 2.176301, y: 0.36046526, z: -1.3943905}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6277845652796012597}
   m_Father: {fileID: 4263850618646154580}
-  m_LocalEulerAnglesHint: {x: -0.941, y: -154.286, z: 7.039}
+  m_LocalEulerAnglesHint: {x: -0.941, y: -334.286, z: 7.039}
 --- !u!1 &1969256394231282957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1637,7 +1655,7 @@ GameObject:
   m_Component:
   - component: {fileID: 818170498125503944}
   m_Layer: 0
-  m_Name: PivotA-R2
+  m_Name: PivotF-R2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1940,8 +1958,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3452306014851256241}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.6919846, y: -0.11378012, z: -0.20099781, w: -0.6839673}
-  m_LocalPosition: {x: -0.032621786, y: 0.08604736, z: -0.0039913617}
+  m_LocalRotation: {x: 0.11378184, y: 0.69198436, z: 0.6839674, w: -0.2009977}
+  m_LocalPosition: {x: 0.010733368, y: 0.09122005, z: 0.0069250558}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2072,7 +2090,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3980260961893195372}
   m_Layer: 0
-  m_Name: PivotA-R
+  m_Name: PivotF-R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2090,7 +2108,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 27982216608010612}
   m_Father: {fileID: 8695528043432365238}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3723787715846255989
@@ -2868,7 +2887,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 27982216608010612}
   - {fileID: 2971154504482752764}
   - {fileID: 2799639537165542120}
   - {fileID: 1389573625861664649}
@@ -3430,8 +3448,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8145129248411842963}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.69198436, y: 0.11378192, z: 0.20099774, w: -0.6839674}
-  m_LocalPosition: {x: 0.032621566, y: 0.08604744, z: -0.003991306}
+  m_LocalRotation: {x: 0.11378197, y: -0.6919843, z: -0.6839674, w: -0.2009978}
+  m_LocalPosition: {x: -0.01073337, y: 0.09122005, z: 0.006925048}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3543,14 +3561,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8506787691073130920}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.061672233, y: -0.972945, z: 0.0056690597, w: -0.22258164}
+  m_LocalRotation: {x: 0.005668804, y: -0.22258274, z: -0.061670903, w: 0.97294474}
   m_LocalPosition: {x: -2.176301, y: 0.36046526, z: -1.3943905}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8588517154601325611}
   m_Father: {fileID: 4263850618646154580}
-  m_LocalEulerAnglesHint: {x: -0.941, y: 154.286, z: -7.039}
+  m_LocalEulerAnglesHint: {x: -0.941, y: -25.714, z: -7.039}
 --- !u!1 &8571778662306086686
 GameObject:
   m_ObjectHideFlags: 0
@@ -4450,6 +4468,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6931424036127594289, guid: e600df7985b472a47b749508f08d9678, type: 3}
+    - {fileID: 3017928104872544868, guid: e600df7985b472a47b749508f08d9678, type: 3}
+    - {fileID: 102188869688433984, guid: e600df7985b472a47b749508f08d9678, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e600df7985b472a47b749508f08d9678, type: 3}
@@ -4881,6 +4901,12 @@ PrefabInstance:
 --- !u!4 &4935296283211752877 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8244541524509749277, guid: 466842c35f2b4994685c7fcebfac296b,
+    type: 3}
+  m_PrefabInstance: {fileID: 3897811635619239344}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &9115268294773294943 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5217489711617004271, guid: 466842c35f2b4994685c7fcebfac296b,
     type: 3}
   m_PrefabInstance: {fileID: 3897811635619239344}
   m_PrefabAsset: {fileID: 0}

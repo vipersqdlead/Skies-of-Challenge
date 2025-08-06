@@ -183,6 +183,7 @@ MonoBehaviour:
   criticalAoA: 15
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 25
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -198,6 +199,8 @@ MonoBehaviour:
   wingType: 2
   sweepAngle: 70
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.01
   waveDragMultiplier: 2
   newWaveDragMultiplier: 1.615
@@ -327,10 +330,9 @@ MonoBehaviour:
   AoADampFactor: 0
   brakeInput: 0
   experiencesG: 1
+  baseGTolerance: 2
   gTolerance: 7.5
   gMax: 13.5
-  gRecoveryRate: 1.5
-  gDrainRate: 3
   blackOutFactor: 0
 --- !u!114 &3664102520621388802
 MonoBehaviour:
@@ -464,6 +466,7 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 4000
+  missileMinRange: 0
   isCagedSeeker: 0
   slaveToRadar: 0
   Target: {fileID: 0}
@@ -593,6 +596,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 44710
   engines:
   - {fileID: 8105143573206336220}
@@ -660,14 +664,10 @@ MonoBehaviour:
   yawFactor: 1
   currentState: {fileID: 3635693231542435308}
   guns: {fileID: 3664102520621388802}
+  irMissile: {fileID: 0}
   canUseMissiles: 1
   canUseCannon: 1
   advancedGunnery: 0
-  missileLockFiringDelay: 0
-  missileFiringCooldown: 0
-  missileMinRange: 0
-  missileMaxRange: 0
-  missileMaxFireAngle: 0
   bulletSpeed: 600
   cannonRange: 600
   cannonMaxFireAngle: 25

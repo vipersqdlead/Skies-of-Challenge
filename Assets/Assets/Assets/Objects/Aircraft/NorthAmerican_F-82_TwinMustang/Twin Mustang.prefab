@@ -10869,6 +10869,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -10884,6 +10885,8 @@ MonoBehaviour:
   wingType: 0
   sweepAngle: 0
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.005
   waveDragMultiplier: 2
   newWaveDragMultiplier: 3.2
@@ -11022,6 +11025,7 @@ MonoBehaviour:
   AoADampFactor: 0
   brakeInput: 0
   experiencesG: 1
+  baseGTolerance: 2
   gTolerance: 7.5
   gMax: 13.5
   blackOutFactor: 0
@@ -11136,6 +11140,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -11353,6 +11358,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.86
   propEfficiencyMach: 0.475
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 2750
   engines:
   - {fileID: 4410946736168538361}
@@ -11367,8 +11373,8 @@ MonoBehaviour:
   enginePropellers:
   - {fileID: 7664407602786681049}
   - {fileID: 5410144558848729251}
-  minSpeed: 2
-  maxSpeed: 6
+  minSpeed: 0.6
+  maxSpeed: 3
 --- !u!54 &707189148789588757
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11486,8 +11492,11 @@ MonoBehaviour:
   ailerons:
   - {fileID: 7422706455026537584}
   - {fileID: 189116878344706877}
+  spoilers: []
   elevators:
   - {fileID: 1521328487042681895}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 3109418349079845244}
   - {fileID: 3390107787790675739}

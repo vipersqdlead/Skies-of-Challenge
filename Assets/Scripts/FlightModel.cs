@@ -14,8 +14,9 @@ public class FlightModel : MonoBehaviour
     [SerializeField] public float angleOfAttack;
     [SerializeField] public float criticalAoA;
     [SerializeField] public float angleOfAttackHorizontal;
-    public float maxAngleOfAttack;
+    public float maxAngleOfAttack, maxAeroAngleOfAttack;
     [SerializeField] public float rateOfClimb;
+	public float radarAltitude;
     public float machSpeed;
     public float IAS_Speed;
     public float currentTurnRadius;
@@ -36,6 +37,8 @@ public class FlightModel : MonoBehaviour
     public WingType wingType;
     [SerializeField] float sweepAngle;
     [SerializeField] float aspectRatio;
+	[SerializeField] bool stalls = true;
+	public bool AoALimiter = true;
     public float drag;
     float originalDragValue;
     public float waveDragMultiplier = 2f;
@@ -60,16 +63,17 @@ public class FlightModel : MonoBehaviour
         anims = GetComponent<ControlSurfaceAnimation>();
         originalDragValue = drag;
         rb.drag = Mathf.Epsilon;
+		rb.angularDrag = 1f;
         aspectRatio = (wingSpan * wingSpan) / wingArea;
-        if(maxAngleOfAttack == 0)
-        {
-            CalculateMaxAoA();
-        }        
+        CalculateMaxAoA();
 		if(criticalAoA == 0)
         {
             criticalAoA = maxAngleOfAttack * 0.9f;
         }
         waveDragPeakMach = (neverExceedSpeed / 1234f) + 0.03f;
+		
+		gTolerance += baseGTolerance;
+		gMax += baseGTolerance;
     }
 	
 	void Start()
@@ -85,20 +89,20 @@ public class FlightModel : MonoBehaviour
             case WingType.StraightWing:
                 {
                     float CLMax = 1.1f + (aspectRatio / 20f);
-                    maxAngleOfAttack = (CLMax / (Mathf.PI * 2)) * 57.3f;
+                    maxAeroAngleOfAttack = (CLMax / (Mathf.PI * 2)) * 57.3f;
                     if (anims != null)
                     {
-                        maxAngleOfAttack += anims.slatExtensionDistance * 10f;
+                        maxAeroAngleOfAttack += anims.slatExtensionDistance * 10f;
                     }
                     break;
                 }
             case WingType.SweptWing:
                 {
                     float CLMax = 1.1f + (aspectRatio / 20f) * Mathf.Cos(Mathf.Deg2Rad * sweepAngle);
-                    maxAngleOfAttack = (CLMax / (Mathf.PI * 2)) * 57.3f;
+                    maxAeroAngleOfAttack = (CLMax / (Mathf.PI * 2)) * 57.3f;
                     if (anims != null)
                     {
-                        maxAngleOfAttack += anims.slatExtensionDistance * 10f;
+                        maxAeroAngleOfAttack += anims.slatExtensionDistance * 10f;
                     }
                     break;
                 }
@@ -110,15 +114,19 @@ public class FlightModel : MonoBehaviour
                     CLMax2 = Mathf.Pow(CLMax2, 2f);
                     CLMax2 = CLMax2 * 4f;
                     CLMax = CLMax + CLMax2;
-                    maxAngleOfAttack = (CLMax / (Mathf.PI * 2f)) * 57.3f;
+                    maxAeroAngleOfAttack = (CLMax / (Mathf.PI * 2f)) * 57.3f;
                     if (anims != null)
                     {
-                        maxAngleOfAttack += anims.slatExtensionDistance * 10f;
+                        maxAeroAngleOfAttack += anims.slatExtensionDistance * 10f;
                     }
                     break;
                 }
         }
-        //criticalAoA = maxAngleOfAttack * 0.9f;
+		if(maxAngleOfAttack == 0)
+		{
+			maxAngleOfAttack = maxAeroAngleOfAttack;
+		}
+        //criticalAoA = maxAeroAngleOfAttack * 0.9f;
     }
     private void FixedUpdate()
     {
@@ -188,6 +196,8 @@ public class FlightModel : MonoBehaviour
 
             // Apply torque to align nose with velocity (nose-down effect)
             float torqueMultiplier = Mathf.Max(Mathf.Abs(angleOfAttack), Mathf.Abs(angleOfAttackHorizontal)) * 1000f;
+			
+			torqueMultiplier = Mathf.Min(rb.mass, torqueMultiplier);
             rb.AddTorque(torqueDirection * torqueMultiplier * (Time.deltaTime * 60f), ForceMode.Force);
         }
         rb.AddForce(liftDirection * lift - dragDirection * _drag);
@@ -195,7 +205,9 @@ public class FlightModel : MonoBehaviour
 
     void CheckForStalls()
     {
-        stalling = Mathf.Abs(angleOfAttack) >= maxAngleOfAttack || Mathf.Abs(angleOfAttackHorizontal) >= (maxAngleOfAttack * 1.5f);
+		if(!stalls) { return; }
+		
+        stalling = Mathf.Abs(angleOfAttack) >= maxAeroAngleOfAttack || Mathf.Abs(angleOfAttackHorizontal) >= (maxAeroAngleOfAttack * 1.5f);
     }
 
 	public float authorityPercent;
@@ -209,7 +221,12 @@ public class FlightModel : MonoBehaviour
         float turnRateRad = currentTurnRate * Mathf.Deg2Rad;
         currentTurnRadius = currentSpeed / turnRateRad; // Result is in meters
 
-		authorityPercent = Mathf.Clamp01((IAS_Speed * 100 / (stallSpeed * 2f)) / 100f);
+		if(AoALimiter)
+		{
+			authorityPercent = Mathf.Clamp01((IAS_Speed * 100 / (stallSpeed * 2f)) / 100f);
+		}
+		
+		else { authorityPercent = 1f; }
         // Pitch force
         float pitchOutput = Mathf.Clamp(pitch, -1.0f, 0.5f);
         pitchOutput = pitchOutput * ((Mathf.Max(noseAuthority,(PitchForce.Evaluate(normalizedSpeed) * 100f))) * authorityPercent * blackOutAuthorityModifier);
@@ -288,6 +305,13 @@ public class FlightModel : MonoBehaviour
 	public float AoADampFactor;
     public void SetControlInput(Vector3 input)
     {
+		if(!AoALimiter)
+		{
+			controlInput = new Vector3(input.x, input.y, input.z);
+			calculateControlForces(controlInput.x, controlInput.y, -controlInput.z);
+			return;
+		}
+		
 		if((Mathf.Abs(angleOfAttack) < maxAngleOfAttack * 1.05f))
 		{
 			AoADampFactor = Mathf.Clamp01((maxAngleOfAttack - Mathf.Abs(angleOfAttack)) / (maxAngleOfAttack - criticalAoA));
@@ -311,6 +335,7 @@ public class FlightModel : MonoBehaviour
         CalculateGForce();
         angleOfAttack = Mathf.Atan2(-localVelocity.y, localVelocity.z) * Mathf.Rad2Deg;
         angleOfAttackHorizontal = Mathf.Atan2(-localVelocity.x, localVelocity.z) * Mathf.Rad2Deg;
+		radarAltitude = Utilities.GetRadarAltitude(transform.position);
     }
 
     Vector3 lastVelocity;
@@ -362,6 +387,7 @@ public class FlightModel : MonoBehaviour
 	
 	[Header("G Force Effects")]
 	public bool experiencesG = true;
+	[SerializeField] float baseGTolerance = 0f;
 	public float gTolerance = 7.5f;
 	public float gMax = 13.5f;
 	float gRecoveryRate = 0.225f;

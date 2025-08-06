@@ -1017,7 +1017,7 @@ Transform:
   m_GameObject: {fileID: 3410987094207053208}
   serializedVersion: 2
   m_LocalRotation: {x: -0.00000003774895, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5439999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1419,12 +1419,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 3481232502541563317}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 928292624766405102}
   aircraftName: Ki-201-I Karyu
   nameShort: Ki-201
   nameLong: Ki-201-I
   speed_maxSpeed: 990
   power_maxPower: 2151
+  power_WepPower: 0
   isJet: 1
   engineNumber: 2
   powerToWeight: 0.65
@@ -1456,6 +1459,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 21100
+  currentHorsepower: 0
   serviceCeiling: 16000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -1528,6 +1532,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 0
   engines:
   - {fileID: 4452557345233823483}
@@ -1563,6 +1568,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -1578,6 +1584,8 @@ MonoBehaviour:
   wingType: 1
   sweepAngle: 13
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.02
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2
@@ -1724,6 +1732,11 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 2
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &1949007136259135744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1814,6 +1827,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -1833,6 +1847,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -1858,6 +1873,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 4
   canReload: 1
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: 418af485d0eda284aa131344587a6686, type: 3}
   MissilePos:
   - {fileID: 6282325388389645294}
@@ -1869,10 +1885,13 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 6000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -2032,8 +2051,11 @@ MonoBehaviour:
   ailerons:
   - {fileID: 1802781828956215541}
   - {fileID: 3176222702115414804}
+  spoilers: []
   elevators:
   - {fileID: 4239762125502164696}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 4816746538911976951}
   slats:
@@ -2921,9 +2943,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5576480043780783395}
   - {fileID: 2478098937811224148}
-  - {fileID: 5811928396564022884}
+  - {fileID: 5576480043780783395}
   m_Father: {fileID: 4239762125502164696}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6582759838867881770
@@ -3034,7 +3055,7 @@ Transform:
   m_GameObject: {fileID: 6605063297032624688}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.03}
+  m_LocalPosition: {x: 0, y: 0, z: 0.514}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3306,12 +3327,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7573802904798308452}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00000003774895, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 1, z: 0.00000003774895, w: 0}
+  m_LocalPosition: {x: 0, y: -0.823, z: -3.962}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 4401611971487144138}
+  m_Father: {fileID: 5122253438769947750}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4933230200612997720
 MeshFilter:
@@ -3569,7 +3590,7 @@ Transform:
   m_GameObject: {fileID: 8348055631180100085}
   serializedVersion: 2
   m_LocalRotation: {x: -0.00000003774895, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5439999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3723,6 +3744,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5811928396564022884}
   - {fileID: 4239762125502164696}
   m_Father: {fileID: 6260798416200925529}
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}

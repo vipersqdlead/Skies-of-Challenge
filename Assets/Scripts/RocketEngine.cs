@@ -11,7 +11,7 @@ public class RocketEngine : MonoBehaviour
 	[SerializeField] float initialMass, finalMass;
     [SerializeField] Rigidbody rb;
     [SerializeField] bool rocketDelay, destroyOnceOutOfFuel;
-    [SerializeField] ParticleSystem rocketTrailParticle, smoke;
+    public ParticleSystem rocketTrailParticle, smoke;
     [SerializeField] AudioSource launchSnd, rocketSound;
 
     bool isAlreadyOutofFuel;
@@ -54,14 +54,16 @@ public class RocketEngine : MonoBehaviour
             {
                 rocketSound.enabled = true;
             }
-            rb.AddForce(transform.forward * rocketThrust * Time.deltaTime * 60f, ForceMode.Impulse);
+			
+			rb.AddForce(-rocketTrailParticle.transform.forward * rocketThrust * Time.deltaTime * 60f, ForceMode.Impulse);
+
             if(rocketTrailParticle != null)
             {
                 rocketTrailParticle.enableEmission = true;
             }
             if(smoke != null)
             {
-			var smokeEmission = smoke.emission;
+				var smokeEmission = smoke.emission;
                 smokeEmission.enabled = true;
             }
             rocketTimer -= Time.deltaTime;

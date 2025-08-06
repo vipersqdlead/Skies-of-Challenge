@@ -5690,10 +5690,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 5429959261725307392}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 4929685479358493003}
 --- !u!1 &3276600559414929893
@@ -12171,12 +12170,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 4060421403914432832}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 7464484406698579779}
   aircraftName: Ta 154A Moskito
   nameShort: Ta 154
   nameLong: Ta 154A
   speed_maxSpeed: 660
   power_maxPower: 2050
+  power_WepPower: 0
   isJet: 0
   engineNumber: 2
   powerToWeight: 1.6
@@ -12261,6 +12263,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -12276,6 +12279,8 @@ MonoBehaviour:
   wingType: 0
   sweepAngle: 0
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.015
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2.8
@@ -12413,6 +12418,11 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 0
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &1466758683438909515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12497,6 +12507,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -12516,6 +12527,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -12633,6 +12645,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 8750
+  currentHorsepower: 0
   serviceCeiling: 14500
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -12741,6 +12754,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 1500
   engines:
   - {fileID: 6166597006845134691}
@@ -12884,8 +12898,11 @@ MonoBehaviour:
   ailerons:
   - {fileID: 4791901814596190646}
   - {fileID: 8882517067213752447}
+  spoilers: []
   elevators:
   - {fileID: 5127342909665735231}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 5215538526563737923}
   slats: []
@@ -12963,11 +12980,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: 
   isPlayer: 0
+  hub: {fileID: 0}
   MaxMissileAmmo: 4
   MissileAmmo: 4
   MissileReload: 20
   canReload: 1
   angleToPlayer: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   MissilePrefab: {fileID: 888724703871080596, guid: 1d1de52f37c4fd6429daccd55279e5d7,
     type: 3}
   MissilePos:
@@ -12978,6 +12997,9 @@ MonoBehaviour:
   missile: {fileID: 0}
   AcquisitionMaxTimer: 30
   AcquisitionTimer: 30
+  radarRange: 19000
+  radarGimbalLimit: 60
+  pulseDoppler: 0
   possibleTarget: {fileID: 0}
   Target: {fileID: 0}
   Acquiring: 0
@@ -12986,6 +13008,9 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 2071230819831282771}
   killCounter: {fileID: 4929685479358493003}
+  closingSpeed: 0
+  filterSize: 20
+  timeToLockBreak: 3
 --- !u!1 &8021098630795985434
 GameObject:
   m_ObjectHideFlags: 0
@@ -13584,10 +13609,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 601662589428215747}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 4929685479358493003}
 --- !u!82 &986139024721015405
@@ -14505,10 +14529,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 4424721625144244325}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 4929685479358493003}
 --- !u!1 &8747408288222412949
@@ -15171,10 +15194,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 9158103562549685569}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 4929685479358493003}
 --- !u!82 &7334875410621328852

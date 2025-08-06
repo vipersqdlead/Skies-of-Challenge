@@ -416,10 +416,11 @@ MonoBehaviour:
   shot: {fileID: 4536069713274933703}
   rateOfFire: 0
   rofTimer: 0
-  overheatTimer: 0
+  muzzleFlash: {fileID: 0}
+  muzzlePositionZOffset: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6406513789558698803}
 --- !u!82 &4536069713274933703
@@ -981,12 +982,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 3432824939839892215}
   aircraftName: F4D-1 Skyray
   nameShort: F4D
   nameLong: F4D-1
   speed_maxSpeed: 0
   power_maxPower: 0
+  power_WepPower: 0
   isJet: 0
   engineNumber: 0
   powerToWeight: 0
@@ -1102,6 +1106,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -1117,6 +1122,8 @@ MonoBehaviour:
   wingType: 2
   sweepAngle: 52.5
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.013
   waveDragMultiplier: 2
   newWaveDragMultiplier: 1.6
@@ -1254,6 +1261,11 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 2
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &5826004335633451601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1303,6 +1315,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 41670
+  currentHorsepower: 0
   serviceCeiling: 12500
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -1402,6 +1415,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 29620
   engines:
   - {fileID: 5473227254048185997}
@@ -1448,6 +1462,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 4
   canReload: 0
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: c517ab4b8bb4a9b4f84ad7a92e800083, type: 3}
   MissilePos:
   - {fileID: 120342504673496940}
@@ -1459,10 +1474,13 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 4000
+  missileMinRange: 0
   isCagedSeeker: 1
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -1503,13 +1521,10 @@ MonoBehaviour:
   yawFactor: 1
   currentState: {fileID: -2228797540033266777}
   guns: {fileID: 5826004335633451601}
+  irMissile: {fileID: 0}
   canUseMissiles: 1
   canUseCannon: 1
-  missileLockFiringDelay: 0
-  missileFiringCooldown: 0
-  missileMinRange: 0
-  missileMaxRange: 0
-  missileMaxFireAngle: 0
+  advancedGunnery: 0
   bulletSpeed: 700
   cannonRange: 800
   cannonMaxFireAngle: 23
@@ -1609,10 +1624,11 @@ MonoBehaviour:
   shot: {fileID: 0}
   rateOfFire: 0
   rofTimer: 0
-  overheatTimer: 0
+  muzzleFlash: {fileID: 0}
+  muzzlePositionZOffset: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6406513789558698803}
 --- !u!1 &3312025921134221885
@@ -2267,10 +2283,11 @@ MonoBehaviour:
   shot: {fileID: 0}
   rateOfFire: 0
   rofTimer: 0
-  overheatTimer: 0
+  muzzleFlash: {fileID: 0}
+  muzzlePositionZOffset: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6406513789558698803}
 --- !u!1 &4616807573862944608
@@ -3126,10 +3143,11 @@ MonoBehaviour:
   shot: {fileID: 0}
   rateOfFire: 0
   rofTimer: 0
-  overheatTimer: 0
+  muzzleFlash: {fileID: 0}
+  muzzlePositionZOffset: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6406513789558698803}
 --- !u!1 &7033181895112195563

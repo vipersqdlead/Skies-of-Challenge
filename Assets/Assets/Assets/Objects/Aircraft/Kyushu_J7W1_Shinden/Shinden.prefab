@@ -5209,10 +5209,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 648596611589767514}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6686903900661511475}
 --- !u!82 &4167478817893183071
@@ -6357,10 +6356,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 5109978810334300188}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6686903900661511475}
 --- !u!1 &3681505193163771765
@@ -10053,10 +10051,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 845012839808761853}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6686903900661511475}
 --- !u!1 &5309191079479601931
@@ -13275,10 +13272,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 2104306954179245216}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6686903900661511475}
 --- !u!1 &7207634832667590499
@@ -15470,12 +15466,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 4145334092462433521}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 2308734663575416682}
   aircraftName: J7W1 Shinden
   nameShort: J7W
   nameLong: J7W1
   speed_maxSpeed: 730
   power_maxPower: 2000
+  power_WepPower: 0
   isJet: 0
   engineNumber: 1
   powerToWeight: 1.82
@@ -15560,6 +15559,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -15575,6 +15575,8 @@ MonoBehaviour:
   wingType: 2
   sweepAngle: 15
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.007
   waveDragMultiplier: 2
   newWaveDragMultiplier: 4.2
@@ -15712,6 +15714,11 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 0
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &2871430788762903658
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15728,6 +15735,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 8000
+  currentHorsepower: 0
   serviceCeiling: 12000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -15836,6 +15844,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.87
   propEfficiencyMach: 0.46
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 2000
   engines:
   - {fileID: 6256722340276485250}
@@ -15934,6 +15943,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -15953,6 +15963,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -16124,6 +16135,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 0
   canReload: 0
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: 1f8fa826239400240aa1e60d37196aec, type: 3}
   MissilePos:
   - {fileID: 1913369327915723932}
@@ -16135,10 +16147,13 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 5000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -16162,11 +16177,14 @@ MonoBehaviour:
   ailerons:
   - {fileID: 650664464050128928}
   - {fileID: 521955543750547070}
-  elevators:
+  spoilers: []
+  elevators: []
+  elevons:
   - {fileID: 3173894730521475749}
   - {fileID: 7727021400489700057}
   - {fileID: 4381247228073193597}
   - {fileID: 6540693061957308862}
+  vTails: []
   rudders:
   - {fileID: 2506326572693039972}
   - {fileID: 4633304257305220902}

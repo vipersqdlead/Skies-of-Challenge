@@ -607,6 +607,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -622,6 +623,8 @@ MonoBehaviour:
   wingType: 1
   sweepAngle: 18.5
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.013
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2
@@ -769,6 +772,7 @@ MonoBehaviour:
   AoADampFactor: 0
   brakeInput: 0
   experiencesG: 1
+  baseGTolerance: 2
   gTolerance: 7.5
   gMax: 13.5
   blackOutFactor: 0
@@ -918,6 +922,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 1450
   engines:
   - {fileID: 647670089318337122}
@@ -982,6 +987,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -1082,9 +1088,12 @@ MonoBehaviour:
   ailerons:
   - {fileID: 5365871991059938367}
   - {fileID: 1652724411276351184}
-  elevators:
+  spoilers: []
+  elevators: []
+  elevons:
   - {fileID: 5412645287392644125}
   - {fileID: 1291349939488758492}
+  vTails: []
   rudders:
   - {fileID: 4226915373954413337}
   slats:

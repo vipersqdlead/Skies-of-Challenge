@@ -21,7 +21,7 @@ public class SurvivalSettings : MonoBehaviour
     public TMP_Text mapText;
     public TMP_Text weaponText;
 	public float totalAvailable;
-    [SerializeField] TMP_Text speedText, powerText, climbText, weightText, agilityText, wingLoadingText, firePowerText, healthText, descriptionText;
+    [SerializeField] TMP_Text speedText, powerText, climbText, weightText, agilityText, wingLoadingText, firePowerText, healthText, descriptionText, ratingText;
     public Transform modelDisplayPoint; // assign in Inspector
     private GameObject currentModel; // to keep track of the displayed model
     public float modelRotationSpeed = 20f;
@@ -99,10 +99,14 @@ public class SurvivalSettings : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F4))
         {
             PlayerPrefs.SetInt("Unlock All Aircraft", 1);
+			totalAvailable = CheckTotalAvailability();
+			totalCompletion.text = "Completion: " + totalAvailable + "/" + aircraftPrefabs.Length;
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
             PlayerPrefs.SetInt("Unlock All Aircraft", 0);
+			totalAvailable = CheckTotalAvailability();
+			totalCompletion.text = "Completion: " + totalAvailable + "/" + aircraftPrefabs.Length;
         }
         if (loadMission == true)
         {
@@ -178,6 +182,7 @@ public class SurvivalSettings : MonoBehaviour
         selectedHub.CalculateSomeStats();
 
         planeText.text = selectedHub.aircraftName;
+		ratingText.text = "Rating: " + selectedHub.hp.pointsWorth + " pts.";
 
         speedText.text = "Speed: " + selectedHub.speed_maxSpeed + " km/h";
         weightText.text = "Weight: " + selectedHub.rb.mass + " Kg";
@@ -297,6 +302,7 @@ public class SurvivalSettings : MonoBehaviour
 	
 	float CheckTotalAvailability()
 	{	
+		totalAvailable = 0;
 		for(int i = 0; i < aircraftPrefabs.Length; i++)
 		{
 			if(CheckPlaneAvailability((PlaneTypes)i))
@@ -319,7 +325,12 @@ public class SurvivalSettings : MonoBehaviour
         switch (type)
         {
 			case PlaneTypes.Pucara66:
-			    if (PlayerPrefs.GetInt("IA 58D Pucará Total Kill Count") >= 5)
+			    if (PlayerPrefs.GetInt("IA 58D Pucará Total Kill Count") >= 150)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.PucaraC:
+			    if (PlayerPrefs.GetInt("IA 58D Pucará Highest Kill Count") >= 35)
                 { return true; }
                 else
                 { return false; }
@@ -350,6 +361,11 @@ public class SurvivalSettings : MonoBehaviour
                 { return false; }
             case PlaneTypes.AiracobraL:
                 if (PlayerPrefs.GetInt("P-39N Airacobra Highest Score") >= 30000 || PlayerPrefs.GetInt("P-400 Hispanocobra Highest Score") >= 30000)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.MiG3_Shvak:
+                if (PlayerPrefs.GetInt("MiG-3 Highest Score") >= 60000)
                 { return true; }
                 else
                 { return false; }
@@ -583,6 +599,11 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
+			case PlaneTypes.Centauro56:
+                if (PlayerPrefs.GetInt("G.55 Serie 1 Highest Time Alive") >= 600)
+                { return true; }
+                else
+                { return false; }
             case PlaneTypes.Airacomet:
                 if ((PlayerPrefs.GetInt("P-63A Kingcobra Total Kill Count") + PlayerPrefs.GetInt("P-39N Airacobra Total Kill Count")) >= 100)
                 { return true; }
@@ -633,6 +654,11 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
+			case PlaneTypes.Yak3_VK107:
+                if (PlayerPrefs.GetInt("Yak-3 Highest Kill Count") >= 70)
+                { return true; }
+                else
+                { return false; }
             case PlaneTypes.DoraLate:
                 if (PlayerPrefs.GetInt("General Total Kills") >= 2500)
                 { return true; }
@@ -645,6 +671,11 @@ public class SurvivalSettings : MonoBehaviour
                 { return false; }
             case PlaneTypes.KogarashiOtsu:
                 if (PlayerPrefs.GetInt("Ki-100-II Kogarashi Highest Kill Count") >= 60 || PlayerPrefs.GetInt("Ki-100-I Kogarashi Highest Kill Count") >= 60 && PlayerPrefs.GetInt("Ki-84-Ic Hayate Total Time Alive") + PlayerPrefs.GetInt("Ki-84-Ib Hayate Total Time Alive") + PlayerPrefs.GetInt("Ki-84-Ic Hayate Total Time Alive") + PlayerPrefs.GetInt("Ki-84-II Hayate Total Time Alive") >= 1800)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.Lavochkin5:
+                if (PlayerPrefs.GetInt("La-7 Total Time Alive") >= 1200)
                 { return true; }
                 else
                 { return false; }
@@ -977,12 +1008,22 @@ public class SurvivalSettings : MonoBehaviour
                 if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
                 { return true; }
                 else
-                { return false; }
-            case PlaneTypes.Bison:
-                if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
+                { return false; } */
+			case PlaneTypes.FishbedSMT:
+			    if (PlayerPrefs.GetInt("MiG-21F Fishbed Total Kill Count") >= 150)
                 { return true; }
                 else
-                { return false; } */
+                { return false; }
+			case PlaneTypes.FishbedBis:
+			    if (PlayerPrefs.GetInt("MiG-21SMT Fishbed Highest Score") >= 60000)
+                { return true; }
+                else
+                { return false; }
+            case PlaneTypes.Bison:
+                if (PlayerPrefs.GetInt("MiG-21bis Fishbed Highest Round") >= 20)
+                { return true; }
+                else
+                { return false; }
             case PlaneTypes.FreedomFighter:
                 if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
                 { return true; }
@@ -990,6 +1031,11 @@ public class SurvivalSettings : MonoBehaviour
                 { return false; }
             case PlaneTypes.PhantomS:
                 if (PlayerPrefs.GetInt("F-4E Phantom II Highest Score") >= 30000)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.PhantomFGR:
+                if (PlayerPrefs.GetInt("F-4S Phantom II Highest Score") >= 50000 && PlayerPrefs.GetInt("Tornado ADV Total Kill Count") >= 125)
                 { return true; }
                 else
                 { return false; }
@@ -1044,7 +1090,27 @@ public class SurvivalSettings : MonoBehaviour
                 else
                 { return false; }
 			case PlaneTypes.Samurai:
-                if (PlayerPrefs.GetInt("F-14A Tomcat Total Kills") + PlayerPrefs.GetInt("A9M5 Yuurei Total Kills") >= 250)
+                if (PlayerPrefs.GetInt("F-14A Tomcat Total Kill Count") + PlayerPrefs.GetInt("A9M5 Yuurei Total Kill Count") >= 250)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.TomcatD:
+                if (PlayerPrefs.GetInt("F-14A Tomcat Highest Kill Count") + PlayerPrefs.GetInt("F-14B Tomcat Highest Kill Count") >= 300)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.EagleC:
+                if (PlayerPrefs.GetInt("F-15A Eagle Highest Kill Count") >= 104)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.EagleE:
+				if (PlayerPrefs.GetInt("F-15A Eagle Highest Time Alive") >= 1200 || PlayerPrefs.GetInt("F-15A Eagle Highest Time Alive") >= 1200)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.EagleEX:
+				if (PlayerPrefs.GetInt("F-15E Strike Eagle Total Kill Count")  >= 500)
                 { return true; }
                 else
                 { return false; }
@@ -1084,7 +1150,7 @@ public class SurvivalSettings : MonoBehaviour
         Fuji,
         Pucara,
 		Pucara66,
-		// PucaraC,
+		PucaraC,
         Trojan,
         Pilatus,
         Tucano,
@@ -1096,8 +1162,8 @@ public class SurvivalSettings : MonoBehaviour
         AiracobraN, 
         HispanoCobra,
         AiracobraL,
-		// MiG3,
-		// MiG3_Shvak,
+		MiG3,
+		MiG3_Shvak,
         VargB,
         VargA,
         ReisenV,
@@ -1173,6 +1239,7 @@ public class SurvivalSettings : MonoBehaviour
         Shoki,
         Centauro,
         CentauroA,
+		Centauro56,
         Kingcobra,
         Airacomet,
         Dolch,
@@ -1193,15 +1260,15 @@ public class SurvivalSettings : MonoBehaviour
         Senden,
         Kurfurst,
         WhiteFootFox,
-		// Yak3,
-		// Yak3_VK107,
+		Yak3,
+		Yak3_VK107,
         Dora,
         DoraLate,
         Kogarashi,
         KogarashiI,
         KogarashiOtsu,
         Lavochkin7,
-		// Lavochkin5,
+		Lavochkin5,
         Tempest,
 		Skyraider,
 		Skyshark,
@@ -1255,7 +1322,7 @@ public class SurvivalSettings : MonoBehaviour
         Kikka,
 		Kikka_20mm,
         KikkaOtsu,
-		//Su9,
+		Su9,
 		//Su11,
         Fargo,
         FargoLate,
@@ -1355,9 +1422,9 @@ public class SurvivalSettings : MonoBehaviour
         Fitter,
         //WhiteDazeII,
         Fishbed,
-		//FishbedSMT,
-		//FishbedBis,
-        //Bison,
+		FishbedSMT,
+		FishbedBis,
+        Bison,
         TigerII,
         FreedomFighter,
 		TigerIIG,
@@ -1365,6 +1432,7 @@ public class SurvivalSettings : MonoBehaviour
 		//Tora,
         Phantom,
 		PhantomS,
+		PhantomFGR,
 		YuureiEarly,
         Yuurei,
 		PhantomICE,
@@ -1384,7 +1452,7 @@ public class SurvivalSettings : MonoBehaviour
 		TomcatB,
         Samurai,
 	    PersianCat,
-		//TomcatD,
+		TomcatD,
         //TornadoGR3,
 	    //TornadoADV,
         //Fencer,
@@ -1408,10 +1476,10 @@ public class SurvivalSettings : MonoBehaviour
 		//Flanker37,
 		//J10A,
 		//J10C,
-        //EagleA,
-		//EagleC,
-		//EagleE,
-		//EagleEX,
+        EagleA,
+		EagleC,
+		EagleE,
+		EagleEX,
 		//EagleJ,
 		//EagleSE,
         //Mirage2000C,

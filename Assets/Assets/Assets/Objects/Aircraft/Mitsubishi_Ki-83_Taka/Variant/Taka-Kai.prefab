@@ -2910,12 +2910,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 3204026352931389677}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 0}
   aircraftName: Ki-83-II Taka-Kai
   nameShort: 
   nameLong: 
   speed_maxSpeed: 760
   power_maxPower: 2800
+  power_WepPower: 0
   isJet: 0
   engineNumber: 2
   powerToWeight: 1.22
@@ -3001,7 +3004,9 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
+  radarAltitude: 0
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
@@ -3016,6 +3021,8 @@ MonoBehaviour:
   wingType: 0
   sweepAngle: 0
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.0085
   waveDragMultiplier: 2
   newWaveDragMultiplier: 4
@@ -3153,6 +3160,11 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 0
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &5809231546882465267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3245,9 +3257,9 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
-  SARHPovCircle: {fileID: 0}
   SARHLockCircle: {fileID: 0}
   IRMissiles: 0
   SAGMissiles: 0
@@ -3264,6 +3276,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -3381,6 +3394,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 11000
+  currentHorsepower: 0
   serviceCeiling: 14000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -3534,6 +3548,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.875
   propEfficiencyMach: 0.47
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 3000
   engines:
   - {fileID: 1247593158717035227}
@@ -3622,6 +3637,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 0
   canReload: 0
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: 9851e50313ce30647b5c4f20b8150b95, type: 3}
   MissilePos:
   - {fileID: 2181320698446529161}
@@ -3633,17 +3649,19 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 6000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
+  allAspectSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 3714934670303231089}
   killCounter: {fileID: 48891722698384627}
-  aspect: 0
-  irccm: 0
 --- !u!114 &7643199576628838833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3660,9 +3678,12 @@ MonoBehaviour:
   ailerons:
   - {fileID: 7450392617244741337}
   - {fileID: 3506126089275380955}
-  elevators:
+  spoilers: []
+  elevators: []
+  elevons:
   - {fileID: 1229072263063901245}
   - {fileID: 1423173904963042980}
+  vTails: []
   rudders:
   - {fileID: 3233234983549282053}
   slats: []
@@ -11947,6 +11968,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.061300017
       objectReference: {fileID: 0}
+    - target: {fileID: 1923002124180466669, guid: e600df7985b472a47b749508f08d9678,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ea1db025716954c4cacb06edce963063, type: 2}
     - target: {fileID: 2402240578495285805, guid: e600df7985b472a47b749508f08d9678,
         type: 3}
       propertyPath: m_Name
@@ -12275,12 +12301,12 @@ PrefabInstance:
     - target: {fileID: 8920150699076676404, guid: e600df7985b472a47b749508f08d9678,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.142
       objectReference: {fileID: 0}
     - target: {fileID: 8920150699076676404, guid: e600df7985b472a47b749508f08d9678,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.283
+      value: -0.294
       objectReference: {fileID: 0}
     - target: {fileID: 8920150699076676404, guid: e600df7985b472a47b749508f08d9678,
         type: 3}
@@ -12290,22 +12316,22 @@ PrefabInstance:
     - target: {fileID: 8920150699076676404, guid: e600df7985b472a47b749508f08d9678,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8920150699076676404, guid: e600df7985b472a47b749508f08d9678,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8920150699076676404, guid: e600df7985b472a47b749508f08d9678,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8920150699076676404, guid: e600df7985b472a47b749508f08d9678,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8920150699076676404, guid: e600df7985b472a47b749508f08d9678,
         type: 3}
@@ -12320,7 +12346,7 @@ PrefabInstance:
     - target: {fileID: 8920150699076676404, guid: e600df7985b472a47b749508f08d9678,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

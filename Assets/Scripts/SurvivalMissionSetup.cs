@@ -21,26 +21,57 @@ public class SurvivalMissionSetup : MonoBehaviour
         player = Instantiate(playerAircraftPrefabs[PlayerPrefs.GetInt("Survival Aircraft")], new Vector3(transform.position.x, 4500f, transform.position.z), transform.rotation);
         //status.aircraftName = playerAircraftPrefabs[PlayerPrefs.GetInt("Survival Aircraft")].name;
 		status.aircraftName = playerAircraftPrefabs[PlayerPrefs.GetInt("Survival Aircraft")].GetComponent<AircraftHub>().aircraftName;
+		status.Player = player;
+        hub = player.GetComponent<AircraftHub>();
 		
+		int playerRating = hub.hp.pointsWorth;
+		
+		if (PlayerPrefs.GetInt("Survival Aircraft") == 0)
+        {
+            status.aircraftType = SurvivalMissionStatus.AircraftType.Trainer;
+        }
+        else if (playerRating <= 670)
+        {
+            status.aircraftType = SurvivalMissionStatus.AircraftType.Prop;
+        }
+        else if (playerRating <= 930)
+        {
+            status.aircraftType = SurvivalMissionStatus.AircraftType.JetTier1;
+        }
+        else if (playerRating <= 1100)
+        {
+            status.aircraftType = SurvivalMissionStatus.AircraftType.JetTier2;
+        }
+		else if(playerRating <= 1270)
+		{
+			status.aircraftType = SurvivalMissionStatus.AircraftType.JetTier3;
+		}
+		else
+		{
+			status.aircraftType = SurvivalMissionStatus.AircraftType.JetTier4;
+		}
+		
+		/*
         if (PlayerPrefs.GetInt("Survival Aircraft") < 1)
         {
             status.aircraftType = SurvivalMissionStatus.AircraftType.Trainer;
         }
-        else if (PlayerPrefs.GetInt("Survival Aircraft") >= 1 && PlayerPrefs.GetInt("Survival Aircraft") < 149)
+        else if (PlayerPrefs.GetInt("Survival Aircraft") >= 1 && PlayerPrefs.GetInt("Survival Aircraft") < 157)
         {
             status.aircraftType = SurvivalMissionStatus.AircraftType.Prop;
         }
-        else if (PlayerPrefs.GetInt("Survival Aircraft") >= 148 && PlayerPrefs.GetInt("Survival Aircraft") < 211)
+        else if (PlayerPrefs.GetInt("Survival Aircraft") >= 157 && PlayerPrefs.GetInt("Survival Aircraft") < 219)
         {
             status.aircraftType = SurvivalMissionStatus.AircraftType.JetTier1;
         }
-        else if (PlayerPrefs.GetInt("Survival Aircraft") >= 211)
+        else if (PlayerPrefs.GetInt("Survival Aircraft") >= 219)
         {
             status.aircraftType = SurvivalMissionStatus.AircraftType.JetTier2;
-        }
+        }*/
+		
+		
         Instantiate(mapPrefabs[PlayerPrefs.GetInt("Survival Map")]);
-        status.Player = player;
-        hub = player.GetComponent<AircraftHub>();
+
         status.KillCounter = hub.killcounter;
         status.deathCam.Player = player;
         status.waveSpawner = waveSpawner;
@@ -109,7 +140,7 @@ public class SurvivalMissionSetup : MonoBehaviour
 
 
     [SerializeField] TMP_Text UI_HP, UI_Missiles, UI_MissilesSAG, UI_MissilesRadar, UI_Rockets, UI_Combo, UI_Flares, UI_Target;
-    [SerializeField] GameObject UI_Crosshair, UI_LeadMarker, UI_FPM, UI_MsslAcq, UI_MsslLock, UI_SARHAcq, UI_SARHLock, UI_Center;
+    [SerializeField] GameObject UI_Crosshair, UI_LeadMarker, UI_FPM, UI_MsslAcq, UI_MsslLock, UI_SARHLock, UI_Center;
     [SerializeField] AudioSource UI_stallWarning_SFX;
     [SerializeField] RawImage UI_healthIcon, UI_blackOut;
     [SerializeField] EnemyMarkers markers;
@@ -138,7 +169,6 @@ public class SurvivalMissionSetup : MonoBehaviour
         hub.planeToUI.flaresTxt = UI_Flares;
         hub.planeToUI.AcquireCircle = UI_MsslAcq;
         hub.planeToUI.LockCircle = UI_MsslLock;
-        hub.planeToUI.SARHPovCircle = UI_SARHAcq;
         hub.planeToUI.SARHLockCircle = UI_SARHLock;
 		//hub.planeToUI.currentTarget = UI_Target;
 

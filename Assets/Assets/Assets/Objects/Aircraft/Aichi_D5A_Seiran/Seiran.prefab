@@ -148,7 +148,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4624412306872401581}
   - {fileID: 6880959886542691045}
   m_Father: {fileID: 7001900326060120745}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -331,13 +330,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295063398019534280}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00045342316, y: -0.0047369036, z: 0.043359026, w: 0.99904823}
-  m_LocalPosition: {x: -0.36808407, y: 0.008448601, z: -0.033583015}
-  m_LocalScale: {x: 0.9999998, y: 1.0000002, z: 1.0000452}
+  m_LocalRotation: {x: -0.4847501, y: 0.5101705, z: 0.515437, w: 0.48894593}
+  m_LocalPosition: {x: -0.00956082, y: -0.017583173, z: 0.031770367}
+  m_LocalScale: {x: 1, y: 1, z: 1.0000452}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8328375601642802099}
-  m_Father: {fileID: 3548586888392583913}
+  m_Father: {fileID: 8453060748187676076}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8623438585823693380
 MeshFilter:
@@ -960,10 +959,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 8121682652882026439}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!82 &7533204519348891505
@@ -1961,13 +1959,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1072340648269635162}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.015068146, y: -0.000000001819145, z: 0.9989942, w: 0.04223246}
-  m_LocalPosition: {x: -0.3678819, y: -0.008317947, z: -0.03312105}
-  m_LocalScale: {x: 1.0000002, y: 1, z: 0.99999994}
+  m_LocalRotation: {x: -0.47997242, y: -0.50453824, z: -0.5198665, w: 0.49477932}
+  m_LocalPosition: {x: -0.030800056, y: -0.021222103, z: 0.03617292}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 305199273635179596}
-  m_Father: {fileID: 8539787352712073221}
+  m_Father: {fileID: 469886375670515205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7868179889816195102
 MeshFilter:
@@ -3025,6 +3023,38 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &1412526865826516512
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8453060748187676076}
+  m_Layer: 0
+  m_Name: Pivot_BL
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8453060748187676076
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1412526865826516512}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4996443416717305746}
+  m_Father: {fileID: 6376686530180924153}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1439462596964788764
 GameObject:
   m_ObjectHideFlags: 0
@@ -3964,6 +3994,38 @@ MonoBehaviour:
   rateOfFireRPM: 750
   rofTimer: 0
   killCounter: {fileID: 5350997912003756959}
+--- !u!1 &1851002373528953282
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 555910720776330189}
+  m_Layer: 0
+  m_Name: BrakeL
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &555910720776330189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851002373528953282}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.11018812, y: -0.005458579, z: -0.024726748, w: 0.99358815}
+  m_LocalPosition: {x: 0.0046307445, y: -0.06164856, z: 0.16682643}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 469886375670515205}
+  m_Father: {fileID: 7001900326060120745}
+  m_LocalEulerAnglesHint: {x: -12.664, y: -0.317, z: -2.816}
 --- !u!1 &1922299950809724112
 GameObject:
   m_ObjectHideFlags: 0
@@ -7387,6 +7449,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3548586888392583913}
+  - {fileID: 6376686530180924153}
   m_Father: {fileID: 8889782103388388351}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4136199718469382207
@@ -7420,7 +7483,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4996443416717305746}
   - {fileID: 3833840022055927984}
   m_Father: {fileID: 869945602861916564}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8512,10 +8574,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 1571205174116960374}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!1 &4611896038103021201
@@ -10276,6 +10337,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8539787352712073221}
+  - {fileID: 555910720776330189}
   m_Father: {fileID: 6855712198389511606}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5862288607395632756
@@ -10604,12 +10666,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 6096054625538863109}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 4981096916450801889}
   aircraftName: D5A2 Seiran
   nameShort: D5A
   nameLong: D5A2
   speed_maxSpeed: 640
   power_maxPower: 1776
+  power_WepPower: 0
   isJet: 0
   engineNumber: 1
   powerToWeight: 2
@@ -10646,6 +10711,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -10661,6 +10727,8 @@ MonoBehaviour:
   wingType: 0
   sweepAngle: 0
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.006
   waveDragMultiplier: 2
   newWaveDragMultiplier: 4.75
@@ -10807,6 +10875,11 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 0
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &840625624679607077
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10897,6 +10970,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -10916,6 +10990,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -11033,6 +11108,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 7380
+  currentHorsepower: 0
   serviceCeiling: 12000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -11132,6 +11208,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.89
   propEfficiencyMach: 0.51
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 1500
   engines:
   - {fileID: 4410946736168538361}
@@ -11315,6 +11392,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 0
   canReload: 0
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: 1f8fa826239400240aa1e60d37196aec, type: 3}
   MissilePos:
   - {fileID: 7725642936649578741}
@@ -11326,10 +11404,13 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 5000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -11353,16 +11434,21 @@ MonoBehaviour:
   ailerons:
   - {fileID: 2477548246908080577}
   - {fileID: 8539089322086876321}
+  spoilers: []
   elevators:
   - {fileID: 7551517782927795363}
   - {fileID: 1818930140647233204}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 3238330606617284764}
   slats: []
   flaps:
   - {fileID: 869945602861916564}
   - {fileID: 7001900326060120745}
-  airbrakes: []
+  airbrakes:
+  - {fileID: 8453060748187676076}
+  - {fileID: 469886375670515205}
   maxDeflectionAngle: 30
   deflectionCurve:
     serializedVersion: 2
@@ -11390,7 +11476,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   flapExtensionAngle: 50
   flapExtensionSpeed: 1
-  airbrakeExtensionAngle: 60
+  airbrakeExtensionAngle: 40
   airbrakeExtensionSpeed: 1
   flapExtensionValue: 0
   brakeExtensionValue: 0
@@ -15654,6 +15740,38 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8343587244591290424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6376686530180924153}
+  m_Layer: 0
+  m_Name: BrakeL
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6376686530180924153
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8343587244591290424}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.11018632, y: 0.005459892, z: 0.024722775, w: 0.9935884}
+  m_LocalPosition: {x: 0.0046307445, y: -0.06164856, z: 0.16682643}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8453060748187676076}
+  m_Father: {fileID: 869945602861916564}
+  m_LocalEulerAnglesHint: {x: -12.664, y: 0.317, z: 2.816}
 --- !u!1 &8434492838461326051
 GameObject:
   m_ObjectHideFlags: 0
@@ -15988,6 +16106,38 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &8591623466395712529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 469886375670515205}
+  m_Layer: 0
+  m_Name: Pivot_BR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &469886375670515205
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8591623466395712529}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 4624412306872401581}
+  m_Father: {fileID: 555910720776330189}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8604234389330252215
 GameObject:
   m_ObjectHideFlags: 0
@@ -16049,10 +16199,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 6114595129277928745}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!1 &8646819563385168507
@@ -16116,10 +16265,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 1566417735266317915}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 5350997912003756959}
 --- !u!1 &8709310285785813017

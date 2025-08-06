@@ -53,7 +53,9 @@ public class WaveSpawner : MonoBehaviour
         {
             int spawnRand = Random.Range(0, auxSpawnPositions.Count);
             GameObject newWave = Instantiate(eligibleAircraft[Random.Range(0, eligibleAircraft.Count)], Utilities.GetSafeSpawnAltitude(auxSpawnPositions[spawnRand].position, player.transform.position.y), auxSpawnPositions[spawnRand].rotation);
-            //auxSpawnPositions.Remove(auxSpawnPositions[spawnRand]);
+            Vector3 pos = GetSpawnPosition(player.transform.position.y, 8000f);
+			//GameObject newWave = Instantiate(eligibleAircraft[Random.Range(0, eligibleAircraft.Count)], pos, pos.forward);
+			//auxSpawnPositions.Remove(auxSpawnPositions[spawnRand]);
             Wave wave = newWave.GetComponent<Wave>();
             wave.AddRenderersToMarker(markers, status, player);
             foreach (AircraftHub hub in wave.aircraft)
@@ -286,6 +288,24 @@ public class WaveSpawner : MonoBehaviour
             }
         }
     }
+	
+	Vector3 GetSpawnPosition(float alt, float spawnDistance)
+	{
+		// Point toward world center
+		
+		Vector3 randPosition = new Vector3(Random.Range(-100f, 100f), 0f, Random.Range(-100f, 100f));
+		
+		Vector3 directionToCenter = (new Vector3(0f, alt, 0f) - randPosition).normalized;
+		
+		Vector3 directionFromCenter = directionToCenter * -1f;
+		Vector3 spawnPosition = directionFromCenter * spawnDistance;
+		spawnPosition = Utilities.GetSafeSpawnAltitude(spawnPosition, alt);
+		
+		Quaternion rotation = Quaternion.LookRotation(directionToCenter, Vector3.up);
+
+		return spawnPosition;
+	
+	}
 
     Vector3 GetSafeSpawnAltitude(Vector3 spawnPoint, float playerAltitude)
     {

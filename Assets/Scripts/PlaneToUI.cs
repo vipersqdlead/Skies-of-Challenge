@@ -19,7 +19,7 @@ public class PlaneToUI : MonoBehaviour
     public GameObject UI;
     public TMP_Text Health, MissilesIR, MissilesSAG, MissilesRadar, Rockets1, Bombs, flaresTxt, guidedBombs, killsCombo; /*	currentTarget; */
     public RawImage healthIcon, blackOutBlack;
-    public GameObject AcquireCircle, LockCircle, SARHPovCircle, SARHLockCircle;
+    public GameObject AcquireCircle, LockCircle, SARHLockCircle;
 
     public bool IRMissiles, SAGMissiles, SARHMissiles, Rockets, bomb, guidedBomb, flares;
 
@@ -127,7 +127,7 @@ public class PlaneToUI : MonoBehaviour
 
         if (speedLabel != null)
         {
-            if (playerControls.IAS_Speed < playerControls.stallSpeed + 30f || playerControls.stalling == true|| hub.planeCam.camShaking == true || playerControls.currentSpeed > playerControls.neverExceedSpeed - 60f)
+            if (playerControls.IAS_Speed < playerControls.stallSpeed + 30f || playerControls.stalling == true|| hub.planeCam.camShaking == true || playerControls.IAS_Speed > (playerControls.neverExceedSpeed - 60f))
             {
                 speedLabel.color = Color.red;
             }
@@ -249,15 +249,30 @@ public class PlaneToUI : MonoBehaviour
     {
         if (SARHMissiles == true)
         {
+			string lockState = "";
+			
+			if(!SARHControl.Acquiring)
+			{
+					lockState = "";
+			}
+			else if(SARHControl.Acquiring && !SARHControl.Locked)
+			{
+				lockState = "[ACQ] ";
+			}
+			else if(SARHControl.Locked)
+			{
+				lockState = "[TRK] ";
+			}
+			
             if (SARHControl.isPlayer)
             {
-                MissilesRadar.text = ">" + SARHControl.weaponName + "    " + SARHControl.MissileAmmo;
+                MissilesRadar.text = ">" + lockState + SARHControl.weaponName + "    " + SARHControl.MissileAmmo;
             }
             else
             {
                 MissilesRadar.text = SARHControl.weaponName + "    " + SARHControl.MissileAmmo;
             }
-            SARHPovCircle.SetActive(false);
+            //SARHPovCircle.SetActive(false);
             SARHLockCircle.SetActive(false);
 
             if(hub.planeCam.camShaking == false)
@@ -278,7 +293,7 @@ public class PlaneToUI : MonoBehaviour
             }
             if (SARHControl.Acquiring)
             {
-                SARHPovCircle.SetActive(true);
+                //SARHPovCircle.SetActive(true);
                 if (SARHControl.Target)
                 {
                     SARHLockCircle.SetActive(true);
@@ -303,6 +318,20 @@ public class PlaneToUI : MonoBehaviour
         {
             if (IRControl != null)
             {
+				string lockState = "";
+				if(!IRControl.Acquiring && !IRControl.Locked)
+				{
+					lockState = "";
+				}
+				else if(IRControl.Acquiring && !IRControl.Locked)
+				{
+					lockState = "[ACQ] ";
+				}
+				else if(IRControl.Locked)
+				{
+					lockState = "[TRK] ";
+				}
+				
                 AcquireCircle.transform.localScale = new Vector3(IRControl.missileOuterFoV / 5, IRControl.missileOuterFoV / 5, 1);
 				LockCircle.transform.localScale = new Vector3(IRControl.missileInnerFoV / 5, IRControl.missileInnerFoV / 5, 1);
                 if (!IRControl.Acquiring && !IRControl.Locked)
@@ -341,7 +370,7 @@ public class PlaneToUI : MonoBehaviour
 				
                 if (IRControl.isPlayer)
                 {
-                    MissilesIR.text = ">" + IRControl.weaponName + "    " + IRControl.MissileAmmo;
+                    MissilesIR.text = ">" + lockState + IRControl.weaponName + "    " + IRControl.MissileAmmo;
                 }
                 else
                 {

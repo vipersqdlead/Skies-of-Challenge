@@ -18,8 +18,7 @@ public class IR_Missile : MonoBehaviour
     public float searchRange = 2000f;
 	public float minRange = 800f;
     public float missileInnerFoV, missileOuterFoV;
-    public bool isCagedSeeker, slaveToRadar;
-    public IRCCMType irccmType;
+    public bool isCagedSeeker, slaveToRadar, IRCCM, thrustVectoring, allAspectSeeker;
 
     public float missileTimer = 2f;
     public float fuzeActivationTime = 0.5f;
@@ -50,10 +49,11 @@ public class IR_Missile : MonoBehaviour
         drag = rb.drag;
         fuzeTimer = missileTimer - fuzeActivationTime;
         Missile = gameObject;
+		if (IRCCM) { missileInnerFoV = 1f; }
     }
     void Start()
     {
-		if(target != null) {        directionToTarget = (target.transform.position - transform.position).normalized;}
+		if(target != null) { directionToTarget = (target.transform.position - transform.position).normalized;}
 		launchTime = Time.time;
     }
 
@@ -76,6 +76,7 @@ public class IR_Missile : MonoBehaviour
         {
             ProxyFuse = true;
             Guidance();
+			if(thrustVectoring) { ThrustVectoring(); }
         }
 		
         // "Wake-up" factor: ramp up control authority
@@ -106,29 +107,15 @@ public class IR_Missile : MonoBehaviour
 
     public virtual void Aquire()
     {
-        if (irccmType == IRCCMType.NoIRCCM)
-        {
-			if(SeekerNoIRCCM() != null)
-			{
-				if(SeekerNoIRCCM().CompareTag("Flare"))
-				{
-					target = SeekerNoIRCCM(); 
-					print("Saw a flare");
-				}
-			}
-        }
-        else if (irccmType == IRCCMType.IRCCM)
+
+		if(Seeker() != null)
 		{
-			missileInnerFoV = 1f;
-			if(SeekerNoIRCCM() != null)
+			if(Seeker().CompareTag("Flare"))
 			{
-				if(SeekerNoIRCCM().CompareTag("Flare"))
-				{
-					target = SeekerNoIRCCM(); 
-					print("Saw a flare");
-				}
+				target = Seeker(); 
+				print("Saw a flare");
 			}
-        }
+		}
 
         return;
          /*
@@ -220,7 +207,7 @@ public class IR_Missile : MonoBehaviour
             }*/
     }
 
-    GameObject SeekerNoIRCCM()
+    GameObject Seeker()
     {
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, SearchRadius(searchRange), directionToTarget, searchRange);
 
@@ -283,62 +270,6 @@ public class IR_Missile : MonoBehaviour
             return null;
         }
     }
-    GameObject SeekerIRCCM()
-    {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, 1f, directionToTarget, searchRange);
-
-        List<(int, float, RaycastHit)> sortedHits = new List<(int, float, RaycastHit)>();
-
-        foreach (var hit in hits)
-        {
-            int typePriority = 1;
-
-            if (hit.collider.CompareTag("Flare"))
-            {
-				typePriority = 0;
-            }
-            else if ((hit.collider.CompareTag("Fighter") && hit.collider.gameObject != launcherPlane) || hit.collider.CompareTag("Bomber"))
-            {
-				typePriority = 1;
-            }
-            else
-            {
-                continue;
-            }
-
-			Vector3 toHit = (hit.point - transform.position).normalized;
-			float angleToHit = Vector3.Angle(directionToTarget, toHit);
-            if (angleToHit > missileInnerFoV)
-            {
-                continue;
-            }
-
-            float distance = hit.distance;
-
-            sortedHits.Add((typePriority, distance, hit));
-        }
-
-        sortedHits.Sort((a, b) =>
-        {
-            int typeCompare = a.Item1.CompareTo(b.Item1);
-
-            if (typeCompare != 0)
-            {
-                return typeCompare;
-            }
-            return a.Item2.CompareTo(b.Item2);
-        }
-        );
-        if (sortedHits.Count != 0)
-        {
-            return sortedHits[0].Item3.collider.gameObject;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
 
     float timerToSelfDestruct;
     void Guidance()
@@ -419,6 +350,15 @@ public class IR_Missile : MonoBehaviour
 
         return Quaternion.RotateTowards(transform.rotation, desiredRotation, maxDelta);
     }
+	
+	void ThrustVectoring()
+	{
+		RocketEngine[] engines = GetComponents<RocketEngine>();
+		foreach(RocketEngine engine in engines)
+		{
+			engine.rocketTrailParticle.gameObject.transform.rotation = Quaternion.Euler(directionToTarget);
+		}
+	}
 
     void TargetReflection()
     {
@@ -426,7 +366,7 @@ public class IR_Missile : MonoBehaviour
         if (target != null)
         {
             missileToTargetAngle = Vector3.Angle(transform.forward, target.transform.position - transform.position);
-            if (missileToTargetAngle >= 90f)
+            if (!IRCCM && missileToTargetAngle >= 90f)
             {
                 target = null;
                 return;

@@ -1190,12 +1190,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 9201981900125730783}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 733797666080788980}
   aircraftName: Ta 183B Huckebein
   nameShort: Ta 183
   nameLong: Ta 183B
   speed_maxSpeed: 950
   power_maxPower: 1314
+  power_WepPower: 0
   isJet: 1
   engineNumber: 1
   powerToWeight: 0.46
@@ -1232,6 +1235,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -1247,6 +1251,8 @@ MonoBehaviour:
   wingType: 1
   sweepAngle: 40
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.007
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2
@@ -1375,6 +1381,11 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 2
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &2168044773943301030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1523,6 +1534,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 12890
+  currentHorsepower: 0
   serviceCeiling: 14000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -1613,6 +1625,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 0
   engines:
   - {fileID: 1188707908528480576}
@@ -1654,6 +1667,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -1673,6 +1687,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -1769,6 +1784,7 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 2000
+  missileMinRange: 0
   isCagedSeeker: 0
   slaveToRadar: 0
   Target: {fileID: 0}
@@ -1853,9 +1869,12 @@ MonoBehaviour:
   ailerons:
   - {fileID: 2556044980382219243}
   - {fileID: 5048767451433825388}
+  spoilers: []
   elevators:
   - {fileID: 6981303994612267828}
   - {fileID: 6512315277567633004}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 9202423128236682738}
   slats: []

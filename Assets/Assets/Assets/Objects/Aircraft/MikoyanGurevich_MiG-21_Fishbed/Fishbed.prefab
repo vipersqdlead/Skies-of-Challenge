@@ -234,13 +234,16 @@ MonoBehaviour:
   radarMissileControl: {fileID: 0}
   rocketLauncherControl: {fileID: 7107123546004588074}
   bombControl: {fileID: 0}
-  flareDispenser: {fileID: 1372948868202894757}
+  flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 4446048182601721664}
   aircraftName: MiG-21F Fishbed
   nameShort: MiG-21
   nameLong: MiG-21F
   speed_maxSpeed: 1300
   power_maxPower: 7341
+  power_WepPower: 0
   isJet: 1
   engineNumber: 1
   powerToWeight: 1.19
@@ -303,7 +306,9 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
+  radarAltitude: 0
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
@@ -318,6 +323,8 @@ MonoBehaviour:
   wingType: 2
   sweepAngle: 57
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.007
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2.95
@@ -446,6 +453,11 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 2
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &1257820892668996848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,7 +489,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aircraftHub: {fileID: 0}
   guns:
-  - {fileID: 3845284889648635453}
   - {fileID: 4390064768502402931}
   isPlayer: 1
   trigger: 0
@@ -529,9 +540,9 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
-  SARHPovCircle: {fileID: 0}
   SARHLockCircle: {fileID: 0}
   IRMissiles: 0
   SAGMissiles: 0
@@ -548,6 +559,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -571,7 +583,7 @@ MonoBehaviour:
   isPlayer: 1
   isGroundTgt: 0
   countsAsKill: 1
-  pointsWorth: 1070
+  pointsWorth: 930
   HP: 190
   hpPercent: 0
   Defense: 27
@@ -780,7 +792,8 @@ MonoBehaviour:
   MaxMissileAmmo: 2
   MissileAmmo: 2
   canReload: 1
-  Missile: {fileID: 2244568564740985332, guid: cd3b3ae951530ec4cb60c1e7214c3eac, type: 3}
+  hub: {fileID: 0}
+  Missile: {fileID: 2244568564740985332, guid: 48a4baf1bd6a4e143bfa72cacae475d2, type: 3}
   MissilePos:
   - {fileID: 3603624954151043576}
   - {fileID: 2112057255296744889}
@@ -789,17 +802,19 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 4000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
+  allAspectSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 7180611819124486595}
   killCounter: {fileID: 1978067054733514080}
-  aspect: 1
-  irccm: 0
 --- !u!114 &6982110809263645009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -816,6 +831,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 34166
+  currentHorsepower: 0
   serviceCeiling: 16000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -906,6 +922,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 17084
   engines:
   - {fileID: 8105143573206336220}
@@ -933,8 +950,11 @@ MonoBehaviour:
   ailerons:
   - {fileID: 253284217278316409}
   - {fileID: 3980260961893195372}
+  spoilers: []
   elevators:
   - {fileID: 1392995642023625606}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 6281553292891590702}
   slats: []
@@ -990,12 +1010,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 119144134666846188}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14b819a906094784d9aea3bf9ea0627c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPlayer: 1
+  isPlayer: 0
   trigger: 0
   flarePrefab: {fileID: 5231318020974602043, guid: a644b4741f60d71478e4e8a7c48499cc,
     type: 3}
@@ -23390,6 +23410,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
+        type: 3}
       propertyPath: MaxDistance
       value: 1500
       objectReference: {fileID: 0}
@@ -23468,6 +23493,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GunPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 8043144945965931367, guid: 5fedf6142ab063a4cb59979acf8c2680,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -23483,18 +23513,6 @@ AudioSource:
     type: 3}
   m_PrefabInstance: {fileID: 3638841026300944142}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3845284889648635453 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 514237850303463731, guid: 5fedf6142ab063a4cb59979acf8c2680,
-    type: 3}
-  m_PrefabInstance: {fileID: 3638841026300944142}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &6764757472760431726 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
@@ -23601,6 +23619,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 514237850303463731, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
+      propertyPath: shot
+      value: 
+      objectReference: {fileID: 791652246410021342}
+    - target: {fileID: 514237850303463731, guid: 5fedf6142ab063a4cb59979acf8c2680,
+        type: 3}
       propertyPath: shellTimer
       value: 5
       objectReference: {fileID: 0}
@@ -23656,17 +23679,27 @@ PrefabInstance:
     - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_Volume
-      value: 0.2
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
+        type: 3}
+      propertyPath: MinDistance
+      value: 80
       objectReference: {fileID: 0}
     - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 639e55c39e043054082bb890c6d6ef98, type: 3}
+      objectReference: {fileID: 8300000, guid: 3349368465b646a4da7d0b926e245be1, type: 3}
     - target: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
       propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
         type: 3}
@@ -23728,8 +23761,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: GunPrefab (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8043144945965931360, guid: 5fedf6142ab063a4cb59979acf8c2680,
@@ -23738,6 +23770,12 @@ PrefabInstance:
       addedObject: {fileID: 736032082391860514}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fedf6142ab063a4cb59979acf8c2680, type: 3}
+--- !u!82 &791652246410021342 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3545133050591823774, guid: 5fedf6142ab063a4cb59979acf8c2680,
+    type: 3}
+  m_PrefabInstance: {fileID: 4309474510499548736}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4390064768502402931 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 514237850303463731, guid: 5fedf6142ab063a4cb59979acf8c2680,

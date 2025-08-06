@@ -475,7 +475,6 @@ GameObject:
   - component: {fileID: 7160021290123139819}
   - component: {fileID: 5160225766580429515}
   - component: {fileID: 5393735990614257057}
-  - component: {fileID: -7352541962628100837}
   - component: {fileID: 2726497995332553526}
   - component: {fileID: 8745190652845005266}
   - component: {fileID: 7384599778373647072}
@@ -773,6 +772,10 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &810768066963378457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -826,6 +829,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 8500
+  currentHorsepower: 0
   serviceCeiling: 14100
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -950,12 +954,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 0}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
-  meshRenderer: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
+  meshRenderer: {fileID: 5136417114696061516}
   aircraftName: P-59A Airacomet
-  nameShort: 
-  nameLong: 
+  nameShort: P-59
+  nameLong: P-59A
   speed_maxSpeed: 660
   power_maxPower: 0
+  power_WepPower: 0
   isJet: 0
   engineNumber: 0
   powerToWeight: 0
@@ -1026,53 +1033,6 @@ MonoBehaviour:
   rateOfFireRPM: 750
   rofTimer: 0
   killCounter: {fileID: 7384599778373647072}
---- !u!114 &-7352541962628100837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540922269036293049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60e7a39b02566b64fba11c5355cb02d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fm: {fileID: 0}
-  playerInputs: {fileID: 0}
-  engineControl: {fileID: 0}
-  rb: {fileID: 0}
-  gunsControl: {fileID: 810768066963378457}
-  planeToUI: {fileID: 0}
-  hp: {fileID: 0}
-  killcounter: {fileID: 0}
-  planeCam: {fileID: 0}
-  planeHUD: {fileID: 0}
-  weaponManager: {fileID: 0}
-  irControl: {fileID: 0}
-  sagControl: {fileID: 0}
-  radarMissileControl: {fileID: 0}
-  rocketLauncherControl: {fileID: 5393735990614257057}
-  bombControl: {fileID: 0}
-  flareDispenser: {fileID: 0}
-  meshRenderer: {fileID: 0}
-  aircraftName: 
-  nameShort: 
-  nameLong: 
-  speed_maxSpeed: 0
-  power_maxPower: 0
-  isJet: 0
-  engineNumber: 0
-  powerToWeight: 0
-  attack_totalBurstMass: 0
-  agility_maxTurnDegS: 0
-  agility_wingLoading: 0
-  agility_maxTurnSpeed: 0
-  agility_weight: 0
-  health_maxHP: 0
-  defense_def: 0
-  aircraftDescription: 
-  aircraftModel: {fileID: 0}
 --- !u!114 &2726497995332553526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1103,6 +1063,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -1122,6 +1083,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -1218,7 +1180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d74f1d1952f138f468b891bb83d43afc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hub: {fileID: -7352541962628100837}
+  hub: {fileID: 0}
   ailerons:
   - {fileID: 8676008618568321780}
   - {fileID: 8505364282612757580}
@@ -1312,6 +1274,7 @@ MonoBehaviour:
   - {fileID: 1124885880360521597}
   - {fileID: 4931392064429599672}
   GuidePoint: {fileID: 6526778870233953980}
+  guideRange: 8000
   killCounter: {fileID: 7384599778373647072}
 --- !u!1 &1540922269994766545
 GameObject:
@@ -1600,10 +1563,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 2064729616761952138}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 7384599778373647072}
 --- !u!1 &1610116177542326799
@@ -2513,10 +2475,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 2060247134475815716}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 7384599778373647072}
 --- !u!1 &3109927214484303837
@@ -4837,10 +4798,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 8388608774294710796}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 7384599778373647072}
 --- !u!82 &7220828700796986709
@@ -5366,10 +5326,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 1665683517141679945}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 7384599778373647072}
 --- !u!82 &608705996958402283
@@ -6193,6 +6152,12 @@ PrefabInstance:
 --- !u!4 &4824245003216504442 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5850486903954866347, guid: 3cb0996f2fe7811499c26767bdf189a3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1423757137437411025}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5136417114696061516 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6091694315116975261, guid: 3cb0996f2fe7811499c26767bdf189a3,
     type: 3}
   m_PrefabInstance: {fileID: 1423757137437411025}
   m_PrefabAsset: {fileID: 0}

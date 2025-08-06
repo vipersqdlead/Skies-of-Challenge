@@ -61,10 +61,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 6605290703356506334}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6978473715818533837}
 --- !u!1 &6599218901213981051
@@ -128,10 +127,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 5943614778005786517}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 6978473715818533837}
 --- !u!1 &7560920793933573914
@@ -855,9 +853,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6318788914817192642, guid: d794f8dca04ca2c48bf4d84ec05c9b09,
         type: 3}
+      propertyPath: MinDistance
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318788914817192642, guid: d794f8dca04ca2c48bf4d84ec05c9b09,
+        type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: b1fe600647469b04ba5b313da35041ca, type: 3}
+    - target: {fileID: 6318788914817192642, guid: d794f8dca04ca2c48bf4d84ec05c9b09,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6680854307914149069, guid: d794f8dca04ca2c48bf4d84ec05c9b09,
+        type: 3}
+      propertyPath: nameLong
+      value: Spitfire Mk.II
+      objectReference: {fileID: 0}
     - target: {fileID: 6680854307914149069, guid: d794f8dca04ca2c48bf4d84ec05c9b09,
         type: 3}
       propertyPath: aircraftName
@@ -867,7 +880,7 @@ PrefabInstance:
         type: 3}
       propertyPath: meshRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 7565170208930461144}
     - target: {fileID: 6680854307914149069, guid: d794f8dca04ca2c48bf4d84ec05c9b09,
         type: 3}
       propertyPath: aircraftModel
@@ -976,6 +989,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 5c4df623704ebed45a2e2d4113f1f6c2,
         type: 3}
+    - target: {fileID: 7533204519348891505, guid: d794f8dca04ca2c48bf4d84ec05c9b09,
+        type: 3}
+      propertyPath: MaxDistance
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 7533204519348891505, guid: d794f8dca04ca2c48bf4d84ec05c9b09,
+        type: 3}
+      propertyPath: MinDistance
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 7533204519348891505, guid: d794f8dca04ca2c48bf4d84ec05c9b09,
+        type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7639124801785713943, guid: d794f8dca04ca2c48bf4d84ec05c9b09,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2012,6 +2040,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aedddb7d30d1e8e4fbb3f8041983e5a7, type: 3}
+--- !u!23 &7565170208930461144 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: aedddb7d30d1e8e4fbb3f8041983e5a7,
+    type: 3}
+  m_PrefabInstance: {fileID: 9168615914504481116}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8698648691263999671 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: aedddb7d30d1e8e4fbb3f8041983e5a7,

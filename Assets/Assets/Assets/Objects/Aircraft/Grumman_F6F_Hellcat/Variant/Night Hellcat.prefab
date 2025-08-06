@@ -997,6 +997,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Night Hellcat
       objectReference: {fileID: 0}
+    - target: {fileID: 6361306857825022163, guid: b518152bcbb17f148a2e3e37f43f65e8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ded0954c1eec9614b8f3f73fcdbc914d, type: 2}
     - target: {fileID: 6631040786700570481, guid: b518152bcbb17f148a2e3e37f43f65e8,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -1211,6 +1216,11 @@ PrefabInstance:
       propertyPath: shot
       value: 
       objectReference: {fileID: 264007945515812490}
+    - target: {fileID: 7458524335104127569, guid: b518152bcbb17f148a2e3e37f43f65e8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ded0954c1eec9614b8f3f73fcdbc914d, type: 2}
     - target: {fileID: 7463821194783515781, guid: b518152bcbb17f148a2e3e37f43f65e8,
         type: 3}
       propertyPath: specialWeapons.Array.data[1]
@@ -1567,11 +1577,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: 
   isPlayer: 0
+  hub: {fileID: 0}
   MaxMissileAmmo: 2
   MissileAmmo: 2
   MissileReload: 20
   canReload: 1
   angleToPlayer: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   MissilePrefab: {fileID: 2244568564740985332, guid: ecf288903ffda9a4ea0c3894787b20ff,
     type: 3}
   MissilePos:
@@ -1580,6 +1592,9 @@ MonoBehaviour:
   missile: {fileID: 0}
   AcquisitionMaxTimer: 0
   AcquisitionTimer: 0
+  radarRange: 19000
+  radarGimbalLimit: 60
+  pulseDoppler: 0
   possibleTarget: {fileID: 0}
   Target: {fileID: 0}
   Acquiring: 0
@@ -1588,6 +1603,9 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 6272072482727375418}
   killCounter: {fileID: 6035227963374631061}
+  closingSpeed: 0
+  filterSize: 20
+  timeToLockBreak: 3
 --- !u!114 &6035227963374631061 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5350997912003756959, guid: b518152bcbb17f148a2e3e37f43f65e8,

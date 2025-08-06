@@ -1220,10 +1220,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 3481232502541563317}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
-  meshRenderer: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
+  meshRenderer: {fileID: 5483024314070111103}
   aircraftName: R2Y2 Keiun-Kai
+  nameShort: R2Y
+  nameLong: R2Y2
   speed_maxSpeed: 860
   power_maxPower: 1187
+  power_WepPower: 0
   isJet: 1
   engineNumber: 2
   powerToWeight: 0.21
@@ -1256,6 +1261,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 11650
+  currentHorsepower: 0
   serviceCeiling: 16000
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -1325,7 +1331,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   isAfterburningEngine: 0
   useAirDensityMultiplier: 0
+  maxPropEfficiency: 0.85
+  propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 0
   engines:
   - {fileID: 4452557345233823483}
@@ -1352,6 +1361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hub: {fileID: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   localAngularVelocity: {x: 0, y: 0, z: 0}
   currentSpeed: 0
@@ -1360,10 +1370,13 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
+  currentTurnRate: 0
+  noseAuthority: 0
   target: {fileID: 0}
   side: 1
   SpawnSpeed: 280
@@ -1373,6 +1386,8 @@ MonoBehaviour:
   wingType: 0
   sweepAngle: 0
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.02
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2
@@ -1479,8 +1494,15 @@ MonoBehaviour:
   centerOfLift: {fileID: 1203138783792892821}
   health: {fileID: 4589046941072282347}
   anims: {fileID: 0}
+  authorityPercent: 0
   controlInput: {x: 0, y: 0, z: 0}
+  AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 0
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &1949007136259135744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1518,17 +1540,21 @@ MonoBehaviour:
   - {fileID: 2090198433347258254}
   isPlayer: 1
   trigger: 0
+  baseVelocity: 0
   useConvergence: 0
   hasDynamicConvergence: 0
   gunConvergenceDistance: 500
   convergencePoint: {x: 0, y: 0, z: 0}
+  mainGunroundsFired: 0
+  AGRoundsFired: 0
+  totalRoundsFired: 0
   additionalGuns:
   - {fileID: 8642539471884144375}
-  - {fileID: 5300659400948301921}
-  - {fileID: 1834182304818286684}
-  - {fileID: 7220422528320151695}
-  - {fileID: 3820802559278613716}
-  - {fileID: 3950867104478228880}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   additionalGunsGO:
@@ -1566,6 +1592,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -1585,6 +1612,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -1610,6 +1638,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 4
   canReload: 1
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: f9905b30bce974d4b82e573ff0970ba5, type: 3}
   MissilePos:
   - {fileID: 6282325388389645294}
@@ -1619,11 +1648,15 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 3000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -1722,6 +1755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Kills: 0
   Points: 0
+  hits: 0
   comboCounting: 0
   currentCombo: 0
 --- !u!114 &355378603226344784
@@ -1782,8 +1816,11 @@ MonoBehaviour:
   ailerons:
   - {fileID: 1802781828956215541}
   - {fileID: 3176222702115414804}
+  spoilers: []
   elevators:
   - {fileID: 4239762125502164696}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 4816746538911976951}
   slats:
@@ -3587,6 +3624,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1476057064363801448}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &5483024314070111103 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6371361488932087831, guid: 2eb6b0261ac703f4b8761f62f2ce9a53,
+    type: 3}
+  m_PrefabInstance: {fileID: 1476057064363801448}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1828860791271960468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4765,72 +4808,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e600df7985b472a47b749508f08d9678, type: 3}
---- !u!114 &1834182304818286684 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5142445962408123112, guid: e600df7985b472a47b749508f08d9678,
-    type: 3}
-  m_PrefabInstance: {fileID: 6785218531374533300}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2730111016578900352 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8920150699076676404, guid: e600df7985b472a47b749508f08d9678,
     type: 3}
   m_PrefabInstance: {fileID: 6785218531374533300}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &3820802559278613716 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7723611663119584864, guid: e600df7985b472a47b749508f08d9678,
-    type: 3}
-  m_PrefabInstance: {fileID: 6785218531374533300}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3950867104478228880 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7565410752736623396, guid: e600df7985b472a47b749508f08d9678,
-    type: 3}
-  m_PrefabInstance: {fileID: 6785218531374533300}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5300659400948301921 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1704130777859607253, guid: e600df7985b472a47b749508f08d9678,
-    type: 3}
-  m_PrefabInstance: {fileID: 6785218531374533300}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7220422528320151695 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4187758612736256571, guid: e600df7985b472a47b749508f08d9678,
-    type: 3}
-  m_PrefabInstance: {fileID: 6785218531374533300}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8642539471884144375 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3015590486485779523, guid: e600df7985b472a47b749508f08d9678,

@@ -1479,10 +1479,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 2076979583387186171}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 4277119381940890023}
 --- !u!82 &3497456172728049463
@@ -3958,10 +3957,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 3170925988685769408}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 4277119381940890023}
 --- !u!82 &3051101462506110213
@@ -4321,10 +4319,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 6028915310478842224}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 4277119381940890023}
 --- !u!82 &1367516045330803864
@@ -4920,12 +4917,15 @@ MonoBehaviour:
   rocketLauncherControl: {fileID: 7981137225842437951}
   bombControl: {fileID: 0}
   flareDispenser: {fileID: 0}
+  aiController: {fileID: 0}
+  dfState: {fileID: 0}
   meshRenderer: {fileID: 7611611689164749277}
   aircraftName: P-65A Cheetah
-  nameShort: 
-  nameLong: 
+  nameShort: P-65
+  nameLong: P-65A
   speed_maxSpeed: 720
   power_maxPower: 2830
+  power_WepPower: 0
   isJet: 0
   engineNumber: 2
   powerToWeight: 1.43
@@ -4964,6 +4964,7 @@ MonoBehaviour:
   criticalAoA: 0
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 0
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
   machSpeed: 0
   IAS_Speed: 0
@@ -4979,6 +4980,8 @@ MonoBehaviour:
   wingType: 0
   sweepAngle: 0
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.009
   waveDragMultiplier: 2
   newWaveDragMultiplier: 4.3
@@ -5116,6 +5119,11 @@ MonoBehaviour:
   controlInput: {x: 0, y: 0, z: 0}
   AoADampFactor: 0
   brakeInput: 0
+  experiencesG: 1
+  baseGTolerance: 0
+  gTolerance: 7.5
+  gMax: 13.5
+  blackOutFactor: 0
 --- !u!114 &8841535459295183133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5214,6 +5222,7 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -5233,6 +5242,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -5350,6 +5360,7 @@ MonoBehaviour:
   ThrottleInput: 1
   currentEnginePower: 0
   engineStaticThrust: 11100
+  currentHorsepower: 0
   serviceCeiling: 13600
   powerByAltitudeMultiplier:
     serializedVersion: 2
@@ -5476,6 +5487,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.86
   propEfficiencyMach: 0.475
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 3050
   engines:
   - {fileID: 5489647724220365505}
@@ -5557,6 +5569,7 @@ MonoBehaviour:
   MaxMissileAmmo: 2
   MissileAmmo: 2
   canReload: 1
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: 86e47f0f2e83a804e8980d5314a31270, type: 3}
   MissilePos:
   - {fileID: 7946953118705351912}
@@ -5566,10 +5579,13 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 2000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
@@ -5646,8 +5662,11 @@ MonoBehaviour:
   ailerons:
   - {fileID: 6751187704101037782}
   - {fileID: 4026200229352720432}
+  spoilers: []
   elevators:
   - {fileID: 5477080575888418565}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 3102714065597865098}
   slats: []
@@ -5739,6 +5758,7 @@ MonoBehaviour:
   - {fileID: 1392206512574676343}
   - {fileID: 2598079335232252426}
   GuidePoint: {fileID: 7205768046468430168}
+  guideRange: 8000
   killCounter: {fileID: 4277119381940890023}
 --- !u!1 &2657064890560570457
 GameObject:
@@ -7443,10 +7463,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 5467284060508853153}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 4277119381940890023}
 --- !u!82 &6002123226238190631
@@ -7944,10 +7963,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 6301593590579451054}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 4277119381940890023}
 --- !u!82 &2574569193302039073
@@ -9467,10 +9485,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 5124674388789888234}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 4277119381940890023}
 --- !u!82 &8292970936083873068
@@ -11241,10 +11258,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 25074123497581643}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 4277119381940890023}
 --- !u!82 &6193450262151741956
@@ -13842,10 +13858,9 @@ MonoBehaviour:
   rofTimer: 0
   muzzleFlash: {fileID: 1599861882595093433}
   muzzlePositionZOffset: 0
-  overheatTimer: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
   shotsFired: 0
   killCounter: {fileID: 4277119381940890023}
 --- !u!82 &8535005546028040221

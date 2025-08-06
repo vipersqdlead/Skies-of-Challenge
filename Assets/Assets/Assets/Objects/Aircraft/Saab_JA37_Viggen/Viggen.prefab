@@ -444,7 +444,9 @@ MonoBehaviour:
   criticalAoA: 15
   angleOfAttackHorizontal: 0
   maxAngleOfAttack: 20
+  maxAeroAngleOfAttack: 0
   rateOfClimb: 0
+  radarAltitude: 0
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
@@ -459,6 +461,8 @@ MonoBehaviour:
   wingType: 2
   sweepAngle: 42
   aspectRatio: 0
+  stalls: 1
+  AoALimiter: 1
   drag: 0.01
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2.185
@@ -588,10 +592,9 @@ MonoBehaviour:
   AoADampFactor: 0
   brakeInput: 0
   experiencesG: 1
+  baseGTolerance: 2
   gTolerance: 7.5
   gMax: 13.5
-  gRecoveryRate: 1.5
-  gDrainRate: 3
   blackOutFactor: 0
 --- !u!114 &1257820892668996848
 MonoBehaviour:
@@ -677,7 +680,6 @@ MonoBehaviour:
   blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
-  SARHPovCircle: {fileID: 0}
   SARHLockCircle: {fileID: 0}
   IRMissiles: 0
   SAGMissiles: 0
@@ -694,6 +696,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -908,8 +911,10 @@ MonoBehaviour:
   missileOuterFoV: 0
   missileInnerFoV: 0
   missileLockRange: 6000
+  missileMinRange: 0
   isCagedSeeker: 0
   slaveToRadar: 0
+  allAspectSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
@@ -919,8 +924,6 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 7180611819124486595}
   killCounter: {fileID: 1978067054733514080}
-  aspect: 0
-  irccm: 0
 --- !u!114 &6982110809263645009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1037,6 +1040,7 @@ MonoBehaviour:
   maxPropEfficiency: 0.85
   propEfficiencyMach: 0.42
   afterBurner: 0
+  thrustVectoring: 0
   afterburnerThrust: 43780
   engines:
   - {fileID: 8105143573206336220}
@@ -1064,9 +1068,12 @@ MonoBehaviour:
   ailerons:
   - {fileID: 6887666747699270710}
   - {fileID: 7627317017823629948}
+  spoilers: []
   elevators:
   - {fileID: 2355699958594814118}
   - {fileID: 6909166632682234603}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 1162347271146714307}
   slats: []
@@ -1174,12 +1181,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Sparrow-E
   isPlayer: 0
+  hub: {fileID: 0}
   MaxMissileAmmo: 2
   MissileAmmo: 2
   MissileReload: 20
   canReload: 1
   angleToPlayer: 0
-  MissilePrefab: {fileID: 5186579997882432130, guid: 17e179aeeac8c144e84c7ac4cdb7ebb2,
+  seekerDirection: {x: 0, y: 0, z: 0}
+  MissilePrefab: {fileID: 5186579997882432130, guid: d7e9016a8f90f014e82f9026152e21a4,
     type: 3}
   MissilePos:
   - {fileID: 7700739736341621390}
@@ -1187,6 +1196,9 @@ MonoBehaviour:
   missile: {fileID: 0}
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
+  radarRange: 19000
+  radarGimbalLimit: 60
+  pulseDoppler: 1
   possibleTarget: {fileID: 0}
   Target: {fileID: 0}
   Acquiring: 0
@@ -1195,6 +1207,9 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 0}
   killCounter: {fileID: 1978067054733514080}
+  closingSpeed: 0
+  filterSize: 20
+  timeToLockBreak: 3
 --- !u!1 &171914407533263812
 GameObject:
   m_ObjectHideFlags: 0

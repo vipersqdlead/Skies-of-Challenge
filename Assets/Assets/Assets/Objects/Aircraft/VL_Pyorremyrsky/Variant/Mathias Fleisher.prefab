@@ -3026,6 +3026,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1058088736089752066, guid: 12c029caad8ff0c4fadde99a185d839d,
         type: 3}
+      propertyPath: pointsWorth
+      value: 570
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058088736089752066, guid: 12c029caad8ff0c4fadde99a185d839d,
+        type: 3}
       propertyPath: countsAsKill
       value: 0
       objectReference: {fileID: 0}
@@ -3183,17 +3188,22 @@ PrefabInstance:
     - target: {fileID: 2986837824123255802, guid: 12c029caad8ff0c4fadde99a185d839d,
         type: 3}
       propertyPath: powerToWeight
-      value: 0.69
+      value: 1.45
       objectReference: {fileID: 0}
     - target: {fileID: 2986837824123255802, guid: 12c029caad8ff0c4fadde99a185d839d,
         type: 3}
       propertyPath: agility_weight
-      value: 2600
+      value: 2620
+      objectReference: {fileID: 0}
+    - target: {fileID: 2986837824123255802, guid: 12c029caad8ff0c4fadde99a185d839d,
+        type: 3}
+      propertyPath: power_WepPower
+      value: 1800
       objectReference: {fileID: 0}
     - target: {fileID: 2986837824123255802, guid: 12c029caad8ff0c4fadde99a185d839d,
         type: 3}
       propertyPath: power_maxPower
-      value: 1800
+      value: 1150
       objectReference: {fileID: 0}
     - target: {fileID: 2986837824123255802, guid: 12c029caad8ff0c4fadde99a185d839d,
         type: 3}
@@ -3204,6 +3214,11 @@ PrefabInstance:
         type: 3}
       propertyPath: agility_maxTurnDegS
       value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 2986837824123255802, guid: 12c029caad8ff0c4fadde99a185d839d,
+        type: 3}
+      propertyPath: agility_wingLoading
+      value: 137
       objectReference: {fileID: 0}
     - target: {fileID: 2986837824123255802, guid: 12c029caad8ff0c4fadde99a185d839d,
         type: 3}
@@ -3331,17 +3346,17 @@ PrefabInstance:
         type: 3}
       propertyPath: additionalGuns.Array.data[1]
       value: 
-      objectReference: {fileID: 4958251624187529943}
+      objectReference: {fileID: 0}
     - target: {fileID: 7956716673136035668, guid: 12c029caad8ff0c4fadde99a185d839d,
         type: 3}
       propertyPath: additionalGuns.Array.data[2]
       value: 
-      objectReference: {fileID: 1456022945417140970}
+      objectReference: {fileID: 0}
     - target: {fileID: 7956716673136035668, guid: 12c029caad8ff0c4fadde99a185d839d,
         type: 3}
       propertyPath: additionalGuns.Array.data[3]
       value: 
-      objectReference: {fileID: 7598872441794357817}
+      objectReference: {fileID: 0}
     - target: {fileID: 7956716673136035668, guid: 12c029caad8ff0c4fadde99a185d839d,
         type: 3}
       propertyPath: additionalGunsGO.Array.data[0]
@@ -3553,8 +3568,8 @@ MonoBehaviour:
   flaresTxt: {fileID: 0}
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
-  currentTarget: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
   SARHPovCircle: {fileID: 0}
@@ -3574,6 +3589,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -3640,9 +3656,12 @@ MonoBehaviour:
   ailerons:
   - {fileID: 1492573793408122771}
   - {fileID: 5130392296321681943}
+  spoilers: []
   elevators:
   - {fileID: 343560579337632546}
   - {fileID: 1744482813613050147}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 9077750522358728133}
   slats: []
@@ -3863,48 +3882,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 963456930c3dce54aa5788b9863861fe, type: 3}
---- !u!114 &1456022945417140970 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5142445962408123112, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 6010465456669999106}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &2928408140283685686 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8920150699076676404, guid: 963456930c3dce54aa5788b9863861fe,
     type: 3}
   m_PrefabInstance: {fileID: 6010465456669999106}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4958251624187529943 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1704130777859607253, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 6010465456669999106}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7598872441794357817 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4187758612736256571, guid: 963456930c3dce54aa5788b9863861fe,
-    type: 3}
-  m_PrefabInstance: {fileID: 6010465456669999106}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffafcbe90cdfc954dab83235e025e5fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8232315587329509935 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2402240578495285805, guid: 963456930c3dce54aa5788b9863861fe,
