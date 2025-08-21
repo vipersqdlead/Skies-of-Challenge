@@ -115,11 +115,12 @@ public class SurvivalMissionSetup : MonoBehaviour
 				hub.fm.experiencesG = false;
 			}
         }
+		
     }
 
     void Start()
     {
-        
+        Destroy(this);
     }
 
     void Update()
@@ -161,7 +162,6 @@ public class SurvivalMissionSetup : MonoBehaviour
         hub.planeToUI.healthIcon = UI_healthIcon;
         hub.planeToUI.blackOutBlack = UI_blackOut;
         hub.planeToUI.killsCombo = UI_Combo;
-        hub.planeToUI.Rockets = true;
         hub.planeToUI.Rockets1 = UI_Rockets;
         hub.planeToUI.MissilesIR = UI_Missiles;
         hub.planeToUI.MissilesSAG = UI_MissilesSAG;
@@ -171,6 +171,16 @@ public class SurvivalMissionSetup : MonoBehaviour
         hub.planeToUI.LockCircle = UI_MsslLock;
         hub.planeToUI.SARHLockCircle = UI_SARHLock;
 		//hub.planeToUI.currentTarget = UI_Target;
+		//hub.planeToUI.oilLeakWarn = UI_OilLeak;
+		//hub.planeToUI.waterLeakWarn = UI_WaterLeak;
+
+		{
+			hub.planeToUI.IRMissiles = false;	
+			hub.planeToUI.SARHMissiles = false;
+			hub.planeToUI.SAGMissiles = false;
+			hub.planeToUI.Rockets = false;
+			hub.planeToUI.flares = false;
+		}
 
 
         hub.planeToUI.IRControl = hub.irControl;
@@ -187,6 +197,10 @@ public class SurvivalMissionSetup : MonoBehaviour
         {
             hub.planeToUI.SAGMissiles = true;
         }
+		if(hub.rocketLauncherControl != null)
+		{
+			hub.planeToUI.Rockets = true;
+		}
         if(hub.flareDispenser != null)
         {
             hub.planeToUI.flares = true;

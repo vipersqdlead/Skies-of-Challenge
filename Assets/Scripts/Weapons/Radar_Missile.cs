@@ -9,6 +9,7 @@ public class Radar_Missile : MonoBehaviour
     public GameObject shooter;
 
     public AircraftHub possibleTarget, target;
+	Vector3 targetPosition;
 
     [SerializeField] float timerToFuze = 1f;
     [SerializeField] float lifeTime = 60f;
@@ -20,11 +21,12 @@ public class Radar_Missile : MonoBehaviour
 	public AnimationCurve maxGLoadMultiplierAtMach;
     public float rampUpTime = 2f;
     [SerializeField] float launchTime, drag;
-	float multipathAltitude = 150f;
+	float multipathAltitude = 120f;
 
     public float angleToMissile;
     public bool hasTerminalGuidance;
     public IR_AllAspect_Missile IR_Guidance;
+	[SerializeField] bool seekerActive;
 
     public bool Acquiring = false;
     public bool Locked = false;
@@ -35,6 +37,7 @@ public class Radar_Missile : MonoBehaviour
     [Header("Missile State")]
     public float speed;
     public float speedMach;
+	public float relativeSpeed;
     [SerializeField] public float gForce;
     private float maxGAchieved;
     private float maxSpeedAchievedMach;
@@ -90,6 +93,7 @@ public class Radar_Missile : MonoBehaviour
 		if(target != null)
 		{
 			lastKnownTargetDirection = (target.transform.position - gameObject.transform.position).normalized;
+			relativeSpeed = closingSpeed - rb.velocity.magnitude;
 		}
     }
 
@@ -117,6 +121,7 @@ public class Radar_Missile : MonoBehaviour
             }
             else
             {
+				seekerActive = true;
                 if(IR_Guidance == null)
                 {
                     Acquisition();
@@ -186,6 +191,8 @@ public class Radar_Missile : MonoBehaviour
         return Quaternion.RotateTowards(transform.rotation, desiredRotation, maxDelta);
     }
 
+	GameObject chaff;
+	public bool chaffed;
     void Acquisition()
     {
 		Vector3 lookDirection = Vector3.zero;
@@ -197,20 +204,26 @@ public class Radar_Missile : MonoBehaviour
 		
         print("Acquiring");
         RaycastHit hit;
-        float thickness = 150f; //<-- Desired thickness here
+        float thickness = 30f; //<-- Desired thickness here
         if (Physics.SphereCast(transform.position, thickness, lookDirection, out hit))
         {
             if (hit.collider.CompareTag("Fighter") || hit.collider.CompareTag("Bomber"))
             {
                 possibleTarget = hit.collider.GetComponent<AircraftHub>();
             }
+			if(hit.collider.CompareTag("Chaff") && notch)
+			{
+				chaff = hit.collider.gameObject;
+				chaffed = true;
+			}
         }
 
-        if (possibleTarget != null)
+        if (possibleTarget != null && !chaffed)
         {
+			NotchFilter();
 			closingSpeed = Utilities.GetClosingVelocity(possibleTarget, rb);
             angleToMissile = Vector3.Angle(transform.forward, possibleTarget.transform.position - transform.position);
-            if (angleToMissile <= 90f && Mathf.Abs(closingSpeed - rb.velocity.magnitude) > 30f)
+            if (angleToMissile <= 90f && !notch)
             {
                 target = possibleTarget; Locked = true; print("Target Locked by Missile!");
             }
@@ -219,6 +232,11 @@ public class Radar_Missile : MonoBehaviour
                 target = null; Locked = false; 
             }
         }
+		else if (chaffed)
+        {
+            target = null;
+			print("Missile has been chaffed.");
+        }
     }
 
     void TargetReflection()
@@ -226,23 +244,47 @@ public class Radar_Missile : MonoBehaviour
 		if(target == null) return;
 
         float missileToTargetAngle = Vector3.Angle(transform.forward, target.transform.position-transform.position);
-		if(hasTerminalGuidance) { NotchFilter(); }
+		if(hasTerminalGuidance && seekerActive) { NotchFilter(); CheckForChaff(); }
         if (missileToTargetAngle >= 90f)
         {
             target = null;
         }
     }
 	
+	public void CheckForChaff()
+	{
+		RaycastHit hit;
+        float thickness = 150f; //<-- Desired thickness here
+        if (Physics.SphereCast(transform.position, thickness, lastKnownTargetDirection, out hit))
+        {
+			if(hit.collider.CompareTag("Chaff") && notch)
+			{
+				chaff = hit.collider.gameObject;
+				chaffed = true;
+			}
+        }
+		if (chaffed)
+        {
+            target = null;
+			print("Missile has been chaffed.");
+        }
+	}
+	
 	public float closingSpeed;
-	public float timeToLockBreak = 3f;
-	float maxTimeToLockBreak = 3f;
+	bool notch;
+	float timeToLockBreak = 3f;
+	public float maxTimeToLockBreak = 2f;
 	void NotchFilter()
 	{
-		closingSpeed = Utilities.GetClosingVelocity(target, rb);
+		if(possibleTarget == null) return;
 		
-		if(Mathf.Abs(closingSpeed - rb.velocity.magnitude) < 30f)
+		float _dotProduct = Mathf.Abs(Vector3.Dot(rb.velocity.normalized, possibleTarget.rb.velocity.normalized));
+		closingSpeed = _dotProduct;
+		
+		if(_dotProduct < 0.3f)
 		{
 			timeToLockBreak -= Time.deltaTime;
+			notch = true;
 		}
 		else
 		{
@@ -250,11 +292,13 @@ public class Radar_Missile : MonoBehaviour
 			{
 				timeToLockBreak += Time.deltaTime;
 			}
+			notch = false;
 		}
 		
 		if(timeToLockBreak <= 0f)
 		{
 			print("Missile " + gameObject.name + " has been notched!");
+			timeToLockBreak = maxTimeToLockBreak;
 			target = null;
 		}
 	}
@@ -262,7 +306,15 @@ public class Radar_Missile : MonoBehaviour
     Vector3 lastVelocity;
     Vector3 LocalGForce;
 	void CalculateGForce()
-{
+	{
+		
+		var invRotation = Quaternion.Inverse(rb.rotation);
+        var acceleration = (rb.velocity - lastVelocity) / Time.fixedDeltaTime;
+        LocalGForce = invRotation * acceleration;
+        lastVelocity = rb.velocity;
+        gForce = Mathf.Max(Mathf.Abs(LocalGForce.y) / 9.81f, Mathf.Abs(LocalGForce.x) / 9.81f);
+		
+		/*
 		// Get the change in velocity over time (acceleration)
 		Vector3 acceleration = (rb.velocity - lastVelocity) / Time.fixedDeltaTime;
 		lastVelocity = rb.velocity;
@@ -274,11 +326,10 @@ public class Radar_Missile : MonoBehaviour
 		// Compute G-force based only on lateral acceleration
 		float lateralG = lateralAcceleration.magnitude / 9.81f;
 
-		gForce = lateralG;
+		gForce = lateralG;  */
 	}
     void OnDestroy()
     {
-        print("Missile " + gameObject.name + " max G achieved was: " + maxGAchieved);
-        print("Missile " + gameObject.name + " max speed achieved was: M " + maxSpeedAchievedMach);
+        print("Missile " + gameObject.name + " max G achieved was: " + maxGAchieved + " G; max speed achieved was: M " + maxSpeedAchievedMach);
     }
 }

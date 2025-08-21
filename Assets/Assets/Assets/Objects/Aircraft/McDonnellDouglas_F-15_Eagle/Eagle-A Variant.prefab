@@ -38,10 +38,40 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1560933343119202685, guid: 3f9c8ed3ee6e7874b8a43806a37a6d66,
+        type: 3}
+      propertyPath: afterBurner
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2474305656358896590, guid: 3f9c8ed3ee6e7874b8a43806a37a6d66,
+        type: 3}
+      propertyPath: gMax
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 2474305656358896590, guid: 3f9c8ed3ee6e7874b8a43806a37a6d66,
         type: 3}
       propertyPath: side
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2474305656358896590, guid: 3f9c8ed3ee6e7874b8a43806a37a6d66,
+        type: 3}
+      propertyPath: gTolerance
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2474305656358896590, guid: 3f9c8ed3ee6e7874b8a43806a37a6d66,
+        type: 3}
+      propertyPath: AoADampFactor
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2474305656358896590, guid: 3f9c8ed3ee6e7874b8a43806a37a6d66,
+        type: 3}
+      propertyPath: currentTurnRate
+      value: -0.34722215
+      objectReference: {fileID: 0}
+    - target: {fileID: 2474305656358896590, guid: 3f9c8ed3ee6e7874b8a43806a37a6d66,
+        type: 3}
+      propertyPath: currentTurnRadius
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2539151567916124337, guid: 3f9c8ed3ee6e7874b8a43806a37a6d66,
         type: 3}
@@ -156,7 +186,7 @@ PrefabInstance:
     - target: {fileID: 7100752597541707090, guid: 3f9c8ed3ee6e7874b8a43806a37a6d66,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7551616878351691740, guid: 3f9c8ed3ee6e7874b8a43806a37a6d66,
         type: 3}
@@ -166,12 +196,22 @@ PrefabInstance:
     - target: {fileID: 7551616878351691740, guid: 3f9c8ed3ee6e7874b8a43806a37a6d66,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7622541450040395003, guid: 3f9c8ed3ee6e7874b8a43806a37a6d66,
         type: 3}
       propertyPath: isPlayer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7622541450040395003, guid: 3f9c8ed3ee6e7874b8a43806a37a6d66,
+        type: 3}
+      propertyPath: flareReload
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7622541450040395003, guid: 3f9c8ed3ee6e7874b8a43806a37a6d66,
+        type: 3}
+      propertyPath: rateOfFireRPM
+      value: 120
       objectReference: {fileID: 0}
     - target: {fileID: 8575306095385221790, guid: 3f9c8ed3ee6e7874b8a43806a37a6d66,
         type: 3}
@@ -294,6 +334,7 @@ MonoBehaviour:
   currentState: {fileID: 2156389537655855059}
   guns: {fileID: 2896919476629686935}
   irMissile: {fileID: 7436603955671638821}
+  radarMissile: {fileID: 0}
   canUseMissiles: 1
   canUseCannon: 1
   advancedGunnery: 0
@@ -332,6 +373,7 @@ MonoBehaviour:
   incomingMissile: {fileID: 0}
   pilotLevel: 1
   irController: {fileID: 0}
+  radarController: {fileID: 0}
   flares: {fileID: 0}
   missileCooldownTime: 0
   missileCooldownTimer: 0
@@ -345,7 +387,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 414031240358100599}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4613509587248455822}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b37ea0e9101ccd24eadf1164f886e8be, type: 3}
   m_Name: 

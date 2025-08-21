@@ -385,7 +385,15 @@ public class IR_Missile : MonoBehaviour
     Vector3 LocalGForce;
     [SerializeField] public float gForce;
 	void CalculateGForce()
-{
+	{
+	
+		var invRotation = Quaternion.Inverse(rb.rotation);
+        var acceleration = (rb.velocity - lastVelocity) / Time.fixedDeltaTime;
+        LocalGForce = invRotation * acceleration;
+        lastVelocity = rb.velocity;
+        gForce = Mathf.Max(Mathf.Abs(LocalGForce.y) / 9.81f, Mathf.Abs(LocalGForce.x) / 9.81f);
+	
+	/*
 		// Get the change in velocity over time (acceleration)
 		Vector3 acceleration = (rb.velocity - lastVelocity) / Time.fixedDeltaTime;
 		lastVelocity = rb.velocity;
@@ -397,7 +405,7 @@ public class IR_Missile : MonoBehaviour
 		// Compute G-force based only on lateral acceleration
 		float lateralG = lateralAcceleration.magnitude / 9.81f;
 
-		gForce = lateralG;
+		gForce = lateralG; */
 	}
 
     void OnDestroy()

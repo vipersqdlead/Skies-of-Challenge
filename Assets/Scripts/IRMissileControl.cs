@@ -48,6 +48,8 @@ public class IRMissileControl : BaseSpWeaponControl
         isCagedSeeker = Missile.GetComponent<IR_Missile>().isCagedSeeker;
         slaveToRadar = Missile.GetComponent<IR_Missile>().slaveToRadar;
 		allAspectSeeker = Missile.GetComponent<IR_Missile>().allAspectSeeker;
+		
+		MaxMissileAmmo = MissilePos.Length;
     }
 	
 	
@@ -236,7 +238,7 @@ public class IRMissileControl : BaseSpWeaponControl
         Acquiring = true;
     }
 
-    void TurnSeekerOff()
+    public void TurnSeekerOff()
     {
         Target = null;
         Locked = false;
@@ -300,4 +302,12 @@ public class IRMissileControl : BaseSpWeaponControl
         TurnSeekerOff();
         LockGrowl.enabled = false;
     }
+	
+	public void PrepareForAIUse()
+	{
+		isPlayer = false;
+		if(LockGrowl != null)
+		{ LockGrowl.enabled = false; }
+		LockGrowl = null;
+	}
 }

@@ -260,10 +260,10 @@ public static class Utilities {
                 Rigidbody hitMssl = collider.GetComponent<Rigidbody>();
                 if(hitMssl != null)
                 {
-					{
-						Radar_Missile msslRdr = hitMssl.GetComponent<Radar_Missile>();
-						IR_Missile msslIR = hitMssl.GetComponent<IR_Missile>();
+					Radar_Missile msslRdr = hitMssl.GetComponent<Radar_Missile>();
+					IR_Missile msslIR = hitMssl.GetComponent<IR_Missile>();
 					
+					{
 						if(msslRdr != null)
 						{
 							if(msslRdr.target != user)
@@ -289,7 +289,7 @@ public static class Utilities {
 						}
 					}
 					
-					if (isEngineBurning == false)
+					if (msslIR != null && isEngineBurning == false)
 					{
 						continue;
 					}

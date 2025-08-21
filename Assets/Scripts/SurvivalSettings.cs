@@ -949,6 +949,16 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
+			case PlaneTypes.HunterF6:
+                if (PlayerPrefs.GetInt("Hunter FGA.9 Total Kill Count") >= 75)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.HunterF58:
+                if (PlayerPrefs.GetInt("Hunter FGA.9 Total Time Alive") + PlayerPrefs.GetInt("Hunter F.6 Total Time Alive") >= 3600f)
+                { return true; }
+                else
+                { return false; }
             //case PlaneTypes.EnteB:
             //    if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
             //    { return true; }
@@ -976,6 +986,11 @@ public class SurvivalSettings : MonoBehaviour
                 { return false; }
             case PlaneTypes.KazeLate:
                 if (PlayerPrefs.GetInt("General Total Kills") >= 2000)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.DrakenA:
+                if (PlayerPrefs.GetInt("J35D Draken Total Kill Count") >= 85)
                 { return true; }
                 else
                 { return false; }
@@ -1024,8 +1039,23 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
+			case PlaneTypes.Fishcan:
+                if (PlayerPrefs.GetInt("MiG-21F Fishbed Total Score") + PlayerPrefs.GetInt("MiG-21SMT Fishbed Total Score") + PlayerPrefs.GetInt("MiG-21bis Fishbed Total Score") >= 5000000)
+                { return true; }
+                else
+                { return false; }
             case PlaneTypes.FreedomFighter:
                 if (PlayerPrefs.GetInt("Survival Highest Round") >= 25)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.TigerIIG:
+                if (PlayerPrefs.GetInt("F-5E Tiger II Total Kill Count") >= 100)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.TigerIII:
+                if (PlayerPrefs.GetInt("F-5E Tiger II Highest Kill Count") >= 50 && PlayerPrefs.GetInt("F-5G Tiger II Highest Kill Count") >= 50)
                 { return true; }
                 else
                 { return false; }
@@ -1099,6 +1129,93 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
+			case PlaneTypes.FulcrumSMT:
+                if (PlayerPrefs.GetInt("MiG-29 Fulcrum (9-13) Highest Kill Count") >= 104)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.FalconADF:
+                if (PlayerPrefs.GetInt("F-16A-5 Fighting Falcon Total Kill Count") >= 50)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.FalconC50:
+                if (PlayerPrefs.GetInt("F-16A-5 Fighting Falcon Total Kill Count") >= 100 && PlayerPrefs.GetInt("F-16A-15 ADF Fighting Falcon Total Kill Count") >= 100)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.FalconD50Plus:
+                if (PlayerPrefs.GetInt("F-16C-50 Fighting Falcon Total Time Alive") >= 2400)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.FalconV:
+                if (PlayerPrefs.GetInt("F-16C-50 Fighting Falcon Highest Score") >= 100000)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.FalconZero:
+                if (PlayerPrefs.GetInt("F-16C-50 Fighting Falcon Highest Time Alive") >= 900 && PlayerPrefs.GetInt("T-2A Kaze (Late) Total Kill Count") >= 100)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.Flanker27SM:
+                if (PlayerPrefs.GetInt("Su-27S Flanker Total Time Alive") >= 900)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.FlankerJ11:
+                if ((PlayerPrefs.GetInt("J-9 Fengren Total Kill Count") + PlayerPrefs.GetInt("J-7E Fishcan Total Kill Count") + PlayerPrefs.GetInt("Su-27SM Total Kill Count")) >= 300)
+                { return true; }
+                else
+                { return false; }
+			/*
+			case PlaneTypes.Flanker30SM:
+                if (PlayerPrefs.GetInt("Su-27S Flanker Total Time Alive") >= 900)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.Flanker30MKI:
+                if (PlayerPrefs.GetInt("Su-27S Flanker Total Time Alive") >= 900)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.Flanker33Early:
+                if (PlayerPrefs.GetInt("Su-27S Flanker Total Time Alive") >= 900)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.Flanker33Late:
+                if (PlayerPrefs.GetInt("Su-27S Flanker Total Time Alive") >= 900)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.Flanker34:
+                if (PlayerPrefs.GetInt("Su-27S Flanker Total Time Alive") >= 900)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.Flanker35:
+                if (PlayerPrefs.GetInt("Su-27S Flanker Total Time Alive") >= 900)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.Flanker37:
+                if (PlayerPrefs.GetInt("Su-27S Flanker Total Time Alive") + PlayerPrefs.GetInt("Su-27SM Flanker Total Time Alive") + PlayerPrefs.GetInt("Su-30SM Flanker Total Time Alive") + PlayerPrefs.GetInt("Su-33 Flanker (Early) Total Time Alive") + PlayerPrefs.GetInt("Su-33 Flanker (Late) Total Time Alive") + PlayerPrefs.GetInt("Su-34 Fullback Total Time Alive") + PlayerPrefs.GetInt("Su-35S Flanker Total Time Alive") >= 21000)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.FlankerJ15:
+                if (PlayerPrefs.GetInt("J-11B Flanker Highest Kill Count") >= 100)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.FlankerJ16:
+                if (PlayerPrefs.GetInt("J-15 Flanker Highest Kill Count") >= 100 && PlayerPrefs.GetInt("Su-33 Flanker (Early) Highest Time Alive") >= 600)
+                { return true; }
+                else
+                { return false; }
+			*/
 			case PlaneTypes.EagleC:
                 if (PlayerPrefs.GetInt("F-15A Eagle Highest Kill Count") >= 104)
                 { return true; }
@@ -1114,15 +1231,41 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
+			case PlaneTypes.EagleJ:
+				if (PlayerPrefs.GetInt("F-15C Eagle Total Kill Count") + PlayerPrefs.GetInt("F-2A Zero Total Kill Count") >= 1000)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.EagleSE:
+				if (PlayerPrefs.GetInt("F-15E Strike Eagle Highest Kill Count") >= 104)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.Mirage20005:
+                if (PlayerPrefs.GetInt("Mirage 2000C Highest Time Alive") >= 1200)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.Mirage4000C:
+                if (PlayerPrefs.GetInt("Mirage 4000A Total Kill Count") >= 150)
+                { return true; }
+                else
+                { return false; }
+			case PlaneTypes.HornetC:
+                if (PlayerPrefs.GetInt("F/A-18A Hornet Total Time Alive") >= 3000)
+                { return true; }
+                else
+                { return false; }
 			case PlaneTypes.Raptor:
-				if(totalAvailable >= aircraftPrefabs.Length - 1)
-				{
-					return true;
-				}
+				if(totalAvailable >= aircraftPrefabs.Length - 2)
+				{ return true; }
 				else
-				{
-					return false;
-				}
+				{ return false; }
+			case PlaneTypes.RaptorLate:
+				if(totalAvailable >= aircraftPrefabs.Length - 2 && PlayerPrefs.GetInt("F-22A Raptor Total Kill Count")  >= 500)
+				{ return true; }
+				else
+				{ return false; }
         }
         return true;
     }
@@ -1383,7 +1526,9 @@ public class SurvivalSettings : MonoBehaviour
         Ayit,
         FightingHawk,
         Lansen,
-        Hunter,
+        HunterFGA9,
+		HunterF6,
+		HunterF58,
         SuperEtendard,
 		//SuperEtendardModernise
         VautourIS,
@@ -1392,6 +1537,8 @@ public class SurvivalSettings : MonoBehaviour
         Kyokkou,
 		// SeaDemon,
         Harrier,
+		//HarrierGR3,
+		//SeaHarrier,
         //HarrierC,
         Farmer,
         StarfighterA,
@@ -1411,6 +1558,7 @@ public class SurvivalSettings : MonoBehaviour
 		KazeEarly,
         KazeLate,
         Draken,
+		DrakenA,
         DrakenJ,
         //Cipher,
         MirageIIIC,
@@ -1425,10 +1573,11 @@ public class SurvivalSettings : MonoBehaviour
 		FishbedSMT,
 		FishbedBis,
         Bison,
+		Fishcan,
         TigerII,
         FreedomFighter,
 		TigerIIG,
-		//TigerIII,
+		TigerIII,
 		//Tora,
         Phantom,
 		PhantomS,
@@ -1455,24 +1604,33 @@ public class SurvivalSettings : MonoBehaviour
 		TomcatD,
         //TornadoGR3,
 	    //TornadoADV,
+		//TornadoF3,
         //Fencer,
         //AardvarkA,
 		//AardvarkF,
-        //FulcrumA,
-		//FulcrumSMT,
+        FulcrumA,
+		FulcrumSMT,
 		//FulcrumK,
 		//SuperFulcrum,
-        //FalconA,
-		//FalconC,
+        FalconA5,
+		FalconADF,
+		FalconC50,
+		FalconD50Plus,
 		//FalconF,
-		//FalconZero,
+		FalconV,
+		FalconZero,
 		//FalconZeroKai,
-		//FalconV,
-        //Flanker27,
-		//Flanker33,
-		//Flanker30,
+        Flanker27,
+		Flanker27SM,
+		FlankerJ11,
+		Flanker33Early,
+		//Flanker33Late,
+		//FlankerJ16,
+		//Flanker30SM,
+		//Flanker30MKI,
 		//Flanker34,
 		//Flanker35,
+		//FlankerJ15,
 		//Flanker37,
 		//J10A,
 		//J10C,
@@ -1480,26 +1638,29 @@ public class SurvivalSettings : MonoBehaviour
 		EagleC,
 		EagleE,
 		EagleEX,
-		//EagleJ,
-		//EagleSE,
-        //Mirage2000C,
-	    //Mirage4000A,
-		//Mirage4000C,
-		//HornetA,
-		//HornetC,
+		EagleJ,
+		EagleSE,
+        Mirage2000C,
+		Mirage20005,
+	    Mirage4000A,
+		Mirage4000C,
+		HornetA,
+		HornetC,
         //SuperHornet,
-        //Eurofighter,
-        //RafaleC,
+        Eurofighter,
+        RafaleC,
 		//RafaleM,
         //GripenA,
 		//GripenC,
 		//GripenE,
-		Raptor
 		// BlackWidowII,
 		// Felon,
-		// J20A,
+		J20A,
+		//J20A_Late,
 		//LightningIIa,
 		//LightningIIc
+		Raptor,
+		RaptorLate
     }
 
     public enum MapTypes

@@ -3969,6 +3969,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4481509903801911865, guid: 8e80493ad94f89245b68741bec1a3525,
         type: 3}
+      propertyPath: pointsWorth
+      value: 530
+      objectReference: {fileID: 0}
+    - target: {fileID: 4481509903801911865, guid: 8e80493ad94f89245b68741bec1a3525,
+        type: 3}
       propertyPath: countsAsKill
       value: 0
       objectReference: {fileID: 0}
@@ -4176,9 +4181,9 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
-  SARHPovCircle: {fileID: 0}
   SARHLockCircle: {fileID: 0}
   IRMissiles: 0
   SAGMissiles: 0
@@ -4195,6 +4200,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -4315,6 +4321,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 0
   canReload: 0
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: 86e47f0f2e83a804e8980d5314a31270, type: 3}
   MissilePos:
   - {fileID: 1012029658074193785}
@@ -4324,18 +4331,21 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 0
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 3000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
+  allAspectSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 550783594177627392}
   killCounter: {fileID: 4632461957504980269}
-  aspect: 1
-  irccm: 0
 --- !u!114 &3914618488066459868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4352,8 +4362,11 @@ MonoBehaviour:
   ailerons:
   - {fileID: 9098724026033749362}
   - {fileID: 3334296999320787978}
+  spoilers: []
   elevators:
   - {fileID: 8464995257910281402}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 1444145457483424092}
   slats: []

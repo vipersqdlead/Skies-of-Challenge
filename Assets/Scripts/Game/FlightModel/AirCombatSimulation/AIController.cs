@@ -32,6 +32,7 @@ public class AIController : MonoBehaviour , StateUser
     [Header("Weaponry-related")]
     public GunsControl guns;
 	public IRMissileControl irMissile;
+	public RadarMissileControl radarMissile;
     public bool canUseMissiles;
     [SerializeField] bool canUseCannon;
 	public bool advancedGunnery;
@@ -76,11 +77,10 @@ public class AIController : MonoBehaviour , StateUser
 
     void Start()
     {
-		try
-		{
+
 			hub = plane.GetComponent<AircraftHub>();
-		
-			engineControl = GetComponent<EngineControl>();
+			plane = hub.fm;
+			engineControl = hub.engineControl;
 
 			selfTarget = plane.GetComponent<Target>();
 
@@ -89,9 +89,29 @@ public class AIController : MonoBehaviour , StateUser
 				targetPlane = plane.target.GetComponent<FlightModel>();
 			}
 			
+			if(canUseCannon)
+			{
+				guns = hub.gunsControl;
+			}
+			
 			if(canUseMissiles)
 			{
 				irMissile = hub.irControl;
+				radarMissile = hub.radarMissileControl;
+				
+				if(irMissile != null) 
+				{
+					irMissile.enabled = true;
+					irMissile.PrepareForAIUse();
+				}
+				if(radarMissile != null) 
+				{
+					radarMissile.enabled = true;
+					radarMissile.PrepareForAIUse();
+				}
+				
+				
+				
 			}
 
 			dodgeOffsets = new List<Vector3>();
@@ -105,12 +125,7 @@ public class AIController : MonoBehaviour , StateUser
 				Debug.LogError("currentState is NULL at ExecuteStateOnStart()");
 			}
 			ExecuteStateOnStart();
-		}
-	
-	    catch (System.Exception e)
-		{
-				Debug.LogError("Error in Start(): " + e);
-		}
+
     }
 
     Vector3 AvoidGround()
@@ -266,7 +281,7 @@ public class AIController : MonoBehaviour , StateUser
 
         if (canUseMissiles)
         {
-            CalculateMissiles(dt);
+            //CalculateMissiles(dt);
         }
 
         if (canUseCannon)
@@ -292,7 +307,7 @@ public class AIController : MonoBehaviour , StateUser
             missileDelayTimer = missileLockFiringDelay;
         }
 		
-		if(range < irMissile.missileLockRange)
+		if(range < irMissile.missileLockRange && irMissile.Acquiring == false)
 		{
 			irMissile.Acquiring = true;
 		}
@@ -469,14 +484,14 @@ public class AIController : MonoBehaviour , StateUser
         var ray = new Ray(plane.rb.position, velocityRot * Quaternion.Euler(groundAvoidanceAngle, 0, 0) * Vector3.forward);
         groundCollisionDistance = plane.currentTurnRadius * 0.9f;
 
-	Vector3 rayDir = plane.rb.velocity.normalized;
+		Vector3 rayDir = plane.rb.velocity.normalized;
 
         //if (Physics.Raycast(ray, groundCollisionDistance + plane.localVelocity.z, groundCollisionMask.value) || plane.IAS_Speed >= plane.neverExceedSpeed)
 		if (Physics.Raycast(transform.position, rayDir, out RaycastHit hit, groundCollisionDistance))
         {
             steering = AvoidGround();
             plane.SetControlInput(steering);
-            throttle = CalculateThrottle(groundAvoidanceMinSpeed, groundAvoidanceMaxSpeed);
+            throttle = CalculateThrottle(0f, minSpeed);
             emergency = true;
         }
         else

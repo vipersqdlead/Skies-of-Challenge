@@ -1969,16 +1969,21 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
   - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
   - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
+  shellList: []
   rateOfFireRPM: 900
   muzzleVelocity: 850
+  shooterVelocityV3: {x: 0, y: 0, z: 0}
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 0}
   rateOfFire: 0
   rofTimer: 0
-  overheatTimer: 0
+  muzzleFlash: {fileID: 0}
+  muzzlePositionZOffset: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!1 &5361539832949852611
 GameObject:
@@ -2146,16 +2151,21 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
   - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
   - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
+  shellList: []
   rateOfFireRPM: 900
   muzzleVelocity: 850
+  shooterVelocityV3: {x: 0, y: 0, z: 0}
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 0}
   rateOfFire: 0
   rofTimer: 0
-  overheatTimer: 0
+  muzzleFlash: {fileID: 0}
+  muzzlePositionZOffset: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!1 &6391905595197585626
 GameObject:
@@ -2953,16 +2963,21 @@ MonoBehaviour:
   - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
   - {fileID: 7005174183826454184, guid: 754312b58c958f5408c3208a08a05058, type: 3}
   - {fileID: 7005174183826454184, guid: 9e373d5c21a402141879b6bf45148ff5, type: 3}
+  shellList: []
   rateOfFireRPM: 900
   muzzleVelocity: 850
+  shooterVelocityV3: {x: 0, y: 0, z: 0}
+  baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 0}
   rateOfFire: 0
   rofTimer: 0
-  overheatTimer: 0
+  muzzleFlash: {fileID: 0}
+  muzzlePositionZOffset: 0
+  overheatTimerPercent: 0
   overheated: 0
   overheatResetTimer: 0
-  overheatedRoF: 0
+  shotsFired: 0
   killCounter: {fileID: 0}
 --- !u!1001 &1148533619833601664
 PrefabInstance:
@@ -3427,7 +3442,7 @@ PrefabInstance:
     - target: {fileID: 1361061018166472792, guid: 975c359f0e8de7240bb39c3acd338720,
         type: 3}
       propertyPath: m_Mass
-      value: 3200
+      value: 4260
       objectReference: {fileID: 0}
     - target: {fileID: 1706296576763610783, guid: 975c359f0e8de7240bb39c3acd338720,
         type: 3}
@@ -3815,12 +3830,12 @@ PrefabInstance:
     - target: {fileID: 8194085726454922345, guid: 975c359f0e8de7240bb39c3acd338720,
         type: 3}
       propertyPath: Defense
-      value: 80
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 8194085726454922345, guid: 975c359f0e8de7240bb39c3acd338720,
         type: 3}
       propertyPath: CritRate
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8194085726454922345, guid: 975c359f0e8de7240bb39c3acd338720,
         type: 3}
@@ -3830,7 +3845,7 @@ PrefabInstance:
     - target: {fileID: 8194085726454922345, guid: 975c359f0e8de7240bb39c3acd338720,
         type: 3}
       propertyPath: pointsWorth
-      value: 2000
+      value: 470
       objectReference: {fileID: 0}
     - target: {fileID: 8194085726454922345, guid: 975c359f0e8de7240bb39c3acd338720,
         type: 3}
@@ -4084,9 +4099,9 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
-  SARHPovCircle: {fileID: 0}
   SARHLockCircle: {fileID: 0}
   IRMissiles: 0
   SAGMissiles: 0
@@ -4103,6 +4118,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -4170,6 +4186,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 0
   canReload: 0
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: e195638c96a24f746a1c0f816b61c83d, type: 3}
   MissilePos:
   - {fileID: 5986024609430399962}
@@ -4179,18 +4196,21 @@ MonoBehaviour:
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 0
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 2000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
+  allAspectSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 2279418232740292385}
   killCounter: {fileID: 6801797527136957377}
-  aspect: 0
-  irccm: 0
 --- !u!114 &3066709782914779662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4207,9 +4227,12 @@ MonoBehaviour:
   ailerons:
   - {fileID: 5385672893743295852, guid: 2e0138a0e08725f45883f6f52d0bb553, type: 3}
   - {fileID: 3841962348513667670, guid: 2e0138a0e08725f45883f6f52d0bb553, type: 3}
+  spoilers: []
   elevators:
   - {fileID: 3640953178549382668, guid: 2e0138a0e08725f45883f6f52d0bb553, type: 3}
   - {fileID: 7413284077500722808, guid: 2e0138a0e08725f45883f6f52d0bb553, type: 3}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 4590196679457993985, guid: 2e0138a0e08725f45883f6f52d0bb553, type: 3}
   - {fileID: 1277753452964279452, guid: 2e0138a0e08725f45883f6f52d0bb553, type: 3}

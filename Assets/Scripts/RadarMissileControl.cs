@@ -18,7 +18,7 @@ public class RadarMissileControl : BaseSpWeaponControl
     public GameObject MissilePrefab;
     public GameObject[] MissilePos;
 
-    [SerializeField] Radar_Missile missile;
+    public Radar_Missile missile;
 
     public float AcquisitionMaxTimer;
     public float AcquisitionTimer;
@@ -56,10 +56,6 @@ public class RadarMissileControl : BaseSpWeaponControl
                 if (Target != null && missile == null)
                 {
                     FireMissile();
-                }
-                else if (missile != null)
-                {
-                    print("Missile already in the air!");
                 }
             }
         }
@@ -109,7 +105,8 @@ public class RadarMissileControl : BaseSpWeaponControl
             }
         }
     }
-
+	
+	public bool chaffed;
 	FlightModel radarTarget;
     void Aqcuisition()
     {
@@ -134,27 +131,59 @@ public class RadarMissileControl : BaseSpWeaponControl
 				}
 				
 				
-				float thickness = 150f; //<-- Desired thickness here
+				float thickness = 10f; //<-- Desired thickness here
 				RaycastHit[] hits = Physics.SphereCastAll(transform.position, thickness, seekerDirection, radarRange);
+				chaffed = false;
 				foreach (var hit in hits)
 				{
 					if(hit.collider.CompareTag("Bullet") || hit.collider.gameObject == gameObject)
 					{
 						continue;
 					}
-					
+
 					if (hit.collider.CompareTag("Fighter") || hit.collider.CompareTag("Bomber"))
 					{
 						possibleTarget = hit.collider.gameObject;
 					}
-
-					if(possibleTarget != null)
+					
+					if(hit.collider.CompareTag("Chaff"))
+					{
+						if(pulseDoppler && notch)
+						{
+							//chaff = hit.collider.gameObject;
+							chaffed = true;
+						}
+						else if(!pulseDoppler) { chaffed = true; Target = hit.collider.gameObject; Locked = true; }
+					}
+					
+					if(hit.collider.CompareTag("Ground"))
+					{
+						if(possibleTarget != null)
+						{
+							float distToTarget = Vector3.Distance(transform.position, possibleTarget.transform.position);
+							float distToGround = Vector3.Distance(transform.position, hit.point);
+							bool isTargetCovered = (distToGround < distToTarget);
+							
+							if(isTargetCovered)
+							{
+								ResetLock();
+								return;
+							}
+						}
+					}
+					
+					
+					if(possibleTarget != null && !chaffed)
 					{
 						angleToPlayer = Vector3.Angle(transform.forward, possibleTarget.transform.position - transform.position);
 						
 						if(pulseDoppler)
 						{
-							if (angleToPlayer < radarGimbalLimit && Mathf.Abs((Utilities.GetClosingVelocity(possibleTarget.GetComponent<AircraftHub>(), hub.rb) - hub.rb.velocity.magnitude)) > filterSize)
+							NotchFilter();
+							//if (angleToPlayer < radarGimbalLimit && Mathf.Abs((Utilities.GetClosingVelocity(possibleTarget.GetComponent<AircraftHub>(), hub.rb) - hub.rb.velocity.magnitude)) > filterSize)
+							if (angleToPlayer < radarGimbalLimit && !notch)
+								
+							
 							{
 								Target = possibleTarget; Locked = true;
 							}
@@ -175,8 +204,10 @@ public class RadarMissileControl : BaseSpWeaponControl
 								ResetLock();
 							}
 						}
-						
-						
+					}
+					if(chaffed)
+					{
+						ResetLock();
 					}
 				}
             }
@@ -192,7 +223,7 @@ public class RadarMissileControl : BaseSpWeaponControl
     {
         if(Target != null)
         {
-			if(pulseDoppler) { NotchFilter(); }
+			if(pulseDoppler) { NotchFilter(); } else { CheckForChaff(); }
             angleToPlayer = Vector3.Angle(transform.forward, Target.transform.position - transform.position);
         }
         if (missile != null && angleToPlayer <= radarGimbalLimit)
@@ -209,17 +240,43 @@ public class RadarMissileControl : BaseSpWeaponControl
 		}
     }
 	
+	void CheckForChaff()
+	{
+		float thickness = 10f; //<-- Desired thickness here
+		RaycastHit[] hits = Physics.SphereCastAll(transform.position, thickness, seekerDirection, radarRange);
+		chaffed = false;
+		foreach (var hit in hits)
+		{
+			if(hit.collider.CompareTag("Bullet") || hit.collider.gameObject == gameObject)
+			{
+				continue;
+			}
+
+			if(hit.collider.CompareTag("Chaff"))
+			{
+				chaffed = true;
+				missile.target = null;
+				missile = null;
+				Target = hit.collider.gameObject;
+			}
+		}
+	}
+	
 	public float closingSpeed;
+	public bool notch;
 	public float filterSize = 20f;
-	public float timeToLockBreak = 3f;
-	float maxTimeToLockBreak = 3f;
+	float timeToLockBreak = 1.25f;
+	float maxTimeToLockBreak = 1.25f;
 	void NotchFilter()
 	{
-		closingSpeed = Mathf.Abs(Utilities.GetClosingVelocity(Target.GetComponent<AircraftHub>(), hub.rb));
 		
-		if((closingSpeed - hub.rb.velocity.magnitude) < filterSize)
+		/*
+		closingSpeed = Mathf.Abs((Utilities.GetClosingVelocity(possibleTarget.GetComponent<AircraftHub>(), hub.rb) - hub.rb.velocity.magnitude));
+		
+		if(closingSpeed < filterSize)
 		{
 			timeToLockBreak -= Time.deltaTime;
+			notch = true;
 		}
 		else
 		{
@@ -227,11 +284,37 @@ public class RadarMissileControl : BaseSpWeaponControl
 			{
 				timeToLockBreak += Time.deltaTime;
 			}
+			notch = false;
 		}
 		
 		if(timeToLockBreak <= 0f)
 		{
 			print("Radar " + gameObject.name + " has been notched!");
+			timeToLockBreak = maxTimeToLockBreak;
+			ResetLock();
+		}
+		
+		*/
+		
+		float _dotProduct = Mathf.Abs(Vector3.Dot(hub.rb.velocity.normalized, possibleTarget.GetComponent<AircraftHub>().rb.velocity.normalized));
+		closingSpeed = _dotProduct;
+		
+		if(_dotProduct < filterSize / 100f)
+		{
+			timeToLockBreak -= Time.deltaTime;
+			notch = true;
+		}
+		else
+		{
+			if(timeToLockBreak < maxTimeToLockBreak)
+			{
+				timeToLockBreak += Time.deltaTime;
+			}
+			notch = false;
+		}
+		
+		if(timeToLockBreak <= 0f)
+		{
 			timeToLockBreak = maxTimeToLockBreak;
 			ResetLock();
 		}
@@ -246,7 +329,7 @@ public class RadarMissileControl : BaseSpWeaponControl
         Acquiring = true;
     }
 
-    void TurnSeekerOff()
+    public void TurnSeekerOff()
     {
         ResetLock();
 		Acquiring = false;
@@ -254,7 +337,7 @@ public class RadarMissileControl : BaseSpWeaponControl
         return;
     }
 
-    void FireMissile()
+    public void FireMissile()
     {
         if (MissileAmmo > 0)
         {
@@ -306,4 +389,12 @@ public class RadarMissileControl : BaseSpWeaponControl
          missile = null;
          LockGrowl.enabled = false;
     }
+	
+	public void PrepareForAIUse()
+	{
+		isPlayer = false;
+		if(LockGrowl != null)
+		{ LockGrowl.enabled = false; }
+		LockGrowl = null;
+	}
 }

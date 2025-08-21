@@ -16,6 +16,10 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] List<GameObject> trainerWavePrefabs;
     [SerializeField] List<GameObject> jetTier2WavePrefabs;
     [SerializeField] List<GameObject> jetTier2BonusWavePrefabs;
+	[SerializeField] List<GameObject> jetTier3WavePrefabs;
+    [SerializeField] List<GameObject> jetTier3BonusWavePrefabs;
+	[SerializeField] List<GameObject> jetTier4WavePrefabs;
+    [SerializeField] List<GameObject> jetTier4BonusWavePrefabs;
     [SerializeField] List<Transform> SpawnPositions;
     public EnemyMarkers markers;
     public SurvivalMissionStatus status;
@@ -330,4 +334,83 @@ public class WaveSpawner : MonoBehaviour
 
         return new Vector3(spawnPoint.x, finalAltitude, spawnPoint.z);
     }
+	
+	public void CleanLists(int tier)
+	{
+		// -1 is new matchmaker, 0 is props, 1 is subsonics, 2 is gen2, 3 is gen3, 4 is gen4.
+		
+		if(tier == (-1))
+		{
+			allAircraftPrefabs.Clear();
+			sortedAircraft.Clear();
+			jetTier1WavePrefabs.Clear();
+			jetTier2WavePrefabs.Clear();
+			jetTier3WavePrefabs.Clear();
+			jetTier4WavePrefabs.Clear();
+			propWavePrefabs.Clear();
+		}
+		if(tier == 0)
+		{
+			jetTier1WavePrefabs.Clear();
+			jetTier2WavePrefabs.Clear();
+			jetTier3WavePrefabs.Clear();
+			jetTier4WavePrefabs.Clear();
+			allAircraftPrefabs.Clear();
+			sortedAircraft.Clear();
+			eligibleAircraft.Clear();
+			jetTier1BonusWavePrefabs.Clear();
+			jetTier2BonusWavePrefabs.Clear();
+			jetTier3BonusWavePrefabs.Clear();
+			jetTier4BonusWavePrefabs.Clear();
+		}
+		
+		if(tier == 1)
+		{
+			
+			jetTier2WavePrefabs.Clear();
+			jetTier3WavePrefabs.Clear();
+			jetTier4WavePrefabs.Clear();
+			propWavePrefabs.Clear();
+			allAircraftPrefabs.Clear();
+			sortedAircraft.Clear();
+			eligibleAircraft.Clear();
+			propBonusWavePrefabs.Clear();
+			
+			jetTier2BonusWavePrefabs.Clear();
+			jetTier3BonusWavePrefabs.Clear();
+			jetTier4BonusWavePrefabs.Clear();
+		}
+		
+		if(tier == 2)
+		{
+			jetTier1WavePrefabs.Clear();
+			jetTier3WavePrefabs.Clear();
+			jetTier4WavePrefabs.Clear();
+			propWavePrefabs.Clear();
+			allAircraftPrefabs.Clear();
+			sortedAircraft.Clear();
+			eligibleAircraft.Clear();
+			propBonusWavePrefabs.Clear();
+			jetTier1BonusWavePrefabs.Clear();
+			jetTier3BonusWavePrefabs.Clear();
+			jetTier4BonusWavePrefabs.Clear();
+		}
+	
+	
+		/*
+		if(tier == 1)
+		{
+			jetTier1WavePrefabs.Clear();
+			jetTier2WavePrefabs.Clear();
+			propWavePrefabs.Clear();
+			allAircraftPrefabs.Clear();
+			sortedAircraft.Clear();
+			eligibleAircraft.Clear();
+			propBonusWavePrefabs.Clear();
+			jetTier1BonusWavePrefabs.Clear();
+			jetTier2BonusWavePrefabs.Clear();
+		}
+		*/
+		
+	}
 }

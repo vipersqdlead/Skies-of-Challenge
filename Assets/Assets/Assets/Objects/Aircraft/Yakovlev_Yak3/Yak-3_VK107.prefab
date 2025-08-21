@@ -84,6 +84,7 @@ MonoBehaviour:
   shellList: []
   rateOfFireRPM: 750
   muzzleVelocity: 750
+  shooterVelocityV3: {x: 0, y: 0, z: 0}
   baseVelocity: 0
   accuracyError: 0.001
   shot: {fileID: 0}
@@ -294,6 +295,7 @@ MonoBehaviour:
   aspectRatio: 0
   stalls: 1
   AoALimiter: 1
+  flapsDeactivateAoALimiter: 0
   drag: 0.0065
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2
@@ -616,8 +618,8 @@ MonoBehaviour:
   - {fileID: 2722653106896007200}
   enginePropellers:
   - {fileID: 1033553122757967390}
-  minSpeed: 1
-  maxSpeed: 6.5
+  minSpeed: 0.6
+  maxSpeed: 2.8
 --- !u!114 &6303653961283598913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,8 +668,11 @@ MonoBehaviour:
   agility_weight: 2500
   health_maxHP: 120
   defense_def: 25
-  aircraftDescription: WIP
-  aircraftModel: {fileID: 358414275056531103, guid: 6b8281751dd7c3c4086c4d7b80bfb5cc,
+  aircraftDescription: The Yak-3 was upgraded with the bigger VK-107 engine from
+    the bigger and older Yak-9. The increase in power makes it unmatched at low altitude
+    while making it better at medium-to-high altitudes, where the smaller engine
+    ran out of breath.
+  aircraftModel: {fileID: 967329574194918649, guid: b04e7ed89f97aa54f880bbb7f9dfd7a3,
     type: 3}
 --- !u!114 &6502556098923312427
 MonoBehaviour:
@@ -1077,7 +1082,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397911868621195355}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.000000021073426, y: 0.7071068, z: 0.000000021073424, w: 0.70710677}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: -0.055, z: 2.661}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1686,9 +1691,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1033553122757967390}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.637, y: 0, z: -0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.39999986}
+  m_LocalRotation: {x: 1.7763568e-15, y: 1, z: 0.000000029802322, w: -0.000000059604645}
+  m_LocalPosition: {x: 0, y: 0, z: 0.6370001}
+  m_LocalScale: {x: 0.30000004, y: 0.3, z: 0.39999992}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 397911868621195352}
@@ -3556,6 +3561,7 @@ MonoBehaviour:
   shellList: []
   rateOfFireRPM: 800
   muzzleVelocity: 750
+  shooterVelocityV3: {x: 0, y: 0, z: 0}
   baseVelocity: 0
   accuracyError: 0.005
   shot: {fileID: 1771411082939326049}
@@ -3955,9 +3961,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8408656645341184072}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 1.7763568e-15, y: 1, z: 0.000000029802322, w: -0.000000059604645}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 2.0899994}
+  m_LocalScale: {x: 0.70000005, y: 0.7, z: 2.0899997}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 397911868621195352}
@@ -4809,22 +4815,22 @@ PrefabInstance:
     - target: {fileID: 265362850718809240, guid: 219a3ca965318ac43b134274d6db239a,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.70710677
       objectReference: {fileID: 0}
     - target: {fileID: 265362850718809240, guid: 219a3ca965318ac43b134274d6db239a,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.000000021073426
       objectReference: {fileID: 0}
     - target: {fileID: 265362850718809240, guid: 219a3ca965318ac43b134274d6db239a,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 265362850718809240, guid: 219a3ca965318ac43b134274d6db239a,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: 0.000000021073424
       objectReference: {fileID: 0}
     - target: {fileID: 265362850718809240, guid: 219a3ca965318ac43b134274d6db239a,
         type: 3}
@@ -5405,12 +5411,12 @@ PrefabInstance:
     - target: {fileID: 3840133075294714594, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.008
+      value: -1.103
       objectReference: {fileID: 0}
     - target: {fileID: 3840133075294714594, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.467
+      value: 1.209
       objectReference: {fileID: 0}
     - target: {fileID: 3840133075294714594, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
@@ -5460,17 +5466,17 @@ PrefabInstance:
     - target: {fileID: 5539745974436084357, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.19428219
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 5539745974436084357, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.42745638
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5539745974436084357, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5171099
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 5539745974436084357, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
@@ -5494,6 +5500,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5539745974769496575, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6275
+      objectReference: {fileID: 0}
+    - target: {fileID: 5539745974769496575, guid: 86c3118cde119134fa3b0ba8da81a906,
+        type: 3}
       propertyPath: m_LocalScale.z
       value: 0.03
       objectReference: {fileID: 0}
@@ -5506,6 +5517,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.522
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876063837615848677, guid: 86c3118cde119134fa3b0ba8da81a906,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.8999999
       objectReference: {fileID: 0}
     - target: {fileID: 7447228592301921685, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
@@ -5622,12 +5638,12 @@ PrefabInstance:
     - target: {fileID: 3840133075294714594, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.008
+      value: -1.103
       objectReference: {fileID: 0}
     - target: {fileID: 3840133075294714594, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.467
+      value: 1.209
       objectReference: {fileID: 0}
     - target: {fileID: 3840133075294714594, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
@@ -5677,17 +5693,17 @@ PrefabInstance:
     - target: {fileID: 5539745974436084357, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.19428219
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 5539745974436084357, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.42745638
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5539745974436084357, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5171099
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 5539745974436084357, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
@@ -5711,6 +5727,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5539745974769496575, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6275
+      objectReference: {fileID: 0}
+    - target: {fileID: 5539745974769496575, guid: 86c3118cde119134fa3b0ba8da81a906,
+        type: 3}
       propertyPath: m_LocalScale.z
       value: 0.03
       objectReference: {fileID: 0}
@@ -5723,6 +5744,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.522
+      objectReference: {fileID: 0}
+    - target: {fileID: 6876063837615848677, guid: 86c3118cde119134fa3b0ba8da81a906,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.9
       objectReference: {fileID: 0}
     - target: {fileID: 7447228592301921685, guid: 86c3118cde119134fa3b0ba8da81a906,
         type: 3}

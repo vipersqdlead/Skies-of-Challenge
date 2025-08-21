@@ -39,6 +39,7 @@ public class FlightModel : MonoBehaviour
     [SerializeField] float aspectRatio;
 	[SerializeField] bool stalls = true;
 	public bool AoALimiter = true;
+	public bool flapsDeactivateAoALimiter = false;
     public float drag;
     float originalDragValue;
     public float waveDragMultiplier = 2f;
@@ -352,7 +353,8 @@ public class FlightModel : MonoBehaviour
         wingSpan = newWingspan;
         aspectRatio = (newWingspan * newWingspan) / wingArea;
         CalculateMaxAoA();
-		criticalAoA = maxAngleOfAttack * 0.9f;
+		maxAngleOfAttack = maxAeroAngleOfAttack * 0.95f;
+		criticalAoA = maxAngleOfAttack * 0.8f;
     }
 
     void NeverExceedSpeedPenalty()
@@ -369,6 +371,11 @@ public class FlightModel : MonoBehaviour
     public bool brakeInput;
     void CheckFlapsAndBrakes()
     {
+		if(flapsDeactivateAoALimiter)
+		{
+			AoALimiter = !flaps;
+		}
+		
         if (brakeInput && Input.GetAxis("Throttle") > 0)
         {
             flaps = true;

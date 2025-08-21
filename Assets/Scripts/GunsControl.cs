@@ -11,6 +11,7 @@ public class GunsControl : MonoBehaviour
     public bool trigger;
 	
 	public float baseVelocity;
+	[HideInInspector] Vector3 baseVelocityV3;
     public bool useConvergence;
     public bool hasDynamicConvergence;
     public float gunConvergenceDistance = 500f;
@@ -47,6 +48,7 @@ public class GunsControl : MonoBehaviour
 		
         ApplyConvergence();
 		baseVelocity = aircraftHub.rb.velocity.magnitude;
+		baseVelocityV3 = aircraftHub.rb.velocity.normalized;
         if(trigger)
         {
             FireGuns();
@@ -153,6 +155,7 @@ public class GunsControl : MonoBehaviour
 			if(gun == null)
 					continue;
 			gun.baseVelocity = baseVelocity;
+			gun.shooterVelocityV3 = baseVelocityV3;
             gun.Fire();
 			//mainGunroundsFired = gun.shotsFired - mainGunroundsFired;
 			_tempShotsFiredMG += gun.shotsFired;
@@ -167,6 +170,7 @@ public class GunsControl : MonoBehaviour
 				if(gun == null)
 					continue;
 				gun.baseVelocity = baseVelocity;
+				gun.shooterVelocityV3 = baseVelocityV3;
 				gun.Fire();
 				_tempShotsFiredAG += gun.shotsFired;
 			}

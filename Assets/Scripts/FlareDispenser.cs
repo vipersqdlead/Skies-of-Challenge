@@ -12,7 +12,7 @@ public class FlareDispenser : MonoBehaviour
     [SerializeField] private Transform[] flareSpawnPoint; // Position where flares are deployed
     [SerializeField] float flareReload = 20;
     public int flareCount = 5; // Number of flares available
-    [SerializeField] int maxFlareCount;
+    [SerializeField] public int maxFlareCount;
     public float rateOfFireRPM = 0; // This is the reference RPM (rounds per minute) for continuous flare dispensing.
     public float rateOfFire; // Time in seconds between shots
     [SerializeField] float rofTimer; // Timer to be used when firing
@@ -92,6 +92,7 @@ public class FlareDispenser : MonoBehaviour
             GameObject flare = Instantiate(flarePrefab, flareSpawnPoint[i].position, transform.rotation);
             flare.GetComponent<Rigidbody>().AddForce(rb.velocity + ((flareSpawnPoint[i].forward + error) * 115f), ForceMode.VelocityChange);
             flareCount--;
+			Destroy(flare, 15f);
         }
     }
 }

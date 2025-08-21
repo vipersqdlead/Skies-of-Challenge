@@ -3809,7 +3809,6 @@ MonoBehaviour:
   blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
-  SARHPovCircle: {fileID: 0}
   SARHLockCircle: {fileID: 0}
   IRMissiles: 0
   SAGMissiles: 0
@@ -3875,6 +3874,7 @@ MonoBehaviour:
   maxAngleOfAttack: 0
   maxAeroAngleOfAttack: 0
   rateOfClimb: 0
+  radarAltitude: 0
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
@@ -4363,6 +4363,7 @@ MonoBehaviour:
   missileMinRange: 0
   isCagedSeeker: 0
   slaveToRadar: 0
+  allAspectSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
@@ -4372,8 +4373,6 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 6224547674108693506}
   killCounter: {fileID: 6609938941638052285}
-  aspect: 0
-  irccm: 0
 --- !u!114 &2910103348142659168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4557,11 +4556,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: 
   isPlayer: 0
+  hub: {fileID: 0}
   MaxMissileAmmo: 4
   MissileAmmo: 4
   MissileReload: 20
   canReload: 1
   angleToPlayer: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   MissilePrefab: {fileID: 5186579997882432130, guid: a98bc4dec1b0ab845bbadb9611337ad3,
     type: 3}
   MissilePos:
@@ -4572,6 +4573,9 @@ MonoBehaviour:
   missile: {fileID: 0}
   AcquisitionMaxTimer: 120
   AcquisitionTimer: 120
+  radarRange: 19000
+  radarGimbalLimit: 60
+  pulseDoppler: 1
   possibleTarget: {fileID: 0}
   Target: {fileID: 0}
   Acquiring: 0
@@ -4580,6 +4584,9 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 2898658444982672722}
   killCounter: {fileID: 6609938941638052285}
+  closingSpeed: 0
+  filterSize: 20
+  timeToLockBreak: 3
 --- !u!114 &5276642702413077994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7802,6 +7809,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: 20mmGunPod_Type4_SUU23
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402240578495285805, guid: e600df7985b472a47b749508f08d9678,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3015590486485779523, guid: e600df7985b472a47b749508f08d9678,
         type: 3}

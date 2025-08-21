@@ -55,6 +55,11 @@ public class SurvivalMissionStatus : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
+
+		
+		
+		
+		
         Fade(true);
         playerAcHub = Player.GetComponent<AircraftHub>();
 		
@@ -62,6 +67,33 @@ public class SurvivalMissionStatus : MonoBehaviour
 		waveSpawner.currentDifficulty = battleRating;
 		waveSpawner.enableBlackouts = enableBlackouts;
 		waveSpawner.OrderLists();
+		
+		{
+			if(oldMatchmaking)
+			{
+				if (aircraftType == AircraftType.Prop)
+				{
+					waveSpawner.CleanLists(0);
+				}
+				if (aircraftType == AircraftType.JetTier1)
+				{
+					waveSpawner.CleanLists(1);
+				}
+				if (aircraftType == AircraftType.JetTier2)
+				{
+					waveSpawner.CleanLists(2);
+				}
+				if (aircraftType == AircraftType.JetTier3)
+				{
+					waveSpawner.CleanLists(2);
+				}
+				if (aircraftType == AircraftType.JetTier4)
+				{
+					waveSpawner.CleanLists(2);
+				}
+			}
+			else{ waveSpawner.CleanLists(-1); }
+		}
 		
         //MissionStart.GetComponent<AudioSource>().Play();
 
@@ -914,7 +946,7 @@ public class SurvivalMissionStatus : MonoBehaviour
 	
 	string GiveReward()
 	{
-		int randomReward = UnityEngine.Random.Range(1, 10);
+		int randomReward = UnityEngine.Random.Range(1, 11);
 		string text = "";
         switch (randomReward)
             {
@@ -992,6 +1024,18 @@ public class SurvivalMissionStatus : MonoBehaviour
                                     {
                                         playerAcHub.hp.HealMaxHP();
                                         text = "Reward: Full Health Restored!";
+                                    }
+									break;
+								case 10:
+								    if (playerAcHub.flareDispenser != null)
+                                    {
+                                        playerAcHub.flareDispenser.flareCount = playerAcHub.flareDispenser.maxFlareCount;
+                                        text = "Reward: Flares reloaded!";
+                                    }
+                                    else
+                                    {
+                                        playerAcHub.hp.HealHPAmmount(UnityEngine.Random.Range(70, 150));
+										text = "Reward: Health Restored!";
                                     }
 									break;
                             }

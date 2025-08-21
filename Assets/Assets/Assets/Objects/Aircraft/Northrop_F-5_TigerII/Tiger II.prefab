@@ -3026,7 +3026,7 @@ MonoBehaviour:
   flareDispenser: {fileID: 7269806837363031025}
   aiController: {fileID: 0}
   dfState: {fileID: 0}
-  meshRenderer: {fileID: 0}
+  meshRenderer: {fileID: 8645050832515012163}
   aircraftName: F-5E Tiger II
   nameShort: F-5
   nameLong: F-5E
@@ -3080,7 +3080,6 @@ MonoBehaviour:
   blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
-  SARHPovCircle: {fileID: 0}
   SARHLockCircle: {fileID: 0}
   IRMissiles: 0
   SAGMissiles: 0
@@ -3146,6 +3145,7 @@ MonoBehaviour:
   maxAngleOfAttack: 0
   maxAeroAngleOfAttack: 0
   rateOfClimb: 0
+  radarAltitude: 0
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
@@ -3162,6 +3162,7 @@ MonoBehaviour:
   aspectRatio: 0
   stalls: 1
   AoALimiter: 1
+  flapsDeactivateAoALimiter: 0
   drag: 0.027
   waveDragMultiplier: 2
   newWaveDragMultiplier: 2
@@ -3598,6 +3599,7 @@ MonoBehaviour:
   missileMinRange: 0
   isCagedSeeker: 0
   slaveToRadar: 0
+  allAspectSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
@@ -3607,8 +3609,6 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 7750478190715863860}
   killCounter: {fileID: 6609938941638052285}
-  aspect: 1
-  irccm: 0
 --- !u!114 &10673027907317128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5380,6 +5380,12 @@ PrefabInstance:
 --- !u!4 &5371080468585109783 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4816319596143129940, guid: ad02dfbb75935eb49a36979c0a5bac3e,
+    type: 3}
+  m_PrefabInstance: {fileID: 603174611413167171}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8645050832515012163 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 9198474630116964864, guid: ad02dfbb75935eb49a36979c0a5bac3e,
     type: 3}
   m_PrefabInstance: {fileID: 603174611413167171}
   m_PrefabAsset: {fileID: 0}

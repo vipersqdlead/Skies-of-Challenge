@@ -2642,6 +2642,11 @@ PrefabInstance:
       propertyPath: additionalGunsGO.Array.data[1]
       value: 
       objectReference: {fileID: 7696625930592717034}
+    - target: {fileID: 1574825759795915613, guid: 1bc564c2c51f03a41926ccdd06644e22,
+        type: 3}
+      propertyPath: m_Mass
+      value: 4475
+      objectReference: {fileID: 0}
     - target: {fileID: 2543456278311596398, guid: 1bc564c2c51f03a41926ccdd06644e22,
         type: 3}
       propertyPath: m_audioClip
@@ -2706,8 +2711,58 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7449457133200735613, guid: 1bc564c2c51f03a41926ccdd06644e22,
         type: 3}
+      propertyPath: extraLives
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7449457133200735613, guid: 1bc564c2c51f03a41926ccdd06644e22,
+        type: 3}
+      propertyPath: pointsWorth
+      value: 530
+      objectReference: {fileID: 0}
+    - target: {fileID: 7449457133200735613, guid: 1bc564c2c51f03a41926ccdd06644e22,
+        type: 3}
       propertyPath: countsAsKill
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7449457133200735613, guid: 1bc564c2c51f03a41926ccdd06644e22,
+        type: 3}
+      propertyPath: invulnerable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7449457133200735613, guid: 1bc564c2c51f03a41926ccdd06644e22,
+        type: 3}
+      propertyPath: invulnerableTimer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483738992862300395, guid: 1bc564c2c51f03a41926ccdd06644e22,
+        type: 3}
+      propertyPath: powerByAltitudeMultiplier.m_Curve.Array.data[2].time
+      value: 0.7621264
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483738992862300395, guid: 1bc564c2c51f03a41926ccdd06644e22,
+        type: 3}
+      propertyPath: powerByAltitudeMultiplier.m_Curve.Array.data[3].time
+      value: 1.0333835
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483738992862300395, guid: 1bc564c2c51f03a41926ccdd06644e22,
+        type: 3}
+      propertyPath: powerByAltitudeMultiplier.m_Curve.Array.data[3].value
+      value: 0.20855708
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483738992862300395, guid: 1bc564c2c51f03a41926ccdd06644e22,
+        type: 3}
+      propertyPath: powerByAltitudeMultiplier.m_Curve.Array.data[3].inSlope
+      value: -2.6350467
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483738992862300395, guid: 1bc564c2c51f03a41926ccdd06644e22,
+        type: 3}
+      propertyPath: powerByAltitudeMultiplier.m_Curve.Array.data[3].inWeight
+      value: 0.08226918
+      objectReference: {fileID: 0}
+    - target: {fileID: 7483738992862300395, guid: 1bc564c2c51f03a41926ccdd06644e22,
+        type: 3}
+      propertyPath: powerByAltitudeMultiplier.m_Curve.Array.data[3].outSlope
+      value: -2.6350467
       objectReference: {fileID: 0}
     - target: {fileID: 8505339195802795359, guid: 1bc564c2c51f03a41926ccdd06644e22,
         type: 3}
@@ -2995,9 +3050,9 @@ MonoBehaviour:
   guidedBombs: {fileID: 0}
   killsCombo: {fileID: 0}
   healthIcon: {fileID: 0}
+  blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
-  SARHPovCircle: {fileID: 0}
   SARHLockCircle: {fileID: 0}
   IRMissiles: 0
   SAGMissiles: 0
@@ -3017,6 +3072,7 @@ MonoBehaviour:
   maxSpeed: 900
   speedLabel: {fileID: 0}
   speedArrow: {fileID: 0}
+  IAS_Arrow: {fileID: 0}
   stallAlarm: {fileID: 0}
   rpmLabel: {fileID: 0}
   rpmArrow: {fileID: 0}
@@ -3139,6 +3195,7 @@ MonoBehaviour:
   MaxMissileAmmo: 4
   MissileAmmo: 0
   canReload: 0
+  hub: {fileID: 0}
   Missile: {fileID: 2244568564740985332, guid: 86e47f0f2e83a804e8980d5314a31270, type: 3}
   MissilePos:
   - {fileID: 1560867596820605665}
@@ -3148,18 +3205,21 @@ MonoBehaviour:
   AcquisitionMaxTimer: 25
   AcquisitionTimer: 0
   missileOuterFoV: 0
+  missileInnerFoV: 0
   missileLockRange: 3000
+  missileMinRange: 0
   isCagedSeeker: 0
+  slaveToRadar: 0
+  allAspectSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   Acquiring: 0
   Locked: 0
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 689800095331724854}
   killCounter: {fileID: 1322877510349351948}
-  aspect: 0
-  irccm: 0
 --- !u!114 &6747644229456217731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3176,8 +3236,11 @@ MonoBehaviour:
   ailerons:
   - {fileID: 7952961052269045721}
   - {fileID: 7412179461507978923}
+  spoilers: []
   elevators:
   - {fileID: 6123213145540478711}
+  elevons: []
+  vTails: []
   rudders:
   - {fileID: 6627040665194484069}
   slats: []

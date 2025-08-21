@@ -40,8 +40,8 @@ public class SpWeaponManager : MonoBehaviour
             else
             {
                 specialWeapons[i].isPlayer = false;
-                specialWeapons[i].DisableWeapon();
             }
+			specialWeapons[i].DisableWeapon();
         }
     }
 

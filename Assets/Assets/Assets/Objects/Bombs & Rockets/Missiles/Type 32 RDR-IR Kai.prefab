@@ -674,7 +674,7 @@ Rigidbody:
   m_GameObject: {fileID: 2244568564740985332}
   serializedVersion: 4
   m_Mass: 170
-  m_Drag: 0.009
+  m_Drag: 0.02
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -954,7 +954,7 @@ MonoBehaviour:
   missileOuterFoV: 60
   isCagedSeeker: 0
   slaveToRadar: 0
-  IRCCM: 1
+  IRCCM: 0
   thrustVectoring: 0
   allAspectSeeker: 1
   missileTimer: 0
@@ -1141,7 +1141,6 @@ MonoBehaviour:
   rampUpTime: 2
   launchTime: 0
   drag: 0
-  multipathAltitude: 300
   angleToMissile: 0
   hasTerminalGuidance: 1
   IR_Guidance: {fileID: 2336263370449300910}
@@ -1149,10 +1148,12 @@ MonoBehaviour:
   Locked: 0
   speed: 0
   speedMach: 0
+  relativeSpeed: 0
   gForce: 0
   navigationConstant: 2
+  chaffed: 0
   closingSpeed: 0
-  timeToLockBreak: 3
+  maxTimeToLockBreak: 2
 --- !u!114 &7320647541631884670
 MonoBehaviour:
   m_ObjectHideFlags: 0

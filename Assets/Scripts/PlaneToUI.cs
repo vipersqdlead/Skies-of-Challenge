@@ -131,15 +131,14 @@ public class PlaneToUI : MonoBehaviour
             {
                 speedLabel.color = Color.red;
             }
-            if (playerControls.stalling)
-            {
-                stallAlarm.enabled = true;
-            }
             else
             {
                 speedLabel.color = Color.white;
-                stallAlarm.enabled = false;
             }
+			
+			if (playerControls.stalling)
+            { stallAlarm.enabled = true; }
+			else { stallAlarm.enabled = false; }
             speedLabel.text = ((int)speed).ToString();
 
             // stallAlarm.enabled = (-playerControls.maxAngleOfAttack / 2 - 1f) < playerControls.angleOfAttack && playerControls.angleOfAttack < playerControls.maxAngleOfAttack + 3f;
@@ -245,15 +244,17 @@ public class PlaneToUI : MonoBehaviour
         }
     }
 
+	UnityEngine.UI.Image lockDiamond;
     void RadarMissiles()
     {
         if (SARHMissiles == true)
         {
+			if(lockDiamond == null) { lockDiamond = SARHLockCircle.GetComponent<UnityEngine.UI.Image>(); }
 			string lockState = "";
 			
 			if(!SARHControl.Acquiring)
 			{
-					lockState = "";
+				lockState = "";
 			}
 			else if(SARHControl.Acquiring && !SARHControl.Locked)
 			{
@@ -262,6 +263,16 @@ public class PlaneToUI : MonoBehaviour
 			else if(SARHControl.Locked)
 			{
 				lockState = "[TRK] ";
+				lockDiamond.color = Color.green;
+			}
+			if(SARHControl.Guiding)
+			{
+				lockDiamond.color = Color.red;
+			}
+			
+			if(SARHControl.notch)
+			{
+				lockDiamond.color = Color.black;
 			}
 			
             if (SARHControl.isPlayer)

@@ -3696,7 +3696,6 @@ MonoBehaviour:
   rampUpTime: 5
   launchTime: 0
   drag: 0
-  multipathAltitude: 300
   angleToMissile: 0
   hasTerminalGuidance: 1
   IR_Guidance: {fileID: 6714731242313933842}
@@ -3706,8 +3705,9 @@ MonoBehaviour:
   speedMach: 0
   gForce: 0
   navigationConstant: 2
+  chaffed: 0
   closingSpeed: 0
-  timeToLockBreak: 3
+  maxTimeToLockBreak: 2
 --- !u!54 &2806993683341460876
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4132,13 +4132,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   launcherPlane: {fileID: 0}
-  searchRange: 5500
+  searchRange: 8000
   minRange: 800
   missileInnerFoV: 3
   missileOuterFoV: 60
   isCagedSeeker: 0
   slaveToRadar: 0
-  IRCCM: 1
+  IRCCM: 0
   thrustVectoring: 0
   allAspectSeeker: 1
   missileTimer: 2
@@ -4150,22 +4150,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0.2690513
-      outSlope: 0.2690513
+      time: 0.7562218
+      value: 0.253479
+      inSlope: 1.1437087
+      outSlope: 1.1437087
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.07498898
+      outWeight: 0.36800736
     - serializedVersion: 3
-      time: 2.01925
-      value: 0.98935556
-      inSlope: 0.6974902
-      outSlope: 0.6974902
+      time: 1.0041318
+      value: 1.0046506
+      inSlope: 7.597418
+      outSlope: 7.597418
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.07218994
+      inWeight: 0.15876386
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

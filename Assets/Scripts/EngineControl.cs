@@ -116,7 +116,7 @@ public class EngineControl : MonoBehaviour
 				if(thrustVectoring)
 				{
 					aircraft.rb.AddForce((engine.transform.forward) * currentEnginePower, ForceMode.Force);
-					aircraft.AoALimiter = aircraft.currentSpeed < 600f;
+					aircraft.AoALimiter = aircraft.currentSpeed > 600f;
 				}
 				else
 				{
@@ -155,10 +155,11 @@ public class EngineControl : MonoBehaviour
             }
             foreach (var prop in enginePropellers)
             {
-				if(milPowerPercent == 0)
+				if(milPowerPercent == 0 && isAfterburningEngine)
 				{
-					milPowerPercent = maxSpeed * ((engineStaticThrust * 100f / afterburnerThrust) / 100f);
+					milPowerPercent = maxSpeed * ((engineStaticThrust * 100f / (afterburnerThrust + engineStaticThrust)) / 100f);
 				}
+				else { milPowerPercent = maxSpeed; }
                 //float speed = minSpeed + (maxSpeed * ThrottleInput);
                 float speed = Mathf.Lerp(minSpeed, maxSpeed, ThrottleInput);
                 if (!afterBurner)

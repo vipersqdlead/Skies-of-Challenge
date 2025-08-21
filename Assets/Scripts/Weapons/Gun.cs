@@ -11,6 +11,7 @@ public class Gun : MonoBehaviour
 	int poolIndex;
     public float rateOfFireRPM = 0; // This is the reference RPM (rounds per minute) the gun fires. I just take a reference value from the internet, as it depends on the specific gun
     public float muzzleVelocity; // This is how fast the bullet goes when it's fired.
+	[HideInInspector] public Vector3 shooterVelocityV3 = Vector3.zero;
 	public float baseVelocity = 0f; // Base velocity when fired from a plane or mobile platform. Its set from Gun Controller or an AA Controler.
     [SerializeField] float accuracyError = 0.0001f; // Used for gun spread
     [SerializeField] AudioSource shot; // piu piu sound
