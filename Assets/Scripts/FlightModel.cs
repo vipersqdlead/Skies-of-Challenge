@@ -80,7 +80,7 @@ public class FlightModel : MonoBehaviour
 	void Start()
 	{
 		rb.AddForce(transform.forward * SpawnSpeed, ForceMode.VelocityChange);
-		noseAuthority = GetComponent<AircraftHub>().agility_maxTurnDegS;
+		noseAuthority = hub.agility_maxTurnDegS;
 	}
 
     void CalculateMaxAoA()
@@ -170,19 +170,22 @@ public class FlightModel : MonoBehaviour
         float extradrag = 1f;
         if (anims != null)
         {
-                float extraLift = anims.flapExtensionValue * (anims.flapExtensionAngle / 100f) + 1f;
-                inducedLift = inducedLift * Mathf.Clamp(extraLift, 1f, extraLift);
-                inducedDrag = inducedDrag * Mathf.Clamp(extraLift * 2, 1f, extraLift * 2);
+            float extraLift = anims.flapExtensionValue * (anims.flapExtensionAngle / 100f) + 1f;
+            inducedLift = inducedLift * Mathf.Clamp(extraLift, 1f, extraLift);
+            inducedDrag = inducedDrag * Mathf.Clamp(extraLift * 2, 1f, extraLift * 2);
             
                 //extradrag = anims.brakeExtensionValue * (anims.airbrakeExtensionAngle / 100f) + 1f;
                 //inducedDrag = inducedDrag * Mathf.Clamp(extradrag * anims.airbrakes.Length, 1f, extradrag * anims.airbrakes.Length);
+			if(anims.airbrakes.Length != 0)
+			{
 				extradrag = anims.brakeExtensionValue * (anims.airbrakeExtensionAngle / 100f);
-				inducedDrag *= 1f + extradrag * anims.airbrakes.Length;
+				drag *= 1f + (extradrag * anims.airbrakes.Length);	
+			}
         }
 
         float stallLiftFactor = Mathf.Clamp01((IAS_Speed - stallSpeed) / stallSpeed + 1f);
         float lift = inducedLift * pressure * stallLiftFactor;
-        float _drag = ((drag * currentDrag + inducedDrag) * pressure);
+        float _drag = ((drag + inducedDrag) * pressure * currentDrag);
 
 
         // *flip sign(s) if necessary*
@@ -294,7 +297,7 @@ public class FlightModel : MonoBehaviour
         float pressure = (rb.velocity.sqrMagnitude * currentDrag) * 1.2754f * 0.5f * (wingArea / 2);
 
         float lift = inducedLift * pressure;
-        float _drag = ((drag * currentDrag + inducedDrag) * pressure);
+        float _drag = ((drag + inducedDrag) * pressure * currentDrag);
         //float _drag = (0.021f + inducedDrag) * pressure;
 
         // *flip sign(s) if necessary*
