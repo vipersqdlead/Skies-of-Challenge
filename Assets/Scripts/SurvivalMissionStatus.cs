@@ -38,7 +38,7 @@ public class SurvivalMissionStatus : MonoBehaviour
 
 
     [SerializeField] GameObject currentLockedTarget;
-    public TMP_Text KillCountUI, PointCount, TimeLeft, currentWaveUI, newWaveText, newWaveBonusText, bonusWaveObjectiveText, enemiesLeftText, mapBoundaryWarning, mEnd_TimeBonus, mEnd_PointScore, mEnd_FinalScore, fpsCounterTxt;
+    public TMP_Text KillCountUI, PointCount, TimeLeft, currentWaveUI, newWaveText, newWaveBonusText, bonusWaveObjectiveText, enemiesLeftText, mapBoundaryWarning, mEnd_TimeBonus, mEnd_PointScore, mEnd_FinalScore;
     public AudioSource mapBoundaryWarningAS;
     public AudioClip mapBoundaryWarningLight, mapBoundaryWarningStrong;
 
@@ -85,11 +85,11 @@ public class SurvivalMissionStatus : MonoBehaviour
 				}
 				if (aircraftType == AircraftType.JetTier3)
 				{
-					waveSpawner.CleanLists(2);
+					waveSpawner.CleanLists(3);
 				}
 				if (aircraftType == AircraftType.JetTier4)
 				{
-					waveSpawner.CleanLists(2);
+					waveSpawner.CleanLists(4);
 				}
 			}
 			else{ waveSpawner.CleanLists(-1); }
@@ -202,22 +202,11 @@ public class SurvivalMissionStatus : MonoBehaviour
 		}
 		
         MapBoundaries();
-		CountFPS();
-		fpsCounterTxt.text = "FPS: " + currentFPS;
+
     }
 	
 	
-	int totalFrames;
-	int currentFPS;
-	void CountFPS()
-	{
-		totalFrames++;
-		if(totalFrames % 10 == 0)
-		{
-			currentFPS = (int)(1f / Time.unscaledDeltaTime);
-			totalFrames = 0;
-		}
-	}
+
 	
 
     IEnumerator StartNewWave()
@@ -685,28 +674,6 @@ public class SurvivalMissionStatus : MonoBehaviour
 						{
 							waveSpawner.spawnEnemyWave(enemyQuantity);
 						}
-						
-						/*
-                        if (currentWave <= 3)
-                        {
-                            waveSpawner.spawnEnemyWave(1);
-                        }
-                        else if (currentWave > 3 && currentWave <= 6)
-                        {
-                            waveSpawner.spawnEnemyWave(2);
-                        }
-                        else if (currentWave > 6 && currentWave <= 9)
-                        {
-                            waveSpawner.spawnEnemyWave(3);
-                        }
-                        else if (currentWave > 9 && currentWave <= 12)
-                        {
-                            waveSpawner.spawnEnemyWave(4);
-                        }
-                        else
-                        {
-                            waveSpawner.spawnEnemyWave(6);
-                        } */
                     }
 
                     break;
@@ -731,28 +698,6 @@ public class SurvivalMissionStatus : MonoBehaviour
 						{
 							waveSpawner.spawnEnemyWave(enemyQuantity);
 						}
-						
-						/*
-                        if (currentWave <= 2)
-                        {
-                            waveSpawner.spawnEnemyWave(1);
-                        }
-                        else if (currentWave > 2 && currentWave < 5)
-                        {
-                            waveSpawner.spawnEnemyWave(2);
-                        }
-                        else if (currentWave > 5 && currentWave <= 8)
-                        {
-                            waveSpawner.spawnEnemyWave(3);
-                        }
-                        else if (currentWave > 8 && currentWave < 10)
-                        {
-                            waveSpawner.spawnEnemyWave(4);
-                        }
-                        else
-                        {
-                            waveSpawner.spawnEnemyWave(6);
-                        }	*/
                     }
                     break;
 
@@ -776,28 +721,6 @@ public class SurvivalMissionStatus : MonoBehaviour
 						{
 							waveSpawner.spawnEnemyWave(enemyQuantity);
 						}
-						
-						/*
-                        if (currentWave <= 3)
-                        {
-                            waveSpawner.spawnEnemyWave(1);
-                        }
-                        else if (currentWave > 3 && currentWave <= 6)
-                        {
-                            waveSpawner.spawnEnemyWave(2);
-                        }
-                        else if (currentWave > 6 && currentWave <= 9)
-                        {
-                            waveSpawner.spawnEnemyWave(3);
-                        }
-                        else if (currentWave > 9 && currentWave <= 12)
-                        {
-                            waveSpawner.spawnEnemyWave(4);
-                        }
-                        else
-                        {
-                            waveSpawner.spawnEnemyWave(6);
-                        }	*/
                     }
 
                     break;
@@ -822,28 +745,6 @@ public class SurvivalMissionStatus : MonoBehaviour
 						{
 							waveSpawner.spawnEnemyWave(enemyQuantity);
 						}
-						
-						/*
-                        if (currentWave <= 3)
-                        {
-                            waveSpawner.spawnEnemyWave(1);
-                        }
-                        else if (currentWave > 3 && currentWave <= 6)
-                        {
-                            waveSpawner.spawnEnemyWave(2);
-                        }
-                        else if (currentWave > 6 && currentWave <= 9)
-                        {
-                            waveSpawner.spawnEnemyWave(3);
-                        }
-                        else if (currentWave > 9 && currentWave <= 12)
-                        {
-                            waveSpawner.spawnEnemyWave(4);
-                        }
-                        else
-                        {
-                            waveSpawner.spawnEnemyWave(6);
-                        }	*/
                     }
                     break;
 				case AircraftType.JetTier3:
@@ -859,35 +760,13 @@ public class SurvivalMissionStatus : MonoBehaviour
 						
 						if(oldMatchmaking)
 						{
-							waveSpawner.JetTier2SpawnWave(enemyQuantity);
+							waveSpawner.JetTier3SpawnWave(enemyQuantity);
 						}
 						
 						else
 						{
 							waveSpawner.spawnEnemyWave(enemyQuantity);
 						}
-						
-						/*
-                        if (currentWave <= 3)
-                        {
-                            waveSpawner.spawnEnemyWave(1);
-                        }
-                        else if (currentWave > 3 && currentWave <= 6)
-                        {
-                            waveSpawner.spawnEnemyWave(2);
-                        }
-                        else if (currentWave > 6 && currentWave <= 9)
-                        {
-                            waveSpawner.spawnEnemyWave(3);
-                        }
-                        else if (currentWave > 9 && currentWave <= 12)
-                        {
-                            waveSpawner.spawnEnemyWave(4);
-                        }
-                        else
-                        {
-                            waveSpawner.spawnEnemyWave(6);
-                        }	*/
                     }
                     break;
 				case AircraftType.JetTier4:
@@ -903,35 +782,13 @@ public class SurvivalMissionStatus : MonoBehaviour
 						
 						if(oldMatchmaking)
 						{
-							waveSpawner.JetTier2SpawnWave(enemyQuantity);
+							waveSpawner.JetTier4SpawnWave(enemyQuantity);
 						}
 						
 						else
 						{
 							waveSpawner.spawnEnemyWave(enemyQuantity);
 						}
-						
-						/*
-                        if (currentWave <= 3)
-                        {
-                            waveSpawner.spawnEnemyWave(1);
-                        }
-                        else if (currentWave > 3 && currentWave <= 6)
-                        {
-                            waveSpawner.spawnEnemyWave(2);
-                        }
-                        else if (currentWave > 6 && currentWave <= 9)
-                        {
-                            waveSpawner.spawnEnemyWave(3);
-                        }
-                        else if (currentWave > 9 && currentWave <= 12)
-                        {
-                            waveSpawner.spawnEnemyWave(4);
-                        }
-                        else
-                        {
-                            waveSpawner.spawnEnemyWave(6);
-                        }	*/
                     }
                     break;
             }

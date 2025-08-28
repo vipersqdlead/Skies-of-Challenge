@@ -242,8 +242,8 @@ public class RadarMissileControl : BaseSpWeaponControl
 	
 	void CheckForChaff()
 	{
-		float thickness = 10f; //<-- Desired thickness here
-		RaycastHit[] hits = Physics.SphereCastAll(transform.position, thickness, seekerDirection, radarRange);
+		float thickness = 5f; //<-- Desired thickness here
+		RaycastHit[] hits = Physics.SphereCastAll(transform.position + (seekerDirection * 100f), thickness, seekerDirection, radarRange);
 		chaffed = false;
 		foreach (var hit in hits)
 		{

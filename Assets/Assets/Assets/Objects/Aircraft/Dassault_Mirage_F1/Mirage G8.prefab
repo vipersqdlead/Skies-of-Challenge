@@ -3234,7 +3234,6 @@ MonoBehaviour:
   blackOutBlack: {fileID: 0}
   AcquireCircle: {fileID: 0}
   LockCircle: {fileID: 0}
-  SARHPovCircle: {fileID: 0}
   SARHLockCircle: {fileID: 0}
   IRMissiles: 0
   SAGMissiles: 0
@@ -3300,6 +3299,7 @@ MonoBehaviour:
   maxAngleOfAttack: 0
   maxAeroAngleOfAttack: 0
   rateOfClimb: 0
+  radarAltitude: 0
   machSpeed: 0
   IAS_Speed: 0
   currentTurnRadius: 0
@@ -3316,6 +3316,7 @@ MonoBehaviour:
   aspectRatio: 0
   stalls: 1
   AoALimiter: 1
+  flapsDeactivateAoALimiter: 0
   drag: 0.008
   waveDragMultiplier: 2
   newWaveDragMultiplier: 3.8
@@ -3780,6 +3781,7 @@ MonoBehaviour:
   missileMinRange: 0
   isCagedSeeker: 0
   slaveToRadar: 0
+  allAspectSeeker: 0
   Target: {fileID: 0}
   distanceToTarget: 0
   _angleToTarget: 0
@@ -3789,8 +3791,6 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 6224547674108693506}
   killCounter: {fileID: 6609938941638052285}
-  aspect: 1
-  irccm: 0
 --- !u!114 &2910103348142659168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3971,11 +3971,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: 
   isPlayer: 0
+  hub: {fileID: 0}
   MaxMissileAmmo: 2
   MissileAmmo: 2
   MissileReload: 20
   canReload: 1
   angleToPlayer: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   MissilePrefab: {fileID: 2244568564740985332, guid: f301791f202c2b6498e2732409460d3c,
     type: 3}
   MissilePos:
@@ -3984,6 +3986,9 @@ MonoBehaviour:
   missile: {fileID: 0}
   AcquisitionMaxTimer: 20
   AcquisitionTimer: 20
+  radarRange: 19000
+  radarGimbalLimit: 60
+  pulseDoppler: 1
   possibleTarget: {fileID: 0}
   Target: {fileID: 0}
   Acquiring: 0
@@ -3992,6 +3997,10 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 0}
   killCounter: {fileID: 6609938941638052285}
+  chaffed: 0
+  closingSpeed: 0
+  notch: 0
+  filterSize: 20
 --- !u!114 &5276642702413077994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4065,14 +4074,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5253448236980915032}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.5735764, z: 0, w: 0.8191521}
+  m_LocalRotation: {x: 0, y: 0.19080894, z: 0, w: 0.9816273}
   m_LocalPosition: {x: 1.807349, y: 2.4809358, z: -1.5005128}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9018764393361130070}
   m_Father: {fileID: 3737436467463435385}
-  m_LocalEulerAnglesHint: {x: 0, y: 70, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 22, z: 0}
 --- !u!1 &5294326727242598398
 GameObject:
   m_ObjectHideFlags: 0
@@ -5628,14 +5637,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8517659248603169157}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.5735764, z: 0, w: 0.8191521}
+  m_LocalRotation: {x: 0, y: -0.19080894, z: 0, w: 0.9816273}
   m_LocalPosition: {x: -1.8069997, y: 2.4838336, z: -1.5006998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3656868101992559480}
   m_Father: {fileID: 3737436467463435385}
-  m_LocalEulerAnglesHint: {x: 0, y: -70, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -22, z: 0}
 --- !u!1 &8549926440300973358
 GameObject:
   m_ObjectHideFlags: 0

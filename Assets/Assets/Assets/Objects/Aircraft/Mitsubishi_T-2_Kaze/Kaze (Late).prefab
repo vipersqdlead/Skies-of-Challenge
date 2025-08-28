@@ -246,16 +246,6 @@ PrefabInstance:
       propertyPath: weaponName
       value: Type 25 IR
       objectReference: {fileID: 0}
-    - target: {fileID: 5134692137552665971, guid: 6afc5306dcb07e846999e4a00f32f385,
-        type: 3}
-      propertyPath: flapExtensionAngle
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5134692137552665971, guid: 6afc5306dcb07e846999e4a00f32f385,
-        type: 3}
-      propertyPath: flapExtensionSpeed
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5186831589724909408, guid: 6afc5306dcb07e846999e4a00f32f385,
         type: 3}
       propertyPath: pointsWorth
@@ -390,11 +380,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Type 20 RDR
   isPlayer: 0
+  hub: {fileID: 0}
   MaxMissileAmmo: 2
   MissileAmmo: 2
   MissileReload: 20
   canReload: 1
   angleToPlayer: 0
+  seekerDirection: {x: 0, y: 0, z: 0}
   MissilePrefab: {fileID: 2244568564740985332, guid: bb3e20bfa62c3494a8f255273b7888ff,
     type: 3}
   MissilePos:
@@ -403,6 +395,9 @@ MonoBehaviour:
   missile: {fileID: 0}
   AcquisitionMaxTimer: 30
   AcquisitionTimer: 30
+  radarRange: 19000
+  radarGimbalLimit: 60
+  pulseDoppler: 1
   possibleTarget: {fileID: 0}
   Target: {fileID: 0}
   Acquiring: 0
@@ -411,6 +406,10 @@ MonoBehaviour:
   AcqGrowl: {fileID: 0}
   LockGrowl: {fileID: 8981188156167379996}
   killCounter: {fileID: 9064446088350926283}
+  chaffed: 0
+  closingSpeed: 0
+  notch: 0
+  filterSize: 20
 --- !u!114 &9064446088350926283 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1978067054733514080, guid: 6afc5306dcb07e846999e4a00f32f385,

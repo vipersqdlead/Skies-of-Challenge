@@ -146,5 +146,159 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 119144134666846188, guid: 640ccb8771399ef408df67c3629a7d07,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1586726550837490114}
+    - targetCorrespondingSourceObject: {fileID: 119144134666846188, guid: 640ccb8771399ef408df67c3629a7d07,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5558578546963036180}
   m_SourcePrefab: {fileID: 100100000, guid: 640ccb8771399ef408df67c3629a7d07, type: 3}
+--- !u!114 &87166121225505020 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3664102520621388802, guid: 640ccb8771399ef408df67c3629a7d07,
+    type: 3}
+  m_PrefabInstance: {fileID: 3741414818370297086}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3624100284260377362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e096c513ce05b84e940f68a2d432d0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &3624100284260377362 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 119144134666846188, guid: 640ccb8771399ef408df67c3629a7d07,
+    type: 3}
+  m_PrefabInstance: {fileID: 3741414818370297086}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1586726550837490114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3624100284260377362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b017257907571cd4088e288cb98777c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plane: {fileID: 4752811460590884417}
+  hub: {fileID: 4655514858366198227}
+  engineControl: {fileID: 5983414999665294767}
+  steeringSpeed: 0
+  minSpeed: 250
+  maxSpeed: 490
+  recoverSpeedMin: 72
+  recoverSpeedMax: 144
+  groundCollisionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  groundCollisionDistance: 200
+  groundAvoidanceAngle: 5
+  groundAvoidanceMinSpeed: 72
+  groundAvoidanceMaxSpeed: 144
+  pitchUpThreshold: -20
+  fineSteeringAngle: 5
+  rollFactor: 0.01
+  yawFactor: 0.1
+  currentState: {fileID: 0}
+  guns: {fileID: 87166121225505020}
+  irMissile: {fileID: 8194213364776354921}
+  radarMissile: {fileID: 0}
+  canUseMissiles: 1
+  canUseCannon: 1
+  advancedGunnery: 0
+  bulletSpeed: 780
+  cannonRange: 900
+  cannonMaxFireAngle: 5
+  cannonBurstLength: 1
+  cannonBurstCooldown: 3
+  minMissileDodgeDistance: 0
+  reactionDelayMin: 0
+  reactionDelayMax: 0
+  reactionDelayDistance: 0
+  isRecoveringSpeed: 0
+  dodging: 0
+  lastDodgePoint: {x: 0, y: 0, z: 0}
+  dodgeOffsets: []
+  dodgeTimer: 0
+  steering: {x: 0, y: 0, z: 0}
+  throttle: 0
+  emergency: 0
+  targetPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &5558578546963036180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3624100284260377362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c24ea9e261f73b149b9e0b785bda04ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  targetLookRange: 50000
+  incomingMissile: {fileID: 0}
+  pilotLevel: 1
+  irController: {fileID: 0}
+  radarController: {fileID: 0}
+  flares: {fileID: 0}
+  missileCooldownTime: 0
+  missileCooldownTimer: 0
+  lookAroundCooldownTime: 0
+  lookAroundCooldownTimer: 0
+  lookAroundRange: 0
+--- !u!114 &4655514858366198227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8320289180716399917, guid: 640ccb8771399ef408df67c3629a7d07,
+    type: 3}
+  m_PrefabInstance: {fileID: 3741414818370297086}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3624100284260377362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60e7a39b02566b64fba11c5355cb02d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4752811460590884417 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8221686311685507775, guid: 640ccb8771399ef408df67c3629a7d07,
+    type: 3}
+  m_PrefabInstance: {fileID: 3741414818370297086}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3624100284260377362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25ca0767b2fd4dc46be3d009643298c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5983414999665294767 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6982110809263645009, guid: 640ccb8771399ef408df67c3629a7d07,
+    type: 3}
+  m_PrefabInstance: {fileID: 3741414818370297086}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3624100284260377362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354ae61937b48ee43a492ecff1266415, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8194213364776354921 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4781588429107943575, guid: 640ccb8771399ef408df67c3629a7d07,
+    type: 3}
+  m_PrefabInstance: {fileID: 3741414818370297086}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3624100284260377362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b37ea0e9101ccd24eadf1164f886e8be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

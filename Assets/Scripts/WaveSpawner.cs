@@ -110,6 +110,9 @@ public class WaveSpawner : MonoBehaviour
 			}
         }
 	}
+	
+	
+	
 
     public void JetTier1SpawnWave(int numberOfEnemies)
     {
@@ -145,6 +148,10 @@ public class WaveSpawner : MonoBehaviour
         Wave wave = newWave.GetComponent<Wave>();
         wave.AddRenderersToMarker(markers, status, player);
     }
+	
+	
+	
+	
 
     public void JetTier2SpawnWave(int numberOfEnemies)
     {
@@ -179,6 +186,9 @@ public class WaveSpawner : MonoBehaviour
         Wave wave = newWave.GetComponent<Wave>();
         wave.AddRenderersToMarker(markers, status, player);
     }
+	
+	
+	
 
     public void PropSpawnWave(int numberOfEnemies)
     {
@@ -213,6 +223,9 @@ public class WaveSpawner : MonoBehaviour
         Wave wave = newWave.GetComponent<Wave>();
         wave.AddRenderersToMarker(markers, status, player);
     }
+	
+	
+	
     public void TrainerSpawnWave(int numberOfEnemies)
     {
         List<Transform> auxSpawnPositions = SpawnPositions;
@@ -234,6 +247,88 @@ public class WaveSpawner : MonoBehaviour
             }
         }
     }
+	
+	
+	
+	
+	
+	
+	
+	public void JetTier3SpawnWave(int numberOfEnemies)
+    {
+        List<Transform> auxSpawnPositions = SpawnPositions;
+
+        for (int i = 0; i < numberOfEnemies; i++)
+        {
+            int spawnRand = Random.Range(0, auxSpawnPositions.Count);
+            GameObject newWave = Instantiate(jetTier3WavePrefabs[Random.Range(0, jetTier3WavePrefabs.Count)], GetSafeSpawnAltitude(auxSpawnPositions[spawnRand].position, player.transform.position.y), auxSpawnPositions[spawnRand].rotation);
+            //auxSpawnPositions.Remove(auxSpawnPositions[spawnRand]);
+            Wave wave = newWave.GetComponent<Wave>();
+            wave.AddRenderersToMarker(markers, status, player);
+            foreach (AircraftHub hub in wave.aircraft)
+            {				
+				hub.fm.experiencesG = enableBlackouts;
+                if (hub.transform.position.y < 0f)
+                {
+                    hub.transform.position = new Vector3(hub.transform.position.x, Mathf.Abs(hub.transform.position.y), hub.transform.position.z);
+                }
+            }
+        }
+    }
+	
+    public void JetTier3BonusSpawnWave()
+    {
+        List<Transform> auxSpawnPositions = SpawnPositions;
+
+        int spawnRand = Random.Range(0, auxSpawnPositions.Count);
+        int randomWave = Random.Range(0, jetTier3BonusWavePrefabs.Count);
+        print(randomWave);
+        GameObject newWave = Instantiate(jetTier3BonusWavePrefabs[randomWave], GetSafeSpawnAltitude(auxSpawnPositions[spawnRand].position, player.transform.position.y), auxSpawnPositions[spawnRand].rotation);
+        //auxSpawnPositions.Remove(auxSpawnPositions[spawnRand]);
+        Wave wave = newWave.GetComponent<Wave>();
+        wave.AddRenderersToMarker(markers, status, player);
+    }
+	
+	
+	
+	
+	
+	public void JetTier4SpawnWave(int numberOfEnemies)
+    {
+        List<Transform> auxSpawnPositions = SpawnPositions;
+
+        for (int i = 0; i < numberOfEnemies; i++)
+        {
+            int spawnRand = Random.Range(0, auxSpawnPositions.Count);
+            GameObject newWave = Instantiate(jetTier4WavePrefabs[Random.Range(0, jetTier4WavePrefabs.Count)], GetSafeSpawnAltitude(auxSpawnPositions[spawnRand].position, player.transform.position.y), auxSpawnPositions[spawnRand].rotation);
+            //auxSpawnPositions.Remove(auxSpawnPositions[spawnRand]);
+            Wave wave = newWave.GetComponent<Wave>();
+            wave.AddRenderersToMarker(markers, status, player);
+            foreach (AircraftHub hub in wave.aircraft)
+            {				
+				hub.fm.experiencesG = enableBlackouts;
+                if (hub.transform.position.y < 0f)
+                {
+                    hub.transform.position = new Vector3(hub.transform.position.x, Mathf.Abs(hub.transform.position.y), hub.transform.position.z);
+                }
+            }
+        }
+    }
+	
+    public void JetTier4BonusSpawnWave()
+    {
+        List<Transform> auxSpawnPositions = SpawnPositions;
+
+        int spawnRand = Random.Range(0, auxSpawnPositions.Count);
+        int randomWave = Random.Range(0, jetTier4BonusWavePrefabs.Count);
+        print(randomWave);
+        GameObject newWave = Instantiate(jetTier4BonusWavePrefabs[randomWave], GetSafeSpawnAltitude(auxSpawnPositions[spawnRand].position, player.transform.position.y), auxSpawnPositions[spawnRand].rotation);
+        //auxSpawnPositions.Remove(auxSpawnPositions[spawnRand]);
+        Wave wave = newWave.GetComponent<Wave>();
+        wave.AddRenderersToMarker(markers, status, player);
+    }
+	
+	//////////////////////////////////
 
     public void PropAlliedSpawnWave()
     {
@@ -292,6 +387,53 @@ public class WaveSpawner : MonoBehaviour
             }
         }
     }
+	
+	
+	
+	public void Jet3AlliedSpawnWave()
+    {
+        GameObject newWave = Instantiate(jetTier3WavePrefabs[Random.Range(0, jetTier3WavePrefabs.Count)], GetSafeSpawnAltitude(new Vector3(0, 4000f, 0), player.transform.position.y), transform.rotation);
+        //auxSpawnPositions.Remove(auxSpawnPositions[spawnRand]);
+        Wave wave = newWave.GetComponent<Wave>();
+        wave.AddAllyRenderersToMarker(markers, status);
+        foreach (AircraftHub hub in wave.aircraft)
+        {
+			hub.fm.experiencesG = enableBlackouts;			
+            hub.hp.extraLives = 1;
+			if(hub.irControl != null)
+			{
+				hub.irControl.canReload = true;
+			}
+            if (hub.transform.position.y < 0f)
+            {
+                hub.transform.position = new Vector3(hub.transform.position.x, Mathf.Abs(hub.transform.position.y), hub.transform.position.z);
+            }
+        }
+    }
+	
+	public void Jet4AlliedSpawnWave()
+    {
+        GameObject newWave = Instantiate(jetTier4WavePrefabs[Random.Range(0, jetTier4WavePrefabs.Count)], GetSafeSpawnAltitude(new Vector3(0, 4000f, 0), player.transform.position.y), transform.rotation);
+        //auxSpawnPositions.Remove(auxSpawnPositions[spawnRand]);
+        Wave wave = newWave.GetComponent<Wave>();
+        wave.AddAllyRenderersToMarker(markers, status);
+        foreach (AircraftHub hub in wave.aircraft)
+        {
+			hub.fm.experiencesG = enableBlackouts;			
+            hub.hp.extraLives = 1;
+			if(hub.irControl != null)
+			{
+				hub.irControl.canReload = true;
+			}
+            if (hub.transform.position.y < 0f)
+            {
+                hub.transform.position = new Vector3(hub.transform.position.x, Mathf.Abs(hub.transform.position.y), hub.transform.position.z);
+            }
+        }
+    }
+	
+	
+	/////////////////////////////////////////
 	
 	Vector3 GetSpawnPosition(float alt, float spawnDistance)
 	{
@@ -396,7 +538,35 @@ public class WaveSpawner : MonoBehaviour
 			jetTier4BonusWavePrefabs.Clear();
 		}
 	
-	
+		if(tier == 3)
+		{
+			jetTier1WavePrefabs.Clear();
+			jetTier2WavePrefabs.Clear();
+			jetTier4WavePrefabs.Clear();
+			propWavePrefabs.Clear();
+			allAircraftPrefabs.Clear();
+			sortedAircraft.Clear();
+			eligibleAircraft.Clear();
+			propBonusWavePrefabs.Clear();
+			jetTier1BonusWavePrefabs.Clear();
+			jetTier2BonusWavePrefabs.Clear();
+			jetTier4BonusWavePrefabs.Clear();
+		}
+		
+		if(tier == 4)
+		{
+			jetTier1WavePrefabs.Clear();
+			jetTier2WavePrefabs.Clear();
+			jetTier3WavePrefabs.Clear();
+			propWavePrefabs.Clear();
+			allAircraftPrefabs.Clear();
+			sortedAircraft.Clear();
+			eligibleAircraft.Clear();
+			propBonusWavePrefabs.Clear();
+			jetTier1BonusWavePrefabs.Clear();
+			jetTier2BonusWavePrefabs.Clear();
+			jetTier3BonusWavePrefabs.Clear();
+		}
 		/*
 		if(tier == 1)
 		{

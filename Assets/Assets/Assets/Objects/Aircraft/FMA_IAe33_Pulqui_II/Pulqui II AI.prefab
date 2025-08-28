@@ -36,7 +36,7 @@ PrefabInstance:
     - target: {fileID: 1939725900200813399, guid: 553c61af4fe0fb241ac2af57ba02986d,
         type: 3}
       propertyPath: m_Name
-      value: Pulqui II Variant
+      value: Pulqui II AI
       objectReference: {fileID: 0}
     - target: {fileID: 2168044773943301030, guid: 553c61af4fe0fb241ac2af57ba02986d,
         type: 3}
@@ -241,7 +241,7 @@ MonoBehaviour:
   steeringSpeed: 50
   minSpeed: 200
   maxSpeed: 300
-  recoverSpeedMin: 108
+  recoverSpeedMin: 36
   recoverSpeedMax: 288
   groundCollisionMask:
     serializedVersion: 2
@@ -256,14 +256,11 @@ MonoBehaviour:
   yawFactor: 0.1
   currentState: {fileID: 7027462961511532405}
   guns: {fileID: 567801194273284247}
+  irMissile: {fileID: 0}
+  radarMissile: {fileID: 0}
   canUseMissiles: 0
   canUseCannon: 1
   advancedGunnery: 0
-  missileLockFiringDelay: 0
-  missileFiringCooldown: 0
-  missileMinRange: 0
-  missileMaxRange: 0
-  missileMaxFireAngle: 0
   bulletSpeed: 950
   cannonRange: 850
   cannonMaxFireAngle: 45
@@ -299,6 +296,7 @@ MonoBehaviour:
   incomingMissile: {fileID: 0}
   pilotLevel: 1
   irController: {fileID: 0}
+  radarController: {fileID: 0}
   flares: {fileID: 0}
   missileCooldownTime: 0
   missileCooldownTimer: 0

@@ -47,7 +47,7 @@ public class DogfightingState : StateBase
 			if(controller.radarMissile) { radarController = controller.radarMissile; }
         }
 
-		missileCooldownTime = UnityEngine.Random.Range(10f,30f);
+		missileCooldownTime = UnityEngine.Random.Range(7f,15f);
         missileCooldownTimer = missileCooldownTime;
 		missileCooldown = true;
     }
@@ -280,7 +280,8 @@ public class DogfightingState : StateBase
                 float distanceToTarget = Vector3.Distance(transform.position, controller.plane.target.transform.position);
 				float dotProduct = Vector3.Dot(transform.forward, controller.plane.target.transform.forward);
 				float wez = 10000f / (irController.Missile.GetComponent<IR_Missile>().maxGLoad * 0.75f);
-                if(distanceToTarget > wez && distanceToTarget < Mathf.Min(Utilities.GetIRLockRange(dotProduct, irController.missileLockRange, irController.allAspectSeeker), 5000f))
+				float currentMaxLockRange = Mathf.Min(Utilities.GetIRLockRange(dotProduct, irController.missileLockRange, irController.allAspectSeeker), 6000f);
+                if(distanceToTarget > wez && distanceToTarget < currentMaxLockRange && irController.MissileAmmo != 0)
                 {
                     irController.Acquiring = true;
 					if (irController.Locked && irController.Target != null)
@@ -294,7 +295,7 @@ public class DogfightingState : StateBase
 						}
 					}
                 }
-                else if(distanceToTarget > 5000f && dotProduct < -0.3f && radarController != null)
+                else if(((distanceToTarget > currentMaxLockRange) || (irController.MissileAmmo == 0)) && radarController != null)
 				{
 					radarController.Acquiring = true;
 					if (radarController.Locked && radarController.Target != null)
@@ -310,9 +311,11 @@ public class DogfightingState : StateBase
             }
             else
             {
-                irController.TurnSeekerOff();
+				if(irController != null)
+					irController.TurnSeekerOff();
 				
-				radarController.TurnSeekerOff();
+				if(radarController != null) 
+					radarController.TurnSeekerOff();
             }
         }
     }

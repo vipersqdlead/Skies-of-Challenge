@@ -135,6 +135,7 @@ MonoBehaviour:
   shellList: []
   rateOfFireRPM: 750
   muzzleVelocity: 750
+  shooterVelocityV3: {x: 0, y: 0, z: 0}
   baseVelocity: 0
   accuracyError: 0.0001
   shot: {fileID: 0}
@@ -550,6 +551,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1994996906693939299, guid: fdfda1dd76a7f3e4081da69fa1d346f8,
         type: 3}
+      propertyPath: useConvergence
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1994996906693939299, guid: fdfda1dd76a7f3e4081da69fa1d346f8,
+        type: 3}
       propertyPath: guns.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -558,6 +564,11 @@ PrefabInstance:
       propertyPath: guns.Array.data[3]
       value: 
       objectReference: {fileID: 283346204949416585}
+    - target: {fileID: 1994996906693939299, guid: fdfda1dd76a7f3e4081da69fa1d346f8,
+        type: 3}
+      propertyPath: hasDynamicConvergence
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1994996906693939299, guid: fdfda1dd76a7f3e4081da69fa1d346f8,
         type: 3}
       propertyPath: additionalGuns.Array.data[0]

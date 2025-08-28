@@ -984,6 +984,11 @@ public class SurvivalSettings : MonoBehaviour
                 { return true; }
                 else
                 { return false; }
+			case PlaneTypes.CrusaderP:
+				if (PlayerPrefs.GetInt("F8U-2 Crusader Highest Round") >= 10)
+                { return true; }
+                else
+                { return false; }
             case PlaneTypes.KazeLate:
                 if (PlayerPrefs.GetInt("General Total Kills") >= 2000)
                 { return true; }
@@ -1536,6 +1541,8 @@ public class SurvivalSettings : MonoBehaviour
 		//Sabredog,
         Kyokkou,
 		// SeaDemon,
+		// SeaDemonM,
+		// SeaDemon3,
         Harrier,
 		//HarrierGR3,
 		//SeaHarrier,
@@ -1552,6 +1559,7 @@ public class SurvivalSettings : MonoBehaviour
         Fantan,
         Crusader,
         CrusaderE,
+		CrusaderP,
 		//Jaguar,
 		//JaguarM,
         Kaze,

@@ -174,13 +174,15 @@ public class FlightModel : MonoBehaviour
                 inducedLift = inducedLift * Mathf.Clamp(extraLift, 1f, extraLift);
                 inducedDrag = inducedDrag * Mathf.Clamp(extraLift * 2, 1f, extraLift * 2);
             
-                extradrag = anims.brakeExtensionValue * (anims.airbrakeExtensionAngle / 100f) + 1f;
-                inducedDrag = inducedDrag * Mathf.Clamp(extradrag * anims.airbrakes.Length - 1, 1f, extradrag * anims.airbrakes.Length - 1);
+                //extradrag = anims.brakeExtensionValue * (anims.airbrakeExtensionAngle / 100f) + 1f;
+                //inducedDrag = inducedDrag * Mathf.Clamp(extradrag * anims.airbrakes.Length, 1f, extradrag * anims.airbrakes.Length);
+				extradrag = anims.brakeExtensionValue * (anims.airbrakeExtensionAngle / 100f);
+				inducedDrag *= 1f + extradrag * anims.airbrakes.Length;
         }
 
         float stallLiftFactor = Mathf.Clamp01((IAS_Speed - stallSpeed) / stallSpeed + 1f);
         float lift = inducedLift * pressure * stallLiftFactor;
-        float _drag = ((drag * currentDrag + inducedDrag) * pressure) * extradrag;
+        float _drag = ((drag * currentDrag + inducedDrag) * pressure);
 
 
         // *flip sign(s) if necessary*
@@ -198,7 +200,7 @@ public class FlightModel : MonoBehaviour
             // Apply torque to align nose with velocity (nose-down effect)
             float torqueMultiplier = Mathf.Max(Mathf.Abs(angleOfAttack), Mathf.Abs(angleOfAttackHorizontal)) * 1000f;
 			
-			torqueMultiplier = Mathf.Min(rb.mass, torqueMultiplier);
+			//torqueMultiplier = Mathf.Min(rb.mass, torqueMultiplier);
             rb.AddTorque(torqueDirection * torqueMultiplier * (Time.deltaTime * 60f), ForceMode.Force);
         }
         rb.AddForce(liftDirection * lift - dragDirection * _drag);
@@ -222,12 +224,12 @@ public class FlightModel : MonoBehaviour
         float turnRateRad = currentTurnRate * Mathf.Deg2Rad;
         currentTurnRadius = currentSpeed / turnRateRad; // Result is in meters
 
-		if(AoALimiter)
-		{
-			authorityPercent = Mathf.Clamp01((IAS_Speed * 100 / (stallSpeed * 2f)) / 100f);
-		}
+		//if(AoALimiter)
+		//{
+			authorityPercent = Mathf.Clamp01((IAS_Speed * 100f / (stallSpeed * 2f)) / 100f);
+		//}
+		// else { authorityPercent = 1f; }
 		
-		else { authorityPercent = 1f; }
         // Pitch force
         float pitchOutput = Mathf.Clamp(pitch, -1.0f, 0.5f);
         pitchOutput = pitchOutput * ((Mathf.Max(noseAuthority,(PitchForce.Evaluate(normalizedSpeed) * 100f))) * authorityPercent * blackOutAuthorityModifier);
